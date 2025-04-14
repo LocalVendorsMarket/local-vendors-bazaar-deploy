@@ -1,4 +1,5 @@
 import './App.css';
+import { motion } from 'framer-motion';
 
 function App() {
   return (
@@ -35,18 +36,10 @@ function App() {
             marginTop: '0.5rem'
           }}
         >
-          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>
-            Home
-          </a>
-          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>
-            FAQ
-          </a>
-          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>
-            Blog
-          </a>
-          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>
-            Contact
-          </a>
+          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
+          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+          <a href="#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
         </nav>
       </header>
 
@@ -60,19 +53,37 @@ function App() {
           width: '100%'
         }}
       >
-        <img
+        <motion.img
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
           style={{ width: '200px', marginBottom: '1rem' }}
         />
-        <h1 style={{ color: '#2b9348' }}>Welcome to Local Vendors Bazaar 🎉</h1>
-        <p style={{ fontSize: '1.2rem', color: '#555' }}>
+        <motion.h1
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          style={{ color: '#2b9348' }}
+        >
+          Welcome to Local Vendors Bazaar 🎉
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
+          style={{ fontSize: '1.2rem', color: '#555' }}
+        >
           Shop and Save Locally — Supporting Chicago and Beyond!
-        </p>
+        </motion.p>
 
-        <img
+        <motion.img
           src="/assets/flyer.png"
           alt="Local Vendors Bazaar Flyer"
+          initial={{ scale: 0.95, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ delay: 0.8, duration: 1 }}
           style={{
             maxWidth: '100%',
             marginTop: '2rem',
@@ -82,7 +93,10 @@ function App() {
         />
 
         {/* Vendor CTA */}
-        <div
+        <motion.div
+          initial={{ y: 50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ delay: 1.1, duration: 0.8 }}
           style={{
             marginTop: '3rem',
             padding: '2rem',
@@ -109,7 +123,7 @@ function App() {
           >
             Become a Vendor
           </a>
-        </div>
+        </motion.div>
       </main>
 
       {/* Footer */}
@@ -129,5 +143,6 @@ function App() {
 }
 
 export default App;
+
 
 
