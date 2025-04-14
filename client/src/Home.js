@@ -1,4 +1,4 @@
-// src/Home.js
+/// src/Home.js
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -128,7 +128,7 @@ const Home = () => (
       {/* FAQ Section */}
       <section id="faq" style={{ padding: '4rem 1rem', backgroundColor: '#f0fdf4' }}>
         <h2 style={{ color: '#2b9348' }}>Frequently Asked Questions</h2>
-        <p>We’ll add real answers soon!</p>
+        <p>We’ll add real answers here soon!</p>
       </section>
 
       {/* Contact Section */}
