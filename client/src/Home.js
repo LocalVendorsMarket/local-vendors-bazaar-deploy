@@ -134,10 +134,16 @@ const Home = () => (
       </section>
 
       {/* Contact Section */}
-      <section id="contact" style={{ padding: '4rem 1rem' }}>
-        <h2 style={{ color: '#2b9348' }}>Contact Us</h2>
-        <p>Email us at hello@localvendorsbazaar.com</p>
-      </section>
+      <section id="faq">
+  <h2>FAQ</h2>
+  <p>Some content...</p>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <p>Some content...</p>
+</section>
+
     </main>
 
     {/* Footer */}
