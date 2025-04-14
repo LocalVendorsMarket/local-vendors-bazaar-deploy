@@ -32,6 +32,44 @@ const Home = () => (
   </div>
 
   <nav
+  style={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: '0.5rem'
+  }}
+>
+  <a href="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
+  <a href="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+  <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+  <a href="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+</nav>
+
+  >
+    <a href="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
+    <a href="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+    <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+    <a href="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+  </nav>
+</h<header
+  style={{
+    backgroundColor: '#2b9348',
+    padding: '1rem',
+    color: '#fff',
+    position: 'sticky',
+    top: 0,
+    zIndex: 1000,
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  }}
+>
+  <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+    LocalVendorsBazaar
+  </div>
+
+  <nav
     style={{
       display: 'flex',
       flexWrap: 'wrap',
@@ -46,22 +84,6 @@ const Home = () => (
   </nav>
 </header>
 
-    >
-      <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</div>
-      <nav
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-          marginTop: '0.5rem'
-        }}
-      >
-        <a href="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-        <a href="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
-        <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-        <a href="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
-      </nav>
-    </header>
 
     {/* Main Content */}
     <main
