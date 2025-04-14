@@ -1,18 +1,37 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
+import { useLocation } from 'react-router-dom';
 
-const Home = () => (
-  <div
-    id="home"
-    className="App"
-    style={{
-      fontFamily: 'sans-serif',
-      display: 'flex',
-      flexDirection: 'column',
-      minHeight: '100vh'
-    }}
-  >
+
+const Home = () => {
+    const location = useLocation();
+  
+    useEffect(() => {
+      const hash = location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }, 100);
+        }
+      }
+    }, [location]);
+  
+
+  useEffect(() => {
+    const hash = location.hash;
+    if (hash) {
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100); // Give the page time to render
+      }
+    }
+  }, [location]);
+
     {/* Navigation Bar */}
     <header
       style={{
