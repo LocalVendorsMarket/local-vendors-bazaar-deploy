@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
 
-
 const Home = () => (
   <div
     className="App"
@@ -32,19 +31,18 @@ const Home = () => (
         LocalVendorsBazaar
       </div>
       <nav
-  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginTop: '0.5rem'
-  }}
->
-  <HashLink smooth to="/#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</HashLink>
-  <HashLink smooth to="/#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</HashLink>
-  <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-  <HashLink smooth to="/#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</HashLink>
-</nav>
-
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          marginTop: '0.5rem'
+        }}
+      >
+        <HashLink smooth to="/#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</HashLink>
+        <HashLink smooth to="/#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</HashLink>
+        <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+        <HashLink smooth to="/#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</HashLink>
+      </nav>
     </header>
 
     {/* Main Content */}
@@ -136,17 +134,10 @@ const Home = () => (
       </section>
 
       {/* Contact Section */}
-      <section id="faq">
-  <h2>Frequently Asked Questions</h2>
-  <p>We’ll add real answers here soon!</p>
-</section>
-
-<section id="contact">
-  <h2>Contact Us</h2>
-  <p>Email us at hello@localvendorsbazaar.com</p>
-</section>
-
-
+      <section id="contact" style={{ padding: '4rem 1rem' }}>
+        <h2 style={{ color: '#2b9348' }}>Contact Us</h2>
+        <p>Email us at hello@localvendorsbazaar.com</p>
+      </section>
     </main>
 
     {/* Footer */}
@@ -165,5 +156,6 @@ const Home = () => (
 );
 
 export default Home;
+
 
 
