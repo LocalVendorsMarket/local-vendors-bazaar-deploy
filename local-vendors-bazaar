@@ -1,0 +1,24 @@
+{/* FAQ Section */}
+<section id="faq" style={{ padding: '4rem 1rem', backgroundColor: '#f7fff7' }}>
+  <h2 style={{ color: '#2b9348' }}>Frequently Asked Questions</h2>
+  <p>We’ll add real questions here soon!</p>
+</section>
+
+{/* Contact Section */}
+<section id="contact" style={{ padding: '4rem 1rem' }}>
+  <h2 style={{ color: '#2b9348' }}>Contact Us</h2>
+  <p>Email us at hello@localvendorsbazaar.com</p>
+</section>
+<nav
+  style={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: '0.5rem'
+  }}
+>
+  <a href="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
+  <a href="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+  <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+  <a href="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+</nav>
