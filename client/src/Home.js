@@ -7,13 +7,17 @@ const Home = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const hash = location.hash;
+    const hash = location.hash || window.location.hash;
     if (hash) {
       const element = document.querySelector(hash);
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
-        }, 100); // Delay to ensure DOM is ready
+        }, 300); // increased delay just in case Vercel is late rendering
+      }
+    }
+  }, [location]);
+  
       }
     }
   }, [location]);
