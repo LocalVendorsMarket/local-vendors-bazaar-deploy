@@ -4,6 +4,7 @@ import { HashLink } from 'react-router-hash-link';
 
 const Home = () => (
   <div
+    id="home"
     className="App"
     style={{
       fontFamily: 'sans-serif',
@@ -38,10 +39,10 @@ const Home = () => (
           marginTop: '0.5rem'
         }}
       >
-        <HashLink smooth to="/#" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</HashLink>
-        <HashLink smooth to="/#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</HashLink>
+        <HashLink smooth to="#home" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</HashLink>
+        <HashLink smooth to="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</HashLink>
         <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-        <HashLink smooth to="/#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</HashLink>
+        <HashLink smooth to="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</HashLink>
       </nav>
     </header>
 
@@ -156,6 +157,7 @@ const Home = () => (
 );
 
 export default Home;
+
 
 
 
