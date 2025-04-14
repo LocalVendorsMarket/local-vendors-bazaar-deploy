@@ -1,17 +1,12 @@
+// src/App.js
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-
-<Router basename="/">
-  {/* ... your routes */}
-</Router>
-
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Blog from './Blog';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog" element={<Blog />} />
@@ -21,6 +16,7 @@ function App() {
 }
 
 export default App;
+
 
 
 

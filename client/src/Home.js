@@ -1,3 +1,4 @@
+// src/Home.js
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
@@ -13,11 +14,7 @@ const Home = () => {
       if (element) {
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
-        }, 300); // increased delay just in case Vercel is late rendering
-      }
-    }
-  }, [location]);
-  
+        }, 300);
       }
     }
   }, [location]);
@@ -177,7 +174,6 @@ const Home = () => {
   );
 };
 
-// Shared nav style
 const linkStyle = {
   margin: '5px 10px',
   color: '#fff',
@@ -185,6 +181,7 @@ const linkStyle = {
 };
 
 export default Home;
+
 
 
 
