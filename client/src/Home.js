@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { HashLink } from 'react-router-hash-link';
 
 const Home = () => (
   <div
@@ -37,10 +38,10 @@ const Home = () => (
           marginTop: '0.5rem'
         }}
       >
-        <a href="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-        <a href="#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+        <HashLink smooth to="/" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Home</HashLink>
+        <HashLink smooth to="/#faq" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>FAQ</HashLink>
         <a href="/blog" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-        <a href="#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+        <HashLink smooth to="/#contact" style={{ margin: '5px 10px', color: '#fff', textDecoration: 'none' }}>Contact</HashLink>
       </nav>
     </header>
 
@@ -155,4 +156,5 @@ const Home = () => (
 );
 
 export default Home;
+
 
