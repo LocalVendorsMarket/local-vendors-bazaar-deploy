@@ -135,14 +135,15 @@ const Home = () => (
 
       {/* Contact Section */}
       <section id="faq">
-  <h2>FAQ</h2>
-  <p>Some content...</p>
+  <h2>Frequently Asked Questions</h2>
+  <p>We’ll add real answers here soon!</p>
 </section>
 
 <section id="contact">
-  <h2>Contact</h2>
-  <p>Some content...</p>
+  <h2>Contact Us</h2>
+  <p>Email us at hello@localvendorsbazaar.com</p>
 </section>
+
 
     </main>
 
