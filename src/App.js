@@ -63,6 +63,5 @@ function App() {
     </div>
   );
 }
-<div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-  LocalVendorsBazaar 🚀
-</div>
+export default App;
+
