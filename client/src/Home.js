@@ -65,7 +65,7 @@ const Home = () => {
         </p>
 
         <img
-          src="/assets/flyer-temp.png"
+          src="/assets/flyer.png"
           alt="Local Vendors Bazaar Flyer"
           style={{
             maxWidth: '100%',
