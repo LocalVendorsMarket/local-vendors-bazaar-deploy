@@ -4,7 +4,7 @@ import Home from './Home';
 import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
-
+import VendorSignup from './VendorSignup';
 function App() {
   return (
     <Router basename="/">
@@ -13,6 +13,7 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/signup" element={<VendorSignup />} />
       </Routes>
     </Router>
   );

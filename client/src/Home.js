@@ -48,6 +48,7 @@ const Home = () => {
           <a href="/faq" style={linkStyle}>FAQ</a>
           <a href="/blog" style={linkStyle}>Blog</a>
           <a href="/contact" style={linkStyle}>Contact</a>
+          <a href="/signup" style={linkStyle}>Become a Vendor</a>
         </nav>
       </header>
 
@@ -88,7 +89,7 @@ const Home = () => {
             Join our marketplace and connect with buyers near you.
           </p>
           <a
-            href="#"
+            href="/signup"
             style={{
               display: 'inline-block',
               marginTop: '1rem',
