@@ -1,11 +1,19 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 const VendorSignupPage = () => {
   const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = () => {
+  const handleSubmit = (e) => {
+    e.preventDefault(); // prevent default form action
     setSubmitted(true);
+
+    // simulate delay and redirect
+    setTimeout(() => {
+      navigate('/thank-you');
+    }, 1000);
   };
 
   return (
@@ -22,7 +30,6 @@ const VendorSignupPage = () => {
         <h2 className="text-4xl font-extrabold text-center text-green-600 mb-2">
           Become a Local Vendor
         </h2>
-        
         <p className="text-center text-gray-600 mb-8">
           Reach your local community by listing your business on LocalVendorsBazaar.com
         </p>
@@ -33,15 +40,10 @@ const VendorSignupPage = () => {
             animate={{ opacity: 1 }}
             className="text-center text-green-700 text-lg font-semibold"
           >
-            🎉 Thank you! Your application has been submitted.
+            🎉 Thank you! Redirecting...
           </motion.div>
         ) : (
-          <form
-            action="https://formspree.io/f/movebonk"
-            method="POST"
-            className="grid gap-6"
-            onSubmit={handleSubmit}
-          >
+          <form className="grid gap-6" onSubmit={handleSubmit}>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
               <input

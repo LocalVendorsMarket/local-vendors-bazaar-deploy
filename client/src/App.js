@@ -4,7 +4,8 @@ import Home from './Home';
 import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
-import VendorSignupPage from './VendorSignup'; // ✅ FIXED path
+import VendorSignupPage from './VendorSignup';
+import ThankYou from './ThankYou'; // ✅ import thank-you page
 
 function App() {
   return (
@@ -14,13 +15,15 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<VendorSignupPage />} /> {/* ✅ FIXED route */}
+        <Route path="/signup" element={<VendorSignupPage />} />
+        <Route path="/thank-you" element={<ThankYou />} /> {/* ✅ new route */}
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 
