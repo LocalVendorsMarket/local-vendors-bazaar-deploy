@@ -4,17 +4,35 @@ import { motion } from 'framer-motion';
 import { HashLink } from 'react-router-hash-link';
 import { useLocation } from 'react-router-dom';
 
-const Home = () => {
-  const location = useLocation();
 
-  useEffect(() => {
-    const hash = location.hash || window.location.hash;
-    if (hash) {
-      const element = document.querySelector(hash);
-      if (element) {
-        setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth' });
-        }, 300);
+const location = useLocation();
+
+// Handles scroll on in-app navigation
+useEffect(() => {
+  const hash = location.hash;
+  if (hash) {
+    const element = document.querySelector(hash);
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 300);
+    }
+  }
+}, [location]);
+
+// Handles scroll on direct page load (e.g. /#faq)
+useEffect(() => {
+  const hash = window.location.hash;
+  if (hash) {
+    const element = document.querySelector(hash);
+    if (element) {
+      setTimeout(() => {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }, 500); // Increased delay for safety
+    }
+  }
+}, []);
+
       }
     }
   }, [location]);
