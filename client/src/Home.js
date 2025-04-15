@@ -39,18 +39,18 @@ const Home = () => {
           LocalVendorsBazaar
         </div>
         <nav
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-            marginTop: '0.5rem'
-          }}
-        >
-          <a onClick={() => scrollToSection('home')} style={linkStyle}>Home</a>
-          <a onClick={() => scrollToSection('faq')} style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a onClick={() => scrollToSection('contact')} style={linkStyle}>Contact</a>
-        </nav>
+  style={{
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginTop: '0.5rem'
+  }}
+>
+  <a href="/" style={linkStyle}>Home</a>
+  <a href="/faq" style={linkStyle}>FAQ</a>
+  <a href="/blog" style={linkStyle}>Blog</a>
+  <a href="/contact" style={linkStyle}>Contact</a>
+</nav>
       </header>
 
       {/* Main Content */}
@@ -165,10 +165,10 @@ const Home = () => {
 };
 
 const linkStyle = {
-  margin: '5px 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  cursor: 'pointer'
+    margin: '5px 10px',
+    color: '#fff',
+    textDecoration: 'none'
+  };
 };
 
 export default Home;
