@@ -1,41 +1,13 @@
-// src/Home.js
-import React, { useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { HashLink } from 'react-router-hash-link';
-import { useLocation } from 'react-router-dom';
 
-
-const location = useLocation();
-
-// Handles scroll on in-app navigation
-useEffect(() => {
-  const hash = location.hash;
-  if (hash) {
-    const element = document.querySelector(hash);
-    if (element) {
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }, 300);
+const Home = () => {
+  const scrollToSection = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
     }
-  }
-}, [location]);
-
-// Handles scroll on direct page load (e.g. /#faq)
-useEffect(() => {
-  const hash = window.location.hash;
-  if (hash) {
-    const element = document.querySelector(hash);
-    if (element) {
-      setTimeout(() => {
-        element.scrollIntoView({ behavior: 'smooth' });
-      }, 500); // Increased delay for safety
-    }
-  }
-}, []);
-
-      }
-    }
-  }, [location]);
+  };
 
   return (
     <div
@@ -74,10 +46,10 @@ useEffect(() => {
             marginTop: '0.5rem'
           }}
         >
-          <HashLink smooth to="#home" style={linkStyle}>Home</HashLink>
-          <HashLink smooth to="#faq" style={linkStyle}>FAQ</HashLink>
+          <a onClick={() => scrollToSection('home')} style={linkStyle}>Home</a>
+          <a onClick={() => scrollToSection('faq')} style={linkStyle}>FAQ</a>
           <a href="/blog" style={linkStyle}>Blog</a>
-          <HashLink smooth to="#contact" style={linkStyle}>Contact</HashLink>
+          <a onClick={() => scrollToSection('contact')} style={linkStyle}>Contact</a>
         </nav>
       </header>
 
@@ -195,10 +167,12 @@ useEffect(() => {
 const linkStyle = {
   margin: '5px 10px',
   color: '#fff',
-  textDecoration: 'none'
+  textDecoration: 'none',
+  cursor: 'pointer'
 };
 
 export default Home;
+
 
 
 
