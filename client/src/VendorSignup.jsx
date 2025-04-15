@@ -9,7 +9,10 @@ const VendorSignupPage = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
+    <div
+      className="min-h-screen w-screen bg-gray-100 flex items-center justify-center"
+      style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
@@ -104,6 +107,7 @@ const VendorSignupPage = () => {
 };
 
 export default VendorSignupPage;
+
 
 
 
