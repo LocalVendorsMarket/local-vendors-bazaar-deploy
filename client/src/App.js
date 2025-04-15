@@ -4,7 +4,7 @@ import Home from './Home';
 import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
-import VendorSignup from './pages/VendorSignup'; // ✅ updated import path
+import VendorSignupPage from './pages/VendorSignup';
 
 function App() {
   return (
@@ -14,13 +14,14 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<VendorSignup />} />
+        <Route path="/signup" element={<VendorSignupPage />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 

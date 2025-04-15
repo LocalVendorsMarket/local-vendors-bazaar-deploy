@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
-const VendorSignup = () => {
+const VendorSignupPage = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
@@ -16,9 +16,9 @@ const VendorSignup = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="bg-white w-full max-w-xl p-8 rounded-2xl shadow-xl"
       >
-        {/* DEBUG TEXT - REMOVE AFTER CONFIRMING THIS IS RENDERED */}
+        {/* 🔥 DEBUG TEXT */}
         <h1 className="text-4xl font-bold text-red-600 text-center mb-10">
-          🔍 DEBUG: This is the real VendorSignup.jsx
+          🔥 CONFIRMED JSX: This is VendorSignupPage.jsx
         </h1>
 
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
@@ -108,7 +108,8 @@ const VendorSignup = () => {
   );
 };
 
-export default VendorSignup;
+export default VendorSignupPage;
+
 
 
 
