@@ -65,15 +65,15 @@ const Home = () => {
         </p>
 
         <img
-          src="/assets/flyer-new.png"
-          alt="Local Vendors Bazaar Flyer"
-          style={{
-            maxWidth: '100%',
-            marginTop: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          }}
-        />
+  src="/assets/flyer-v2.png"
+  alt="Local Vendors Bazaar Flyer"
+  style={{
+    maxWidth: '100%',
+    marginTop: '2rem',
+    borderRadius: '12px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+  }}
+/>
 
         {/* Vendor CTA */}
         <div
