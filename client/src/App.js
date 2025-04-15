@@ -4,7 +4,7 @@ import Home from './Home';
 import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
-import VendorSignupPage from './pages/VendorSignup';
+import VendorSignupPage from './VendorSignup'; // ✅ FIXED path
 
 function App() {
   return (
@@ -14,13 +14,14 @@ function App() {
         <Route path="/blog" element={<Blog />} />
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<VendorSignupPage />} />
+        <Route path="/signup" element={<VendorSignupPage />} /> {/* ✅ FIXED route */}
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 

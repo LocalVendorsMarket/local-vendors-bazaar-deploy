@@ -16,11 +16,6 @@ const VendorSignupPage = () => {
         transition={{ duration: 0.8, ease: 'easeOut' }}
         className="bg-white w-full max-w-xl p-8 rounded-2xl shadow-xl"
       >
-        {/* 🔥 DEBUG TEXT */}
-        <h1 className="text-4xl font-bold text-red-600 text-center mb-10">
-          🔥 CONFIRMED JSX: This is VendorSignupPage.jsx
-        </h1>
-
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Become a Local Vendor
         </h2>
@@ -109,6 +104,7 @@ const VendorSignupPage = () => {
 };
 
 export default VendorSignupPage;
+
 
 
 
