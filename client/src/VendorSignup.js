@@ -1,42 +1,89 @@
-// src/VendorSignup.js
-import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 
 const VendorSignup = () => {
-  const [formData, setFormData] = useState({
-    businessName: '',
-    email: '',
-    phone: '',
-    website: '',
-    message: ''
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Vendor application submitted!');
-    console.log(formData);
-    // later: send to backend or API
-  };
-
   return (
-    <div style={{ padding: '2rem', maxWidth: '600px', margin: '0 auto', fontFamily: 'sans-serif' }}>
-      <h1 style={{ color: '#2b9348' }}>Vendor Signup</h1>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <input type="text" name="businessName" placeholder="Business Name" value={formData.businessName} onChange={handleChange} required />
-        <input type="email" name="email" placeholder="Email Address" value={formData.email} onChange={handleChange} required />
-        <input type="text" name="phone" placeholder="Phone Number" value={formData.phone} onChange={handleChange} />
-        <input type="url" name="website" placeholder="Website (optional)" value={formData.website} onChange={handleChange} />
-        <textarea name="message" placeholder="Tell us about your business..." rows="4" value={formData.message} onChange={handleChange}></textarea>
-        <button type="submit" style={{ backgroundColor: '#2b9348', color: '#fff', padding: '10px', border: 'none', borderRadius: '5px' }}>
-          Submit Application
-        </button>
-      </form>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-10">
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: 'easeOut' }}
+        className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8"
+      >
+        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
+          Become a Local Vendor
+        </h2>
+
+        <form
+          action="https://formspree.io/f/movebonk"
+          method="POST"
+          className="space-y-5"
+        >
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+            <input
+              type="text"
+              name="businessName"
+              placeholder="Your Business Name"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+            <input
+              type="tel"
+              name="phone"
+              placeholder="123-456-7890"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Website (Optional)</label>
+            <input
+              type="url"
+              name="website"
+              placeholder="https://yourbusiness.com"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+            <textarea
+              name="description"
+              placeholder="Tell us what you sell, how you're local, etc."
+              rows="4"
+              className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-400"
+              required
+            ></textarea>
+          </div>
+
+          <motion.button
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            type="submit"
+            className="w-full py-3 bg-green-500 text-white font-semibold rounded-xl transition hover:bg-green-600"
+          >
+            Submit Application
+          </motion.button>
+        </form>
+      </motion.div>
     </div>
   );
-};
 
-export default VendorSignup;
+
+
