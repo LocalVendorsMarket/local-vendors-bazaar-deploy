@@ -9,7 +9,10 @@ const VendorSignupPage = () => {
   };
 
   return (
-    <div className="w-screen min-h-screen bg-gray-50 flex items-center justify-center px-4 py-12">
+    <div
+      className="min-h-screen w-full bg-gray-50 flex justify-center items-center px-4 py-12"
+      style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+    >
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
@@ -19,7 +22,6 @@ const VendorSignupPage = () => {
         <h2 className="text-4xl font-extrabold text-center text-green-600 mb-2">
           Become a Local Vendor
         </h2>
-        <p className="text-center text-sm text-red-500 mb-6">🚧 Styled form version loaded 🚧</p>
         <p className="text-center text-gray-600 mb-8">
           Reach your local community by listing your business on LocalVendorsBazaar.com
         </p>
@@ -110,6 +112,7 @@ const VendorSignupPage = () => {
 };
 
 export default VendorSignupPage;
+
 
 
 
