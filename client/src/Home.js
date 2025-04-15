@@ -38,12 +38,13 @@ const Home = () => {
         <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
           LocalVendorsBazaar
         </div>
-        <nav
-  style={{
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    marginTop: '0.5rem'
+        <nav style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', marginTop: '0.5rem' }}>
+  <a href="/" style={linkStyle}>Home</a>
+  <a href="/faq" style={linkStyle}>FAQ</a>
+  <a href="/blog" style={linkStyle}>Blog</a>
+  <a href="/contact" style={linkStyle}>Contact</a>
+</nav>
+
   }}
 >
   <a href="/" style={linkStyle}>Home</a>
