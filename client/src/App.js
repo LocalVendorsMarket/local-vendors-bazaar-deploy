@@ -5,6 +5,7 @@ import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
 import VendorSignup from './VendorSignup';
+
 function App() {
   return (
     <Router basename="/">
