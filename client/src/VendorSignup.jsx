@@ -9,12 +9,12 @@ const VendorSignup = () => {
   };
 
   return (
-    <div className="min-h-screen w-full flex justify-center items-center bg-gray-100 px-4 py-10">
+    <div className="w-screen min-h-screen bg-gray-100 flex items-center justify-center px-4 py-10">
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: 'easeOut' }}
-        className="w-full max-w-xl bg-white rounded-2xl shadow-xl p-8"
+        className="bg-white w-full max-w-xl p-8 rounded-2xl shadow-xl"
       >
         <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Become a Local Vendor
@@ -104,6 +104,7 @@ const VendorSignup = () => {
 };
 
 export default VendorSignup;
+
 
 
 
