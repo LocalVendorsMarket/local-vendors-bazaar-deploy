@@ -22,9 +22,7 @@ const VendorSignupPage = () => {
         <h2 className="text-4xl font-extrabold text-center text-green-600 mb-2">
           Become a Local Vendor
         </h2>
-        <p className="text-center text-sm text-blue-500 mb-6">
-          🚀 LIVE: Final centered & styled layout
-        </p>
+        
         <p className="text-center text-gray-600 mb-8">
           Reach your local community by listing your business on LocalVendorsBazaar.com
         </p>
