@@ -4,9 +4,10 @@ import { motion } from 'framer-motion';
 const VendorSignup = () => {
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
+    // Let the browser submit the form to Formspree,
+    // and show thank you message immediately.
     setSubmitted(true);
-    // Let Formspree handle the POST request
   };
 
   return (
@@ -105,6 +106,7 @@ const VendorSignup = () => {
 };
 
 export default VendorSignup;
+
 
 
 
