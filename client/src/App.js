@@ -4,7 +4,7 @@ import Home from './Home';
 import Blog from './Blog';
 import Faq from './Faq';
 import Contact from './Contact';
-import VendorSignup from './VendorSignup';
+import VendorSignup from './pages/VendorSignup'; // ✅ updated import path
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
