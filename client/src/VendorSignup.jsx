@@ -12,26 +12,34 @@ const VendorSignupPage = () => {
     setSubmitted(true);
     setError(null);
 
-    const formData = new FormData(e.target);
+    const form = e.target;
+
+    const data = {
+      businessName: form.businessName.value,
+      email: form.email.value,
+      phone: form.phone.value,
+      website: form.website.value,
+      description: form.description.value,
+    };
 
     try {
-      const response = await fetch('https://formspree.io/f/movebonk', {
+      const response = await fetch('https://hook.us2.make.com/g0jblgnwxnvvoh1dk2vu3e1jr3csryv8', {
         method: 'POST',
-        body: formData,
         headers: {
-          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
+        body: JSON.stringify(data),
       });
 
       if (response.ok) {
         navigate('/thank-you');
       } else {
-        const data = await response.json();
-        setError(data?.message || 'Something went wrong. Please try again.');
+        setError('Something went wrong.');
         setSubmitted(false);
       }
     } catch (err) {
-      setError('Submission failed. Please try again later.');
+      console.error('Submission error:', err);
+      setError('Submission failed. Please try again.');
       setSubmitted(false);
     }
   };
@@ -68,46 +76,7 @@ const VendorSignupPage = () => {
           <div className="text-center text-red-600 font-medium mb-4">{error}</div>
         )}
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  setSubmitted(true);
-  setError(null);
-
-  const form = e.target;
-
-  const data = {
-    businessName: form.businessName.value,
-    email: form.email.value,
-    phone: form.phone.value,
-    website: form.website.value,
-    description: form.description.value,
-  };
-
-  try {
-    const response = await fetch('https://hook.us2.make.com/e3tcpelov1gjmey2fs3f4rjtpt107mny', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (response.ok) {
-      navigate('/thank-you');
-    } else {
-      setError('Something went wrong.');
-      setSubmitted(false);
-    }
-  } catch (err) {
-    console.error('Submission error:', err);
-    setError('Submission failed. Please try again.');
-    setSubmitted(false);
-  }
-};
-
-  }
-};
-
+        <form className="grid gap-6" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
             <input
@@ -178,6 +147,7 @@ const handleSubmit = async (e) => {
 };
 
 export default VendorSignupPage;
+
 
 
 
