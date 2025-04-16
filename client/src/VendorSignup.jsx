@@ -84,28 +84,27 @@ const handleSubmit = async (e) => {
   };
 
   try {
-    const response = await fetch('https://formspree.io/f/movebonk', {
+    const response = await fetch('https://hook.us2.make.com/e3tcpelov1gjmey2fs3f4rjtpt107mny', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json',
       },
       body: JSON.stringify(data),
     });
 
-    const result = await response.json();
-    console.log('Formspree response:', result);
-
     if (response.ok) {
       navigate('/thank-you');
     } else {
-      setError(result?.message || 'Something went wrong.');
+      setError('Something went wrong.');
       setSubmitted(false);
     }
   } catch (err) {
     console.error('Submission error:', err);
     setError('Submission failed. Please try again.');
     setSubmitted(false);
+  }
+};
+
   }
 };
 
