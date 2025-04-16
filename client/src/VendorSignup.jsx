@@ -68,7 +68,47 @@ const VendorSignupPage = () => {
           <div className="text-center text-red-600 font-medium mb-4">{error}</div>
         )}
 
-        <form className="grid gap-6" onSubmit={handleSubmit}>
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitted(true);
+  setError(null);
+
+  const form = e.target;
+
+  const data = {
+    businessName: form.businessName.value,
+    email: form.email.value,
+    phone: form.phone.value,
+    website: form.website.value,
+    description: form.description.value,
+  };
+
+  try {
+    const response = await fetch('https://formspree.io/f/movebonk', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const result = await response.json();
+    console.log('Formspree response:', result);
+
+    if (response.ok) {
+      navigate('/thank-you');
+    } else {
+      setError(result?.message || 'Something went wrong.');
+      setSubmitted(false);
+    }
+  } catch (err) {
+    console.error('Submission error:', err);
+    setError('Submission failed. Please try again.');
+    setSubmitted(false);
+  }
+};
+
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
             <input
