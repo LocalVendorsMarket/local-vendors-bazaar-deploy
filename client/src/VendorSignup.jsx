@@ -30,6 +30,7 @@ const VendorSignupPage = () => {
         },
         body: JSON.stringify(data),
       });
+      
 
       if (response.ok) {
         navigate('/thank-you');
