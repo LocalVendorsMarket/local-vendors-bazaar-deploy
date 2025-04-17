@@ -11,9 +11,9 @@ const VendorSignupPage = () => {
     e.preventDefault();
     setSubmitted(true);
     setError(null);
-
+  
     const form = e.target;
-
+  
     const data = {
       businessName: form.businessName.value,
       email: form.email.value,
@@ -21,16 +21,16 @@ const VendorSignupPage = () => {
       website: form.website.value,
       description: form.description.value,
     };
-
+  
     try {
-      const response = await fetch('https://hook.us2.make.com/c0hthh3zqtnn29get6u7ciiad1827nnp'), {
+      const response = await fetch('https://hook.us2.make.com/c0hthh3zqtnn29get6u7ciiad1827nnp', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-
+  
       if (response.ok) {
         navigate('/thank-you'); // Redirect after successful submission
       } else {
@@ -43,6 +43,7 @@ const VendorSignupPage = () => {
       setSubmitted(false);
     }
   };
+  
 
   return (
     <div
