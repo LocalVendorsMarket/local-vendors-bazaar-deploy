@@ -23,7 +23,7 @@ const VendorSignupPage = () => {
     };
 
     try {
-      const response = await fetch('https://hook.us2.make.com/bq67n6odlrr1781lz6rkj9ummhs4px98', {
+      const response = await fetch('https://hook.us2.make.com/c0hthh3zqtnn29get6u7ciiad1827nnp'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
