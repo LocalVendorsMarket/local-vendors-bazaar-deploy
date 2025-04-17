@@ -23,13 +23,14 @@ const VendorSignupPage = () => {
     };
   
     try {
-      const response = await fetch('https://hook.us2.make.com/c0hthh3zqtnn29get6u7ciiad1827nnp', {
+      const response = await fetch('https://hook.us2.make.com/e3tcpelov1gjmey2fs3f4rjtpt107mny', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
+      
   
       if (response.ok) {
         navigate('/thank-you'); // Redirect after successful submission
