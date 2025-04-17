@@ -23,17 +23,16 @@ const VendorSignupPage = () => {
     };
 
     try {
-      const response = await fetch('https://hook.us2.make.com/g0jblgnwxnvvoh1dk2vu3e1jr3csryv8', {
+      const response = await fetch('https://hook.us2.make.com/8ekwwg777l9a5iv5l13baq5lds6w60ml', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
       });
-      
 
       if (response.ok) {
-        navigate('/thank-you');
+        navigate('/thank-you'); // Redirect after successful submission
       } else {
         setError('Something went wrong.');
         setSubmitted(false);
@@ -148,6 +147,7 @@ const VendorSignupPage = () => {
 };
 
 export default VendorSignupPage;
+
 
 
 
