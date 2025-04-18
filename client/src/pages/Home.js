@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // ✅ Added Link import for Shop button
 
 const Home = () => {
   const linkStyle = {
@@ -64,16 +65,35 @@ const Home = () => {
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
+        {/* 🚀 NEW SHOP BUTTON ADDED BELOW */}
+        <div style={{ marginTop: '2rem' }}>
+          <Link
+            to="/shop"
+            style={{
+              display: 'inline-block',
+              padding: '10px 20px',
+              backgroundColor: '#2b9348',
+              color: '#fff',
+              textDecoration: 'none',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: '1.1rem',
+            }}
+          >
+            Shop Local Products
+          </Link>
+        </div>
+
         <img
-  src="/assets/flyer-v2.png"
-  alt="Local Vendors Bazaar Flyer"
-  style={{
-    maxWidth: '100%',
-    marginTop: '2rem',
-    borderRadius: '12px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-  }}
-/>
+          src="/assets/flyer-v2.png"
+          alt="Local Vendors Bazaar Flyer"
+          style={{
+            maxWidth: '100%',
+            marginTop: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
+        />
 
         {/* Vendor CTA */}
         <div
@@ -123,6 +143,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
