@@ -32,7 +32,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
-      {/* 🚀 HERO BANNER */}
+      {/* HERO */}
       <div className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           Shop Local and Save Big! 🎉
@@ -42,7 +42,7 @@ const Shop = () => {
         </p>
       </div>
 
-      {/* 🚀 CATEGORIES */}
+      {/* CATEGORIES */}
       <div className="flex flex-wrap justify-center gap-4 mb-12">
         {categories.map((category) => (
           <button
@@ -54,7 +54,7 @@ const Shop = () => {
         ))}
       </div>
 
-      {/* 🚀 PRODUCTS GRID */}
+      {/* PRODUCTS GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
         {products.map((product) => (
           <div
@@ -70,7 +70,7 @@ const Shop = () => {
               <h2 className="text-xl font-semibold text-green-700 mb-2">
                 {product.name}
               </h2>
-              <p className="text-lg font-bold text-gray-700 mb-6">
+              <p className="text-lg font-bold text-gray-700 mb-4">
                 {product.price}
               </p>
               <button className="mt-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
@@ -85,3 +85,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
