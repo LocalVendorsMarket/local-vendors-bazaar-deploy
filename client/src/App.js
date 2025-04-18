@@ -6,7 +6,7 @@ import Faq from './pages/Faq';
 import Contact from './pages/Contact';
 import VendorSignupPage from './pages/VendorSignupPage';
 import ThankYou from './pages/ThankYouPage';
-import ShopPage from './pages/ShopPage'; // ✅ NEW SHOPPAGE IMPORT
+import Shop from './pages/Shop'; // ✅ UPDATED to new Shop.jsx
 
 function App() {
   return (
@@ -18,13 +18,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<VendorSignupPage />} />
         <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/shop" element={<ShopPage />} /> {/* ✅ SHOP PAGE */}
+        <Route path="/shop" element={<Shop />} /> {/* ✅ NEW SHOP COMPONENT */}
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 
