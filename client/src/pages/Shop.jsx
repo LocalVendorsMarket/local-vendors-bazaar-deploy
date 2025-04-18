@@ -32,7 +32,6 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
-      {/* HERO */}
       <div className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           Shop Local and Save Big! 🎉
@@ -42,7 +41,6 @@ const Shop = () => {
         </p>
       </div>
 
-      {/* CATEGORIES */}
       <div className="flex flex-wrap justify-center gap-4 mb-12">
         {categories.map((category) => (
           <button
@@ -54,7 +52,6 @@ const Shop = () => {
         ))}
       </div>
 
-      {/* PRODUCTS GRID */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-6xl">
         {products.map((product) => (
           <div
@@ -85,4 +82,5 @@ const Shop = () => {
 };
 
 export default Shop;
+
 
