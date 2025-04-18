@@ -7,25 +7,25 @@ const ShopPage = () => {
     {
       id: 1,
       name: 'Local Honey',
-      image: '/assets/product-honey.jpg',
+      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
       price: '$12',
     },
     {
       id: 2,
       name: 'Handmade Necklace',
-      image: '/assets/product-necklace.jpg',
+      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
       price: '$25',
     },
     {
       id: 3,
       name: 'Organic T-Shirt',
-      image: '/assets/product-shirt.jpg',
+      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
       price: '$18',
     },
     {
       id: 4,
       name: 'Custom Artwork',
-      image: '/assets/product-art.jpg',
+      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
       price: '$80',
     },
   ];
@@ -59,7 +59,7 @@ const ShopPage = () => {
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden flex flex-col"
+            className="bg-white border border-gray-200 rounded-2xl shadow-md overflow-hidden flex flex-col hover:shadow-lg transition"
           >
             <img
               src={product.image}
@@ -70,7 +70,7 @@ const ShopPage = () => {
               <h2 className="text-xl font-semibold text-green-700 mb-2">
                 {product.name}
               </h2>
-              <p className="text-lg font-bold text-gray-700 mb-4">
+              <p className="text-lg font-bold text-gray-700 mb-6">
                 {product.price}
               </p>
               <button className="mt-auto px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
