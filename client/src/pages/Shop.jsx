@@ -32,7 +32,7 @@ const Shop = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
-      {/* HERO SECTION */}
+      {/* HERO */}
       <div className="text-center mb-12">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           🛍️ Local Deals Await You! 🎉
@@ -85,3 +85,4 @@ const Shop = () => {
 };
 
 export default Shop;
+
