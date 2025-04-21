@@ -1,29 +1,11 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Faq from './pages/Faq';
-import Contact from './pages/Contact';
-import VendorSignupPage from './pages/VendorSignupPage';
-import ThankYou from './pages/ThankYouPage';
-import Products from './pages/Products'; // ✅ NEW FINAL SHOP PAGE
 
-function App() {
+const Products = () => {
   return (
-    <Router basename="/">
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<VendorSignupPage />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/shop" element={<Products />} /> {/* ✅ SHOP NOW POINTS TO PRODUCTS.JSX */}
-      </Routes>
-    </Router>
+    <div className="min-h-screen flex items-center justify-center">
+      <h1 className="text-3xl font-bold text-green-600">Products</h1>
+    </div>
   );
-}
+};
 
-export default App;
-
-
+export default Products;
