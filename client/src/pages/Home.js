@@ -1,16 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
-  return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h1 className="text-4xl font-bold text-green-600">Welcome to Local Vendors Bazaar 🎉</h1>
-      <p className="mt-4 text-gray-600 text-lg">Shop and Save Locally!</p>
-    </div>
-  );
-};
-
-export default Home;
-
+  const linkStyle = {
+    margin: '5px 10px',
+    color: '#fff',
+    textDecoration: 'none',
+  };
 
   return (
     <div
@@ -69,7 +65,7 @@ export default Home;
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
-        {/* 🚀 NEW SHOP BUTTON ADDED BELOW */}
+        {/* 🚀 NEW SHOP BUTTON */}
         <div style={{ marginTop: '2rem' }}>
           <Link
             to="/shop"
@@ -88,6 +84,7 @@ export default Home;
           </Link>
         </div>
 
+        {/* Flyer Image */}
         <img
           src="/assets/flyer-v2.png"
           alt="Local Vendors Bazaar Flyer"
@@ -147,6 +144,7 @@ export default Home;
 };
 
 export default Home;
+
 
 
 
