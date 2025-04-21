@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/home'; // ✅ LOWERCASE home.js
-import Blog from './pages/blog'; // ✅ lowercase blog.jsx
-import Faq from './pages/faq'; // ✅ lowercase faq.jsx
-import Contact from './pages/contact'; // ✅ lowercase contact.jsx
-import VendorSignupPage from './pages/VendorSignupPage'; // ✅
-import ThankYouPage from './pages/ThankYouPage'; // ✅
-import Products from './pages/products'; // ✅ products.jsx
+import Home from './pages/Home'; // ✅ Capital H
+import Blog from './pages/Blog'; // ✅ Capital B
+import Faq from './pages/Faq'; // ✅ Capital F
+import Contact from './pages/Contact'; // ✅ Capital C
+import VendorSignupPage from './pages/VendorSignupPage'; // ✅ Capital V
+import ThankYouPage from './pages/ThankYouPage'; // ✅ Capital T
+import Products from './pages/Products'; // ✅ Capital P
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
