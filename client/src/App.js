@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home'; // ✅ matches Home.js
-import Blog from './pages/Blog'; // ✅ matches Blog.jsx
-import Faq from './pages/Faq'; // ✅ matches Faq.jsx
-import Contact from './pages/Contact'; // ✅ matches Contact.jsx
-import VendorSignupPage from './pages/VendorSignupPage'; // ✅
-import ThankYouPage from './pages/ThankYouPage'; // ✅
-import Products from './pages/Products'; // ✅ matches Products.jsx
+import Home from './pages/Home';
+import Blog from './pages/Blog';
+import Faq from './pages/Faq';
+import Contact from './pages/Contact';
+import VendorSignupPage from './pages/VendorSignupPage';
+import ThankYouPage from './pages/ThankYouPage';
+import Products from './pages/Products';
 
 function App() {
   return (
@@ -25,6 +25,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
