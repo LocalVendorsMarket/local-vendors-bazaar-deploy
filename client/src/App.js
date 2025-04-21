@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
-import Faq from './pages/Faq';
-import Contact from './pages/Contact';
-import VendorSignupPage from './pages/VendorSignupPage';
-import ThankYou from './pages/ThankYouPage';
-import Products from './pages/Products'; // ✅ UPDATED to new Products.jsx
+import Home from '../Home'; // ✅ NOT inside pages
+import Blog from '../Blog'; // ✅ NOT inside pages
+import Faq from '../Faq'; // ✅ NOT inside pages
+import Contact from '../Contact'; // ✅ NOT inside pages
+import VendorSignupPage from '../VendorSignupPage'; // ✅ NOT inside pages
+import ThankYou from '../ThankYouPage'; // ✅ NOT inside pages
+import Products from './Products'; // ✅ Correct new shop page inside pages
 
 function App() {
   return (
@@ -18,13 +18,14 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<VendorSignupPage />} />
         <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/shop" element={<Products />} /> {/* ✅ UPDATED to use Products */}
+        <Route path="/shop" element={<Products />} /> {/* ✅ SHOP NOW POINTS TO PRODUCTS.JSX */}
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 
