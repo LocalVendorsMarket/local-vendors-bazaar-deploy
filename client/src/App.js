@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from '../Home'; // ✅ NOT inside pages
-import Blog from '../Blog'; // ✅ NOT inside pages
-import Faq from '../Faq'; // ✅ NOT inside pages
-import Contact from '../Contact'; // ✅ NOT inside pages
-import VendorSignupPage from '../VendorSignupPage'; // ✅ NOT inside pages
-import ThankYou from '../ThankYouPage'; // ✅ NOT inside pages
-import Products from './Products'; // ✅ Correct new shop page inside pages
+import Home from './pages/home'; // ✅ LOWERCASE home.js
+import Blog from './pages/blog'; // ✅ lowercase blog.jsx
+import Faq from './pages/faq'; // ✅ lowercase faq.jsx
+import Contact from './pages/contact'; // ✅ lowercase contact.jsx
+import VendorSignupPage from './pages/VendorSignupPage'; // ✅
+import ThankYouPage from './pages/ThankYouPage'; // ✅
+import Products from './pages/products'; // ✅ products.jsx
 
 function App() {
   return (
@@ -17,14 +17,16 @@ function App() {
         <Route path="/faq" element={<Faq />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/signup" element={<VendorSignupPage />} />
-        <Route path="/thank-you" element={<ThankYou />} />
-        <Route path="/shop" element={<Products />} /> {/* ✅ SHOP NOW POINTS TO PRODUCTS.JSX */}
+        <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="/shop" element={<Products />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+
 
 
 
