@@ -1,12 +1,16 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; // ✅ Added Link import for Shop button
 
 const Home = () => {
-  const linkStyle = {
-    margin: '5px 10px',
-    color: '#fff',
-    textDecoration: 'none',
-  };
+  return (
+    <div className="min-h-screen flex flex-col items-center justify-center">
+      <h1 className="text-4xl font-bold text-green-600">Welcome to Local Vendors Bazaar 🎉</h1>
+      <p className="mt-4 text-gray-600 text-lg">Shop and Save Locally!</p>
+    </div>
+  );
+};
+
+export default Home;
+
 
   return (
     <div
