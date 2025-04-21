@@ -18,19 +18,15 @@ const Home = () => {
         minHeight: '100vh',
       }}
     >
-      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
           display: 'flex',
-          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
+          flexWrap: 'wrap',
         }}
       >
         <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
@@ -53,7 +49,6 @@ const Home = () => {
         </nav>
       </header>
 
-      {/* Main Content */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
         <img
           src="/assets/logo.png"
@@ -65,7 +60,6 @@ const Home = () => {
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
-        {/* 🚀 NEW SHOP BUTTON */}
         <div style={{ marginTop: '2rem' }}>
           <Link
             to="/shop"
@@ -84,7 +78,6 @@ const Home = () => {
           </Link>
         </div>
 
-        {/* Flyer Image */}
         <img
           src="/assets/flyer-v2.png"
           alt="Local Vendors Bazaar Flyer"
@@ -96,7 +89,6 @@ const Home = () => {
           }}
         />
 
-        {/* Vendor CTA */}
         <div
           style={{
             marginTop: '3rem',
@@ -127,7 +119,6 @@ const Home = () => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -144,12 +135,3 @@ const Home = () => {
 };
 
 export default Home;
-
-
-
-
-
-
-
-
-
