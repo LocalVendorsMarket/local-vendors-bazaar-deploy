@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Blog = () => {
+const Blog = ({ cart }) => {
   const linkStyle = {
     margin: '5px 10px',
     color: '#fff',
@@ -39,41 +39,33 @@ const Blog = () => {
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
+          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           display: 'flex',
-          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexDirection: 'row',
+          flexWrap: 'wrap',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Logo"
-            style={{ width: '40px', height: '40px', marginRight: '10px' }}
-          />
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-            LocalVendorsBazaar
-          </div>
+        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
+          LocalVendorsBazaar
         </div>
 
-        <nav
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
+        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
           <a href="/" style={linkStyle}>Home</a>
           <a href="/faq" style={linkStyle}>FAQ</a>
           <a href="/blog" style={linkStyle}>Blog</a>
           <a href="/contact" style={linkStyle}>Contact</a>
           <a href="/signup" style={linkStyle}>Become a Vendor</a>
+          <a href="/shop" style={linkStyle}>Shop</a>
+          <a href="/cart" style={linkStyle}>
+            🛒 Cart
+            {cart.length > 0 && ` (${cart.length})`}
+          </a>
 
-          {/* Search + Zip inside navbar */}
+          {/* Search + Zip Code */}
           <input
             type="text"
             placeholder="Search products..."
@@ -157,6 +149,7 @@ const Blog = () => {
 };
 
 export default Blog;
+
 
 
 

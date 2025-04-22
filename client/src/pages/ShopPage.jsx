@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Products = ({ cart, setCart }) => {
+const ShopPage = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
 
   const products = [
@@ -166,17 +166,6 @@ const Products = ({ cart, setCart }) => {
   );
 };
 
-export default Products;
-
-
-
-
-
-
-
-
-
-
-
+export default ShopPage;
 
 
