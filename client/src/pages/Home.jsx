@@ -31,18 +31,18 @@ const Home = () => {
           flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
+          flexDirection: 'row',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
           LocalVendorsBazaar
         </div>
 
         <nav
           style={{
             display: 'flex',
+            alignItems: 'center',
             flexWrap: 'wrap',
-            justifyContent: 'center',
-            marginTop: '0.5rem',
           }}
         >
           <a href="/" style={linkStyle}>Home</a>
@@ -50,7 +50,45 @@ const Home = () => {
           <a href="/blog" style={linkStyle}>Blog</a>
           <a href="/contact" style={linkStyle}>Contact</a>
           <a href="/signup" style={linkStyle}>Become a Vendor</a>
-          <a href="/shop" style={linkStyle}>Shop</a>
+          
+          {/* Search + Zip inside navbar */}
+          <input
+            type="text"
+            placeholder="Search products..."
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Zip Code"
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              width: '100px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <button
+            style={{
+              marginLeft: '10px',
+              padding: '6px 12px',
+              backgroundColor: '#40916c',
+              color: '#fff',
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Search
+          </button>
         </nav>
       </header>
 
@@ -59,29 +97,26 @@ const Home = () => {
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
-          style={{ width: '150px', marginBottom: '1rem' }}
+          style={{ width: '200px', marginBottom: '1rem' }}
         />
-        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', fontWeight: 'bold' }}>
-          Welcome to Local Vendors Bazaar 🎉
-        </h1>
-        <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '1rem' }}>
+        <h1 style={{ color: '#2b9348' }}>Welcome to Local Vendors Bazaar 🎉</h1>
+        <p style={{ fontSize: '1.2rem', color: '#555' }}>
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
-        {/* Flyer Section */}
-        <div style={{ marginTop: '3rem' }}>
-          <img
-            src="/assets/flyer-v2.png"
-            alt="Flyer for Local Vendors Bazaar"
-            style={{
-              maxWidth: '100%',
-              borderRadius: '12px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            }}
-          />
-        </div>
+        {/* Flyer image */}
+        <img
+          src="/assets/flyer-v2.png"
+          alt="Local Vendors Bazaar Flyer"
+          style={{
+            maxWidth: '100%',
+            marginTop: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
+        />
 
-        {/* Vendor CTA Section */}
+        {/* Vendor CTA */}
         <div
           style={{
             marginTop: '3rem',
@@ -90,14 +125,12 @@ const Home = () => {
             borderRadius: '12px',
           }}
         >
-          <h2 style={{ color: '#1f7a3f', fontSize: '2rem', fontWeight: 'bold' }}>
-            Are You a Local Vendor?
-          </h2>
-          <p style={{ color: '#333', fontSize: '1.1rem', marginTop: '0.5rem' }}>
-            Join our marketplace and connect with local buyers near you.
+          <h2 style={{ color: '#1f7a3f' }}>Are You a Local Vendor?</h2>
+          <p style={{ color: '#333', fontSize: '1.1rem' }}>
+            Join our marketplace and connect with buyers near you.
           </p>
-          <Link
-            to="/signup"
+          <a
+            href="/signup"
             style={{
               display: 'inline-block',
               marginTop: '1rem',
@@ -110,7 +143,7 @@ const Home = () => {
             }}
           >
             Become a Vendor
-          </Link>
+          </a>
         </div>
       </main>
 
@@ -131,6 +164,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
