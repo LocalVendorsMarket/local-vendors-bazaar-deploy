@@ -43,7 +43,7 @@ const Contact = () => {
           Contact Us
         </h1>
 
-        <form action="https://formspree.io/https://formspree.io/f/movdqjgpf" method="POST" className="space-y-6">
+        <form action="https://formspree.io/f/yourhttps://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input
@@ -101,6 +101,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
 
 
