@@ -4,16 +4,16 @@ const Products = () => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
 
   const products = [
-    { id: 1, name: 'Local Honey', price: '$12' },
-    { id: 2, name: 'Handmade Necklace', price: '$25' },
-    { id: 3, name: 'Organic T-Shirt', price: '$18' },
-    { id: 4, name: 'Custom Artwork', price: '$80' },
+    { id: 1, name: 'Local Honey', price: '$12', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
+    { id: 2, name: 'Handmade Necklace', price: '$25', image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace' },
+    { id: 3, name: 'Organic T-Shirt', price: '$18', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
+    { id: 4, name: 'Custom Artwork', price: '$80', image: 'https://via.placeholder.com/300x200?text=Custom+Artwork' },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center py-10 px-4">
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
       {/* Title */}
-      <h1 className="text-5xl font-extrabold text-green-600 mb-6">
+      <h1 className="text-5xl font-extrabold text-green-600 mb-6 text-center">
         🛍️ Shop Local and Save Big! 🎉
       </h1>
 
@@ -22,8 +22,8 @@ const Products = () => {
         Discover amazing products from your local vendors.
       </p>
 
-      {/* Categories Buttons */}
-      <div className="flex flex-wrap justify-center gap-4 mb-12">
+      {/* Categories */}
+      <div className="flex flex-wrap justify-center gap-3 mb-12">
         {categories.map((category) => (
           <button
             key={category}
@@ -35,17 +35,30 @@ const Products = () => {
       </div>
 
       {/* Products Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-full max-w-7xl">
         {products.map((product) => (
           <div
             key={product.id}
-            className="border rounded-xl p-6 bg-white shadow-md flex flex-col items-center hover:shadow-lg transition"
+            className="bg-white rounded-2xl shadow-md hover:shadow-lg transition transform hover:-translate-y-1 flex flex-col"
           >
-            <h2 className="text-xl font-bold text-green-700 mb-2">{product.name}</h2>
-            <p className="text-gray-600 mb-4">{product.price}</p>
-            <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600">
-              Learn More
-            </button>
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-48 object-cover rounded-t-2xl"
+            />
+            <div className="p-5 flex flex-col flex-grow">
+              <h2 className="text-xl font-semibold text-green-700 mb-2 text-center">{product.name}</h2>
+              <p className="text-lg font-bold text-gray-700 mb-4 text-center">{product.price}</p>
+
+              <div className="flex flex-col gap-2 mt-auto">
+                <button className="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold">
+                  Learn More
+                </button>
+                <button className="w-full py-2 border border-green-500 text-green-600 rounded-lg hover:bg-green-50 transition font-semibold">
+                  Add to Cart
+                </button>
+              </div>
+            </div>
           </div>
         ))}
       </div>
@@ -54,6 +67,7 @@ const Products = () => {
 };
 
 export default Products;
+
 
 
 
