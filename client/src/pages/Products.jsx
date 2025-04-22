@@ -38,12 +38,12 @@ const Products = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
       <NavigationBar />
-      <div className="text-center mb-12 mt-20">
+      <main className="text-center mb-12 mt-24">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">🛍️ Shop Local and Save Big! 🎉</h1>
         <p className="text-gray-600 text-lg">
           Discover amazing products from your favorite local vendors.
         </p>
-      </div>
+      </main>
 
       {/* Categories */}
       <div className="flex flex-wrap justify-center gap-4 mb-12">
@@ -87,6 +87,7 @@ const Products = () => {
 };
 
 export default Products;
+
 
 
 

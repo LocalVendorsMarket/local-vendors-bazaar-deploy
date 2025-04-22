@@ -5,15 +5,18 @@ const VendorSignupPage = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">
       <NavigationBar />
-      <h1 className="text-4xl font-bold text-green-600 mt-20">🏪 Become a Vendor</h1>
-      <p className="mt-4 text-gray-600 text-lg text-center">
-        Join LocalVendorsBazaar and connect your products with thousands of local buyers!
-      </p>
+      <main className="mt-24 text-center px-4">
+        <h1 className="text-4xl font-bold text-green-600">🏪 Become a Vendor</h1>
+        <p className="mt-4 text-gray-600 text-lg">
+          Join LocalVendorsBazaar and reach thousands of local buyers.
+        </p>
+      </main>
     </div>
   );
 };
 
 export default VendorSignupPage;
+
 
 
 
