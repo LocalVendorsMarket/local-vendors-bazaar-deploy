@@ -6,7 +6,7 @@ import Faq from './pages/Faq';
 import Contact from './pages/Contact';
 import VendorSignupPage from './pages/VendorSignupPage';
 import ThankYouPage from './pages/ThankYouPage';
-import Products from './pages/Products';
+import Products from './pages/Products'; // Your shop page
 
 function App() {
   return (
@@ -25,3 +25,4 @@ function App() {
 }
 
 export default App;
+
