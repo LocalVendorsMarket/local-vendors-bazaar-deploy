@@ -14,12 +14,12 @@ function App() {
   return (
     <Router basename="/">
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/faq" element={<Faq />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/signup" element={<VendorSignupPage />} />
-        <Route path="/thank-you" element={<ThankYouPage />} />
+        <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
+        <Route path="/blog" element={<Blog cart={cart} setCart={setCart} />} />
+        <Route path="/faq" element={<Faq cart={cart} setCart={setCart} />} />
+        <Route path="/contact" element={<Contact cart={cart} setCart={setCart} />} />
+        <Route path="/signup" element={<VendorSignupPage cart={cart} setCart={setCart} />} />
+        <Route path="/thank-you" element={<ThankYouPage cart={cart} setCart={setCart} />} />
         <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
       </Routes>
     </Router>
@@ -27,5 +27,6 @@ function App() {
 }
 
 export default App;
+
 
 
