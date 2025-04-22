@@ -1,22 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Contact = () => {
-  const linkStyle = {
-    margin: '5px 10px',
-    color: '#fff',
-    textDecoration: 'none',
-  };
-
   return (
     <div
-      className="App"
-      style={{
-        fontFamily: 'sans-serif',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-      }}
+      className="min-h-screen flex flex-col items-center bg-gray-50"
+      style={{ fontFamily: 'sans-serif', paddingTop: '4rem', paddingBottom: '4rem' }}
     >
       {/* Navigation Bar */}
       <header
@@ -24,127 +12,97 @@ const Contact = () => {
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          position: 'sticky',
+          width: '100%',
+          position: 'fixed',
           top: 0,
-          zIndex: 1000,
           display: 'flex',
-          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexDirection: 'row',
+          flexWrap: 'wrap',
+          zIndex: 1000,
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Logo"
-            style={{ width: '40px', height: '40px', marginRight: '10px' }}
-          />
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-            LocalVendorsBazaar
-          </div>
+        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
+          LocalVendorsBazaar
         </div>
-
-        <nav
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
-
-          {/* Search + Zip inside navbar */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+        <nav style={{ marginRight: '1rem' }}>
+          <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
+          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
         </nav>
       </header>
 
-      {/* Main Contact Content */}
-      <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
+      {/* Contact Form */}
+      <div
+        className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 mt-20"
+        style={{ marginTop: '6rem' }}
+      >
+        <h1 className="text-4xl font-bold text-green-600 text-center mb-8">
           Contact Us
         </h1>
 
-        <div
-          style={{
-            backgroundColor: '#fff',
-            padding: '2rem',
-            borderRadius: '12px',
-            maxWidth: '600px',
-            margin: '0 auto',
-            boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-            textAlign: 'left',
-          }}
-        >
-          <p style={{ marginBottom: '1rem', fontSize: '1.1rem', color: '#555' }}>
-            📧 Email: support@localvendorsbazaar.com
-          </p>
-          <p style={{ marginBottom: '1rem', fontSize: '1.1rem', color: '#555' }}>
-            📞 Phone: (123) 456-7890
-          </p>
-          <p style={{ fontSize: '1.1rem', color: '#555' }}>
-            🏢 Address: 123 Main Street, Chicago, IL 60601
-          </p>
-        </div>
-      </main>
+        <form action="https://formspree.io/https://formspree.io/f/movdqjgpf" method="POST" className="space-y-6">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+            <input
+              type="text"
+              name="name"
+              required
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="Your Name"
+            />
+          </div>
 
-      {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
-        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+            <input
+              type="text"
+              name="subject"
+              required
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="Subject"
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
+            <textarea
+              name="message"
+              required
+              rows="5"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
 export default Contact;
+
+
 
 
 
