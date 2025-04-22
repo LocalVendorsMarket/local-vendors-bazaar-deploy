@@ -1,10 +1,16 @@
 import React from 'react';
 
 const Contact = () => {
+  const linkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+  };
+
   return (
     <div
       className="min-h-screen flex flex-col items-center bg-gray-50"
-      style={{ fontFamily: 'sans-serif', paddingTop: '4rem', paddingBottom: '4rem' }}
+      style={{ fontFamily: 'sans-serif', paddingTop: '5rem', paddingBottom: '3rem' }}
     >
       {/* Navigation Bar */}
       <header
@@ -25,25 +31,26 @@ const Contact = () => {
         <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
           LocalVendorsBazaar
         </div>
-        <nav style={{ marginRight: '1rem' }}>
-          <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
-          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
-          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
+        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
+          <a href="/" style={linkStyle}>Home</a>
+          <a href="/faq" style={linkStyle}>FAQ</a>
+          <a href="/blog" style={linkStyle}>Blog</a>
+          <a href="/contact" style={linkStyle}>Contact</a>
+          <a href="/signup" style={linkStyle}>Become a Vendor</a>
         </nav>
       </header>
 
       {/* Contact Form */}
       <div
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 mt-20"
-        style={{ marginTop: '6rem' }}
+        className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 mt-24"
+        style={{ marginTop: '8rem' }}
       >
         <h1 className="text-4xl font-bold text-green-600 text-center mb-8">
           Contact Us
         </h1>
 
-        <form action="https://formspree.io/f/yourhttps://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
+        {/* ✅ Update your correct Formspree URL here */}
+        <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
             <input
@@ -101,6 +108,7 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
 
 
