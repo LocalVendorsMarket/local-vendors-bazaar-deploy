@@ -1,16 +1,22 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
   const linkStyle = {
-    margin: '0 10px',
+    margin: '5px 10px',
     color: '#fff',
     textDecoration: 'none',
   };
 
   return (
     <div
-      className="min-h-screen flex flex-col items-center bg-gray-50"
-      style={{ fontFamily: 'sans-serif', paddingTop: '5rem', paddingBottom: '3rem' }}
+      className="App"
+      style={{
+        fontFamily: 'sans-serif',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
     >
       {/* Navigation Bar */}
       <header
@@ -18,96 +24,189 @@ const Contact = () => {
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
-          position: 'fixed',
+          position: 'sticky',
           top: 0,
+          zIndex: 1000,
           display: 'flex',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
-          zIndex: 1000,
+          flexDirection: 'row',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
+        <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
           LocalVendorsBazaar
         </div>
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
+
+        <nav
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <Link to="/" style={linkStyle}>Home</Link>
+          <Link to="/faq" style={linkStyle}>FAQ</Link>
+          <Link to="/blog" style={linkStyle}>Blog</Link>
+          <Link to="/contact" style={linkStyle}>Contact</Link>
+          <Link to="/signup" style={linkStyle}>Become a Vendor</Link>
+
+          {/* Search + Zip inside navbar */}
+          <input
+            type="text"
+            placeholder="Search products..."
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Zip Code"
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              width: '100px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <button
+            style={{
+              marginLeft: '10px',
+              padding: '6px 12px',
+              backgroundColor: '#40916c',
+              color: '#fff',
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Search
+          </button>
         </nav>
       </header>
 
-      {/* Contact Form */}
-      <div
-        className="w-full max-w-2xl bg-white rounded-2xl shadow-lg p-8 mt-24"
-        style={{ marginTop: '8rem' }}
-      >
-        <h1 className="text-4xl font-bold text-green-600 text-center mb-8">
-          Contact Us
-        </h1>
+      {/* Main Content */}
+      <main style={{ textAlign: 'center', padding: '2rem', marginTop: '4rem' }}>
+        <img
+          src="/assets/logo.png"
+          alt="Local Vendors Bazaar Logo"
+          style={{ width: '180px', marginBottom: '1rem' }}
+        />
+        <h1 style={{ color: '#2b9348', fontSize: '2rem', marginBottom: '1rem' }}>Contact Us</h1>
+        <p style={{ fontSize: '1.1rem', color: '#555', marginBottom: '2rem' }}>
+          Have a question? We're here to help. Fill out the form below and we'll get back to you!
+        </p>
 
-        {/* ✅ Update your correct Formspree URL here */}
-        <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <form
+          action="https://formspree.io/f/movdqjgp"
+          method="POST"
+          style={{
+            maxWidth: '600px',
+            margin: '0 auto',
+            backgroundColor: '#fff',
+            padding: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
+        >
+          <div style={{ marginBottom: '1rem' }}>
             <input
               type="text"
               name="name"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
               placeholder="Your Name"
+              required
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+              }}
             />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               name="email"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
               placeholder="you@example.com"
+              required
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+              }}
             />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
             <input
               type="text"
               name="subject"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
               placeholder="Subject"
+              required
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+              }}
             />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Message</label>
             <textarea
               name="message"
-              required
-              rows="5"
-              className="w-full border border-gray-300 rounded-lg p-3"
               placeholder="Your Message"
-            ></textarea>
+              rows="5"
+              required
+              style={{
+                width: '100%',
+                padding: '0.75rem',
+                border: '1px solid #ccc',
+                borderRadius: '8px',
+                marginBottom: '1rem',
+              }}
+            />
           </div>
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
+            style={{
+              backgroundColor: '#2b9348',
+              color: '#fff',
+              fontWeight: 'bold',
+              padding: '0.75rem 1.5rem',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+            }}
           >
             Send Message
           </button>
         </form>
-      </div>
+      </main>
+
+      {/* Footer */}
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
+        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
 export default Contact;
+
 
 
 
