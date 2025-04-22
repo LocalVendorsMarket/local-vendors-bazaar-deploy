@@ -2,17 +2,13 @@ import React from 'react';
 
 const VendorSignupPage = ({ cart }) => {
   return (
-    <div
-      className="min-h-screen flex flex-col items-center bg-gray-50"
-      style={{ fontFamily: 'sans-serif' }}
-    >
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -27,119 +23,42 @@ const VendorSignupPage = ({ cart }) => {
         </div>
 
         <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
-          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
-          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
-          <a href="/shop" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Shop</a>
-          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>
-            🛒 Cart
-            {cart && cart.length > 0 && ` (${cart.length})`}
+          <a href="/" style={navLink}>Home</a>
+          <a href="/faq" style={navLink}>FAQ</a>
+          <a href="/blog" style={navLink}>Blog</a>
+          <a href="/contact" style={navLink}>Contact</a>
+          <a href="/signup" style={navLink}>Become a Vendor</a>
+          <a href="/shop" style={navLink}>Shop</a>
+          <a href="/cart" style={navLink}>
+            <span style={{ border: '1px solid #fff', borderRadius: '50%', padding: '3px 6px' }}>
+              🛒
+            </span>
+            {cart.length > 0 && ` (${cart.length})`}
           </a>
-
-          {/* Search + Zip Code */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={buttonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Vendor Signup Form */}
+      {/* Main Content */}
       <main className="flex flex-col items-center justify-center flex-grow p-8">
         <h1 className="text-4xl font-bold text-green-600 mb-4">Become a Vendor</h1>
-        <p className="text-gray-600 mb-8 text-center text-lg">
+        <p className="text-gray-600 mb-8 text-center text-lg max-w-xl">
           Join Local Vendors Bazaar and grow your local business.  
           It's quick, simple, and free to start!
         </p>
 
-        <form action="https://formspree.io/f/movdqjgp" method="POST" className="w-full max-w-lg space-y-6 bg-white p-8 rounded-xl shadow-md">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
-            <input
-              type="text"
-              name="businessName"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="Your Business Name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="123-456-7890"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
-            <input
-              type="url"
-              name="website"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="https://yourbusiness.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
-            <textarea
-              name="description"
-              required
-              rows="4"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="Tell us about your business..."
-            ></textarea>
-          </div>
+        <form
+          action="https://formspree.io/f/movdqjgp"
+          method="POST"
+          className="w-full max-w-xl space-y-6 bg-white p-8 rounded-xl shadow-md"
+        >
+          <FormInput label="Business Name" name="businessName" placeholder="Your Business Name" />
+          <FormInput label="Email" name="email" type="email" placeholder="you@example.com" />
+          <FormInput label="Phone" name="phone" placeholder="123-456-7890" />
+          <FormInput label="Website (optional)" name="website" placeholder="https://yourbusiness.com" />
+          <FormTextarea label="Business Description" name="description" placeholder="Tell us about your business..." />
 
           <button
             type="submit"
@@ -166,4 +85,58 @@ const VendorSignupPage = ({ cart }) => {
   );
 };
 
+const navLink = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const buttonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
+// Reusable Form Input
+const FormInput = ({ label, type = "text", name, placeholder }) => (
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <input
+      type={type}
+      name={name}
+      required
+      className="w-full border border-gray-300 rounded-lg p-3"
+      placeholder={placeholder}
+    />
+  </div>
+);
+
+// Reusable Form Textarea
+const FormTextarea = ({ label, name, placeholder }) => (
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+    <textarea
+      name={name}
+      required
+      rows="4"
+      className="w-full border border-gray-300 rounded-lg p-3"
+      placeholder={placeholder}
+    ></textarea>
+  </div>
+);
+
 export default VendorSignupPage;
+
