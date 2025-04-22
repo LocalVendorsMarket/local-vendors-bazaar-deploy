@@ -28,12 +28,142 @@ const VendorSignupPage = ({ cart }) => {
 
         <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
           <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-          <a href="/faq" style={{ margin: '0 10px', color
+          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
+          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
+          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
+          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
+          <a href="/shop" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Shop</a>
+          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>
+            🛒 Cart
+            {cart && cart.length > 0 && ` (${cart.length})`}
+          </a>
 
+          {/* Search + Zip Code */}
+          <input
+            type="text"
+            placeholder="Search products..."
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Zip Code"
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              width: '100px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <button
+            style={{
+              marginLeft: '10px',
+              padding: '6px 12px',
+              backgroundColor: '#40916c',
+              color: '#fff',
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Search
+          </button>
+        </nav>
+      </header>
 
+      {/* Vendor Signup Form */}
+      <main className="flex flex-col items-center justify-center flex-grow p-8">
+        <h1 className="text-4xl font-bold text-green-600 mb-4">Become a Vendor</h1>
+        <p className="text-gray-600 mb-8 text-center text-lg">
+          Join Local Vendors Bazaar and grow your local business.  
+          It's quick, simple, and free to start!
+        </p>
 
+        <form action="https://formspree.io/f/movdqjgp" method="POST" className="w-full max-w-lg space-y-6 bg-white p-8 rounded-xl shadow-md">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+            <input
+              type="text"
+              name="businessName"
+              required
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="Your Business Name"
+            />
+          </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              name="email"
+              required
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="you@example.com"
+            />
+          </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+            <input
+              type="tel"
+              name="phone"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="123-456-7890"
+            />
+          </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+            <input
+              type="url"
+              name="website"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="https://yourbusiness.com"
+            />
+          </div>
 
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+            <textarea
+              name="description"
+              required
+              rows="4"
+              className="w-full border border-gray-300 rounded-lg p-3"
+              placeholder="Tell us about your business..."
+            ></textarea>
+          </div>
 
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
+          >
+            Submit Application
+          </button>
+        </form>
+      </main>
+
+      {/* Footer */}
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
+        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
+
+export default VendorSignupPage;
