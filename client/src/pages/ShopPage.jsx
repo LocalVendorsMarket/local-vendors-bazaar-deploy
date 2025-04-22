@@ -4,10 +4,34 @@ const ShopPage = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
 
   const products = [
-    { id: 1, name: 'Local Honey', image: 'https://via.placeholder.com/300x200?text=Local+Honey', price: '$12', rating: '⭐⭐⭐⭐⭐' },
-    { id: 2, name: 'Handmade Necklace', image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace', price: '$25', rating: '⭐⭐⭐⭐' },
-    { id: 3, name: 'Organic T-Shirt', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt', price: '$18', rating: '⭐⭐⭐⭐' },
-    { id: 4, name: 'Custom Artwork', image: 'https://via.placeholder.com/300x200?text=Custom+Artwork', price: '$80', rating: '⭐⭐⭐⭐⭐' },
+    {
+      id: 1,
+      name: 'Local Honey',
+      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
+      price: '$12',
+      rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+      id: 2,
+      name: 'Handmade Necklace',
+      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
+      price: '$25',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 3,
+      name: 'Organic T-Shirt',
+      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
+      price: '$18',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 4,
+      name: 'Custom Artwork',
+      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
+      price: '$80',
+      rating: '⭐⭐⭐⭐⭐',
+    },
   ];
 
   const handleAddToCart = (product) => {
@@ -17,7 +41,6 @@ const ShopPage = ({ cart, setCart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      
       {/* Navigation Bar */}
       <header
         style={{
@@ -34,59 +57,33 @@ const ShopPage = ({ cart, setCart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/assets/logo.png"
+            alt="Logo"
+            style={{ height: '40px', marginRight: '10px' }}
+          />
+          <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
         </div>
 
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
-          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
-          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
-          <a href="/shop" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Shop</a>
-          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>
-            🛒 Cart{cart.length > 0 && ` (${cart.length})`}
+        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navStyle}>Home</a>
+          <a href="/faq" style={navStyle}>FAQ</a>
+          <a href="/blog" style={navStyle}>Blog</a>
+          <a href="/contact" style={navStyle}>Contact</a>
+          <a href="/signup" style={navStyle}>Become a Vendor</a>
+          <a href="/shop" style={navStyle}>Shop</a>
+          <a href="/cart" style={navStyle}>
+            <span style={{ fontWeight: 'bold' }}>🛒</span>
+            {cart.length > 0 && (
+              <span style={{ marginLeft: '5px', fontWeight: 'bold' }}>({cart.length})</span>
+            )}
           </a>
 
           {/* Search + Zip */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
@@ -166,6 +163,33 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
+// Style helpers
+const navStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
 export default ShopPage;
+
 
 

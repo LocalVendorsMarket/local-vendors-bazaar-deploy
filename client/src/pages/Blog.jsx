@@ -1,13 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
 const Blog = ({ cart }) => {
-  const linkStyle = {
-    margin: '5px 10px',
-    color: '#fff',
-    textDecoration: 'none',
-  };
-
   const posts = [
     {
       title: "Why Shopping Local Matters",
@@ -24,16 +17,8 @@ const Blog = ({ cart }) => {
   ];
 
   return (
-    <div
-      className="App"
-      style={{
-        fontFamily: 'sans-serif',
-        display: 'flex',
-        flexDirection: 'column',
-        minHeight: '100vh',
-      }}
-    >
-      {/* Navigation Bar */}
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+      {/* Navigation */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -49,69 +34,35 @@ const Blog = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
+        <div style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <img src="/assets/logo.png" alt="logo" style={{ height: '40px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
         </div>
-
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginRight: '1rem' }}>
           <a href="/" style={linkStyle}>Home</a>
           <a href="/faq" style={linkStyle}>FAQ</a>
           <a href="/blog" style={linkStyle}>Blog</a>
           <a href="/contact" style={linkStyle}>Contact</a>
           <a href="/signup" style={linkStyle}>Become a Vendor</a>
           <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={linkStyle}>
-            🛒 Cart
-            {cart.length > 0 && ` (${cart.length})`}
-          </a>
-
-          {/* Search + Zip Code */}
+          <a href="/cart" style={linkStyle}>🛒 <span style={{ filter: 'invert(1)' }}>Cart {cart?.length > 0 && `(${cart.length})`}</span></a>
           <input
             type="text"
             placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
+            style={searchStyle}
           />
           <input
             type="text"
             placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
+            style={{ ...searchStyle, width: '100px' }}
           />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+          <button style={searchBtnStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Main Blog Content */}
+      {/* Blog Section */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
-          Blog and News
-        </h1>
-
+        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>Blog and News</h1>
         <div
           style={{
             display: 'grid',
@@ -122,10 +73,16 @@ const Blog = ({ cart }) => {
           }}
         >
           {posts.map((post, index) => (
-            <div key={index} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                {post.title}
-              </h2>
+            <div
+              key={index}
+              style={{
+                backgroundColor: '#fff',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              }}
+            >
+              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{post.title}</h2>
               <p style={{ color: '#555', fontSize: '1rem' }}>{post.content}</p>
             </div>
           ))}
@@ -148,7 +105,34 @@ const Blog = ({ cart }) => {
   );
 };
 
+// Styles
+const linkStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+};
+
+const searchStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchBtnStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
 export default Blog;
+
 
 
 

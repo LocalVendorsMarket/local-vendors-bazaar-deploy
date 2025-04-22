@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = ({ cart }) => {
+const Home = ({ cart = [] }) => {
   const linkStyle = {
     margin: '5px 10px',
     color: '#fff',
@@ -34,23 +34,25 @@ const Home = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
+        <div style={{ marginLeft: '1rem' }}>
+          <img
+            src="/assets/logo.png"
+            alt="LocalVendorsBazaar Logo"
+            style={{ height: '40px' }}
+          />
         </div>
 
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginRight: '1rem' }}>
           <a href="/" style={linkStyle}>Home</a>
           <a href="/faq" style={linkStyle}>FAQ</a>
           <a href="/blog" style={linkStyle}>Blog</a>
           <a href="/contact" style={linkStyle}>Contact</a>
           <a href="/signup" style={linkStyle}>Become a Vendor</a>
           <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={linkStyle}>
-            🛒 Cart
-            {cart.length > 0 && ` (${cart.length})`}
+          <a href="/cart" style={{ ...linkStyle, display: 'flex', alignItems: 'center' }}>
+            <span style={{ fontSize: '1.2rem', color: '#fff' }}>🛒</span>
+            {cart.length > 0 && <span style={{ marginLeft: '4px' }}>({cart.length})</span>}
           </a>
-
-          {/* Search + Zip Code */}
           <input
             type="text"
             placeholder="Search products..."
@@ -163,6 +165,7 @@ const Home = ({ cart }) => {
 };
 
 export default Home;
+
 
 
 

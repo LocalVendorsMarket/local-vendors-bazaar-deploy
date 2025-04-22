@@ -3,7 +3,7 @@ import React from 'react';
 const ThankYouPage = ({ cart }) => {
   return (
     <div
-      className="min-h-screen flex flex-col bg-gray-50"
+      className="min-h-screen flex flex-col items-center bg-gray-50"
       style={{ fontFamily: 'sans-serif' }}
     >
       {/* Navigation Bar */}
@@ -22,72 +22,39 @@ const ThankYouPage = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
+        <div style={{ marginLeft: '1rem' }}>
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ height: '40px', width: 'auto' }}
+          />
         </div>
 
         <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
-          <a href="/faq" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>FAQ</a>
-          <a href="/blog" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Blog</a>
-          <a href="/contact" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Contact</a>
-          <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
-          <a href="/shop" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Shop</a>
-          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>
-            🛒 Cart{cart && cart.length > 0 && ` (${cart.length})`}
+          <a href="/" style={linkStyle}>Home</a>
+          <a href="/faq" style={linkStyle}>FAQ</a>
+          <a href="/blog" style={linkStyle}>Blog</a>
+          <a href="/contact" style={linkStyle}>Contact</a>
+          <a href="/signup" style={linkStyle}>Become a Vendor</a>
+          <a href="/shop" style={linkStyle}>Shop</a>
+          <a href="/cart" style={linkStyle}>
+            🛒 <span style={{ color: '#fff' }}>{cart.length > 0 ? `Cart (${cart.length})` : 'Cart'}</span>
           </a>
-
-          {/* Search + Zip Code */}
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
       {/* Main Thank You Content */}
       <main className="flex flex-col items-center justify-center flex-grow p-8">
-        <h1 className="text-4xl font-bold text-green-600 mb-4">
+        <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">
           🎉 Thank You!
         </h1>
-        <p className="text-gray-600 text-lg mb-8 text-center">
-          Your application has been submitted successfully.<br />
-          We will review and contact you shortly!
+        <p className="text-gray-600 text-lg mb-8 text-center max-w-lg">
+          Your application has been submitted successfully.
+          <br /> We will review and contact you shortly!
         </p>
-
         <a
           href="/"
           style={{
@@ -106,22 +73,49 @@ const ThankYouPage = ({ cart }) => {
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
+      <footer style={footerStyle}>
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
+// Reusable Styles
+const linkStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
+const footerStyle = {
+  backgroundColor: '#f5f5f5',
+  padding: '1rem',
+  textAlign: 'center',
+  color: '#666',
+  marginTop: 'auto',
+};
+
 export default ThankYouPage;
+
 
 
 
