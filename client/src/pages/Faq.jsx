@@ -53,8 +53,15 @@ const Faq = () => {
           flexDirection: 'row',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
-          LocalVendorsBazaar
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/assets/logo.png"
+            alt="Logo"
+            style={{ width: '40px', height: '40px', marginRight: '10px' }}
+          />
+          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+            LocalVendorsBazaar
+          </div>
         </div>
 
         <nav
@@ -135,19 +142,6 @@ const Faq = () => {
             </div>
           ))}
         </div>
-
-        {/* Optional Flyer at Bottom */}
-        <div style={{ marginTop: '4rem' }}>
-          <img
-            src="/assets/flyer-v2.png"
-            alt="Flyer promoting Local Vendors Bazaar"
-            style={{
-              maxWidth: '100%',
-              borderRadius: '12px',
-              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            }}
-          />
-        </div>
       </main>
 
       {/* Footer */}
@@ -167,6 +161,7 @@ const Faq = () => {
 };
 
 export default Faq;
+
 
 
 
