@@ -50,7 +50,8 @@ const Products = () => {
               <h2 className="text-xl font-semibold text-green-700 mb-2 text-center">{product.name}</h2>
               <p className="text-lg font-bold text-gray-700 mb-4 text-center">{product.price}</p>
 
-              <div className="flex flex-col gap-2 mt-auto">
+              {/* 🚀 BUTTONS WITH GAP */}
+              <div className="flex flex-col gap-3 mt-auto">
                 <button className="w-full py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition font-semibold">
                   Learn More
                 </button>
@@ -58,6 +59,7 @@ const Products = () => {
                   Add to Cart
                 </button>
               </div>
+
             </div>
           </div>
         ))}
@@ -67,6 +69,7 @@ const Products = () => {
 };
 
 export default Products;
+
 
 
 
