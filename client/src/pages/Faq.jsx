@@ -1,6 +1,13 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Faq = () => {
+  const linkStyle = {
+    margin: '5px 10px',
+    color: '#fff',
+    textDecoration: 'none',
+  };
+
   const faqs = [
     {
       question: "What is Local Vendors Bazaar?",
@@ -21,21 +28,146 @@ const Faq = () => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-gray-50">
-      <h1 className="text-4xl font-bold text-green-600 mb-8">Frequently Asked Questions</h1>
-      <div className="w-full max-w-3xl space-y-6">
-        {faqs.map((faq, index) => (
-          <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-            <h2 className="text-2xl font-semibold text-green-700 mb-2">{faq.question}</h2>
-            <p className="text-gray-600">{faq.answer}</p>
-          </div>
-        ))}
-      </div>
+    <div
+      className="App"
+      style={{
+        fontFamily: 'sans-serif',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      {/* Navigation Bar */}
+      <header
+        style={{
+          backgroundColor: '#2b9348',
+          padding: '1rem',
+          color: '#fff',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexDirection: 'row',
+        }}
+      >
+        <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+          LocalVendorsBazaar
+        </div>
+
+        <nav
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          <a href="/" style={linkStyle}>Home</a>
+          <a href="/faq" style={linkStyle}>FAQ</a>
+          <a href="/blog" style={linkStyle}>Blog</a>
+          <a href="/contact" style={linkStyle}>Contact</a>
+          <a href="/signup" style={linkStyle}>Become a Vendor</a>
+
+          {/* Search + Zip inside navbar */}
+          <input
+            type="text"
+            placeholder="Search products..."
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <input
+            type="text"
+            placeholder="Zip Code"
+            style={{
+              marginLeft: '10px',
+              padding: '6px 10px',
+              width: '100px',
+              borderRadius: '8px',
+              border: '1px solid #ccc',
+              fontSize: '14px',
+            }}
+          />
+          <button
+            style={{
+              marginLeft: '10px',
+              padding: '6px 12px',
+              backgroundColor: '#40916c',
+              color: '#fff',
+              borderRadius: '8px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
+          >
+            Search
+          </button>
+        </nav>
+      </header>
+
+      {/* Main FAQ Content */}
+      <main style={{ textAlign: 'center', padding: '2rem' }}>
+        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
+          Frequently Asked Questions
+        </h1>
+
+        <div
+          style={{
+            display: 'grid',
+            gap: '1.5rem',
+            maxWidth: '800px',
+            margin: '0 auto',
+            textAlign: 'left',
+          }}
+        >
+          {faqs.map((faq, index) => (
+            <div key={index} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+                {faq.question}
+              </h2>
+              <p style={{ color: '#555', fontSize: '1rem' }}>{faq.answer}</p>
+            </div>
+          ))}
+        </div>
+
+        {/* Optional Flyer at Bottom */}
+        <div style={{ marginTop: '4rem' }}>
+          <img
+            src="/assets/flyer-v2.png"
+            alt="Flyer promoting Local Vendors Bazaar"
+            style={{
+              maxWidth: '100%',
+              borderRadius: '12px',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            }}
+          />
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
+        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
 export default Faq;
+
 
 
 
