@@ -1,4 +1,3 @@
-cat > src/pages/ShopPage.jsx << 'EOF'
 import React from 'react';
 
 const ShopPage = ({ cart, setCart }) => {
@@ -59,7 +58,11 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -71,7 +74,7 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && ` (${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
@@ -79,7 +82,7 @@ const ShopPage = ({ cart, setCart }) => {
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="text-center mt-10 px-6">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           🛍️ Shop Local and Save Big! 🎉
@@ -182,7 +185,7 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
-EOF
+
 
 
 
