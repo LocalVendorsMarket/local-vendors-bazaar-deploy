@@ -1,11 +1,30 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-const Home = ({ cart = [] }) => {
-  const linkStyle = {
-    margin: '5px 10px',
+const Home = ({ cart }) => {
+  const navLinkStyle = {
+    margin: '0 10px',
     color: '#fff',
     textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    marginLeft: '10px',
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+  };
+
+  const searchButtonStyle = {
+    marginLeft: '10px',
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
   };
 
   return (
@@ -34,62 +53,28 @@ const Home = ({ cart = [] }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ marginLeft: '1rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
-            alt="LocalVendorsBazaar Logo"
-            style={{ height: '40px' }}
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
           />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginRight: '1rem' }}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
-          <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={{ ...linkStyle, display: 'flex', alignItems: 'center' }}>
-            <span style={{ fontSize: '1.2rem', color: '#fff' }}>🛒</span>
-            {cart.length > 0 && <span style={{ marginLeft: '4px' }}>({cart.length})</span>}
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/cart" style={navLinkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '6px 10px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '6px 12px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Search
-          </button>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
@@ -98,18 +83,13 @@ const Home = ({ cart = [] }) => {
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
-          style={{ width: '150px', marginBottom: '1rem' }}
-        />
-        
-          alt="Local Vendors Bazaar Logo"
           style={{ width: '200px', marginBottom: '1rem' }}
-        /
+        />
         <h1 style={{ color: '#2b9348' }}>Welcome to Local Vendors Bazaar 🎉</h1>
         <p style={{ fontSize: '1.2rem', color: '#555' }}>
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
-        {/* Flyer image */}
         <img
           src="/assets/flyer-v2.png"
           alt="Local Vendors Bazaar Flyer"
@@ -121,7 +101,6 @@ const Home = ({ cart = [] }) => {
           }}
         />
 
-        {/* Vendor CTA */}
         <div
           style={{
             marginTop: '3rem',
@@ -169,6 +148,10 @@ const Home = ({ cart = [] }) => {
 };
 
 export default Home;
+
+
+
+
 
 
 
