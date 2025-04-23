@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
@@ -40,32 +39,6 @@ const ShopPage = ({ cart, setCart }) => {
     alert(`${product.name} added to cart!`);
   };
 
-  const navLinkStyle = {
-    margin: '0 10px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '14px',
-  };
-
-  const inputStyle = {
-    marginLeft: '10px',
-    padding: '6px 10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-  };
-
-  const searchButtonStyle = {
-    marginLeft: '10px',
-    padding: '6px 12px',
-    backgroundColor: '#40916c',
-    color: '#fff',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  };
-
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
@@ -85,7 +58,11 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -99,7 +76,6 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -128,7 +104,7 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Products */}
+      {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
         {products.map((product) => (
           <div
@@ -182,7 +158,34 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
+const navLinkStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
 export default ShopPage;
+
 
 
 
