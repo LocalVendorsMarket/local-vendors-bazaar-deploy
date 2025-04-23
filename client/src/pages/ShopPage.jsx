@@ -1,4 +1,5 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
@@ -40,7 +41,7 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f9fafb' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -58,32 +59,24 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img
-  src="/assets/logo.png"
-  alt="Local Vendors Bazaar Logo"
-  style={{ width: '150px', marginBottom: '1rem' }}
-/>
-
-            style={{ height: '40px', marginRight: '10px' }}
-          /
-          <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
+          <img
+            src={logo}
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navStyle}>Home</a>
-          <a href="/faq" style={navStyle}>FAQ</a>
-          <a href="/blog" style={navStyle}>Blog</a>
-          <a href="/contact" style={navStyle}>Contact</a>
-          <a href="/signup" style={navStyle}>Become a Vendor</a>
-          <a href="/shop" style={navStyle}>Shop</a>
-          <a href="/cart" style={navStyle}>
-            <span style={{ fontWeight: 'bold' }}>🛒</span>
-            {cart.length > 0 && (
-              <span style={{ marginLeft: '5px', fontWeight: 'bold' }}>({cart.length})</span>
-            )}
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/cart" style={navLinkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
-          {/* Search + Zip */}
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -91,17 +84,17 @@ const ShopPage = ({ cart, setCart }) => {
       </header>
 
       {/* Hero Section */}
-      <div className="text-center mt-10 px-6">
-        <h1 className="text-5xl font-extrabold text-green-600 mb-4">
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <h1 style={{ fontSize: '2.5rem', color: '#2b9348', fontWeight: 'bold' }}>
           🛍️ Shop Local and Save Big! 🎉
         </h1>
-        <p className="text-gray-600 text-lg mb-8">
+        <p style={{ color: '#555', fontSize: '1.1rem', marginTop: '0.5rem' }}>
           Discover amazing products from your favorite local vendors.
         </p>
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-3 mb-8">
+      <div className="flex flex-wrap justify-center gap-3 my-8">
         {categories.map((category) => (
           <button
             key={category}
@@ -112,7 +105,7 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Products */}
+      {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
         {products.map((product) => (
           <div
@@ -166,11 +159,11 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
-// Style helpers
-const navStyle = {
+const navLinkStyle = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
+  fontSize: '14px',
 };
 
 const inputStyle = {
@@ -193,6 +186,7 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
 
 
 
