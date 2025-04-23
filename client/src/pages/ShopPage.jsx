@@ -41,7 +41,7 @@ const ShopPage = ({ cart, setCart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -58,11 +58,7 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -74,15 +70,16 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 ? `Cart (${cart.length})` : 'Cart'}
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <div className="text-center mt-10 px-6">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           🛍️ Shop Local and Save Big! 🎉
@@ -104,7 +101,7 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Product Grid */}
+      {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
         {products.map((product) => (
           <div
@@ -117,15 +114,9 @@ const ShopPage = ({ cart, setCart }) => {
               className="w-full h-56 object-cover"
             />
             <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">
-                {product.name}
-              </h2>
-              <div className="text-center text-yellow-400 mb-2 text-lg">
-                {product.rating}
-              </div>
-              <p className="text-lg font-bold text-gray-700 text-center mb-6">
-                {product.price}
-              </p>
+              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
+              <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
+              <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
               <div className="flex justify-center gap-4 mt-auto">
                 <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
                   Learn More
@@ -185,6 +176,7 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
 
 
 
