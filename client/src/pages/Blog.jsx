@@ -35,7 +35,12 @@ const Blog = ({ cart }) => {
         }}
       >
         <div style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-          <img src="/assets/logo.png" alt="logo" style={{ height: '40px' }} />
+        <img
+  src="/assets/logo.png"
+  alt="Local Vendors Bazaar Logo"
+  style={{ width: '150px', marginBottom: '1rem' }}
+/>
+style={{ height: '40px' }} />
           <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
         </div>
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginRight: '1rem' }}>

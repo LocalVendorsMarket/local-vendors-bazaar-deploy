@@ -98,8 +98,12 @@ const Home = ({ cart = [] }) => {
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
-          style={{ width: '200px', marginBottom: '1rem' }}
+          style={{ width: '150px', marginBottom: '1rem' }}
         />
+        
+          alt="Local Vendors Bazaar Logo"
+          style={{ width: '200px', marginBottom: '1rem' }}
+        /
         <h1 style={{ color: '#2b9348' }}>Welcome to Local Vendors Bazaar 🎉</h1>
         <p style={{ fontSize: '1.2rem', color: '#555' }}>
           Shop and Save Locally — Supporting Chicago and Beyond!

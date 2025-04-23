@@ -58,11 +58,14 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Logo"
+        <img
+  src="/assets/logo.png"
+  alt="Local Vendors Bazaar Logo"
+  style={{ width: '150px', marginBottom: '1rem' }}
+/>
+
             style={{ height: '40px', marginRight: '10px' }}
-          />
+          /
           <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
         </div>
 

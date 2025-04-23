@@ -23,11 +23,14 @@ const VendorSignupPage = ({ cart }) => {
         }}
       >
         <div style={{ marginLeft: '1rem' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
+        <img
+  src="/assets/logo.png"
+  alt="Local Vendors Bazaar Logo"
+  style={{ width: '150px', marginBottom: '1rem' }}
+/>
+
             style={{ height: '40px', width: 'auto' }}
-          />
+          /
         </div>
 
         <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>

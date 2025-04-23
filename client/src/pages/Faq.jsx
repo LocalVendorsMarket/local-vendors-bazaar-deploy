@@ -40,7 +40,12 @@ const Faq = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+        <img
+  src="/assets/logo.png"
+  alt="Local Vendors Bazaar Logo"
+  style={{ width: '150px', marginBottom: '1rem' }}
+/>
+ style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
