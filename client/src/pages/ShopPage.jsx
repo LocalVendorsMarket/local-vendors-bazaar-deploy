@@ -40,6 +40,32 @@ const ShopPage = ({ cart, setCart }) => {
     alert(`${product.name} added to cart!`);
   };
 
+  const navLinkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    marginLeft: '10px',
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+  };
+
+  const searchButtonStyle = {
+    marginLeft: '10px',
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
@@ -71,15 +97,16 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="text-center mt-10 px-6">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           🛍️ Shop Local and Save Big! 🎉
@@ -108,13 +135,25 @@ const ShopPage = ({ cart, setCart }) => {
             key={product.id}
             className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
           >
-            <img src={product.image} alt={product.name} className="w-full h-56 object-cover" />
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-56 object-cover"
+            />
             <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
-              <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
-              <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
+              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">
+                {product.name}
+              </h2>
+              <div className="text-center text-yellow-400 mb-2 text-lg">
+                {product.rating}
+              </div>
+              <p className="text-lg font-bold text-gray-700 text-center mb-6">
+                {product.price}
+              </p>
               <div className="flex justify-center gap-4 mt-auto">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Learn More</button>
+                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
+                  Learn More
+                </button>
                 <button
                   onClick={() => handleAddToCart(product)}
                   className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
@@ -143,33 +182,8 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
-const navLinkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-const inputStyle = {
-  marginLeft: '10px',
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-};
-
-const searchButtonStyle = {
-  marginLeft: '10px',
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
 export default ShopPage;
+
 
 
 
