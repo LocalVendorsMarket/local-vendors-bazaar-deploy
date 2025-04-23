@@ -41,7 +41,7 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f9fafb' }}>
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -59,11 +59,7 @@ const ShopPage = ({ cart, setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src={logo}
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
+          <img src={logo} alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -75,7 +71,7 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
@@ -83,18 +79,18 @@ const ShopPage = ({ cart, setCart }) => {
         </nav>
       </header>
 
-      {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
-        <h1 style={{ fontSize: '2.5rem', color: '#2b9348', fontWeight: 'bold' }}>
+      {/* Hero */}
+      <div className="text-center mt-10 px-6">
+        <h1 className="text-5xl font-extrabold text-green-600 mb-4">
           🛍️ Shop Local and Save Big! 🎉
         </h1>
-        <p style={{ color: '#555', fontSize: '1.1rem', marginTop: '0.5rem' }}>
+        <p className="text-gray-600 text-lg mb-8">
           Discover amazing products from your favorite local vendors.
         </p>
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-3 my-8">
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
         {categories.map((category) => (
           <button
             key={category}
@@ -105,32 +101,20 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Products Grid */}
+      {/* Products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
         {products.map((product) => (
           <div
             key={product.id}
             className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
           >
-            <img
-              src={product.image}
-              alt={product.name}
-              className="w-full h-56 object-cover"
-            />
+            <img src={product.image} alt={product.name} className="w-full h-56 object-cover" />
             <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">
-                {product.name}
-              </h2>
-              <div className="text-center text-yellow-400 mb-2 text-lg">
-                {product.rating}
-              </div>
-              <p className="text-lg font-bold text-gray-700 text-center mb-6">
-                {product.price}
-              </p>
+              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
+              <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
+              <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
               <div className="flex justify-center gap-4 mt-auto">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">
-                  Learn More
-                </button>
+                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Learn More</button>
                 <button
                   onClick={() => handleAddToCart(product)}
                   className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
@@ -186,6 +170,8 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
+
 
 
 
