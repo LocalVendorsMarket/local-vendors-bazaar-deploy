@@ -4,18 +4,15 @@ const Blog = ({ cart }) => {
   const posts = [
     {
       title: "Why Shopping Local Matters",
-      content:
-        "Supporting local vendors helps grow your community's economy and keeps neighborhoods vibrant. Learn why your local purchase makes a big difference!",
+      content: "Supporting local vendors helps grow your community's economy and keeps neighborhoods vibrant. Learn why your local purchase makes a big difference!",
     },
     {
       title: "Top 5 Local Products to Try",
-      content:
-        "From homemade honey to handcrafted jewelry, discover the best products made with love by your neighbors!",
+      content: "From homemade honey to handcrafted jewelry, discover the best products made with love by your neighbors!",
     },
     {
       title: "How to Save Money While Shopping Locally",
-      content:
-        "Find out tips and tricks for saving big while still supporting local businesses. Your wallet and community will thank you!",
+      content: "Find out tips and tricks for saving big while still supporting local businesses. Your wallet and community will thank you!",
     },
   ];
 
@@ -39,7 +36,7 @@ const Blog = ({ cart }) => {
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -52,35 +49,28 @@ const Blog = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Main Blog Content */}
-      <main className="flex flex-col items-center flex-grow p-8">
-        <h1 className="text-4xl font-bold text-green-600 mb-10">Blog and News</h1>
-        <div className="grid gap-6 w-full max-w-4xl">
+      {/* Blog Content */}
+      <main className="flex-grow px-4 py-12">
+        <h1 className="text-4xl font-bold text-green-700 text-center mb-8">Blog & News</h1>
+        <div className="max-w-4xl mx-auto space-y-6">
           {posts.map((post, index) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-              <h2 className="text-2xl font-semibold text-green-700 mb-2">{post.title}</h2>
-              <p className="text-gray-600">{post.content}</p>
+              <h2 className="text-2xl font-semibold text-green-600 mb-2">{post.title}</h2>
+              <p className="text-gray-700">{post.content}</p>
             </div>
           ))}
         </div>
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
+      <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666' }}>
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -114,6 +104,7 @@ const searchButtonStyle = {
 };
 
 export default Blog;
+
 
 
 
