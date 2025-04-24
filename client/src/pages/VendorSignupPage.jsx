@@ -2,14 +2,13 @@ import React from 'react';
 
 const VendorSignupPage = ({ cart }) => {
   return (
-    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Nav Bar */}
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+      {/* NavBar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -40,43 +39,88 @@ const VendorSignupPage = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Page Content */}
-      <main className="flex flex-col items-center justify-center flex-grow p-8" style={{ textAlign: 'center' }}>
-        <h1 className="text-4xl font-bold text-green-600 mb-4">Become a Vendor</h1>
-        <p className="text-gray-600 mb-8 text-center text-lg" style={{ maxWidth: '600px', margin: '0 auto' }}>
-          Join Local Vendors Bazaar and grow your local business.  
-          It's quick, simple, and free to start!
-        </p>
+      {/* Vendor Form Section */}
+      <main className="flex flex-col items-center justify-center flex-grow p-8">
+        <div style={{ maxWidth: '600px', width: '100%', backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">Become a Vendor</h1>
+          <p className="text-gray-600 mb-6 text-center text-lg">
+            Join Local Vendors Bazaar and grow your local business. It's quick, simple, and free to start!
+          </p>
 
-        <form action="https://formspree.io/f/movdqjgp" method="POST" className="w-full max-w-lg space-y-6 bg-white p-8 rounded-xl shadow-md" style={{ margin: '0 auto' }}>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
-            <input type="text" name="businessName" required className="w-full border border-gray-300 rounded-lg p-3" placeholder="Your Business Name" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" name="email" required className="w-full border border-gray-300 rounded-lg p-3" placeholder="you@example.com" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input type="tel" name="phone" className="w-full border border-gray-300 rounded-lg p-3" placeholder="123-456-7890" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
-            <input type="url" name="website" className="w-full border border-gray-300 rounded-lg p-3" placeholder="https://yourbusiness.com" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
-            <textarea name="description" required rows="4" className="w-full border border-gray-300 rounded-lg p-3" placeholder="Tell us about your business..."></textarea>
-          </div>
-          <button type="submit" className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition">
-            Submit Application
-          </button>
-        </form>
+          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+              <input
+                type="text"
+                name="businessName"
+                required
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="Your Business Name"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="123-456-7890"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+              <input
+                type="url"
+                name="website"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="https://yourbusiness.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+              <textarea
+                name="description"
+                required
+                rows="4"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="Tell us about your business..."
+              ></textarea>
+            </div>
+
+            <button
+              type="submit"
+              className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
+            >
+              Submit Application
+            </button>
+          </form>
+        </div>
       </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666', marginTop: 'auto' }}>
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -110,6 +154,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
