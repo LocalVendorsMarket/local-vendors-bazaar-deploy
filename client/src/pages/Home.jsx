@@ -1,32 +1,6 @@
 import React from 'react';
 
 const Home = ({ cart }) => {
-  const navLinkStyle = {
-    margin: '0 10px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '14px',
-  };
-
-  const inputStyle = {
-    padding: '6px 10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-    marginLeft: '10px',
-  };
-
-  const searchButtonStyle = {
-    padding: '6px 12px',
-    backgroundColor: '#40916c',
-    color: '#fff',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-    marginLeft: '10px',
-  };
-
   return (
     <div
       className="App"
@@ -43,13 +17,14 @@ const Home = ({ cart }) => {
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
+          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           display: 'flex',
-          flexWrap: 'wrap',
-          justifyContent: 'space-between',
           alignItems: 'center',
+          justifyContent: 'space-between',
+          flexWrap: 'wrap',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -58,10 +33,10 @@ const Home = ({ cart }) => {
             alt="Local Vendors Bazaar Logo"
             style={{ width: '40px', marginRight: '10px' }}
           />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -145,7 +120,31 @@ const Home = ({ cart }) => {
   );
 };
 
+const navLinkStyle = {
+  color: '#fff',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
+const inputStyle = {
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
 export default Home;
+
 
 
 
