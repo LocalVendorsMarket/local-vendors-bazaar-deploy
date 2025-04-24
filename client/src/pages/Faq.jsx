@@ -22,7 +22,7 @@ const Faq = ({ cart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar */}
+      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -55,7 +55,8 @@ const Faq = ({ cart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
+            {cart?.length > 0 && ` (${cart.length})`}
           </a>
 
           <input type="text" placeholder="Search products..." style={inputStyle} />
@@ -64,19 +65,22 @@ const Faq = ({ cart }) => {
         </nav>
       </header>
 
-      {/* FAQ Section */}
-      <main className="flex-grow flex flex-col items-center justify-center py-10 px-4">
-        <h1 className="text-4xl font-bold text-green-600 mb-8">Frequently Asked Questions</h1>
-        <div className="w-full max-w-3xl space-y-6">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-              <h2 className="text-2xl font-semibold text-green-700 mb-2">{faq.question}</h2>
-              <p className="text-gray-600">{faq.answer}</p>
-            </div>
-          ))}
+      {/* FAQ Content */}
+      <main className="flex-grow px-4 py-12 flex justify-center">
+        <div className="w-full max-w-3xl">
+          <h1 className="text-4xl font-bold text-green-600 text-center mb-8">Frequently Asked Questions</h1>
+          <div className="space-y-6">
+            {faqs.map((faq, index) => (
+              <div key={index} className="bg-white p-6 rounded-xl shadow-md">
+                <h2 className="text-2xl font-semibold text-green-700 mb-2">{faq.question}</h2>
+                <p className="text-gray-600">{faq.answer}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
 
+      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -119,6 +123,7 @@ const searchButtonStyle = {
 };
 
 export default Faq;
+
 
 
 
