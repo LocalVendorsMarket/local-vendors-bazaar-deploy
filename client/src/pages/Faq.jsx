@@ -22,13 +22,12 @@ const Faq = ({ cart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -41,42 +40,60 @@ const Faq = ({ cart }) => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
+            alt="Logo"
             style={{ width: '40px', marginRight: '10px' }}
           />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/faq" style={navLinkStyle}>FAQ</a>
-          <a href="/blog" style={navLinkStyle}>Blog</a>
-          <a href="/contact" style={navLinkStyle}>Contact</a>
-          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
-            {cart?.length > 0 && ` (${cart.length})`}
+          <a href="/" style={navLink}>Home</a>
+          <a href="/faq" style={navLink}>FAQ</a>
+          <a href="/blog" style={navLink}>Blog</a>
+          <a href="/contact" style={navLink}>Contact</a>
+          <a href="/signup" style={navLink}>Become a Vendor</a>
+          <a href="/shop" style={navLink}>Shop</a>
+          <a href="/cart" style={navLink}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>{' '}
+            {cart?.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButtonStyle}>Search</button>
+          <button style={buttonStyle}>Search</button>
         </nav>
       </header>
 
       {/* FAQ Content */}
-      <main className="flex-grow px-4 py-12 flex justify-center">
-        <div className="w-full max-w-3xl">
-          <h1 className="text-4xl font-bold text-green-600 text-center mb-8">Frequently Asked Questions</h1>
-          <div className="space-y-6">
-            {faqs.map((faq, index) => (
-              <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-                <h2 className="text-2xl font-semibold text-green-700 mb-2">{faq.question}</h2>
-                <p className="text-gray-600">{faq.answer}</p>
-              </div>
-            ))}
-          </div>
+      <main style={{ textAlign: 'center', padding: '2rem' }}>
+        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
+          Frequently Asked Questions
+        </h1>
+
+        <div
+          style={{
+            display: 'grid',
+            gap: '1.5rem',
+            maxWidth: '800px',
+            margin: '0 auto',
+            textAlign: 'left',
+          }}
+        >
+          {faqs.map((faq, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: '#fff',
+                padding: '1.5rem',
+                borderRadius: '12px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              }}
+            >
+              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+                {faq.question}
+              </h2>
+              <p style={{ color: '#555', fontSize: '1rem' }}>{faq.answer}</p>
+            </div>
+          ))}
         </div>
       </main>
 
@@ -96,7 +113,7 @@ const Faq = ({ cart }) => {
   );
 };
 
-const navLinkStyle = {
+const navLink = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
@@ -111,7 +128,7 @@ const inputStyle = {
   fontSize: '14px',
 };
 
-const searchButtonStyle = {
+const buttonStyle = {
   marginLeft: '10px',
   padding: '6px 12px',
   backgroundColor: '#40916c',
@@ -123,6 +140,7 @@ const searchButtonStyle = {
 };
 
 export default Faq;
+
 
 
 
