@@ -5,14 +5,11 @@ const VendorSignupPage = () => {
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
+        className="w-full sticky top-0 z-50"
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -25,98 +22,91 @@ const VendorSignupPage = () => {
             alt="Local Vendors Bazaar Logo"
             style={{ width: '40px', marginRight: '10px' }}
           />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/faq" style={navLinkStyle}>FAQ</a>
-          <a href="/blog" style={navLinkStyle}>Blog</a>
-          <a href="/contact" style={navLinkStyle}>Contact</a>
-          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
+          <a href="/" style={navLink}>Home</a>
+          <a href="/faq" style={navLink}>FAQ</a>
+          <a href="/blog" style={navLink}>Blog</a>
+          <a href="/contact" style={navLink}>Contact</a>
+          <a href="/signup" style={navLink}>Become a Vendor</a>
+          <a href="/shop" style={navLink}>Shop</a>
+          <a href="/cart" style={navLink}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒 Cart</span>
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButtonStyle}>Search</button>
+          <button style={searchButton}>Search</button>
         </nav>
       </header>
 
-      {/* Vendor Signup Form */}
-      <main className="flex flex-col items-center justify-center flex-grow p-8">
-        <h1 className="text-4xl font-bold text-green-600 mb-4">Become a Vendor</h1>
-        <p className="text-gray-600 mb-8 text-center text-lg">
-          Join Local Vendors Bazaar and grow your local business.  
-          It's quick, simple, and free to start!
-        </p>
+      {/* Main Content */}
+      <main className="flex-grow flex justify-center items-center px-4 py-12">
+        <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-2xl">
+          <h1 className="text-3xl font-bold text-green-600 text-center mb-4">Become a Vendor</h1>
+          <p className="text-center text-gray-600 mb-8">
+            Join Local Vendors Bazaar and grow your local business.  
+            It's quick, simple, and free to start!
+          </p>
 
-        <form
-          action="https://formspree.io/f/movdqjgp"
-          method="POST"
-          className="w-full max-w-lg space-y-6 bg-white p-8 rounded-xl shadow-md"
-        >
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
-            <input
-              type="text"
-              name="businessName"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="Your Business Name"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input
-              type="email"
-              name="email"
-              required
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
-            <input
-              type="tel"
-              name="phone"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="123-456-7890"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
-            <input
-              type="url"
-              name="website"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="https://yourbusiness.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
-            <textarea
-              name="description"
-              required
-              rows="4"
-              className="w-full border border-gray-300 rounded-lg p-3"
-              placeholder="Tell us about your business..."
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
-          >
-            Submit Application
-          </button>
-        </form>
+          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
+              <input
+                type="text"
+                name="businessName"
+                required
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="Your Business Name"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="you@example.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <input
+                type="tel"
+                name="phone"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="123-456-7890"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+              <input
+                type="url"
+                name="website"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="https://yourbusiness.com"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+              <textarea
+                name="description"
+                required
+                rows="4"
+                className="w-full border border-gray-300 rounded-lg p-3"
+                placeholder="Tell us about your business..."
+              ></textarea>
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
+            >
+              Submit Application
+            </button>
+          </form>
+        </div>
       </main>
 
       {/* Footer */}
@@ -126,7 +116,6 @@ const VendorSignupPage = () => {
           padding: '1rem',
           textAlign: 'center',
           color: '#666',
-          marginTop: 'auto',
         }}
       >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
@@ -135,7 +124,7 @@ const VendorSignupPage = () => {
   );
 };
 
-const navLinkStyle = {
+const navLink = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
@@ -150,7 +139,7 @@ const inputStyle = {
   fontSize: '14px',
 };
 
-const searchButtonStyle = {
+const searchButton = {
   marginLeft: '10px',
   padding: '6px 12px',
   backgroundColor: '#40916c',
@@ -162,6 +151,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
