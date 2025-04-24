@@ -38,7 +38,6 @@ const VendorSignupPage = () => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -163,6 +162,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
