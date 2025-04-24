@@ -1,22 +1,55 @@
 import React from 'react';
 
 const Home = ({ cart }) => {
+  const navLinkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+    marginLeft: '10px',
+  };
+
+  const searchButtonStyle = {
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    marginLeft: '10px',
+  };
+
   return (
-    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+    <div
+      className="App"
+      style={{
+        fontFamily: 'sans-serif',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
       {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           display: 'flex',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'center',
-          flexWrap: 'wrap',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
@@ -28,7 +61,7 @@ const Home = ({ cart }) => {
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -38,22 +71,10 @@ const Home = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
-          {/* Search + Zip Code */}
-          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <input
-              type="text"
-              placeholder="Search products..."
-              style={inputStyle}
-            />
-            <input
-              type="text"
-              placeholder="Zip Code"
-              style={{ ...inputStyle, width: '100px' }}
-            />
-            <button style={searchButtonStyle}>Search</button>
-          </div>
-        </nav>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
+        </div>
       </header>
 
       {/* Main Content */}
@@ -109,7 +130,6 @@ const Home = ({ cart }) => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -125,32 +145,8 @@ const Home = ({ cart }) => {
   );
 };
 
-const navLinkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-const inputStyle = {
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-  maxWidth: '160px',
-};
-
-const searchButtonStyle = {
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
 export default Home;
+
 
 
 
