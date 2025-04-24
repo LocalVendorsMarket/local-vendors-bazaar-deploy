@@ -2,7 +2,7 @@ import React from 'react';
 
 const VendorSignupPage = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -38,23 +38,25 @@ const VendorSignupPage = () => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Signup Form */}
-      <main className="flex flex-col items-center justify-center flex-grow w-full px-4 py-12">
-        <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">Become a Vendor</h1>
-        <p className="text-gray-600 mb-8 text-center text-lg max-w-xl">
-          Join Local Vendors Bazaar and grow your local business. It's quick, simple, and free to start!
+      {/* Vendor Signup Form */}
+      <main className="flex flex-col items-center justify-center flex-grow p-8">
+        <h1 className="text-4xl font-bold text-green-600 mb-4">Become a Vendor</h1>
+        <p className="text-gray-600 mb-8 text-center text-lg">
+          Join Local Vendors Bazaar and grow your local business.  
+          It's quick, simple, and free to start!
         </p>
 
         <form
           action="https://formspree.io/f/movdqjgp"
           method="POST"
-          className="w-full max-w-xl space-y-6 bg-white p-8 rounded-xl shadow-md"
+          className="w-full max-w-lg space-y-6 bg-white p-8 rounded-xl shadow-md"
         >
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
@@ -161,6 +163,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
