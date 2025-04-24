@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ShopPage = ({ cart = [], setCart }) => {
+const ShopPage = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
 
   const products = [
@@ -58,11 +58,15 @@ const ShopPage = ({ cart = [], setCart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</div>
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        <nav style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -70,9 +74,9 @@ const ShopPage = ({ cart = [], setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
+            {cart?.length > 0 && ` (${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -81,8 +85,12 @@ const ShopPage = ({ cart = [], setCart }) => {
 
       {/* Hero Section */}
       <div className="text-center mt-10 px-6">
-        <h1 className="text-5xl font-extrabold text-green-600 mb-4">🛍️ Shop Local and Save Big! 🎉</h1>
-        <p className="text-gray-600 text-lg mb-8">Discover amazing products from your favorite local vendors.</p>
+        <h1 className="text-5xl font-extrabold text-green-600 mb-4">
+          🛍️ Shop Local and Save Big! 🎉
+        </h1>
+        <p className="text-gray-600 text-lg mb-8">
+          Discover amazing products from your favorite local vendors.
+        </p>
       </div>
 
       {/* Categories */}
@@ -142,7 +150,6 @@ const ShopPage = ({ cart = [], setCart }) => {
           padding: '1rem',
           textAlign: 'center',
           color: '#666',
-          marginTop: 'auto',
         }}
       >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
@@ -178,6 +185,8 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
+
 
 
 
