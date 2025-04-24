@@ -39,34 +39,8 @@ const ShopPage = ({ cart, setCart }) => {
     alert(`${product.name} added to cart!`);
   };
 
-  const navLinkStyle = {
-    margin: '0 10px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '14px',
-  };
-
-  const inputStyle = {
-    marginLeft: '10px',
-    padding: '6px 10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-  };
-
-  const searchButtonStyle = {
-    marginLeft: '10px',
-    padding: '6px 12px',
-    backgroundColor: '#40916c',
-    color: '#fff',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  };
-
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -131,7 +105,7 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Products */}
+      {/* Products Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
         {products.map((product) => (
           <div
@@ -185,7 +159,34 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
+const navLinkStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
 export default ShopPage;
+
 
 
 
