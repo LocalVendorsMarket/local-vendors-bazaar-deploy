@@ -1,41 +1,14 @@
 import React from 'react';
 
 const Contact = ({ cart }) => {
-  const navLinkStyle = {
-    margin: '0 10px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '14px',
-  };
-
-  const inputStyle = {
-    marginLeft: '10px',
-    padding: '6px 10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-  };
-
-  const searchButtonStyle = {
-    marginLeft: '10px',
-    padding: '6px 12px',
-    backgroundColor: '#40916c',
-    color: '#fff',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  };
-
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -46,7 +19,7 @@ const Contact = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <img src="/assets/logo.png" alt="Local Vendors Bazaar Logo" style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -67,15 +40,10 @@ const Contact = ({ cart }) => {
       </header>
 
       {/* Contact Form */}
-      <main style={{ textAlign: 'center', padding: '2rem', marginTop: '3rem' }}>
-        <img
-          src="/assets/logo.png"
-          alt="Local Vendors Bazaar Logo"
-          style={{ width: '180px', marginBottom: '1rem' }}
-        />
+      <main style={{ textAlign: 'center', padding: '2rem', flex: 1 }}>
         <h1 style={{ color: '#2b9348', fontSize: '2rem', marginBottom: '1rem' }}>Contact Us</h1>
         <p style={{ fontSize: '1.1rem', color: '#555', marginBottom: '2rem' }}>
-          Have a question? We're here to help. Fill out the form below and we'll get back to you!
+          Have a question? Fill out the form below and we’ll get back to you!
         </p>
 
         <form
@@ -90,34 +58,36 @@ const Contact = ({ cart }) => {
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
           }}
         >
-          <input
-            type="text"
-            name="name"
-            placeholder="Your Name"
-            required
-            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
-          />
-          <input
-            type="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
-          />
-          <input
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            required
-            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
-          />
-          <textarea
-            name="message"
-            placeholder="Your Message"
-            rows="5"
-            required
-            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
-          />
+          <div style={{ marginBottom: '1rem' }}>
+            <input
+              type="text"
+              name="name"
+              placeholder="Your Name"
+              required
+              style={inputBlockStyle}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="you@example.com"
+              required
+              style={inputBlockStyle}
+            />
+            <input
+              type="text"
+              name="subject"
+              placeholder="Subject"
+              required
+              style={inputBlockStyle}
+            />
+            <textarea
+              name="message"
+              placeholder="Your Message"
+              rows="5"
+              required
+              style={inputBlockStyle}
+            />
+          </div>
 
           <button
             type="submit"
@@ -137,6 +107,7 @@ const Contact = ({ cart }) => {
         </form>
       </main>
 
+      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -152,7 +123,42 @@ const Contact = ({ cart }) => {
   );
 };
 
+const navLinkStyle = {
+  margin: '0 10px',
+  color: '#fff',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
+const inputStyle = {
+  marginLeft: '10px',
+  padding: '6px 10px',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '14px',
+};
+
+const searchButtonStyle = {
+  marginLeft: '10px',
+  padding: '6px 12px',
+  backgroundColor: '#40916c',
+  color: '#fff',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  cursor: 'pointer',
+};
+
+const inputBlockStyle = {
+  width: '100%',
+  padding: '0.75rem',
+  border: '1px solid #ccc',
+  borderRadius: '8px',
+  marginBottom: '1rem',
+};
+
 export default Contact;
+
 
 
 
