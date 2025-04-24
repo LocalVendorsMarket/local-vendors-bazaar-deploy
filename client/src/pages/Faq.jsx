@@ -22,12 +22,13 @@ const Faq = ({ cart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar */}
+      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
+          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -38,12 +39,8 @@ const Faq = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
-          <div style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</div>
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -62,12 +59,12 @@ const Faq = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Main FAQ Content */}
-      <main className="flex-grow flex flex-col items-center justify-center text-center px-6 py-12">
-        <h1 className="text-4xl font-bold text-green-600 mb-8">Frequently Asked Questions</h1>
+      {/* FAQ Content */}
+      <main className="flex flex-col items-center justify-center flex-grow p-8">
+        <h1 className="text-4xl font-bold text-green-600 mb-8 text-center">Frequently Asked Questions</h1>
         <div className="w-full max-w-3xl space-y-6">
           {faqs.map((faq, index) => (
-            <div key={index} className="bg-white p-6 rounded-xl shadow-md text-left">
+            <div key={index} className="bg-white p-6 rounded-xl shadow-md">
               <h2 className="text-2xl font-semibold text-green-700 mb-2">{faq.question}</h2>
               <p className="text-gray-600">{faq.answer}</p>
             </div>
@@ -118,6 +115,7 @@ const searchButtonStyle = {
 };
 
 export default Faq;
+
 
 
 
