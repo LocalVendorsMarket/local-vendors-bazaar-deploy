@@ -16,9 +16,35 @@ const Blog = ({ cart }) => {
     },
   ];
 
+  const navLinkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    marginLeft: '10px',
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+  };
+
+  const searchButtonStyle = {
+    marginLeft: '10px',
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Nav Bar */}
+      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -35,11 +61,7 @@ const Blog = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
+          <img src="/assets/logo.png" alt="Local Vendors Bazaar Logo" style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -59,10 +81,10 @@ const Blog = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Blog Section */}
+      {/* Blog Content */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
         <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
-          Blog and News
+          Blog & Local Highlights
         </h1>
 
         <div
@@ -85,7 +107,6 @@ const Blog = ({ cart }) => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -101,33 +122,10 @@ const Blog = ({ cart }) => {
   );
 };
 
-const navLinkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-const inputStyle = {
-  marginLeft: '10px',
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-};
-
-const searchButtonStyle = {
-  marginLeft: '10px',
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
 export default Blog;
+
+
+
 
 
 

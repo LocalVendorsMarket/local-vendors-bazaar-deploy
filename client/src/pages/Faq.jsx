@@ -20,9 +20,35 @@ const Faq = ({ cart }) => {
     },
   ];
 
+  const navLinkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    marginLeft: '10px',
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+  };
+
+  const searchButtonStyle = {
+    marginLeft: '10px',
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      {/* Nav Bar */}
+      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -39,11 +65,7 @@ const Faq = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
+          <img src="/assets/logo.png" alt="Local Vendors Bazaar Logo" style={{ width: '40px', marginRight: '10px' }} />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -104,33 +126,10 @@ const Faq = ({ cart }) => {
   );
 };
 
-const navLinkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-const inputStyle = {
-  marginLeft: '10px',
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-};
-
-const searchButtonStyle = {
-  marginLeft: '10px',
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
 export default Faq;
+
+
+
 
 
 

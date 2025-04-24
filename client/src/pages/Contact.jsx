@@ -1,11 +1,34 @@
 import React from 'react';
 
 const Contact = ({ cart }) => {
+  const navLinkStyle = {
+    margin: '0 10px',
+    color: '#fff',
+    textDecoration: 'none',
+    fontSize: '14px',
+  };
+
+  const inputStyle = {
+    marginLeft: '10px',
+    padding: '6px 10px',
+    borderRadius: '8px',
+    border: '1px solid #ccc',
+    fontSize: '14px',
+  };
+
+  const searchButtonStyle = {
+    marginLeft: '10px',
+    padding: '6px 12px',
+    backgroundColor: '#40916c',
+    color: '#fff',
+    borderRadius: '8px',
+    border: 'none',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+  };
+
   return (
-    <div
-      className="min-h-screen flex flex-col items-center bg-gray-50"
-      style={{ fontFamily: 'sans-serif' }}
-    >
+    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -22,39 +45,29 @@ const Contact = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ marginLeft: '1rem' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ height: '40px', width: 'auto' }}
-          />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
-          <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={linkStyle}>🛒 <span style={{ color: '#fff' }}>{cart.length > 0 ? `Cart (${cart.length})` : 'Cart'}</span></a>
-
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={inputStyle}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{ ...inputStyle, width: '100px' }}
-          />
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/cart" style={navLinkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+          </a>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main style={{ textAlign: 'center', padding: '2rem', marginTop: '4rem' }}>
+      {/* Contact Form */}
+      <main style={{ textAlign: 'center', padding: '2rem', marginTop: '3rem' }}>
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
@@ -68,87 +81,88 @@ const Contact = ({ cart }) => {
         <form
           action="https://formspree.io/f/movdqjgp"
           method="POST"
-          style={formStyle}
+          style={{
+            maxWidth: '600px',
+            margin: '0 auto',
+            backgroundColor: '#fff',
+            padding: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
         >
-          <input type="text" name="name" placeholder="Your Name" required style={fieldStyle} />
-          <input type="email" name="email" placeholder="you@example.com" required style={fieldStyle} />
-          <input type="text" name="subject" placeholder="Subject" required style={fieldStyle} />
-          <textarea name="message" placeholder="Your Message" rows="5" required style={fieldStyle} />
-          <button type="submit" style={submitButtonStyle}>Send Message</button>
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="you@example.com"
+            required
+            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
+          />
+          <input
+            type="text"
+            name="subject"
+            placeholder="Subject"
+            required
+            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
+          />
+          <textarea
+            name="message"
+            placeholder="Your Message"
+            rows="5"
+            required
+            style={{ ...inputStyle, width: '100%', marginBottom: '1rem' }}
+          />
+
+          <button
+            type="submit"
+            style={{
+              backgroundColor: '#2b9348',
+              color: '#fff',
+              fontWeight: 'bold',
+              padding: '0.75rem 1.5rem',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '1rem',
+            }}
+          >
+            Send Message
+          </button>
         </form>
       </main>
 
-      {/* Footer */}
-      <footer style={footerStyle}>
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-// Styles
-const linkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-};
-
-const inputStyle = {
-  marginLeft: '10px',
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-};
-
-const searchButtonStyle = {
-  marginLeft: '10px',
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
-const formStyle = {
-  maxWidth: '600px',
-  margin: '0 auto',
-  backgroundColor: '#fff',
-  padding: '2rem',
-  borderRadius: '12px',
-  boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-};
-
-const fieldStyle = {
-  width: '100%',
-  padding: '0.75rem',
-  border: '1px solid #ccc',
-  borderRadius: '8px',
-  marginBottom: '1rem',
-};
-
-const submitButtonStyle = {
-  backgroundColor: '#2b9348',
-  color: '#fff',
-  fontWeight: 'bold',
-  padding: '0.75rem 1.5rem',
-  border: 'none',
-  borderRadius: '8px',
-  cursor: 'pointer',
-  fontSize: '1rem',
-};
-
-const footerStyle = {
-  backgroundColor: '#f5f5f5',
-  padding: '1rem',
-  textAlign: 'center',
-  color: '#666',
-  marginTop: 'auto',
-};
-
 export default Contact;
+
+
+
+
+
+
+
+
+
+
 
 
 
