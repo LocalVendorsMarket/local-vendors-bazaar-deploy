@@ -17,8 +17,8 @@ const Blog = ({ cart }) => {
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation */}
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -34,40 +34,37 @@ const Blog = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ marginLeft: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-        <img
-  src="/assets/logo.png"
-  alt="Local Vendors Bazaar Logo"
-  style={{ width: '150px', marginBottom: '1rem' }}
-/>
-style={{ height: '40px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', marginRight: '1rem' }}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
-          <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={linkStyle}>🛒 <span style={{ filter: 'invert(1)' }}>Cart {cart?.length > 0 && `(${cart.length})`}</span></a>
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={searchStyle}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{ ...searchStyle, width: '100px' }}
-          />
-          <button style={searchBtnStyle}>Search</button>
+
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/cart" style={navLinkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+          </a>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
       {/* Blog Section */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
-        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>Blog and News</h1>
+        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '2rem' }}>
+          Blog and News
+        </h1>
+
         <div
           style={{
             display: 'grid',
@@ -78,16 +75,10 @@ style={{ height: '40px' }} />
           }}
         >
           {posts.map((post, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: '#fff',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-              }}
-            >
-              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{post.title}</h2>
+            <div key={index} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
+                {post.title}
+              </h2>
               <p style={{ color: '#555', fontSize: '1rem' }}>{post.content}</p>
             </div>
           ))}
@@ -110,14 +101,14 @@ style={{ height: '40px' }} />
   );
 };
 
-// Styles
-const linkStyle = {
+const navLinkStyle = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
+  fontSize: '14px',
 };
 
-const searchStyle = {
+const inputStyle = {
   marginLeft: '10px',
   padding: '6px 10px',
   borderRadius: '8px',
@@ -125,7 +116,7 @@ const searchStyle = {
   fontSize: '14px',
 };
 
-const searchBtnStyle = {
+const searchButtonStyle = {
   marginLeft: '10px',
   padding: '6px 12px',
   backgroundColor: '#40916c',
@@ -137,6 +128,14 @@ const searchBtnStyle = {
 };
 
 export default Blog;
+
+
+
+
+
+
+
+
 
 
 

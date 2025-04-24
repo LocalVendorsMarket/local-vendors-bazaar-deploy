@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '../assets/logo.png'; // make sure this path is correct
 
 const Faq = ({ cart }) => {
   const faqs = [
@@ -40,12 +39,11 @@ const Faq = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-        <img
-  src="/assets/logo.png"
-  alt="Local Vendors Bazaar Logo"
-  style={{ width: '150px', marginBottom: '1rem' }}
-/>
- style={{ width: '40px', marginRight: '10px' }} />
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -59,7 +57,6 @@ const Faq = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -134,6 +131,12 @@ const searchButtonStyle = {
 };
 
 export default Faq;
+
+
+
+
+
+
 
 
 
