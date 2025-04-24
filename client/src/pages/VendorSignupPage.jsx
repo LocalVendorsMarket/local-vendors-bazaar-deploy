@@ -2,14 +2,17 @@ import React from 'react';
 
 const VendorSignupPage = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
-        className="w-full sticky top-0 z-50"
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
+          width: '100%',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -35,16 +38,17 @@ const VendorSignupPage = () => {
           <a href="/cart" style={navLink}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒 Cart</span>
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButton}>Search</button>
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-grow flex justify-center items-center px-4 py-12">
+      {/* Centered Signup Form */}
+      <main className="flex-grow flex justify-center items-center w-full px-4 py-12">
         <div
-          className="bg-white rounded-2xl shadow-lg p-8 w-full"
+          className="bg-white p-8 rounded-2xl shadow-lg w-full"
           style={{ maxWidth: '600px' }}
         >
           <h1 className="text-3xl font-bold text-green-600 text-center mb-4">
@@ -155,6 +159,7 @@ const searchButton = {
 };
 
 export default VendorSignupPage;
+
 
 
 
