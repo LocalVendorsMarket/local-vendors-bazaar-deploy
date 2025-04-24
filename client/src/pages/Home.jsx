@@ -9,58 +9,65 @@ const Home = ({ cart }) => {
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+        <div
+          style={{
+            maxWidth: '1280px',
+            margin: '0 auto',
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+          }}
+        >
+          {/* Logo */}
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <img
+              src="/assets/logo.png"
+              alt="Local Vendors Bazaar Logo"
+              style={{ width: '40px', marginRight: '10px' }}
+            />
+            <span style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>LocalVendorsBazaar</span>
+          </div>
+
+          {/* Navigation Links */}
+          <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+            <a href="/" style={navLink}>Home</a>
+            <a href="/faq" style={navLink}>FAQ</a>
+            <a href="/blog" style={navLink}>Blog</a>
+            <a href="/contact" style={navLink}>Contact</a>
+            <a href="/signup" style={navLink}>Become a Vendor</a>
+            <a href="/shop" style={navLink}>Shop</a>
+            <a href="/cart" style={navLink}>
+              <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>{' '}
+              {cart?.length > 0 && `(${cart.length})`}
+            </a>
+            <input type="text" placeholder="Search products..." style={inputStyle} />
+            <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+            <button style={searchButtonStyle}>Search</button>
+          </nav>
         </div>
-
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/faq" style={navLinkStyle}>FAQ</a>
-          <a href="/blog" style={navLinkStyle}>Blog</a>
-          <a href="/contact" style={navLinkStyle}>Contact</a>
-          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
-            {cart?.length > 0 && ` (${cart.length})`}
-          </a>
-
-          <input type="text" placeholder="Search products..." style={inputStyle} />
-          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButtonStyle}>Search</button>
-        </nav>
       </header>
 
       {/* Main Content */}
-      <main className="text-center p-8">
+      <main style={{ padding: '2rem', maxWidth: '1024px', margin: '0 auto', textAlign: 'center' }}>
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
-          style={{ width: '200px', marginBottom: '1rem' }}
+          style={{ width: '180px', marginBottom: '1rem' }}
         />
-        <h1 style={{ color: '#2b9348' }}>Welcome to Local Vendors Bazaar 🎉</h1>
-        <p style={{ fontSize: '1.2rem', color: '#555' }}>
+        <h1 className="text-4xl font-bold text-green-600 mb-4">Welcome to Local Vendors Bazaar 🎉</h1>
+        <p className="text-gray-600 text-lg">
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
         <img
           src="/assets/flyer-v2.png"
-          alt="Local Vendors Bazaar Flyer"
+          alt="Flyer"
           style={{
             maxWidth: '100%',
             marginTop: '2rem',
@@ -75,10 +82,11 @@ const Home = ({ cart }) => {
             padding: '2rem',
             backgroundColor: '#f0fdf4',
             borderRadius: '12px',
+            textAlign: 'center',
           }}
         >
-          <h2 style={{ color: '#1f7a3f' }}>Are You a Local Vendor?</h2>
-          <p style={{ color: '#333', fontSize: '1.1rem' }}>
+          <h2 className="text-2xl font-semibold text-green-700">Are You a Local Vendor?</h2>
+          <p className="text-gray-700 mt-2">
             Join our marketplace and connect with buyers near you.
           </p>
           <a
@@ -99,6 +107,7 @@ const Home = ({ cart }) => {
         </div>
       </main>
 
+      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -114,7 +123,7 @@ const Home = ({ cart }) => {
   );
 };
 
-const navLinkStyle = {
+const navLink = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
@@ -141,6 +150,7 @@ const searchButtonStyle = {
 };
 
 export default Home;
+
 
 
 
