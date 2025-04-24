@@ -4,23 +4,20 @@ const Blog = ({ cart }) => {
   const posts = [
     {
       title: "Why Shopping Local Matters",
-      content:
-        "Supporting local vendors helps grow your community's economy and keeps neighborhoods vibrant. Learn why your local purchase makes a big difference!",
+      content: "Supporting local vendors helps grow your community's economy and keeps neighborhoods vibrant. Learn why your local purchase makes a big difference!",
     },
     {
       title: "Top 5 Local Products to Try",
-      content:
-        "From homemade honey to handcrafted jewelry, discover the best products made with love by your neighbors!",
+      content: "From homemade honey to handcrafted jewelry, discover the best products made with love by your neighbors!",
     },
     {
       title: "How to Save Money While Shopping Locally",
-      content:
-        "Find out tips and tricks for saving big while still supporting local businesses. Your wallet and community will thank you!",
+      content: "Find out tips and tricks for saving big while still supporting local businesses. Your wallet and community will thank you!",
     },
   ];
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -37,11 +34,10 @@ const Blog = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
-
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
@@ -50,8 +46,7 @@ const Blog = ({ cart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
-            {cart?.length > 0 && ` (${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
@@ -59,40 +54,25 @@ const Blog = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main className="flex flex-col items-center justify-center flex-grow px-4 py-10">
-        <h1 className="text-4xl font-bold text-green-600 mb-6 text-center">Blog and News</h1>
-        <div className="w-full max-w-3xl space-y-6">
-          {posts.map((post, index) => (
-            <div
-              key={index}
-              style={{
-                backgroundColor: '#fff',
-                padding: '1.5rem',
-                borderRadius: '12px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                marginBottom: '1.5rem',
-              }}
-            >
-              <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>
-                {post.title}
-              </h2>
-              <p style={{ color: '#555', fontSize: '1rem' }}>{post.content}</p>
-            </div>
-          ))}
+      {/* Blog Content */}
+      <main style={{ padding: '2rem', display: 'flex', justifyContent: 'center' }}>
+        <div style={{ maxWidth: '800px', width: '100%' }}>
+          <h1 style={{ textAlign: 'center', fontSize: '2.5rem', color: '#2b9348', marginBottom: '2rem' }}>
+            Blog and News
+          </h1>
+          <div style={{ display: 'grid', gap: '1.5rem' }}>
+            {posts.map((post, index) => (
+              <div key={index} style={{ backgroundColor: '#fff', padding: '1.5rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{post.title}</h2>
+                <p style={{ color: '#555', fontSize: '1rem' }}>{post.content}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
+      <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666', marginTop: 'auto' }}>
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -126,6 +106,7 @@ const searchButtonStyle = {
 };
 
 export default Blog;
+
 
 
 
