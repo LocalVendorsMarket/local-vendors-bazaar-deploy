@@ -34,9 +34,9 @@ const Blog = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
@@ -49,28 +49,35 @@ const Blog = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Blog Content */}
-      <main className="flex-grow px-4 py-12">
-        <h1 className="text-4xl font-bold text-green-700 text-center mb-8">Blog & News</h1>
-        <div className="max-w-4xl mx-auto space-y-6">
+      {/* Main Content */}
+      <main className="flex flex-col items-center justify-center flex-grow px-4 py-10">
+        <h1 className="text-4xl font-bold text-green-600 mb-6 text-center">Blog and News</h1>
+        <div className="w-full max-w-3xl space-y-6">
           {posts.map((post, index) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-md">
-              <h2 className="text-2xl font-semibold text-green-600 mb-2">{post.title}</h2>
-              <p className="text-gray-700">{post.content}</p>
+              <h2 className="text-2xl font-semibold text-green-700 mb-2">{post.title}</h2>
+              <p className="text-gray-600">{post.content}</p>
             </div>
           ))}
         </div>
       </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666' }}>
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -104,6 +111,7 @@ const searchButtonStyle = {
 };
 
 export default Blog;
+
 
 
 
