@@ -22,7 +22,7 @@ const Faq = ({ cart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -39,7 +39,11 @@ const Faq = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
@@ -53,15 +57,16 @@ const Faq = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* FAQ Content */}
-      <main className="flex flex-col items-center justify-center flex-grow p-8">
-        <h1 className="text-4xl font-bold text-green-600 mb-8 text-center">Frequently Asked Questions</h1>
+      {/* FAQ Section */}
+      <main className="flex-grow flex flex-col items-center justify-center py-10 px-4">
+        <h1 className="text-4xl font-bold text-green-600 mb-8">Frequently Asked Questions</h1>
         <div className="w-full max-w-3xl space-y-6">
           {faqs.map((faq, index) => (
             <div key={index} className="bg-white p-6 rounded-xl shadow-md">
@@ -72,7 +77,6 @@ const Faq = ({ cart }) => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -115,6 +119,7 @@ const searchButtonStyle = {
 };
 
 export default Faq;
+
 
 
 
