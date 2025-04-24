@@ -43,14 +43,18 @@ const VendorSignupPage = () => {
 
       {/* Main Content */}
       <main className="flex-grow flex justify-center items-center px-4 py-12">
-        <div className="bg-white rounded-2xl shadow-md p-8 w-full max-w-2xl">
-          <h1 className="text-3xl font-bold text-green-600 text-center mb-4">Become a Vendor</h1>
-          <p className="text-center text-gray-600 mb-8">
-            Join Local Vendors Bazaar and grow your local business.  
-            It's quick, simple, and free to start!
+        <div
+          className="bg-white rounded-2xl shadow-lg p-8 w-full"
+          style={{ maxWidth: '600px' }}
+        >
+          <h1 className="text-3xl font-bold text-green-600 text-center mb-4">
+            Become a Vendor
+          </h1>
+          <p className="text-center text-gray-600 mb-6 text-lg">
+            Join Local Vendors Bazaar and grow your local business. It's quick, simple, and free to start!
           </p>
 
-          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
+          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-5">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
               <input
@@ -151,6 +155,7 @@ const searchButton = {
 };
 
 export default VendorSignupPage;
+
 
 
 
