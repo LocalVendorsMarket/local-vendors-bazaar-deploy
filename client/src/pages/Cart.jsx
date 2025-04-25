@@ -1,13 +1,14 @@
 import React from 'react';
 
 const Cart = ({ cart, setCart }) => {
-  const removeFromCart = (indexToRemove) => {
-    const newCart = cart.filter((_, index) => index !== indexToRemove);
-    setCart(newCart);
+  const handleRemove = (index) => {
+    const updatedCart = [...cart];
+    updatedCart.splice(index, 1);
+    setCart(updatedCart);
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f0fdf4', minHeight: '100vh' }}>
+    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Nav Bar */}
       <header
         style={{
@@ -41,8 +42,7 @@ const Cart = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
-            {cart.length > 0 && ` (${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
@@ -51,36 +51,39 @@ const Cart = ({ cart, setCart }) => {
       </header>
 
       {/* Cart Content */}
-      <main style={{ maxWidth: '900px', margin: '2rem auto', padding: '1rem', backgroundColor: '#fff', borderRadius: '12px' }}>
-        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#2b9348', textAlign: 'center', marginBottom: '1.5rem' }}>
-          🛍️ Your Shopping Cart
-        </h1>
+      <main style={{ flexGrow: 1, padding: '2rem', textAlign: 'center' }}>
+        <h1 style={{ color: '#2b9348', fontSize: '2rem', marginBottom: '2rem' }}>🛍️ Your Shopping Cart</h1>
 
         {cart.length === 0 ? (
-          <p style={{ textAlign: 'center', color: '#555', fontSize: '1.1rem' }}>
-            Your cart is currently empty.
-          </p>
+          <p className="text-gray-600 text-lg">Your cart is currently empty.</p>
         ) : (
-          <div style={{ display: 'grid', gap: '1rem' }}>
+          <div style={{ maxWidth: '700px', margin: '0 auto' }}>
             {cart.map((item, index) => (
-              <div key={index} style={{ display: 'flex', alignItems: 'center', backgroundColor: '#f9f9f9', padding: '1rem', borderRadius: '8px' }}>
-                <img
-                  src={item.image}
-                  alt={item.name}
-                  style={{ width: '100px', height: '80px', objectFit: 'cover', borderRadius: '8px', marginRight: '1rem' }}
-                />
-                <div style={{ flex: 1 }}>
-                  <h2 style={{ fontSize: '1.2rem', color: '#1f7a3f', margin: 0 }}>{item.name}</h2>
-                  <p style={{ margin: '5px 0', color: '#555' }}>{item.price}</p>
+              <div
+                key={index}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  backgroundColor: '#fff',
+                  padding: '1rem',
+                  borderRadius: '8px',
+                  boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
+                  marginBottom: '1rem',
+                }}
+              >
+                <div style={{ textAlign: 'left' }}>
+                  <h2 style={{ fontSize: '1.2rem', color: '#1f7a3f' }}>{item.name}</h2>
+                  <p style={{ color: '#333' }}>{item.price}</p>
                 </div>
                 <button
-                  onClick={() => removeFromCart(index)}
+                  onClick={() => handleRemove(index)}
                   style={{
-                    padding: '8px 16px',
-                    backgroundColor: '#d00000',
+                    backgroundColor: '#e63946',
                     color: '#fff',
                     border: 'none',
                     borderRadius: '6px',
+                    padding: '6px 12px',
                     cursor: 'pointer',
                     fontWeight: 'bold',
                   }}
@@ -94,7 +97,15 @@ const Cart = ({ cart, setCart }) => {
       </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666' }}>
+      <footer
+        style={{
+          backgroundColor: '#f5f5f5',
+          padding: '1rem',
+          textAlign: 'center',
+          color: '#666',
+          marginTop: 'auto',
+        }}
+      >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -128,6 +139,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
