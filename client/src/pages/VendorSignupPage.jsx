@@ -37,7 +37,7 @@ const VendorSignupPage = ({ cart }) => {
         </div>
       </header>
 
-      {/* Vendor Benefits Section */}
+      {/* Page Header */}
       <section className="text-center px-4 py-10">
         <img
           src="/assets/logo.png"
@@ -46,25 +46,27 @@ const VendorSignupPage = ({ cart }) => {
         />
         <h1 className="text-4xl font-bold text-green-600 mb-2">Become a Vendor</h1>
         <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
-          Join our growing network of local sellers and showcase your business to customers in your area and beyond.
+          Join our community and reach thousands of local buyers ready to discover your products!
         </p>
-        <div className="bg-white max-w-2xl mx-auto p-6 rounded-xl shadow-md text-left">
-          <h2 className="text-xl font-bold text-green-700 mb-2">Why Join Local Vendors Bazaar?</h2>
-          <ul className="list-disc list-inside text-gray-700 space-y-1">
-            <li>✅ Free to sign up — no hidden fees</li>
-            <li>📈 Reach new customers in your area</li>
-            <li>💬 Direct inquiries and leads from buyers</li>
-            <li>📦 Showcase your products with images</li>
-            <li>📢 Featured promotions and vendor highlights</li>
+      </section>
+
+      {/* Benefits Section */}
+      <section className="px-4 mb-8">
+        <div className="bg-white max-w-3xl mx-auto p-6 rounded-xl shadow-md text-left">
+          <h2 className="text-xl font-bold text-green-700 mb-3 text-center">Why Join?</h2>
+          <ul className="list-disc list-inside text-gray-700 space-y-2">
+            <li>No listing fees – signup is completely free.</li>
+            <li>Attract customers searching by zip code and category.</li>
+            <li>Upload photos, manage your listing, and promote events.</li>
+            <li>Gain exposure through our featured vendor highlights.</li>
           </ul>
         </div>
       </section>
 
-      {/* Signup Form Section */}
-      <section className="flex-grow px-4 pb-12">
+      {/* Signup Form */}
+      <section className="px-4 pb-12">
         <div
-          className="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-lg"
-          style={{ marginTop: '1rem' }}
+          className="bg-white max-w-3xl mx-auto p-8 rounded-xl shadow-lg"
         >
           <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
             <div>
@@ -79,7 +81,7 @@ const VendorSignupPage = ({ cart }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
               <input
                 type="email"
                 name="email"
@@ -90,33 +92,33 @@ const VendorSignupPage = ({ cart }) => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
               <input
                 type="tel"
                 name="phone"
                 className="w-full border border-gray-300 rounded-lg p-3"
-                placeholder="123-456-7890"
+                placeholder="(123) 456-7890"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Website (Optional)</label>
               <input
                 type="url"
                 name="website"
                 className="w-full border border-gray-300 rounded-lg p-3"
-                placeholder="https://yourbusiness.com"
+                placeholder="https://yourstore.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
+              <label className="block text-sm font-medium text-gray-700 mb-1">Tell us about your business</label>
               <textarea
                 name="description"
                 required
                 rows="4"
                 className="w-full border border-gray-300 rounded-lg p-3"
-                placeholder="Tell us about your business..."
+                placeholder="Describe your products, style, services..."
               ></textarea>
             </div>
 
@@ -172,6 +174,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
