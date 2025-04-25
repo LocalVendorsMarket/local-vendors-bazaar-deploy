@@ -4,10 +4,34 @@ const Products = ({ cart, setCart }) => {
   const categories = ['Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
 
   const products = [
-    { id: 1, name: 'Local Honey', image: 'https://via.placeholder.com/300x200?text=Local+Honey', price: '$12', rating: '⭐⭐⭐⭐⭐' },
-    { id: 2, name: 'Handmade Necklace', image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace', price: '$25', rating: '⭐⭐⭐⭐' },
-    { id: 3, name: 'Organic T-Shirt', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt', price: '$18', rating: '⭐⭐⭐⭐' },
-    { id: 4, name: 'Custom Artwork', image: 'https://via.placeholder.com/300x200?text=Custom+Artwork', price: '$80', rating: '⭐⭐⭐⭐⭐' },
+    {
+      id: 1,
+      name: 'Local Honey',
+      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
+      price: '$12',
+      rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+      id: 2,
+      name: 'Handmade Necklace',
+      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
+      price: '$25',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 3,
+      name: 'Organic T-Shirt',
+      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
+      price: '$18',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 4,
+      name: 'Custom Artwork',
+      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
+      price: '$80',
+      rating: '⭐⭐⭐⭐⭐',
+    },
   ];
 
   const handleAddToCart = (product) => {
@@ -17,7 +41,6 @@ const Products = ({ cart, setCart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      
       {/* Navigation Bar */}
       <header
         style={{
@@ -34,9 +57,11 @@ const Products = ({ cart, setCart }) => {
           flexWrap: 'wrap',
         }}
       >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
-        </div>
+        <img
+          src="/assets/logo.png"
+          alt="Logo"
+          style={{ height: '40px', marginLeft: '1rem' }}
+        />
 
         <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
           <a href="/" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Home</a>
@@ -46,10 +71,9 @@ const Products = ({ cart, setCart }) => {
           <a href="/signup" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Become a Vendor</a>
           <a href="/shop" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>Shop</a>
           <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none' }}>
-            🛒 Cart{cart.length > 0 && ` (${cart.length})`}
+            🛒 Cart {cart.length > 0 && `(${cart.length})`}
           </a>
 
-          {/* Search + Zip */}
           <input
             type="text"
             placeholder="Search products..."
@@ -167,6 +191,7 @@ const Products = ({ cart, setCart }) => {
 };
 
 export default Products;
+
 
 
 
