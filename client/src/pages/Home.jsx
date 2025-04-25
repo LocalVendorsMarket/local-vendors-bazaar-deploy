@@ -3,7 +3,7 @@ import React from 'react';
 const Home = ({ cart }) => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar */}
+      {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
@@ -46,7 +46,17 @@ const Home = ({ cart }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow flex flex-col items-center justify-center text-center px-4 py-8">
+      <main
+        style={{
+          flex: 1,
+          padding: '2rem',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          textAlign: 'center',
+        }}
+      >
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
@@ -59,7 +69,6 @@ const Home = ({ cart }) => {
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
-        {/* Flyer image */}
         <img
           src="/assets/flyer-v2.png"
           alt="Local Vendors Bazaar Flyer"
@@ -71,7 +80,6 @@ const Home = ({ cart }) => {
           }}
         />
 
-        {/* Vendor CTA */}
         <div
           style={{
             marginTop: '3rem',
@@ -79,7 +87,6 @@ const Home = ({ cart }) => {
             backgroundColor: '#f0fdf4',
             borderRadius: '12px',
             maxWidth: '600px',
-            textAlign: 'center',
           }}
         >
           <h2 style={{ color: '#1f7a3f' }}>Are You a Local Vendor?</h2>
@@ -104,7 +111,6 @@ const Home = ({ cart }) => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -146,6 +152,7 @@ const searchButtonStyle = {
 };
 
 export default Home;
+
 
 
 
