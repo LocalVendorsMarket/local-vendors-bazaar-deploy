@@ -3,12 +3,13 @@ import React from 'react';
 const Home = ({ cart }) => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
+      {/* Nav Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
           padding: '1rem',
           color: '#fff',
+          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
@@ -37,6 +38,7 @@ const Home = ({ cart }) => {
           <a href="/cart" style={navLinkStyle}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
+
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
@@ -44,30 +46,35 @@ const Home = ({ cart }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex flex-col items-center justify-center flex-grow text-center px-6 py-12">
+      <main className="flex-grow flex flex-col items-center justify-center text-center px-4 py-8">
         <img
           src="/assets/logo.png"
           alt="Local Vendors Bazaar Logo"
-          style={{ width: '200px', marginBottom: '1rem' }}
+          style={{ width: '160px', marginBottom: '1rem' }}
         />
-        <h1 className="text-4xl font-bold text-green-600 mb-4">Welcome to Local Vendors Bazaar 🎉</h1>
-        <p className="text-lg text-gray-700 mb-8">
+        <h1 style={{ color: '#2b9348', fontSize: '2.2rem', marginBottom: '1rem' }}>
+          Welcome to Local Vendors Bazaar 🎉
+        </h1>
+        <p style={{ fontSize: '1.1rem', color: '#555', maxWidth: '600px' }}>
           Shop and Save Locally — Supporting Chicago and Beyond!
         </p>
 
+        {/* Flyer image */}
         <img
           src="/assets/flyer-v2.png"
           alt="Local Vendors Bazaar Flyer"
           style={{
-            maxWidth: '100%',
+            maxWidth: '90%',
+            marginTop: '2rem',
             borderRadius: '12px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            marginBottom: '3rem',
           }}
         />
 
+        {/* Vendor CTA */}
         <div
           style={{
+            marginTop: '3rem',
             padding: '2rem',
             backgroundColor: '#f0fdf4',
             borderRadius: '12px',
@@ -75,8 +82,8 @@ const Home = ({ cart }) => {
             textAlign: 'center',
           }}
         >
-          <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem' }}>Are You a Local Vendor?</h2>
-          <p style={{ color: '#333', fontSize: '1.1rem', marginTop: '1rem' }}>
+          <h2 style={{ color: '#1f7a3f' }}>Are You a Local Vendor?</h2>
+          <p style={{ color: '#333', fontSize: '1.1rem' }}>
             Join our marketplace and connect with buyers near you.
           </p>
           <a
@@ -104,7 +111,6 @@ const Home = ({ cart }) => {
           padding: '1rem',
           textAlign: 'center',
           color: '#666',
-          marginTop: 'auto',
         }}
       >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
@@ -140,6 +146,7 @@ const searchButtonStyle = {
 };
 
 export default Home;
+
 
 
 
