@@ -7,49 +7,44 @@ const Cart = ({ cart }) => {
       <header
         style={{
           backgroundColor: '#2b9348',
-          padding: '1rem',
+          padding: '1rem 2rem', // gives nice breathing room left/right
           color: '#fff',
           width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
         }}
       >
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            maxWidth: '1280px',
-            margin: '0 auto',
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <img
-              src="/assets/logo.png"
-              alt="Local Vendors Bazaar Logo"
-              style={{ width: '40px', marginRight: '10px' }}
-            />
-            <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
-          </div>
-
-          <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-            <a href="/" style={navLinkStyle}>Home</a>
-            <a href="/faq" style={navLinkStyle}>FAQ</a>
-            <a href="/blog" style={navLinkStyle}>Blog</a>
-            <a href="/contact" style={navLinkStyle}>Contact</a>
-            <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-            <a href="/shop" style={navLinkStyle}>Shop</a>
-            <a href="/cart" style={navLinkStyle}>
-              <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
-            </a>
-
-            <input type="text" placeholder="Search products..." style={inputStyle} />
-            <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-            <button style={searchButtonStyle}>Search</button>
-          </nav>
+        {/* Left Logo + Brand Text */}
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src="/assets/logo.png"
+            alt="Local Vendors Bazaar Logo"
+            style={{ width: '40px', marginRight: '10px' }}
+          />
+          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
+
+        {/* Nav Links + Search */}
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/cart" style={navLinkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
+            {cart?.length > 0 && ` (${cart.length})`}
+          </a>
+          <input type="text" placeholder="Search products..." style={inputStyle} />
+          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
+          <button style={searchButtonStyle}>Search</button>
+        </nav>
       </header>
 
       {/* Cart Content */}
@@ -111,6 +106,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
