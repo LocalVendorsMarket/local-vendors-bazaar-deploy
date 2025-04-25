@@ -17,11 +17,7 @@ const VendorSignupPage = ({ cart }) => {
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
+          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
           <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
@@ -41,25 +37,35 @@ const VendorSignupPage = ({ cart }) => {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="flex-grow flex justify-center items-center p-8">
-        <div
-          style={{
-            width: '100%',
-            maxWidth: '700px',
-            backgroundColor: '#fff',
-            padding: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-            margin: 'auto',
-          }}
-        >
-          <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">Become a Vendor</h1>
-          <p className="text-gray-600 mb-8 text-center text-lg">
-            Join Local Vendors Bazaar and grow your local business.  
-            It's quick, simple, and free to start!
-          </p>
+      {/* Vendor Benefits Section */}
+      <section className="text-center px-4 py-10">
+        <img
+          src="/assets/logo.png"
+          alt="Local Vendors Bazaar Logo"
+          style={{ width: '160px', margin: '0 auto 1rem' }}
+        />
+        <h1 className="text-4xl font-bold text-green-600 mb-2">Become a Vendor</h1>
+        <p className="text-gray-600 max-w-2xl mx-auto text-lg mb-6">
+          Join our growing network of local sellers and showcase your business to customers in your area and beyond.
+        </p>
+        <div className="bg-white max-w-2xl mx-auto p-6 rounded-xl shadow-md text-left">
+          <h2 className="text-xl font-bold text-green-700 mb-2">Why Join Local Vendors Bazaar?</h2>
+          <ul className="list-disc list-inside text-gray-700 space-y-1">
+            <li>✅ Free to sign up — no hidden fees</li>
+            <li>📈 Reach new customers in your area</li>
+            <li>💬 Direct inquiries and leads from buyers</li>
+            <li>📦 Showcase your products with images</li>
+            <li>📢 Featured promotions and vendor highlights</li>
+          </ul>
+        </div>
+      </section>
 
+      {/* Signup Form Section */}
+      <section className="flex-grow px-4 pb-12">
+        <div
+          className="bg-white max-w-2xl mx-auto p-8 rounded-xl shadow-lg"
+          style={{ marginTop: '1rem' }}
+        >
           <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
@@ -122,8 +128,9 @@ const VendorSignupPage = ({ cart }) => {
             </button>
           </form>
         </div>
-      </main>
+      </section>
 
+      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -165,6 +172,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
