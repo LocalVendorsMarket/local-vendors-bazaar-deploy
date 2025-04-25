@@ -1,20 +1,40 @@
 import React, { useState } from 'react';
 
 const ShopPage = ({ cart, setCart }) => {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods'];
-  const [selectedCategory, setSelectedCategory] = useState('All');
 
-  const allProducts = [
-    { id: 1, name: 'Local Honey', category: 'Food', image: 'https://via.placeholder.com/300x200?text=Local+Honey', price: '$12', rating: '⭐⭐⭐⭐⭐' },
-    { id: 2, name: 'Handmade Necklace', category: 'Jewelry', image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace', price: '$25', rating: '⭐⭐⭐⭐' },
-    { id: 3, name: 'Organic T-Shirt', category: 'Clothing', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt', price: '$18', rating: '⭐⭐⭐⭐' },
-    { id: 4, name: 'Custom Artwork', category: 'Art', image: 'https://via.placeholder.com/300x200?text=Custom+Artwork', price: '$80', rating: '⭐⭐⭐⭐⭐' },
+  const products = [
+    {
+      id: 1,
+      name: 'Local Honey',
+      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
+      price: '$12',
+      rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+      id: 2,
+      name: 'Handmade Necklace',
+      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
+      price: '$25',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 3,
+      name: 'Organic T-Shirt',
+      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
+      price: '$18',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 4,
+      name: 'Custom Artwork',
+      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
+      price: '$80',
+      rating: '⭐⭐⭐⭐⭐',
+    },
   ];
-
-  const filteredProducts =
-    selectedCategory === 'All'
-      ? allProducts
-      : allProducts.filter(product => product.category === selectedCategory);
 
   const handleAddToCart = (product) => {
     setCart([...cart, product]);
@@ -23,24 +43,25 @@ const ShopPage = ({ cart, setCart }) => {
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar - same as other pages */}
-      <header style={{
-        backgroundColor: '#2b9348',
-        padding: '1rem',
-        color: '#fff',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Local Vendors Bazaar Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+      {/* Navigation Bar */}
+      <header
+        style={{
+          backgroundColor: '#2b9348',
+          padding: '1rem',
+          color: '#fff',
+          width: '100%',
+          position: 'sticky',
+          top: 0,
+          zIndex: 1000,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        <div style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>
+          LocalVendorsBazaar
         </div>
-
         <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
@@ -49,53 +70,86 @@ const ShopPage = ({ cart, setCart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
         </nav>
       </header>
 
-      {/* Hero */}
+      {/* Hero Section */}
       <div className="text-center mt-10 px-6">
         <h1 className="text-5xl font-extrabold text-green-600 mb-4">🛍️ Shop Local and Save Big! 🎉</h1>
         <p className="text-gray-600 text-lg mb-8">Discover amazing products from your favorite local vendors.</p>
       </div>
 
-      {/* Filter Buttons */}
-      <div className="flex flex-wrap justify-center gap-3 mb-6">
-        {categories.map((cat) => (
+      {/* Categories */}
+      <div className="flex flex-wrap justify-center gap-3 mb-8">
+        {categories.map((category) => (
           <button
-            key={cat}
-            className={`px-5 py-2 rounded-full font-semibold transition ${
-              selectedCategory === cat ? 'bg-green-700 text-white' : 'bg-green-500 text-white hover:bg-green-600'
-            }`}
-            onClick={() => setSelectedCategory(cat)}
+            key={category}
+            className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition font-semibold"
           >
-            {cat}
+            {category}
           </button>
         ))}
       </div>
 
-      {/* Product Grid */}
+      {/* Products */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
-        {filteredProducts.map((product) => (
-          <div key={product.id} className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col">
+        {products.map((product) => (
+          <div
+            key={product.id}
+            className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+          >
             <img src={product.image} alt={product.name} className="w-full h-56 object-cover" />
             <div className="p-6 flex flex-col flex-grow">
               <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
               <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
               <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
               <div className="flex justify-center gap-4 mt-auto">
-                <button className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition">Learn More</button>
-                <button onClick={() => handleAddToCart(product)} className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition">Add to Cart</button>
+                <button
+                  onClick={() => setSelectedProduct(product)}
+                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                >
+                  Learn More
+                </button>
+                <button
+                  onClick={() => handleAddToCart(product)}
+                  className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
+                >
+                  Add to Cart
+                </button>
               </div>
             </div>
           </div>
         ))}
       </div>
+
+      {/* Modal Popup */}
+      {selectedProduct && (
+        <div
+          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          onClick={() => setSelectedProduct(null)}
+        >
+          <div
+            className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">{selectedProduct.name}</h2>
+            <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full mb-4 rounded-lg" />
+            <p className="text-gray-700 mb-2 text-center">Price: {selectedProduct.price}</p>
+            <p className="text-yellow-500 text-center mb-4">{selectedProduct.rating}</p>
+            <button
+              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+              onClick={() => setSelectedProduct(null)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#f5f5f5', padding: '1rem', textAlign: 'center', color: '#666', marginTop: 'auto' }}>
@@ -132,6 +186,7 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
 
 
 
