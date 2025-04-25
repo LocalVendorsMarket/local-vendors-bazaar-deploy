@@ -1,156 +1,66 @@
 import React, { useState } from 'react';
-import SignInModal from '../components/SignInModal'; // Import the modal
+import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
-  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Services', 'Restaurants', 'Retail Stores'];
-
-  const products = [
-    {
-      id: 1,
-      name: 'Local Honey',
-      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
-      price: '$12',
-      rating: '⭐⭐⭐⭐⭐',
-    },
-    {
-      id: 2,
-      name: 'Handmade Necklace',
-      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
-      price: '$25',
-      rating: '⭐⭐⭐⭐',
-    },
-    {
-      id: 3,
-      name: 'Organic T-Shirt',
-      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
-      price: '$18',
-      rating: '⭐⭐⭐⭐',
-    },
-    {
-      id: 4,
-      name: 'Custom Artwork',
-      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
-      price: '$80',
-      rating: '⭐⭐⭐⭐⭐',
-    },
+  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services'];
+  
+  const allProducts = [
+    { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
+    { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
+    { id: 3, name: 'Organic T-Shirt', category: 'Clothing', price: '$18', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
+    { id: 4, name: 'Custom Artwork', category: 'Art', price: '$80', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Artwork' },
+    { id: 5, name: 'Gourmet Pizza', category: 'Restaurants', price: '$15', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Pizza' },
+    { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' },
   ];
 
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isSignInOpen, setIsSignInOpen] = useState(false); // Manage Sign In Modal
+
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter((product) => product.category === selectedCategory);
 
   const handleAddToCart = (product) => {
     setCart([...cart, product]);
     alert(`${product.name} added to cart!`);
   };
 
-  const handleLearnMore = (product) => {
-    setSelectedProduct(product);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedProduct(null);
-  };
-
-  const handleOpenSignIn = () => {
-    setIsSignInOpen(true);
-  };
-
-  const handleCloseSignIn = () => {
-    setIsSignInOpen(false);
-  };
-
   return (
-    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f9f9f9' }}>
-      {/* Nav Bar */}
-      <header style={{
-        backgroundColor: '#2b9348',
-        padding: '0.5rem 1rem',
-        color: '#fff',
-        position: 'sticky',
-        top: 0,
-        zIndex: 1000,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        flexWrap: 'wrap',
-      }}>
+    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Top Nav Bar */}
+      <header style={{ backgroundColor: '#2b9348', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Local Vendors Bazaar" style={{ width: '50px', marginRight: '10px' }} />
+          <a href="/">
+            <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
+          </a>
         </div>
-
-        <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{
-              flexGrow: 1,
-              padding: '8px 12px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <input
-            type="text"
-            placeholder="Zip Code"
-            style={{
-              marginLeft: '10px',
-              padding: '8px 12px',
-              width: '100px',
-              borderRadius: '8px',
-              border: '1px solid #ccc',
-              fontSize: '14px',
-            }}
-          />
-          <button style={{
-            marginLeft: '10px',
-            padding: '8px 16px',
-            backgroundColor: '#40916c',
-            color: '#fff',
-            borderRadius: '8px',
-            border: 'none',
-            fontWeight: 'bold',
-            cursor: 'pointer',
-          }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <input type="text" placeholder="Search products..." style={{ marginRight: '10px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', flexGrow: 1 }} />
+          <input type="text" placeholder="Zip Code" style={{ marginRight: '10px', padding: '6px 10px', width: '100px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <button style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
             Search
           </button>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
-          <button
-            onClick={handleOpenSignIn}
-            style={{
-              backgroundColor: 'transparent',
-              border: '2px solid #fff',
-              color: '#fff',
-              padding: '6px 12px',
-              marginRight: '15px',
-              borderRadius: '6px',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
-            Sign In
-          </button>
-          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none', fontSize: '20px' }}>
-            🛒 {cart.length > 0 && `(${cart.length})`}
+          <a href="/cart" style={{ marginLeft: '20px', color: '#fff', textDecoration: 'none', fontSize: '18px' }}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
         </div>
       </header>
 
-      {/* Category Filter */}
-      <div style={{ backgroundColor: '#edf6f9', padding: '0.5rem', display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
+      {/* Subcategories Nav Bar */}
+      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px' }}>
         {categories.map((category) => (
           <button
             key={category}
+            onClick={() => setSelectedCategory(category)}
             style={{
-              backgroundColor: '#52b788',
+              padding: '6px 12px',
+              backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348',
               color: '#fff',
               border: 'none',
-              padding: '8px 16px',
               borderRadius: '20px',
-              fontWeight: 'bold',
               cursor: 'pointer',
+              fontWeight: 'bold',
+              fontSize: '14px',
             }}
           >
             {category}
@@ -158,66 +68,46 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Hero */}
-      <main style={{ flexGrow: 1, textAlign: 'center', padding: '2rem' }}>
-        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '1rem' }}>Shop Local and Save Big! 🎉</h1>
-        <p style={{ color: '#555', fontSize: '1.2rem', marginBottom: '2rem' }}>
-          Discover amazing products from your favorite local vendors.
-        </p>
-
-        {/* Products */}
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
-          {products.map((product) => (
-            <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
-              <img src={product.image} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
-              <div style={{ padding: '1rem' }}>
-                <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{product.name}</h2>
-                <div style={{ color: '#ffb703', marginBottom: '0.5rem' }}>{product.rating}</div>
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>{product.price}</p>
-                <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '10px' }}>
-                  <button
-                    onClick={() => handleLearnMore(product)}
-                    style={{ backgroundColor: '#2b9348', color: '#fff', padding: '8px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
-                  >
-                    Learn More
-                  </button>
-                  <button
-                    onClick={() => handleAddToCart(product)}
-                    style={{ backgroundColor: '#f77f00', color: '#fff', padding: '8px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
+      {/* Products Section */}
+      <div style={{ padding: '2rem', display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', flexGrow: 1 }}>
+        {filteredProducts.map((product) => (
+          <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+            <h2 style={{ marginTop: '10px', color: '#1f7a3f', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
+            <p style={{ color: '#666', marginBottom: '8px', textAlign: 'center' }}>{product.rating}</p>
+            <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button
+                style={{ padding: '8px 12px', backgroundColor: '#2b9348', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+                onClick={() => setSelectedProduct(product)}
+              >
+                Learn More
+              </button>
+              <button
+                style={{ padding: '8px 12px', backgroundColor: '#f9c74f', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+                onClick={() => handleAddToCart(product)}
+              >
+                Add to Cart
+              </button>
             </div>
-          ))}
-        </div>
-      </main>
+          </div>
+        ))}
+      </div>
 
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#2b9348', color: '#fff', padding: '1.5rem', textAlign: 'center', marginTop: 'auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
-          <div>Get to Know Us</div>
-          <div>Make Money with Us</div>
-          <div>Help Center</div>
-        </div>
-        <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
-
-      {/* Modals */}
+      {/* Modal Popup for Learn More */}
       {selectedProduct && (
-        <div onClick={handleCloseModal} style={{
-          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
-          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        <div style={{
+          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+          backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center',
         }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px' }}>
-            <h2 style={{ color: '#1f7a3f', marginBottom: '1rem' }}>{selectedProduct.name}</h2>
-            <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
-            <p style={{ marginBottom: '1rem' }}>{selectedProduct.rating}</p>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '1rem' }}>{selectedProduct.price}</p>
+          <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px', textAlign: 'center' }}>
+            <h2 style={{ color: '#2b9348', marginBottom: '1rem' }}>{selectedProduct.name}</h2>
+            <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
+            <p style={{ color: '#666', marginBottom: '1rem' }}>{selectedProduct.rating}</p>
+            <p style={{ fontWeight: 'bold', marginBottom: '1rem' }}>{selectedProduct.price}</p>
             <button
-              onClick={handleCloseModal}
-              style={{ marginTop: '1rem', padding: '10px 20px', backgroundColor: '#2b9348', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer' }}
+              onClick={() => setSelectedProduct(null)}
+              style={{ marginTop: '10px', padding: '8px 16px', backgroundColor: '#e63946', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
             >
               Close
             </button>
@@ -225,12 +115,35 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       )}
 
-      {isSignInOpen && <SignInModal onClose={handleCloseSignIn} />}
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#f1f1f1', padding: '2rem', textAlign: 'center', marginTop: 'auto', fontSize: '14px', color: '#555' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', marginBottom: '20px' }}>
+          <div>
+            <h3 style={{ color: '#2b9348', marginBottom: '8px' }}>Get to Know Us</h3>
+            <a href="/" style={footerLinkStyle}>Home</a><br/>
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
+            <a href="/contact" style={footerLinkStyle}>Contact</a><br/>
+          </div>
+          <div>
+            <h3 style={{ color: '#2b9348', marginBottom: '8px' }}>Make Money with Us</h3>
+            <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
+          </div>
+        </div>
+        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
+const footerLinkStyle = {
+  color: '#555',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
 export default ShopPage;
+
 
 
 
