@@ -2,33 +2,32 @@ import React from 'react';
 
 const Cart = ({ cart }) => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Navigation Bar */}
       <header
         style={{
           backgroundColor: '#2b9348',
-          padding: '1rem',
+          padding: '1rem 2rem',
           color: '#fff',
           width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           flexWrap: 'wrap',
+          gap: '10px',
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
-        </div>
+        <img
+          src="/assets/logo.png"
+          alt="Local Vendors Bazaar Logo"
+          style={{ width: '40px', marginRight: '10px' }}
+        />
+        <div style={{ fontWeight: 'bold', fontSize: '1.3rem', marginRight: '1rem' }}>LocalVendorsBazaar</div>
 
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', flexGrow: 1 }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -36,7 +35,7 @@ const Cart = ({ cart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
@@ -44,20 +43,17 @@ const Cart = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Main Content */}
-      <main className="flex flex-col items-center justify-center flex-grow text-center px-6 py-12">
-        <h1 className="text-4xl font-bold text-green-600 mb-6">🛍️ Your Shopping Cart</h1>
+      {/* Cart Content */}
+      <main style={{ flexGrow: 1, padding: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <h1 className="text-4xl font-bold text-green-600 mb-4">🛍️ Your Shopping Cart</h1>
         {cart.length === 0 ? (
-          <p className="text-lg text-gray-600">Your cart is currently empty.</p>
+          <p className="text-gray-600 text-lg">Your cart is currently empty.</p>
         ) : (
-          <ul className="w-full max-w-xl space-y-4 text-left">
+          <ul className="w-full max-w-2xl">
             {cart.map((item, index) => (
-              <li
-                key={index}
-                className="bg-white p-4 rounded-xl shadow-md flex justify-between items-center"
-              >
-                <span className="text-lg font-semibold text-green-800">{item.name}</span>
-                <span className="text-gray-700 font-medium">{item.price}</span>
+              <li key={index} className="border-b py-4 flex justify-between">
+                <span>{item.name}</span>
+                <span>{item.price}</span>
               </li>
             ))}
           </ul>
@@ -71,7 +67,6 @@ const Cart = ({ cart }) => {
           padding: '1rem',
           textAlign: 'center',
           color: '#666',
-          marginTop: 'auto',
         }}
       >
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
@@ -81,7 +76,7 @@ const Cart = ({ cart }) => {
 };
 
 const navLinkStyle = {
-  margin: '0 10px',
+  margin: '0 8px',
   color: '#fff',
   textDecoration: 'none',
   fontSize: '14px',
@@ -107,6 +102,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
