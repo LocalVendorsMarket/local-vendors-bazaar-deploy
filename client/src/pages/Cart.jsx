@@ -19,18 +19,18 @@ const Cart = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        {/* Left: Logo + Title */}
+        {/* Logo + Title */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
             alt="Local Vendors Bazaar Logo"
             style={{ width: '40px', marginRight: '10px' }}
           />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
-        {/* Right: Links + Search */}
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        {/* Nav + Search */}
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -38,16 +38,15 @@ const Cart = ({ cart }) => {
           <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span>
-            {cart?.length > 0 && ` (${cart.length})`}
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
           <button style={searchButtonStyle}>Search</button>
-        </nav>
+        </div>
       </header>
 
-      {/* Cart Main Content */}
+      {/* Main Content */}
       <main style={{ textAlign: 'center', padding: '4rem 2rem' }}>
         <h1 className="text-4xl font-bold text-green-600 mb-6">🛍️ Your Shopping Cart</h1>
         {cart.length === 0 ? (
@@ -104,6 +103,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
