@@ -9,17 +9,17 @@ const Cart = ({ cart }) => {
           backgroundColor: '#2b9348',
           padding: '1rem 1.5rem',
           color: '#fff',
-          width: '100%',
           position: 'sticky',
           top: 0,
           zIndex: 1000,
           display: 'flex',
+          flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
           flexWrap: 'wrap',
         }}
       >
-        {/* Logo + Title */}
+        {/* Logo and Title */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
@@ -29,8 +29,17 @@ const Cart = ({ cart }) => {
           <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
-        {/* Nav + Search */}
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        {/* Navigation Links and Search */}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            alignItems: 'center',
+            gap: '10px',
+            maxWidth: '100%',
+            overflow: 'hidden',
+          }}
+        >
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -46,7 +55,7 @@ const Cart = ({ cart }) => {
         </div>
       </header>
 
-      {/* Main Content */}
+      {/* Cart Content */}
       <main style={{ textAlign: 'center', padding: '4rem 2rem' }}>
         <h1 className="text-4xl font-bold text-green-600 mb-6">🛍️ Your Shopping Cart</h1>
         {cart.length === 0 ? (
@@ -78,7 +87,6 @@ const Cart = ({ cart }) => {
   );
 };
 
-// Styles
 const navLinkStyle = {
   color: '#fff',
   textDecoration: 'none',
@@ -103,6 +111,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
