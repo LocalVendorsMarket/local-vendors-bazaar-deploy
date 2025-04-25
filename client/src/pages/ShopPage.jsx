@@ -1,59 +1,90 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import SignInModal from '../components/SignInModal'; // Import the modal
 
 const ShopPage = ({ cart, setCart }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [isSignInOpen, setIsSignInOpen] = useState(false);
-
-  const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Groceries', 'Services', 'Restaurants', 'Retail Stores'];
+  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Services', 'Restaurants', 'Retail Stores'];
 
   const products = [
-    { id: 1, name: 'Local Honey', image: 'https://via.placeholder.com/300x200?text=Local+Honey', price: '$12', rating: '⭐⭐⭐⭐⭐', category: 'Groceries', description: 'Pure organic local honey.' },
-    { id: 2, name: 'Handmade Necklace', image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace', price: '$25', rating: '⭐⭐⭐⭐', category: 'Jewelry', description: 'Beautiful artisan handmade necklace.' },
-    { id: 3, name: 'Organic T-Shirt', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt', price: '$18', rating: '⭐⭐⭐⭐', category: 'Clothing', description: 'Soft, eco-friendly cotton t-shirt.' },
-    { id: 4, name: 'Custom Artwork', image: 'https://via.placeholder.com/300x200?text=Custom+Artwork', price: '$80', rating: '⭐⭐⭐⭐⭐', category: 'Art', description: 'Unique custom paintings by local artists.' },
+    {
+      id: 1,
+      name: 'Local Honey',
+      image: 'https://via.placeholder.com/300x200?text=Local+Honey',
+      price: '$12',
+      rating: '⭐⭐⭐⭐⭐',
+    },
+    {
+      id: 2,
+      name: 'Handmade Necklace',
+      image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
+      price: '$25',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 3,
+      name: 'Organic T-Shirt',
+      image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
+      price: '$18',
+      rating: '⭐⭐⭐⭐',
+    },
+    {
+      id: 4,
+      name: 'Custom Artwork',
+      image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
+      price: '$80',
+      rating: '⭐⭐⭐⭐⭐',
+    },
   ];
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isSignInOpen, setIsSignInOpen] = useState(false); // Manage Sign In Modal
 
   const handleAddToCart = (product) => {
     setCart([...cart, product]);
     alert(`${product.name} added to cart!`);
   };
 
-  const filteredProducts = selectedCategory === 'All'
-    ? products
-    : products.filter(product => product.category === selectedCategory);
+  const handleLearnMore = (product) => {
+    setSelectedProduct(product);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+  };
+
+  const handleOpenSignIn = () => {
+    setIsSignInOpen(true);
+  };
+
+  const handleCloseSignIn = () => {
+    setIsSignInOpen(false);
+  };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Main Navigation */}
-      <header
-        style={{
-          backgroundColor: '#2b9348',
-          padding: '1rem',
-          color: '#fff',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          flexWrap: 'wrap',
-        }}
-      >
-        {/* Logo */}
-        <Link to="/">
-          <img
-            src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
-            style={{ width: '60px', marginRight: '10px' }}
-          />
-        </Link>
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#f9f9f9' }}>
+      {/* Nav Bar */}
+      <header style={{
+        backgroundColor: '#2b9348',
+        padding: '0.5rem 1rem',
+        color: '#fff',
+        position: 'sticky',
+        top: 0,
+        zIndex: 1000,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        flexWrap: 'wrap',
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img src="/assets/logo.png" alt="Local Vendors Bazaar" style={{ width: '50px', marginRight: '10px' }} />
+        </div>
 
-        {/* Search Bar */}
-        <div style={{ flex: 1, marginLeft: '20px', marginRight: '20px', display: 'flex', alignItems: 'center' }}>
+        <div style={{ flexGrow: 1, display: 'flex', alignItems: 'center', marginLeft: '10px' }}>
           <input
             type="text"
             placeholder="Search products..."
             style={{
-              flex: 1,
-              padding: '10px',
+              flexGrow: 1,
+              padding: '8px 12px',
               borderRadius: '8px',
               border: '1px solid #ccc',
               fontSize: '14px',
@@ -63,74 +94,61 @@ const ShopPage = ({ cart, setCart }) => {
             type="text"
             placeholder="Zip Code"
             style={{
-              width: '100px',
               marginLeft: '10px',
-              padding: '10px',
+              padding: '8px 12px',
+              width: '100px',
               borderRadius: '8px',
               border: '1px solid #ccc',
               fontSize: '14px',
             }}
           />
-          <button
-            style={{
-              marginLeft: '10px',
-              padding: '10px 16px',
-              backgroundColor: '#40916c',
-              color: '#fff',
-              borderRadius: '8px',
-              border: 'none',
-              fontWeight: 'bold',
-              cursor: 'pointer',
-            }}
-          >
+          <button style={{
+            marginLeft: '10px',
+            padding: '8px 16px',
+            backgroundColor: '#40916c',
+            color: '#fff',
+            borderRadius: '8px',
+            border: 'none',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+          }}>
             Search
           </button>
         </div>
 
-        {/* Sign In and Cart */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto' }}>
           <button
-            onClick={() => setIsSignInOpen(true)}
+            onClick={handleOpenSignIn}
             style={{
-              marginRight: '15px',
               backgroundColor: 'transparent',
+              border: '2px solid #fff',
               color: '#fff',
-              fontSize: '14px',
-              border: '1px solid #fff',
               padding: '6px 12px',
-              borderRadius: '8px',
+              marginRight: '15px',
+              borderRadius: '6px',
+              fontWeight: 'bold',
               cursor: 'pointer',
             }}
           >
             Sign In
           </button>
-          <Link to="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '18px' }}>
+          <a href="/cart" style={{ margin: '0 10px', color: '#fff', textDecoration: 'none', fontSize: '20px' }}>
             🛒 {cart.length > 0 && `(${cart.length})`}
-          </Link>
+          </a>
         </div>
       </header>
 
-      {/* Category Navigation */}
-      <nav
-        style={{
-          backgroundColor: '#40916c',
-          padding: '0.5rem',
-          display: 'flex',
-          justifyContent: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        {categories.map(category => (
+      {/* Category Filter */}
+      <div style={{ backgroundColor: '#edf6f9', padding: '0.5rem', display: 'flex', justifyContent: 'center', gap: '15px', flexWrap: 'wrap' }}>
+        {categories.map((category) => (
           <button
             key={category}
-            onClick={() => setSelectedCategory(category)}
             style={{
-              margin: '5px',
-              padding: '8px 14px',
-              backgroundColor: selectedCategory === category ? '#2b9348' : '#52b788',
+              backgroundColor: '#52b788',
               color: '#fff',
               border: 'none',
-              borderRadius: '8px',
+              padding: '8px 16px',
+              borderRadius: '20px',
               fontWeight: 'bold',
               cursor: 'pointer',
             }}
@@ -138,31 +156,34 @@ const ShopPage = ({ cart, setCart }) => {
             {category}
           </button>
         ))}
-      </nav>
+      </div>
 
-      {/* Products */}
-      <main className="flex-grow p-6">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {filteredProducts.map(product => (
-            <div
-              key={product.id}
-              className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
-            >
-              <img src={product.image} alt={product.name} className="w-full h-56 object-cover" />
-              <div className="p-6 flex flex-col flex-grow">
-                <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
-                <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
-                <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
-                <div className="flex justify-center gap-4 mt-auto">
+      {/* Hero */}
+      <main style={{ flexGrow: 1, textAlign: 'center', padding: '2rem' }}>
+        <h1 style={{ color: '#2b9348', fontSize: '2.5rem', marginBottom: '1rem' }}>Shop Local and Save Big! 🎉</h1>
+        <p style={{ color: '#555', fontSize: '1.2rem', marginBottom: '2rem' }}>
+          Discover amazing products from your favorite local vendors.
+        </p>
+
+        {/* Products */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', maxWidth: '1200px', margin: '0 auto' }}>
+          {products.map((product) => (
+            <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '12px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', overflow: 'hidden' }}>
+              <img src={product.image} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+              <div style={{ padding: '1rem' }}>
+                <h2 style={{ color: '#1f7a3f', fontSize: '1.5rem', marginBottom: '0.5rem' }}>{product.name}</h2>
+                <div style={{ color: '#ffb703', marginBottom: '0.5rem' }}>{product.rating}</div>
+                <p style={{ fontSize: '1.2rem', fontWeight: 'bold', color: '#333' }}>{product.price}</p>
+                <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '10px' }}>
                   <button
-                    onClick={() => alert(`${product.name}: ${product.description}`)}
-                    className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
+                    onClick={() => handleLearnMore(product)}
+                    style={{ backgroundColor: '#2b9348', color: '#fff', padding: '8px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
                   >
                     Learn More
                   </button>
                   <button
                     onClick={() => handleAddToCart(product)}
-                    className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
+                    style={{ backgroundColor: '#f77f00', color: '#fff', padding: '8px 12px', borderRadius: '6px', border: 'none', cursor: 'pointer' }}
                   >
                     Add to Cart
                   </button>
@@ -173,92 +194,44 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       </main>
 
-      {/* Footer with Placeholder Links */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '2rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '20px', marginBottom: '1rem' }}>
-          <div><strong>Get to Know Us</strong><br />About Us<br />Careers<br />Blog</div>
-          <div><strong>Make Money with Us</strong><br />Become a Vendor<br />Advertise Your Product<br />Vendor Dashboard</div>
-          <div><strong>Help</strong><br />Contact Us<br />FAQ<br />Returns</div>
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#2b9348', color: '#fff', padding: '1.5rem', textAlign: 'center', marginTop: 'auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', gap: '30px', flexWrap: 'wrap' }}>
+          <div>Get to Know Us</div>
+          <div>Make Money with Us</div>
+          <div>Help Center</div>
         </div>
-        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+        <p style={{ marginTop: '1rem', fontSize: '0.9rem' }}>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
 
-      {/* Sign In Modal */}
-      {isSignInOpen && (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            height: '100%',
-            width: '100%',
-            backgroundColor: 'rgba(0,0,0,0.5)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            zIndex: 10000,
-          }}
-          onClick={() => setIsSignInOpen(false)}
-        >
-          <div
-            style={{
-              background: '#fff',
-              padding: '2rem',
-              borderRadius: '12px',
-              width: '90%',
-              maxWidth: '400px',
-              textAlign: 'center',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <h2 style={{ color: '#2b9348', marginBottom: '1rem' }}>Sign In or Create Account</h2>
-            <input
-              type="text"
-              placeholder="Enter mobile number or email"
-              style={{
-                width: '100%',
-                padding: '10px',
-                marginBottom: '1rem',
-                borderRadius: '8px',
-                border: '1px solid #ccc',
-              }}
-            />
+      {/* Modals */}
+      {selectedProduct && (
+        <div onClick={handleCloseModal} style={{
+          position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
+          backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+        }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px' }}>
+            <h2 style={{ color: '#1f7a3f', marginBottom: '1rem' }}>{selectedProduct.name}</h2>
+            <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+            <p style={{ marginBottom: '1rem' }}>{selectedProduct.rating}</p>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '1rem' }}>{selectedProduct.price}</p>
             <button
-              style={{
-                width: '100%',
-                padding: '10px',
-                backgroundColor: '#40916c',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '8px',
-                fontWeight: 'bold',
-                marginBottom: '1rem',
-              }}
+              onClick={handleCloseModal}
+              style={{ marginTop: '1rem', padding: '10px 20px', backgroundColor: '#2b9348', color: '#fff', border: 'none', borderRadius: '8px', cursor: 'pointer' }}
             >
-              Continue
+              Close
             </button>
-            <div style={{ fontSize: '12px', color: '#555' }}>
-              By continuing, you agree to Local Vendors Bazaar's Conditions of Use and Privacy Notice.
-            </div>
-            <div style={{ marginTop: '1rem', fontSize: '12px', color: '#40916c', textDecoration: 'underline' }}>
-              Need help? | Buying for work?
-            </div>
           </div>
         </div>
       )}
+
+      {isSignInOpen && <SignInModal onClose={handleCloseSignIn} />}
     </div>
   );
 };
 
 export default ShopPage;
+
 
 
 
