@@ -1,18 +1,15 @@
 import React from 'react';
 
-const VendorSignupPage = () => {
+const VendorSignupPage = ({ cart }) => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
       {/* Navigation Bar */}
       <header
+        className="w-full sticky top-0 z-50"
         style={{
           backgroundColor: '#2b9348',
-          padding: '1rem',
           color: '#fff',
-          width: '100%',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
+          padding: '1rem',
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
@@ -22,43 +19,47 @@ const VendorSignupPage = () => {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
-            alt="Local Vendors Bazaar Logo"
+            alt="Logo"
             style={{ width: '40px', marginRight: '10px' }}
           />
           <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </div>
 
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navLink}>Home</a>
-          <a href="/faq" style={navLink}>FAQ</a>
-          <a href="/blog" style={navLink}>Blog</a>
-          <a href="/contact" style={navLink}>Contact</a>
-          <a href="/signup" style={navLink}>Become a Vendor</a>
-          <a href="/shop" style={navLink}>Shop</a>
-          <a href="/cart" style={navLink}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒 Cart</span>
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+          <a href="/" style={linkStyle}>Home</a>
+          <a href="/faq" style={linkStyle}>FAQ</a>
+          <a href="/blog" style={linkStyle}>Blog</a>
+          <a href="/contact" style={linkStyle}>Contact</a>
+          <a href="/signup" style={linkStyle}>Become a Vendor</a>
+          <a href="/shop" style={linkStyle}>Shop</a>
+          <a href="/cart" style={linkStyle}>
+            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
           </a>
-
           <input type="text" placeholder="Search products..." style={inputStyle} />
           <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButton}>Search</button>
-        </nav>
+          <button style={searchButtonStyle}>Search</button>
+        </div>
       </header>
 
-      {/* Centered Signup Form */}
-      <main className="flex-grow flex justify-center items-center w-full px-4 py-12">
+      {/* Main Content */}
+      <main className="flex-grow p-8 flex justify-center items-center">
         <div
-          className="bg-white p-8 rounded-2xl shadow-lg w-full"
-          style={{ maxWidth: '600px' }}
+          style={{
+            width: '100%',
+            maxWidth: '700px',
+            backgroundColor: '#fff',
+            padding: '2rem',
+            borderRadius: '12px',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+          }}
         >
-          <h1 className="text-3xl font-bold text-green-600 text-center mb-4">
-            Become a Vendor
-          </h1>
-          <p className="text-center text-gray-600 mb-6 text-lg">
-            Join Local Vendors Bazaar and grow your local business. It's quick, simple, and free to start!
+          <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">Become a Vendor</h1>
+          <p className="text-gray-600 mb-8 text-center text-lg">
+            Join Local Vendors Bazaar and grow your local business.  
+            It's quick, simple, and free to start!
           </p>
 
-          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-5">
+          <form action="https://formspree.io/f/movdqjgp" method="POST" className="space-y-6">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Business Name</label>
               <input
@@ -69,6 +70,7 @@ const VendorSignupPage = () => {
                 placeholder="Your Business Name"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
               <input
@@ -79,6 +81,7 @@ const VendorSignupPage = () => {
                 placeholder="you@example.com"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
               <input
@@ -88,6 +91,7 @@ const VendorSignupPage = () => {
                 placeholder="123-456-7890"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Website (optional)</label>
               <input
@@ -97,6 +101,7 @@ const VendorSignupPage = () => {
                 placeholder="https://yourbusiness.com"
               />
             </div>
+
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
               <textarea
@@ -107,6 +112,7 @@ const VendorSignupPage = () => {
                 placeholder="Tell us about your business..."
               ></textarea>
             </div>
+
             <button
               type="submit"
               className="w-full bg-green-600 text-white font-bold py-3 rounded-lg hover:bg-green-700 transition"
@@ -117,7 +123,6 @@ const VendorSignupPage = () => {
         </div>
       </main>
 
-      {/* Footer */}
       <footer
         style={{
           backgroundColor: '#f5f5f5',
@@ -132,7 +137,7 @@ const VendorSignupPage = () => {
   );
 };
 
-const navLink = {
+const linkStyle = {
   margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
@@ -147,7 +152,7 @@ const inputStyle = {
   fontSize: '14px',
 };
 
-const searchButton = {
+const searchButtonStyle = {
   marginLeft: '10px',
   padding: '6px 12px',
   backgroundColor: '#40916c',
@@ -159,6 +164,7 @@ const searchButton = {
 };
 
 export default VendorSignupPage;
+
 
 
 
