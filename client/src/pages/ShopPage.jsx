@@ -12,6 +12,7 @@ const ShopPage = ({ cart, setCart }) => {
       image: 'https://via.placeholder.com/300x200?text=Local+Honey',
       price: '$12',
       rating: '⭐⭐⭐⭐⭐',
+      description: 'Freshly harvested natural honey from local bees.',
     },
     {
       id: 2,
@@ -19,6 +20,7 @@ const ShopPage = ({ cart, setCart }) => {
       image: 'https://via.placeholder.com/300x200?text=Handmade+Necklace',
       price: '$25',
       rating: '⭐⭐⭐⭐',
+      description: 'Beautiful handcrafted necklace made by local artisans.',
     },
     {
       id: 3,
@@ -26,6 +28,7 @@ const ShopPage = ({ cart, setCart }) => {
       image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
       price: '$18',
       rating: '⭐⭐⭐⭐',
+      description: 'Comfortable organic cotton t-shirt, eco-friendly.',
     },
     {
       id: 4,
@@ -33,6 +36,7 @@ const ShopPage = ({ cart, setCart }) => {
       image: 'https://via.placeholder.com/300x200?text=Custom+Artwork',
       price: '$80',
       rating: '⭐⭐⭐⭐⭐',
+      description: 'Unique art piece, perfect for home decor.',
     },
   ];
 
@@ -42,7 +46,7 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
+    <div style={{ fontFamily: 'sans-serif', display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       {/* Navigation Bar */}
       <header
         style={{
@@ -79,49 +83,90 @@ const ShopPage = ({ cart, setCart }) => {
       </header>
 
       {/* Hero Section */}
-      <div className="text-center mt-10 px-6">
-        <h1 className="text-5xl font-extrabold text-green-600 mb-4">🛍️ Shop Local and Save Big! 🎉</h1>
-        <p className="text-gray-600 text-lg mb-8">Discover amazing products from your favorite local vendors.</p>
+      <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+        <h1 style={{ fontSize: '2.5rem', color: '#2b9348', fontWeight: 'bold' }}>🛍️ Shop Local and Save Big! 🎉</h1>
+        <p style={{ fontSize: '1.2rem', color: '#555', marginTop: '1rem' }}>
+          Discover amazing products from your favorite local vendors.
+        </p>
       </div>
 
       {/* Categories */}
-      <div className="flex flex-wrap justify-center gap-3 mb-8">
+      <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1rem', marginTop: '2rem' }}>
         {categories.map((category) => (
           <button
             key={category}
-            className="px-5 py-2 bg-green-500 text-white rounded-full hover:bg-green-600 transition font-semibold"
+            style={{
+              padding: '0.5rem 1.5rem',
+              backgroundColor: '#2b9348',
+              color: '#fff',
+              borderRadius: '20px',
+              border: 'none',
+              fontWeight: 'bold',
+              cursor: 'pointer',
+            }}
           >
             {category}
           </button>
         ))}
       </div>
 
-      {/* Products */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 px-8 pb-12 w-full max-w-7xl mx-auto">
+      {/* Products Grid */}
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+        gap: '2rem',
+        padding: '2rem',
+        maxWidth: '1200px',
+        margin: '0 auto'
+      }}>
         {products.map((product) => (
           <div
             key={product.id}
-            className="bg-white border border-gray-200 rounded-2xl shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+            style={{
+              backgroundColor: '#fff',
+              border: '1px solid #ddd',
+              borderRadius: '12px',
+              boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              textAlign: 'center',
+              padding: '1rem',
+            }}
           >
-            <img src={product.image} alt={product.name} className="w-full h-56 object-cover" />
-            <div className="p-6 flex flex-col flex-grow">
-              <h2 className="text-xl font-bold text-green-700 mb-2 text-center">{product.name}</h2>
-              <div className="text-center text-yellow-400 mb-2 text-lg">{product.rating}</div>
-              <p className="text-lg font-bold text-gray-700 text-center mb-6">{product.price}</p>
-              <div className="flex justify-center gap-4 mt-auto">
-                <button
-                  onClick={() => setSelectedProduct(product)}
-                  className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"
-                >
-                  Learn More
-                </button>
-                <button
-                  onClick={() => handleAddToCart(product)}
-                  className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600 transition"
-                >
-                  Add to Cart
-                </button>
-              </div>
+            <img src={product.image} alt={product.name} style={{ width: '100%', height: '200px', objectFit: 'cover' }} />
+            <h2 style={{ fontSize: '1.5rem', color: '#1f7a3f', margin: '1rem 0' }}>{product.name}</h2>
+            <p style={{ color: '#f59e0b', marginBottom: '0.5rem' }}>{product.rating}</p>
+            <p style={{ fontWeight: 'bold', fontSize: '1.2rem', marginBottom: '1rem' }}>{product.price}</p>
+            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
+              <button
+                onClick={() => setSelectedProduct(product)}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#2b9348',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                }}
+              >
+                Learn More
+              </button>
+              <button
+                onClick={() => handleAddToCart(product)}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#fbbf24',
+                  color: '#fff',
+                  borderRadius: '8px',
+                  border: 'none',
+                  cursor: 'pointer',
+                  fontWeight: 'bold',
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
           </div>
         ))}
@@ -130,19 +175,45 @@ const ShopPage = ({ cart, setCart }) => {
       {/* Modal Popup */}
       {selectedProduct && (
         <div
-          className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+          style={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            width: '100vw',
+            height: '100vh',
+            backgroundColor: 'rgba(0,0,0,0.5)',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            zIndex: 2000,
+          }}
           onClick={() => setSelectedProduct(null)}
         >
           <div
-            className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full relative"
+            style={{
+              backgroundColor: '#fff',
+              padding: '2rem',
+              borderRadius: '12px',
+              width: '90%',
+              maxWidth: '500px',
+              textAlign: 'center',
+              position: 'relative',
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2 className="text-2xl font-bold text-green-700 mb-4 text-center">{selectedProduct.name}</h2>
-            <img src={selectedProduct.image} alt={selectedProduct.name} className="w-full mb-4 rounded-lg" />
-            <p className="text-gray-700 mb-2 text-center">Price: {selectedProduct.price}</p>
-            <p className="text-yellow-500 text-center mb-4">{selectedProduct.rating}</p>
+            <h2 style={{ fontSize: '1.8rem', color: '#1f7a3f', marginBottom: '1rem' }}>{selectedProduct.name}</h2>
+            <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', borderRadius: '8px', marginBottom: '1rem' }} />
+            <p style={{ fontSize: '1rem', color: '#333', marginBottom: '1rem' }}>{selectedProduct.description}</p>
             <button
-              className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
+              style={{
+                backgroundColor: '#2b9348',
+                color: '#fff',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                border: 'none',
+                cursor: 'pointer',
+                fontWeight: 'bold',
+              }}
               onClick={() => setSelectedProduct(null)}
             >
               Close
@@ -186,6 +257,7 @@ const searchButtonStyle = {
 };
 
 export default ShopPage;
+
 
 
 
