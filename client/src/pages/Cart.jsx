@@ -7,7 +7,7 @@ const Cart = ({ cart }) => {
       <header
         style={{
           backgroundColor: '#2b9348',
-          padding: '1rem 2rem', // gives nice breathing room left/right
+          padding: '1rem 1.5rem',
           color: '#fff',
           width: '100%',
           position: 'sticky',
@@ -19,7 +19,7 @@ const Cart = ({ cart }) => {
           flexWrap: 'wrap',
         }}
       >
-        {/* Left Logo + Brand Text */}
+        {/* Left: Logo + Title */}
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
             src="/assets/logo.png"
@@ -29,8 +29,8 @@ const Cart = ({ cart }) => {
           <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
         </div>
 
-        {/* Nav Links + Search */}
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+        {/* Right: Links + Search */}
+        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
@@ -47,7 +47,7 @@ const Cart = ({ cart }) => {
         </nav>
       </header>
 
-      {/* Cart Content */}
+      {/* Cart Main Content */}
       <main style={{ textAlign: 'center', padding: '4rem 2rem' }}>
         <h1 className="text-4xl font-bold text-green-600 mb-6">🛍️ Your Shopping Cart</h1>
         {cart.length === 0 ? (
@@ -79,15 +79,14 @@ const Cart = ({ cart }) => {
   );
 };
 
+// Styles
 const navLinkStyle = {
-  margin: '0 10px',
   color: '#fff',
   textDecoration: 'none',
   fontSize: '14px',
 };
 
 const inputStyle = {
-  marginLeft: '10px',
   padding: '6px 10px',
   borderRadius: '8px',
   border: '1px solid #ccc',
@@ -95,7 +94,6 @@ const inputStyle = {
 };
 
 const searchButtonStyle = {
-  marginLeft: '10px',
   padding: '6px 12px',
   backgroundColor: '#40916c',
   color: '#fff',
@@ -106,6 +104,7 @@ const searchButtonStyle = {
 };
 
 export default Cart;
+
 
 
 
