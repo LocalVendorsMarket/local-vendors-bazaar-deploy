@@ -1,75 +1,68 @@
 import React from 'react';
 
 const Cart = ({ cart, setCart }) => {
-  const handleRemove = (index) => {
-    const updatedCart = [...cart];
-    updatedCart.splice(index, 1);
-    setCart(updatedCart);
+  const removeFromCart = (indexToRemove) => {
+    const newCart = cart.filter((_, index) => index !== indexToRemove);
+    setCart(newCart);
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar */}
-      <header
-        style={{
-          backgroundColor: '#2b9348',
-          padding: '1rem',
-          color: '#fff',
-          width: '100%',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div style={{ fontWeight: 'bold', fontSize: '1.5rem', marginLeft: '1rem' }}>
-          LocalVendorsBazaar
-        </div>
+    <div style={{ fontFamily: 'sans-serif', padding: '2rem' }}>
+      <h1 style={{ fontSize: '2rem', color: '#2b9348', marginBottom: '1rem' }}>🛍️ Your Shopping Cart</h1>
 
-        <nav style={{ marginRight: '1rem', display: 'flex', alignItems: 'center' }}>
-          <a href="/" style={navLink}>Home</a>
-          <a href="/shop" style={navLink}>Shop</a>
-          <a href="/cart" style={navLink}>🛒 Cart {cart.length > 0 && `(${cart.length})`}</a>
-        </nav>
-      </header>
-
-      <main className="p-8 text-center">
-        <h1 className="text-3xl font-bold text-green-600 mb-6">🛍️ Your Shopping Cart</h1>
-
-        {cart.length === 0 ? (
-          <p className="text-gray-600 text-lg">Your cart is currently empty.</p>
-        ) : (
-          <div className="space-y-6 w-full max-w-3xl mx-auto">
-            {cart.map((item, index) => (
-              <div key={index} className="flex justify-between items-center bg-white p-4 rounded-lg shadow-md">
+      {cart.length === 0 ? (
+        <p style={{ fontSize: '1.2rem', color: '#555' }}>Your cart is currently empty.</p>
+      ) : (
+        <div style={{ display: 'grid', gap: '1.5rem' }}>
+          {cart.map((item, index) => (
+            <div
+              key={index}
+              style={{
+                backgroundColor: '#fff',
+                padding: '1rem',
+                borderRadius: '8px',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+              }}
+            >
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  style={{ width: '100px', borderRadius: '8px' }}
+                />
                 <div>
-                  <h2 className="text-xl font-bold text-green-700">{item.name}</h2>
-                  <p className="text-gray-600">{item.price}</p>
+                  <h2 style={{ margin: 0, color: '#1f7a3f' }}>{item.name}</h2>
+                  <p style={{ margin: '0.3rem 0', fontWeight: 'bold' }}>{item.price}</p>
+                  <div style={{ fontSize: '1.2rem', color: '#fbbf24' }}>{item.rating}</div>
                 </div>
-                <button
-                  onClick={() => handleRemove(index)}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"
-                >
-                  Remove
-                </button>
               </div>
-            ))}
-          </div>
-        )}
-      </main>
+
+              <button
+                onClick={() => removeFromCart(index)}
+                style={{
+                  padding: '0.5rem 1rem',
+                  backgroundColor: '#e63946',
+                  color: '#fff',
+                  border: 'none',
+                  borderRadius: '6px',
+                  fontWeight: 'bold',
+                  cursor: 'pointer',
+                }}
+              >
+                Remove
+              </button>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
-const navLink = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-};
-
 export default Cart;
+
 
 
