@@ -42,7 +42,7 @@ const VendorSignupPage = ({ cart }) => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow p-8 flex justify-center items-center">
+      <main className="flex-grow flex justify-center items-center p-8">
         <div
           style={{
             width: '100%',
@@ -51,6 +51,7 @@ const VendorSignupPage = ({ cart }) => {
             padding: '2rem',
             borderRadius: '12px',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            margin: 'auto',
           }}
         >
           <h1 className="text-4xl font-bold text-green-600 mb-4 text-center">Become a Vendor</h1>
@@ -164,6 +165,7 @@ const searchButtonStyle = {
 };
 
 export default VendorSignupPage;
+
 
 
 
