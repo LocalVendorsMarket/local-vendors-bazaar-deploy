@@ -23,9 +23,12 @@
             required
           />
   
-          {/* New customer link */}
-          <p style={{ fontSize: '0.85rem', color: '#007185', textAlign: 'center', marginTop: '0.5rem' }}>
-            New customer? <a href="/buyersignup" style={{ color: '#007185', textDecoration: 'underline' }}>Start here.</a>
+          {/* New customer link using window.location */}
+          <p
+            onClick={() => window.location.href = '/buyersignup'}
+            style={{ fontSize: '0.85rem', color: '#007185', textAlign: 'center', marginTop: '0.5rem', textDecoration: 'underline', cursor: 'pointer' }}
+          >
+            New customer? Start here.
           </p>
   
           <button
@@ -38,9 +41,11 @@
             Continue
           </button>
         </form>
+  
         <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
           By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
         </p>
+  
         <button
           onClick={() => setIsSignInModalOpen(false)}
           style={{
@@ -53,5 +58,7 @@
       </div>
     </div>
   )}
+  
+  
   
   
