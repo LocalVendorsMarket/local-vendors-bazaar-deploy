@@ -70,19 +70,37 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Subcategories, Products, Modals and Footer continue below unchanged... */}
+      {/* Subcategory Buttons */}
+      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px' }}>
+        {categories.map((category) => (
+          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
+        ))}
+      </div>
+
+      {/* Products Grid */}
+      <div style={{ padding: '2rem', display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', flexGrow: 1 }}>
+        {filteredProducts.map((product) => (
+          <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+            <h2 style={{ marginTop: '10px', color: '#1f7a3f', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
+            <p style={{ color: '#666', marginBottom: '8px', textAlign: 'center' }}>{product.rating}</p>
+            <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <button style={{ padding: '8px 12px', backgroundColor: '#2b9348', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setSelectedProduct(product)}>Learn More</button>
+              <button style={{ padding: '8px 12px', backgroundColor: '#f9c74f', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Sign In Modal and Update Location Modal will be next here... (continue) */}
 
     </div>
   );
 };
 
-const footerLinkStyle = {
-  color: '#555',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
 export default ShopPage;
+
 
 
 
