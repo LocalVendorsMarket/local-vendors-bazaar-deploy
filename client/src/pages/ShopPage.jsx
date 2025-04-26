@@ -129,60 +129,56 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       )}
 
-      {/* Modal Popup for Sign In */}
-      {isSignInModalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style={{ zIndex: 2000 }}>
-          <div className="bg-white rounded-lg p-8 max-w-md w-full">
-            <h2 className="text-2xl font-bold mb-4 text-green-700">Sign In or Create Account</h2>
-            <form onSubmit={handleSignInSubmit} className="space-y-4">
-              <input
-                type="email"
-                placeholder="Enter email or mobile number"
-                value={signInEmail}
-                onChange={(e) => setSignInEmail(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-md"
-                required
-              />
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-3 rounded-md font-bold hover:bg-green-700 transition"
-              >
-                Continue
-              </button>
-            </form>
-            <p className="text-xs text-gray-600 mt-4">
-              By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
-            </p>
-            <button
-              onClick={() => setIsSignInModalOpen(false)}
-              className="mt-6 w-full bg-gray-300 text-black py-2 rounded-md font-bold hover:bg-gray-400 transition"
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#f1f1f1', padding: '2rem', textAlign: 'center', marginTop: 'auto', fontSize: '14px', color: '#555' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '30px', marginBottom: '20px' }}>
-          <div>
-            <h3 style={{ color: '#2b9348', marginBottom: '8px' }}>Get to Know Us</h3>
-            <a href="/" style={footerLinkStyle}>Home</a><br/>
-            <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
-            <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
-            <a href="/contact" style={footerLinkStyle}>Contact</a><br/>
-          </div>
-          <div>
-            <h3 style={{ color: '#2b9348', marginBottom: '8px' }}>Make Money with Us</h3>
-            <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
-          </div>
-        </div>
-        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
+{isSignInModalOpen && (
+  <div style={{
+    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
+    backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    zIndex: 2000
+  }}>
+    <div style={{
+      backgroundColor: '#fff', padding: '2rem', borderRadius: '12px',
+      width: '90%', maxWidth: '400px', textAlign: 'center'
+    }}>
+      <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2b9348', marginBottom: '1rem' }}>
+        Sign In or Create Account
+      </h2>
+      <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <input
+          type="email"
+          placeholder="Enter email or mobile number"
+          value={signInEmail}
+          onChange={(e) => setSignInEmail(e.target.value)}
+          style={{
+            padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
+          }}
+          required
+        />
+        <button
+          type="submit"
+          style={{
+            backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem',
+            borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
+          }}
+        >
+          Continue
+        </button>
+      </form>
+      <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
+        By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
+      </p>
+      <button
+        onClick={() => setIsSignInModalOpen(false)}
+        style={{
+          marginTop: '1.5rem', padding: '0.5rem 1rem', backgroundColor: '#ccc',
+          color: '#000', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
+        }}
+      >
+        Cancel
+      </button>
     </div>
-  );
-};
+  </div>
+)}
+
 
 const footerLinkStyle = {
   color: '#555',
