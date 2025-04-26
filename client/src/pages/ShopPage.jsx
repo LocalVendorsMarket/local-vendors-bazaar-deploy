@@ -134,21 +134,33 @@ const ShopPage = ({ cart, setCart }) => {
               Sign In or Create Account
             </h2>
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <input
-                type="email"
-                placeholder="Enter email or mobile number"
-                value={signInEmail}
-                onChange={(e) => setSignInEmail(e.target.value)}
-                style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem' }}
-                required
-              />
-              <button
-                type="submit"
-                style={{ backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}
-              >
-                Continue
-              </button>
-            </form>
+  <input
+    type="email"
+    placeholder="Enter email or mobile number"
+    value={signInEmail}
+    onChange={(e) => setSignInEmail(e.target.value)}
+    style={{
+      padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
+    }}
+    required
+  />
+
+  {/* New Customer Link */}
+  <p style={{ fontSize: '0.85rem', color: '#007185', textAlign: 'center', marginTop: '0.5rem' }}>
+    New customer? <a href="/signup" style={{ color: '#007185', textDecoration: 'underline' }}>Start here.</a>
+  </p>
+
+  <button
+    type="submit"
+    style={{
+      backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem',
+      borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
+    }}
+  >
+    Continue
+  </button>
+</form>
+
             <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
               By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
             </p>
