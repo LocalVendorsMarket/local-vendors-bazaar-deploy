@@ -9,46 +9,85 @@
         width: '90%', maxWidth: '400px', textAlign: 'center'
       }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2b9348', marginBottom: '1rem' }}>
-          Sign In or Create Account
+          {isNewCustomer ? 'Create Your Customer Account' : 'Sign In or Create Account'}
         </h2>
   
         <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          {isNewCustomer && (
+            <input
+              type="text"
+              placeholder="Full Name"
+              style={{
+                padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
+              }}
+              required
+            />
+          )}
+          
           <input
             type="email"
             placeholder="Enter mobile number or email"
             value={signInEmail}
             onChange={(e) => setSignInEmail(e.target.value)}
             style={{
-              padding: '0.75rem',
-              border: '1px solid #ccc',
-              borderRadius: '8px',
-              fontSize: '1rem'
+              padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
             }}
             required
           />
   
+          {isNewCustomer && (
+            <input
+              type="password"
+              placeholder="Create password"
+              style={{
+                padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
+              }}
+              required
+            />
+          )}
+  
           <button
             type="submit"
             style={{
-              backgroundColor: '#2b9348',
-              color: '#fff',
-              padding: '0.75rem',
-              borderRadius: '8px',
-              fontWeight: 'bold',
-              fontSize: '1rem',
-              cursor: 'pointer'
+              backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem',
+              borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
             }}
           >
-            Continue
+            {isNewCustomer ? 'Create your account' : 'Continue'}
           </button>
         </form>
   
+        {/* Terms text */}
         <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
-          By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
+          By continuing, you agree to LocalVendorsBazaar's Conditions of Use and Privacy Notice.
+        </p>
+  
+        {/* New customer link */}
+        {!isNewCustomer && (
+          <p
+            onClick={() => setIsNewCustomer(true)}
+            style={{
+              marginTop: '1rem',
+              fontSize: '0.85rem',
+              color: '#007185',
+              textDecoration: 'underline',
+              cursor: 'pointer'
+            }}
+          >
+            New customer? Start here.
+          </p>
+        )}
+  
+        {/* Need Help section */}
+        <p style={{ fontSize: '0.75rem', color: '#007185', marginTop: '1rem', cursor: 'pointer', textDecoration: 'underline' }}>
+          Need help?
         </p>
   
         <button
-          onClick={() => setIsSignInModalOpen(false)}
+          onClick={() => {
+            setIsSignInModalOpen(false);
+            setIsNewCustomer(false);
+          }}
           style={{
             marginTop: '1.5rem',
             padding: '0.5rem 1rem',
