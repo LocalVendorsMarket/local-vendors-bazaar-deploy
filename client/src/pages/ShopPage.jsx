@@ -179,7 +179,6 @@ const ShopPage = ({ cart, setCart }) => {
   </div>
 )}
 
-
 const footerLinkStyle = {
   color: '#555',
   textDecoration: 'none',
@@ -187,6 +186,7 @@ const footerLinkStyle = {
 };
 
 export default ShopPage;
+
 
 
 
