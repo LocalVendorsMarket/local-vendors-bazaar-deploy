@@ -22,6 +22,12 @@
             }}
             required
           />
+  
+          {/* New customer link */}
+          <p style={{ fontSize: '0.85rem', color: '#007185', textAlign: 'center', marginTop: '0.5rem' }}>
+            New customer? <a href="/signup" style={{ color: '#007185', textDecoration: 'underline' }}>Start here.</a>
+          </p>
+  
           <button
             type="submit"
             style={{
@@ -47,4 +53,5 @@
       </div>
     </div>
   )}
+  
   
