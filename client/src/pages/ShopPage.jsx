@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
-  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services'];
+  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services', 'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas'];
 
   const allProducts = [
     { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
@@ -59,19 +59,23 @@ const ShopPage = ({ cart, setCart }) => {
             <span onClick={() => setIsUpdateLocationOpen(true)} style={{ color: '#aad576', textDecoration: 'underline', fontSize: '12px', marginTop: '2px', cursor: 'pointer' }}>Update Location</span>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px', flexGrow: 1, marginLeft: '20px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, marginLeft: '20px', gap: '10px' }}>
+          <select style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }}>
+            {categories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
           <input type="text" placeholder="Search products..." style={{ flexGrow: 1, padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <input type="text" placeholder="Zip Code" style={{ padding: '6px 10px', width: '100px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <button style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Search</button>
+          <button style={{ padding: '6px 10px', backgroundColor: '#40916c', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>🔍</button>
           <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
-          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '18px' }}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
+          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '22px', fontWeight: 'bold' }}>
+            🛒 {cart.length > 0 && `(${cart.length})`}
           </a>
         </div>
       </header>
 
       {/* Subcategory Buttons */}
-      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px' }}>
+      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
         {categories.map((category) => (
           <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
         ))}
@@ -93,13 +97,14 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Sign In Modal and Update Location Modal will be next here... (continue) */}
+      {/* Modals (Sign In, Update Location) and Footer would follow here... */}
 
     </div>
   );
 };
 
 export default ShopPage;
+
 
 
 
