@@ -9,79 +9,46 @@
         width: '90%', maxWidth: '400px', textAlign: 'center'
       }}>
         <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2b9348', marginBottom: '1rem' }}>
-          {isNewCustomer ? 'Create New Customer Account' : 'Sign In'}
+          Sign In or Create Account
         </h2>
   
         <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          {isNewCustomer && (
-            <input
-              type="text"
-              placeholder="Full Name"
-              style={{
-                padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
-              }}
-              required
-            />
-          )}
-          
           <input
             type="email"
-            placeholder={isNewCustomer ? "Email Address" : "Enter email address"}
+            placeholder="Enter mobile number or email"
             value={signInEmail}
             onChange={(e) => setSignInEmail(e.target.value)}
             style={{
-              padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
+              padding: '0.75rem',
+              border: '1px solid #ccc',
+              borderRadius: '8px',
+              fontSize: '1rem'
             }}
             required
           />
   
-          {isNewCustomer && (
-            <input
-              type="password"
-              placeholder="Create password"
-              style={{
-                padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
-              }}
-              required
-            />
-          )}
-  
           <button
             type="submit"
             style={{
-              backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem',
-              borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
-            }}
-          >
-            {isNewCustomer ? 'Create Account' : 'Continue'}
-          </button>
-        </form>
-  
-        {/* Show Start Here link only if they are in Sign In mode */}
-        {!isNewCustomer && (
-          <p
-            onClick={() => setIsNewCustomer(true)}
-            style={{
-              marginTop: '1rem',
-              fontSize: '0.85rem',
-              color: '#007185',
-              textDecoration: 'underline',
+              backgroundColor: '#2b9348',
+              color: '#fff',
+              padding: '0.75rem',
+              borderRadius: '8px',
+              fontWeight: 'bold',
+              fontSize: '1rem',
               cursor: 'pointer'
             }}
           >
-            New customer? Start here.
-          </p>
-        )}
+            Continue
+          </button>
+        </form>
   
         <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
           By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
         </p>
   
         <button
-          onClick={() => {
-            setIsSignInModalOpen(false);
-            setIsNewCustomer(false); // Reset to Sign In mode next time modal opens
-          }}
+          onClick={() => setIsSignInModalOpen(false)}
           style={{
             marginTop: '1.5rem',
             padding: '0.5rem 1rem',
@@ -98,6 +65,7 @@
       </div>
     </div>
   )}
+  
   
   
   
