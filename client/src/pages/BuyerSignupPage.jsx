@@ -3,7 +3,9 @@ import React from 'react';
 const BuyerSignupPage = () => {
   return (
     <div style={{ fontFamily: 'sans-serif', padding: '2rem', minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-      <h1 style={{ color: '#2b9348', marginBottom: '1rem', textAlign: 'center' }}>Create Your Customer Account</h1>
+      <h1 style={{ color: '#2b9348', marginBottom: '1rem', textAlign: 'center' }}>
+        Create Your Customer Account
+      </h1>
 
       <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem', width: '100%', maxWidth: '400px' }}>
         <input
@@ -31,7 +33,7 @@ const BuyerSignupPage = () => {
             borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
           }}
         >
-          Create Account
+          Create Customer Account
         </button>
       </form>
 
@@ -43,6 +45,7 @@ const BuyerSignupPage = () => {
 };
 
 export default BuyerSignupPage;
+
 
 
 
