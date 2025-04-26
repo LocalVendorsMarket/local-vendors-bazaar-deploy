@@ -57,7 +57,7 @@
           </button>
         </form>
   
-        {/* Terms text */}
+        {/* Terms and Conditions Text */}
         <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
           By continuing, you agree to LocalVendorsBazaar's Conditions of Use and Privacy Notice.
         </p>
@@ -78,11 +78,18 @@
           </p>
         )}
   
-        {/* Need Help section */}
-        <p style={{ fontSize: '0.75rem', color: '#007185', marginTop: '1rem', cursor: 'pointer', textDecoration: 'underline' }}>
+        {/* Need Help Link */}
+        <p style={{
+          fontSize: '0.75rem',
+          color: '#007185',
+          marginTop: '1rem',
+          textDecoration: 'underline',
+          cursor: 'pointer'
+        }}>
           Need help?
         </p>
   
+        {/* Cancel Button */}
         <button
           onClick={() => {
             setIsSignInModalOpen(false);
@@ -104,6 +111,7 @@
       </div>
     </div>
   )}
+  
   
   
   
