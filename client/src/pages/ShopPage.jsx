@@ -112,7 +112,8 @@ const ShopPage = ({ cart, setCart }) => {
             onClick={() => setSelectedCategory(category)}
             style={{
               padding: '6px 12px',
-              backgroundColor: selectedCategory === category ? '#4091
+              backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348',
+
 
 
 
