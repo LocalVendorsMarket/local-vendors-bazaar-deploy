@@ -8,6 +8,7 @@ import VendorSignupPage from './pages/VendorSignupPage';
 import ThankYouPage from './pages/ThankYouPage';
 import ShopPage from './pages/ShopPage';
 import Cart from './pages/Cart'; // ✅ Added Cart page import
+import BuyerSignupPage from './pages/BuyerSignupPage'; // ✅ New BuyerSignupPage import
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -22,13 +23,15 @@ function App() {
         <Route path="/signup" element={<VendorSignupPage cart={cart} setCart={setCart} />} />
         <Route path="/thank-you" element={<ThankYouPage cart={cart} setCart={setCart} />} />
         <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
-        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} /> {/* ✅ New Cart route */}
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
+        <Route path="/buyersignup" element={<BuyerSignupPage cart={cart} setCart={setCart} />} /> {/* ✅ New BuyerSignupPage route */}
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
 
 
 
