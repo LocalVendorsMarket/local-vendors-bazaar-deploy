@@ -35,7 +35,7 @@ const ShopPage = ({ cart, setCart }) => {
 
   return (
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Top Nav Bar */}
+      {/* Top Nav */}
       <header style={{ backgroundColor: '#2b9348', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: '#fff' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <a href="/">
@@ -60,7 +60,7 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Subcategories Nav Bar */}
+      {/* Subcategory Buttons */}
       <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '10px' }}>
         {categories.map((category) => (
           <button
@@ -68,124 +68,8 @@ const ShopPage = ({ cart, setCart }) => {
             onClick={() => setSelectedCategory(category)}
             style={{
               padding: '6px 12px',
-              backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348',
-              color: '#fff',
-              border: 'none',
-              borderRadius: '20px',
-              cursor: 'pointer',
-              fontWeight: 'bold',
-              fontSize: '14px',
-            }}
-          >
-            {category}
-          </button>
-        ))}
-      </div>
+              backgroundColor: selectedCategory === category ? '#4091
 
-      {/* Products Section */}
-      <div style={{ padding: '2rem', display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', flexGrow: 1 }}>
-        {filteredProducts.map((product) => (
-          <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-            <h2 style={{ marginTop: '10px', color: '#1f7a3f', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
-            <p style={{ color: '#666', marginBottom: '8px', textAlign: 'center' }}>{product.rating}</p>
-            <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button
-                style={{ padding: '8px 12px', backgroundColor: '#2b9348', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
-                onClick={() => setSelectedProduct(product)}
-              >
-                Learn More
-              </button>
-              <button
-                style={{ padding: '8px 12px', backgroundColor: '#f9c74f', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
-                onClick={() => handleAddToCart(product)}
-              >
-                Add to Cart
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Modal Popup for Learn More */}
-      {selectedProduct && (
-        <div style={{
-          position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-          backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>
-          <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px', textAlign: 'center' }}>
-            <h2 style={{ color: '#2b9348', marginBottom: '1rem' }}>{selectedProduct.name}</h2>
-            <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px', marginBottom: '1rem' }} />
-            <p style={{ color: '#666', marginBottom: '1rem' }}>{selectedProduct.rating}</p>
-            <p style={{ fontWeight: 'bold', marginBottom: '1rem' }}>{selectedProduct.price}</p>
-            <button
-              onClick={() => setSelectedProduct(null)}
-              style={{ marginTop: '10px', padding: '8px 16px', backgroundColor: '#e63946', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-
-{isSignInModalOpen && (
-  <div style={{
-    position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center',
-    zIndex: 2000
-  }}>
-    <div style={{
-      backgroundColor: '#fff', padding: '2rem', borderRadius: '12px',
-      width: '90%', maxWidth: '400px', textAlign: 'center'
-    }}>
-      <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2b9348', marginBottom: '1rem' }}>
-        Sign In or Create Account
-      </h2>
-      <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-        <input
-          type="email"
-          placeholder="Enter email or mobile number"
-          value={signInEmail}
-          onChange={(e) => setSignInEmail(e.target.value)}
-          style={{
-            padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem'
-          }}
-          required
-        />
-        <button
-          type="submit"
-          style={{
-            backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem',
-            borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
-          }}
-        >
-          Continue
-        </button>
-      </form>
-      <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>
-        By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
-      </p>
-      <button
-        onClick={() => setIsSignInModalOpen(false)}
-        style={{
-          marginTop: '1.5rem', padding: '0.5rem 1rem', backgroundColor: '#ccc',
-          color: '#000', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer'
-        }}
-      >
-        Cancel
-      </button>
-    </div>
-  </div>
-)}
-
-const footerLinkStyle = {
-  color: '#555',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-export default ShopPage;
 
 
 
