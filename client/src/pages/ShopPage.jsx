@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
   const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services'];
-  
+
   const allProducts = [
     { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
     { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
@@ -15,6 +15,8 @@ const ShopPage = ({ cart, setCart }) => {
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -23,6 +25,12 @@ const ShopPage = ({ cart, setCart }) => {
   const handleAddToCart = (product) => {
     setCart([...cart, product]);
     alert(`${product.name} added to cart!`);
+  };
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    console.log('Signing in with:', signInEmail);
+    setIsSignInModalOpen(false);
   };
 
   return (
@@ -34,13 +42,19 @@ const ShopPage = ({ cart, setCart }) => {
             <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
           </a>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <input type="text" placeholder="Search products..." style={{ marginRight: '10px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', flexGrow: 1 }} />
-          <input type="text" placeholder="Zip Code" style={{ marginRight: '10px', padding: '6px 10px', width: '100px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
+          <input type="text" placeholder="Search products..." style={{ padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', flexGrow: 1, minWidth: '200px' }} />
+          <input type="text" placeholder="Zip Code" style={{ padding: '6px 10px', width: '100px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <button style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
             Search
           </button>
-          <a href="/cart" style={{ marginLeft: '20px', color: '#fff', textDecoration: 'none', fontSize: '18px' }}>
+          <button
+            onClick={() => setIsSignInModalOpen(true)}
+            style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
+          >
+            Sign In
+          </button>
+          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '18px' }}>
             <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart.length > 0 && `(${cart.length})`}
           </a>
         </div>
@@ -110,6 +124,40 @@ const ShopPage = ({ cart, setCart }) => {
               style={{ marginTop: '10px', padding: '8px 16px', backgroundColor: '#e63946', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}
             >
               Close
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal Popup for Sign In */}
+      {isSignInModalOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50" style={{ zIndex: 2000 }}>
+          <div className="bg-white rounded-lg p-8 max-w-md w-full">
+            <h2 className="text-2xl font-bold mb-4 text-green-700">Sign In or Create Account</h2>
+            <form onSubmit={handleSignInSubmit} className="space-y-4">
+              <input
+                type="email"
+                placeholder="Enter email or mobile number"
+                value={signInEmail}
+                onChange={(e) => setSignInEmail(e.target.value)}
+                className="w-full p-3 border border-gray-300 rounded-md"
+                required
+              />
+              <button
+                type="submit"
+                className="w-full bg-green-600 text-white py-3 rounded-md font-bold hover:bg-green-700 transition"
+              >
+                Continue
+              </button>
+            </form>
+            <p className="text-xs text-gray-600 mt-4">
+              By continuing, you agree to Local Vendors Bazaar's Terms of Use and Privacy Notice.
+            </p>
+            <button
+              onClick={() => setIsSignInModalOpen(false)}
+              className="mt-6 w-full bg-gray-300 text-black py-2 rounded-md font-bold hover:bg-gray-400 transition"
+            >
+              Cancel
             </button>
           </div>
         </div>
