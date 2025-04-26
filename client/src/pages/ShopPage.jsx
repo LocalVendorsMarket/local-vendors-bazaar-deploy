@@ -16,8 +16,11 @@ const ShopPage = ({ cart, setCart }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [signInEmail, setSignInEmail] = useState('');
   const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
+  const [newZip, setNewZip] = useState('');
 
   const filteredProducts = selectedCategory === 'All' ? allProducts : allProducts.filter((product) => product.category === selectedCategory);
 
@@ -33,6 +36,15 @@ const ShopPage = ({ cart, setCart }) => {
     setIsNewCustomer(false);
   };
 
+  const handleUpdateLocationSubmit = (e) => {
+    e.preventDefault();
+    if (newZip.trim()) {
+      setDeliveryLocation(newZip);
+      setNewZip('');
+      setIsUpdateLocationOpen(false);
+    }
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
@@ -43,12 +55,12 @@ const ShopPage = ({ cart, setCart }) => {
             <img src={logo} alt="Logo" style={{ width: '50px' }} />
           </a>
           <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px', color: '#fff' }}>
-            <span>Delivering to Elgin 60120</span>
-            <a href="/update-location" style={{ color: '#aad576', textDecoration: 'underline', fontSize: '12px', marginTop: '2px' }}>Update Location</a>
+            <span>Delivering to {deliveryLocation}</span>
+            <span onClick={() => setIsUpdateLocationOpen(true)} style={{ color: '#aad576', textDecoration: 'underline', fontSize: '12px', marginTop: '2px', cursor: 'pointer' }}>Update Location</span>
           </div>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-          <input type="text" placeholder="Search products..." style={{ padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', flexGrow: 1, minWidth: '200px' }} />
+        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px', flexGrow: 1, marginLeft: '20px' }}>
+          <input type="text" placeholder="Search products..." style={{ flexGrow: 1, padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <input type="text" placeholder="Zip Code" style={{ padding: '6px 10px', width: '100px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <button style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Search</button>
           <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
@@ -58,7 +70,7 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* (Subcategories, Products Grid, Sign In Modal, Footer stay the same below) */}
+      {/* Subcategories, Products, Modals and Footer continue below unchanged... */}
 
     </div>
   );
@@ -71,6 +83,7 @@ const footerLinkStyle = {
 };
 
 export default ShopPage;
+
 
 
 
