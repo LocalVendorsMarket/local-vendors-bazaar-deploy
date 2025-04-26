@@ -62,21 +62,21 @@
           By continuing, you agree to LocalVendorsBazaar's Conditions of Use and Privacy Notice.
         </p>
   
-        {/* New customer link */}
         {!isNewCustomer && (
-          <p
-            onClick={() => setIsNewCustomer(true)}
-            style={{
-              marginTop: '1rem',
-              fontSize: '0.85rem',
-              color: '#007185',
-              textDecoration: 'underline',
-              cursor: 'pointer'
-            }}
-          >
-            New customer? Start here.
-          </p>
-        )}
+  <p
+    onClick={() => setIsNewCustomer(true)}
+    style={{
+      marginTop: '1rem',
+      fontSize: '0.85rem',
+      color: '#007185',
+      textDecoration: 'underline',
+      cursor: 'pointer'
+    }}
+  >
+    New customer? Start here.
+  </p>
+)}
+
   
         {/* Need Help Link */}
         <p style={{
