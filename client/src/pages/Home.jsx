@@ -16,12 +16,19 @@ const Home = ({ cart, setCart }) => {
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* Top Nav */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: 'white' }}>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white', gap: '10px' }}>
         <a href="/">
           <img src={logo} alt="Logo" style={{ width: '50px' }} />
         </a>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc' }} />
+        <nav style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/faq" style={navLinkStyle}>FAQ</a>
+          <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/contact" style={navLinkStyle}>Contact</a>
+          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
+        </nav>
+        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '10px' }}>
+          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', height: '40px' }} />
           <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
           <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>
@@ -31,7 +38,7 @@ const Home = ({ cart, setCart }) => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px' }}>
+      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap', gap: '15px' }}>
         {['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services', 'New Releases', 'Best Sellers', 'Top Rated'].map(category => (
           <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>{category}</span>
         ))}
@@ -62,14 +69,57 @@ const Home = ({ cart, setCart }) => {
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', padding: '2rem', textAlign: 'center', fontSize: '14px', color: 'white', marginTop: 'auto' }}>
-        © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', marginBottom: '20px' }}>
+          <div style={{ minWidth: '150px' }}>
+            <h3>Get to Know Us</h3>
+            <a href="/about" style={footerLinkStyle}>About Us</a><br/>
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
+            <a href="/careers" style={footerLinkStyle}>Careers</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3>Make Money with Us</h3>
+            <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br/>
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br/>
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br/>
+            <a href="/help" style={footerLinkStyle}>Help Center</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3>Stay Connected</h3>
+            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br/>
+            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br/>
+            <a href="/socials" style={footerLinkStyle}>Follow Us</a><br/>
+          </div>
+        </div>
+        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
+          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        </p>
       </footer>
 
     </div>
   );
 };
 
+const navLinkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '14px',
+  fontWeight: 'bold'
+};
+
+const footerLinkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
 export default Home;
+
 
 
 
