@@ -21,6 +21,7 @@ const ShopPage = ({ cart, setCart }) => {
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
   const [newZip, setNewZip] = useState('');
+  const [searchCategory, setSearchCategory] = useState('All');
 
   const filteredProducts = selectedCategory === 'All' ? allProducts : allProducts.filter((product) => product.category === selectedCategory);
 
@@ -60,15 +61,15 @@ const ShopPage = ({ cart, setCart }) => {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, marginLeft: '20px', gap: '10px' }}>
-          <select style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }}>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }}>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ flexGrow: 1, padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <button style={{ padding: '6px 10px', backgroundColor: '#40916c', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>🔍</button>
+          <input type="text" placeholder="Search products..." style={{ flexGrow: 1, maxWidth: '200px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <button style={{ backgroundColor: '#40916c', borderRadius: '8px', padding: '8px', border: 'none', cursor: 'pointer', fontSize: '20px', color: 'white' }}>🔍</button>
           <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
-          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '22px', fontWeight: 'bold' }}>
+          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 1px white)' }}>
             🛒 {cart.length > 0 && `(${cart.length})`}
           </a>
         </div>
@@ -97,13 +98,14 @@ const ShopPage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Modals (Sign In, Update Location) and Footer would follow here... */}
+      {/* Footer would go here... */}
 
     </div>
   );
 };
 
 export default ShopPage;
+
 
 
 
