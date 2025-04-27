@@ -32,7 +32,6 @@ const ShopPage = ({ cart, setCart }) => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    console.log('Signing in with:', signInEmail);
     setIsSignInModalOpen(false);
     setIsNewCustomer(false);
   };
@@ -50,61 +49,37 @@ const ShopPage = ({ cart, setCart }) => {
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
       {/* Top Nav */}
-      <header style={{ backgroundColor: '#2b9348', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: '#fff' }}>
+      <header style={{ backgroundColor: '#2b9348', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <a href="/">
             <img src={logo} alt="Logo" style={{ width: '50px' }} />
           </a>
-          <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px', color: '#fff' }}>
-            <span>Delivering to {deliveryLocation}</span>
-            <span onClick={() => setIsUpdateLocationOpen(true)} style={{ color: '#aad576', textDecoration: 'underline', fontSize: '12px', marginTop: '2px', cursor: 'pointer' }}>Update Location</span>
+          <div style={{ fontSize: '12px' }}>
+            <span>Delivering to {deliveryLocation}</span><br/>
+            <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer', color: '#aad576' }}>Update location</span>
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, marginLeft: '20px', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }}>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', height: '38px' }}>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ flexGrow: 1, maxWidth: '200px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <button style={{ backgroundColor: '#40916c', borderRadius: '8px', padding: '8px', border: 'none', cursor: 'pointer', fontSize: '20px', color: 'white' }}>🔍</button>
-          <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '6px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
-          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 1px white)' }}>
-            🛒 {cart.length > 0 && `(${cart.length})`}
-          </a>
+          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <button style={{ backgroundColor: '#40916c', borderRadius: '8px', padding: '8px', border: 'none', fontSize: '18px', cursor: 'pointer', color: 'white' }}>🔍</button>
+          <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '8px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
+          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart.length > 0 && `(${cart.length})`}</a>
         </div>
       </header>
 
-      {/* Subcategory Buttons */}
-      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-        {categories.map((category) => (
-          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
-        ))}
-      </div>
-
-      {/* Products Grid */}
-      <div style={{ padding: '2rem', display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', flexGrow: 1 }}>
-        {filteredProducts.map((product) => (
-          <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-            <h2 style={{ marginTop: '10px', color: '#1f7a3f', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
-            <p style={{ color: '#666', marginBottom: '8px', textAlign: 'center' }}>{product.rating}</p>
-            <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
-            <div style={{ display: 'flex', gap: '10px' }}>
-              <button style={{ padding: '8px 12px', backgroundColor: '#2b9348', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setSelectedProduct(product)}>Learn More</button>
-              <button style={{ padding: '8px 12px', backgroundColor: '#f9c74f', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
-            </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Footer would go here... */}
+      {/* Other content continues below... */}
 
     </div>
   );
 };
 
 export default ShopPage;
+
 
 
 
