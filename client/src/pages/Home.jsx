@@ -1,153 +1,76 @@
-import React from 'react';
+import React, { useState } from 'react';
+import logo from '../assets/logo.png';
 
-const Home = ({ cart }) => {
+const Home = ({ cart, setCart }) => {
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+
+  const productExamples = [
+    { id: 1, name: 'Fresh Honey', price: '$12', image: 'https://via.placeholder.com/150x100?text=Fresh+Honey' },
+    { id: 2, name: 'Handmade Scarf', price: '$20', image: 'https://via.placeholder.com/150x100?text=Handmade+Scarf' },
+    { id: 3, name: 'Organic Soap', price: '$8', image: 'https://via.placeholder.com/150x100?text=Organic+Soap' },
+    { id: 4, name: 'Wooden Art', price: '$40', image: 'https://via.placeholder.com/150x100?text=Wooden+Art' },
+  ];
+
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
-      <header
-        className="w-full sticky top-0 z-50"
-        style={{
-          backgroundColor: '#2b9348',
-          color: '#fff',
-          padding: '1rem',
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src="/assets/logo.png"
-            alt="Logo"
-            style={{ width: '40px', marginRight: '10px' }}
-          />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
-        </div>
-
-        <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={linkStyle}>Home</a>
-          <a href="/faq" style={linkStyle}>FAQ</a>
-          <a href="/blog" style={linkStyle}>Blog</a>
-          <a href="/contact" style={linkStyle}>Contact</a>
-          <a href="/signup" style={linkStyle}>Become a Vendor</a>
-          <a href="/shop" style={linkStyle}>Shop</a>
-          <a href="/cart" style={linkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      
+      {/* Top Nav */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: 'white' }}>
+        <a href="/">
+          <img src={logo} alt="Logo" style={{ width: '50px' }} />
+        </a>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc' }} />
+          <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
+          <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
+          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>
+            🛒 {cart.length > 0 && `(${cart.length})`}
           </a>
-          <input type="text" placeholder="Search products..." style={inputStyle} />
-          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButtonStyle}>Search</button>
         </div>
       </header>
 
-      {/* Main Content */}
-      <main
-        style={{
-          flex: 1,
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <img
-          src="/assets/logo.png"
-          alt="Local Vendors Bazaar Logo"
-          style={{ width: '160px', marginBottom: '1rem' }}
-        />
-        <h1 style={{ color: '#2b9348', fontSize: '2.2rem', marginBottom: '1rem' }}>
-          Welcome to Local Vendors Bazaar 🎉
-        </h1>
-        <p style={{ fontSize: '1.1rem', color: '#555', maxWidth: '600px' }}>
-          Shop and Save Locally — Supporting Chicago and Beyond!
-        </p>
+      {/* Sub Nav */}
+      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '15px' }}>
+        {['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services', 'New Releases', 'Best Sellers', 'Top Rated'].map(category => (
+          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>{category}</span>
+        ))}
+      </div>
 
-        <img
-          src="/assets/flyer-v2.png"
-          alt="Local Vendors Bazaar Flyer"
-          style={{
-            maxWidth: '90%',
-            marginTop: '2rem',
-            borderRadius: '12px',
-            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-          }}
-        />
+      {/* Slogan */}
+      <div style={{ textAlign: 'center', margin: '2rem 0', fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>
+        Shop and Save Locally
+      </div>
 
-        <div
-          style={{
-            marginTop: '3rem',
-            padding: '2rem',
-            backgroundColor: '#f0fdf4',
-            borderRadius: '12px',
-            maxWidth: '600px',
-          }}
-        >
-          <h2 style={{ color: '#1f7a3f' }}>Are You a Local Vendor?</h2>
-          <p style={{ color: '#333', fontSize: '1.1rem' }}>
-            Join our marketplace and connect with buyers near you.
-          </p>
-          <a
-            href="/signup"
-            style={{
-              display: 'inline-block',
-              marginTop: '1rem',
-              padding: '10px 20px',
-              backgroundColor: '#2b9348',
-              color: '#fff',
-              textDecoration: 'none',
-              borderRadius: '8px',
-              fontWeight: 'bold',
-            }}
-          >
-            Become a Vendor
-          </a>
-        </div>
-      </main>
+      {/* Highlighted Sections */}
+      <div style={{ padding: '1rem' }}>
+        {['New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants'].map((sectionTitle, index) => (
+          <div key={index} style={{ marginBottom: '3rem' }}>
+            <h2 style={{ color: '#003366', fontSize: '1.5rem', marginBottom: '1rem' }}>{sectionTitle}</h2>
+            <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '1rem' }}>
+              {productExamples.map((product) => (
+                <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', width: '150px', minWidth: '150px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                  <img src={product.image} alt={product.name} style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
+                  <h4 style={{ color: '#003366', marginTop: '10px', fontSize: '16px' }}>{product.name}</h4>
+                  <p style={{ fontWeight: 'bold', marginTop: '5px' }}>{product.price}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
 
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-        }}
-      >
-        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', padding: '2rem', textAlign: 'center', fontSize: '14px', color: 'white', marginTop: 'auto' }}>
+        © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
       </footer>
+
     </div>
   );
 };
 
-const linkStyle = {
-  margin: '0 10px',
-  color: '#fff',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
-
-const inputStyle = {
-  marginLeft: '10px',
-  padding: '6px 10px',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '14px',
-};
-
-const searchButtonStyle = {
-  marginLeft: '10px',
-  padding: '6px 12px',
-  backgroundColor: '#40916c',
-  color: '#fff',
-  borderRadius: '8px',
-  border: 'none',
-  fontWeight: 'bold',
-  cursor: 'pointer',
-};
-
 export default Home;
+
 
 
 
