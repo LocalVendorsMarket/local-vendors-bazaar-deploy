@@ -5,14 +5,6 @@ const Home = ({ cart, setCart }) => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [location, setLocation] = useState('Deliver to Elgin 60120');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
-  const productExamples = [
-    { id: 1, name: 'Fresh Honey', price: '$12', image: 'https://via.placeholder.com/150x100?text=Fresh+Honey' },
-    { id: 2, name: 'Handmade Scarf', price: '$20', image: 'https://via.placeholder.com/150x100?text=Handmade+Scarf' },
-    { id: 3, name: 'Organic Soap', price: '$8', image: 'https://via.placeholder.com/150x100?text=Organic+Soap' },
-    { id: 4, name: 'Wooden Art', price: '$40', image: 'https://via.placeholder.com/150x100?text=Wooden+Art' },
-  ];
 
   const allCategories = [
     'All', 'Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods', 'Coupons',
@@ -71,42 +63,41 @@ const Home = ({ cart, setCart }) => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', justifyContent: 'flex-start', flexWrap: 'wrap', gap: '15px' }}>
-        {['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services', 'New Releases', 'Best Sellers', 'Top Rated'].map(category => (
-          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>{category}</span>
+      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'flex-start' }}>
+        {allCategories.map((category) => (
+          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>{category}</span>
         ))}
       </div>
 
-      {/* Slogan */}
-      <div style={{ textAlign: 'center', margin: '2rem 0', fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>
+      {/* Shop and Save Locally Message */}
+      <div style={{ textAlign: 'center', margin: '1rem', fontSize: '22px', fontWeight: 'bold', color: '#003366' }}>
         Shop and Save Locally
       </div>
 
-      {/* Deals Banner */}
-      <div style={{ margin: '1rem', padding: '1rem', backgroundColor: '#cce0ff', textAlign: 'center', fontSize: '20px', fontWeight: 'bold', borderRadius: '10px' }}>
-        🌟 Spring Special: Save up to 20% on Local Foods and Goods! 🌟
-      </div>
-
-      {/* Shop by Category */}
-      <div style={{ padding: '2rem', display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {['Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods'].map((cat, idx) => (
-          <div key={idx} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', width: '120px', height: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#003366', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
+      {/* Shop by Category Boxes */}
+      <div style={{ padding: '1rem', display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {allCategories.map((cat, idx) => (
+          <div key={idx} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '10px', width: '120px', minWidth: '120px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#003366', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
             {cat}
           </div>
         ))}
       </div>
 
-      {/* Product Sections */}
+      {/* Category Sections */}
       <div style={{ padding: '1rem' }}>
-        {['New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants', 'Trending Now', 'Local Favorites', 'New Restaurants', 'Best Deals Today'].map((sectionTitle, index) => (
-          <div key={index} style={{ marginBottom: '3rem' }}>
-            <h2 style={{ color: '#003366', fontSize: '1.5rem', marginBottom: '1rem' }}>{sectionTitle}</h2>
+        {[
+          'New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants',
+          'Local Events', 'Coupons & Deals', 'Gift Shops Specials', 'Top Rated Services',
+          'Wedding Vendors', 'Health & Wellness Deals'
+        ].map((sectionTitle, index) => (
+          <div key={index} style={{ marginBottom: '2rem' }}>
+            <h2 style={{ color: '#003366', fontSize: '1.4rem', marginBottom: '0.5rem' }}>{sectionTitle}</h2>
             <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '1rem' }}>
-              {productExamples.map((product) => (
-                <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', width: '150px', minWidth: '150px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <img src={product.image} alt={product.name} style={{ width: '100%', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
-                  <h4 style={{ color: '#003366', marginTop: '10px', fontSize: '16px' }}>{product.name}</h4>
-                  <p style={{ fontWeight: 'bold', marginTop: '5px' }}>{product.price}</p>
+              {[1,2,3,4,5,6].map((n) => (
+                <div key={n} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '10px', width: '140px', minWidth: '140px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+                  <img src={`https://via.placeholder.com/150x100?text=Product+${n}`} alt="Product" style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px' }} />
+                  <h4 style={{ color: '#003366', marginTop: '8px', fontSize: '14px' }}>Product {n}</h4>
+                  <p style={{ fontWeight: 'bold', fontSize: '13px', marginTop: '5px' }}>$20</p>
                 </div>
               ))}
             </div>
@@ -147,7 +138,6 @@ const Home = ({ cart, setCart }) => {
           © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
         </p>
       </footer>
-
     </div>
   );
 };
@@ -159,6 +149,7 @@ const footerLinkStyle = {
 };
 
 export default Home;
+
 
 
 
