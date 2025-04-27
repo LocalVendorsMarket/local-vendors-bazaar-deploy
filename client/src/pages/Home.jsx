@@ -12,6 +12,17 @@ const Home = ({ cart, setCart }) => {
     { id: 4, name: 'Wooden Art', price: '$40', image: 'https://via.placeholder.com/150x100?text=Wooden+Art' },
   ];
 
+  const sections = [
+    'New Releases',
+    'Best Seller Foods',
+    'Best Seller Clothing',
+    'Top Rated Restaurants',
+    'Trending Now',
+    'Local Favorites',
+    'New Restaurants',
+    'Best Deals Today'
+  ];
+
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
@@ -22,6 +33,7 @@ const Home = ({ cart, setCart }) => {
         </a>
         <nav style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
           <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
           <a href="/contact" style={navLinkStyle}>Contact</a>
@@ -49,9 +61,9 @@ const Home = ({ cart, setCart }) => {
         Shop and Save Locally
       </div>
 
-      {/* Highlighted Sections */}
+      {/* 8 Highlighted Sections */}
       <div style={{ padding: '1rem' }}>
-        {['New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants'].map((sectionTitle, index) => (
+        {sections.map((sectionTitle, index) => (
           <div key={index} style={{ marginBottom: '3rem' }}>
             <h2 style={{ color: '#003366', fontSize: '1.5rem', marginBottom: '1rem' }}>{sectionTitle}</h2>
             <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '1rem' }}>
@@ -119,6 +131,7 @@ const footerLinkStyle = {
 };
 
 export default Home;
+
 
 
 
