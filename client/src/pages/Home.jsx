@@ -5,7 +5,7 @@ const Home = () => {
   const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '140px' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '120px' }}>
       
       {/* Sub Nav Bar */}
       <div style={{
@@ -13,7 +13,7 @@ const Home = () => {
         overflowX: 'auto',
         padding: '10px 20px',
         backgroundColor: '#ffffff',
-        borderBottom: '1px solid #ccc',
+        borderBottom: '1px solid #ddd',
         position: 'fixed',
         top: '80px',
         width: '100%',
@@ -37,19 +37,20 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '40px', padding: '0 20px' }}>
-        <h1 style={{ fontSize: '48px', color: '#0056b3', marginBottom: '20px' }}>
+      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '50px', padding: '0 20px' }}>
+        <h1 style={{ fontSize: '52px', color: '#0056b3', marginBottom: '20px' }}>
           Welcome to Local Vendors Bazaar
         </h1>
-        <p style={{ fontSize: '22px', color: '#333', maxWidth: '800px', margin: '0 auto 30px' }}>
-          Shop locally and save! Discover unique products, services, and support your neighborhood businesses.
+        <p style={{ fontSize: '24px', color: '#333', marginBottom: '30px', maxWidth: '800px', marginInline: 'auto' }}>
+          Discover amazing local products and services.  
+          Shop and save while supporting your neighborhood businesses!
         </p>
         <Link to="/shop">
           <button style={{
             backgroundColor: '#007bff',
             color: 'white',
             padding: '15px 30px',
-            fontSize: '18px',
+            fontSize: '20px',
             border: 'none',
             borderRadius: '8px',
             cursor: 'pointer',
@@ -65,7 +66,7 @@ const Home = () => {
         <img 
           src="/assets/flyer-v2.png" 
           alt="Shop Local Flyer" 
-          style={{ maxWidth: '90%', height: 'auto', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}
+          style={{ maxWidth: '90%', height: 'auto', borderRadius: '12px', boxShadow: '0px 4px 12px rgba(0,0,0,0.2)' }}
         />
       </div>
 
@@ -85,6 +86,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
