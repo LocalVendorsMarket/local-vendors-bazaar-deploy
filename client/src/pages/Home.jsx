@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Home = () => {
+const Home = ({ cart, setCart }) => {
+
   const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
 
   return (
