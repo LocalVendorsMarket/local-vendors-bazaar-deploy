@@ -54,25 +54,23 @@ const ShopPage = ({ cart, setCart }) => {
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', backgroundColor: '#e6f0ff', display: 'flex', flexDirection: 'column' }}>
 
       {/* Top Nav */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <a href="/">
-            <img src={logo} alt="Logo" style={{ width: '50px' }} />
-          </a>
-          <div style={{ fontSize: '12px' }}>
-            <span>Delivering to {deliveryLocation}</span><br/>
-            <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer', color: '#aad576' }}>Update location</span>
-          </div>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap', gap: '10px' }}>
+        <a href="/">
+          <img src={logo} alt="Logo" style={{ width: '50px' }} />
+        </a>
+        <div style={{ fontSize: '12px' }}>
+          <span>Delivering to {deliveryLocation}</span><br/>
+          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer', color: '#aad576' }}>Update location</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, marginLeft: '20px', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', height: '38px', width: '70px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '10px' }}>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', width: '70px' }}>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ width: '550px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <button style={{ backgroundColor: '#40916c', borderRadius: '8px', padding: '8px', border: 'none', fontSize: '18px', cursor: 'pointer', color: 'white' }}>🔍</button>
-          <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '8px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
+          <input type="text" placeholder="Search products..." style={{ width: '500px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '8px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
+          <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart.length > 0 && `(${cart.length})`}</a>
         </div>
       </header>
@@ -80,7 +78,7 @@ const ShopPage = ({ cart, setCart }) => {
       {/* Subcategory Bar */}
       <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start' }}>
         {categories.map((category) => (
-          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#003366', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
+          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#d3d3d3' : '#003366', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
         ))}
       </div>
 
@@ -94,7 +92,7 @@ const ShopPage = ({ cart, setCart }) => {
             <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
             <div style={{ display: 'flex', gap: '10px' }}>
               <button style={{ padding: '8px 12px', backgroundColor: '#003366', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setSelectedProduct(product)}>Learn More</button>
-              <button style={{ padding: '8px 12px', backgroundColor: '#40916c', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
+              <button style={{ padding: '8px 12px', backgroundColor: '#d3d3d3', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </div>
           </div>
         ))}
@@ -104,26 +102,26 @@ const ShopPage = ({ cart, setCart }) => {
       <footer style={{ backgroundColor: '#003366', padding: '2rem', color: '#fff', marginTop: 'auto' }}>
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', marginBottom: '20px' }}>
           <div style={{ minWidth: '150px' }}>
-            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Get to Know Us</h3>
+            <h3 style={{ marginBottom: '8px' }}>Get to Know Us</h3>
             <a href="/about" style={footerLinkStyle}>About Us</a><br/>
             <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
             <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
             <a href="/careers" style={footerLinkStyle}>Careers</a><br/>
           </div>
           <div style={{ minWidth: '150px' }}>
-            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Make Money with Us</h3>
+            <h3 style={{ marginBottom: '8px' }}>Make Money with Us</h3>
             <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
             <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br/>
           </div>
           <div style={{ minWidth: '150px' }}>
-            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Buyer Resources</h3>
+            <h3 style={{ marginBottom: '8px' }}>Buyer Resources</h3>
             <a href="/orders" style={footerLinkStyle}>Your Orders</a><br/>
             <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br/>
             <a href="/returns" style={footerLinkStyle}>Returns</a><br/>
             <a href="/help" style={footerLinkStyle}>Help Center</a><br/>
           </div>
           <div style={{ minWidth: '150px' }}>
-            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Stay Connected</h3>
+            <h3 style={{ marginBottom: '8px' }}>Stay Connected</h3>
             <a href="/contact" style={footerLinkStyle}>Contact Us</a><br/>
             <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br/>
             <a href="/socials" style={footerLinkStyle}>Follow Us</a><br/>
@@ -145,6 +143,7 @@ const footerLinkStyle = {
 };
 
 export default ShopPage;
+
 
 
 
