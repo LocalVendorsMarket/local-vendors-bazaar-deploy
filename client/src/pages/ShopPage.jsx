@@ -25,6 +25,7 @@ const ShopPage = ({ cart, setCart }) => {
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
   const [newZip, setNewZip] = useState('');
   const [searchCategory, setSearchCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -37,6 +38,7 @@ const ShopPage = ({ cart, setCart }) => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
+    console.log('Signing in with:', signInEmail);
     setIsSignInModalOpen(false);
     setIsNewCustomer(false);
   };
@@ -68,7 +70,7 @@ const ShopPage = ({ cart, setCart }) => {
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ width: '450px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={{ width: '550px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
           <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart.length > 0 && `(${cart.length})`}</a>
@@ -145,6 +147,7 @@ const footerLinkStyle = {
 };
 
 export default ShopPage;
+
 
 
 
