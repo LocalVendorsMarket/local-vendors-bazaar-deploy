@@ -54,22 +54,22 @@ const ShopPage = ({ cart, setCart }) => {
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', backgroundColor: '#e6f0ff', display: 'flex', flexDirection: 'column' }}>
 
       {/* Top Nav */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap', gap: '10px' }}>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', gap: '10px', color: 'white' }}>
         <a href="/">
           <img src={logo} alt="Logo" style={{ width: '50px' }} />
         </a>
         <div style={{ fontSize: '12px' }}>
           <span>Delivering to {deliveryLocation}</span><br/>
-          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer', color: '#aad576' }}>Update location</span>
+          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer', color: 'white' }}>Update location</span>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', width: '70px' }}>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', width: '80px' }}>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ width: '500px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
-          <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '8px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
+          <input type="text" placeholder="Search products..." style={{ width: '450px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
           <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart.length > 0 && `(${cart.length})`}</a>
         </div>
@@ -78,7 +78,9 @@ const ShopPage = ({ cart, setCart }) => {
       {/* Subcategory Bar */}
       <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start' }}>
         {categories.map((category) => (
-          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#d3d3d3' : '#003366', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
+          <span key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', color: '#fff', fontWeight: selectedCategory === category ? 'bold' : 'normal', cursor: 'pointer', fontSize: '14px' }}>
+            {category}
+          </span>
         ))}
       </div>
 
@@ -127,7 +129,7 @@ const ShopPage = ({ cart, setCart }) => {
             <a href="/socials" style={footerLinkStyle}>Follow Us</a><br/>
           </div>
         </div>
-        <p style={{ marginTop: '1rem', fontSize: '12px', color: '#aad576', textAlign: 'center' }}>
+        <p style={{ marginTop: '1rem', fontSize: '12px', color: 'white', textAlign: 'center' }}>
           © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
         </p>
       </footer>
@@ -137,12 +139,13 @@ const ShopPage = ({ cart, setCart }) => {
 };
 
 const footerLinkStyle = {
-  color: '#aad576',
+  color: 'white',
   textDecoration: 'none',
   fontSize: '14px',
 };
 
 export default ShopPage;
+
 
 
 
