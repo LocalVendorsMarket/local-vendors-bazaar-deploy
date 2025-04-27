@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = ({ cart, setCart }) => {
-
-  const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
+  const categories = [
+    'All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics',
+    'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'
+  ];
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '120px' }}>
@@ -38,20 +40,19 @@ const Home = ({ cart, setCart }) => {
       </div>
 
       {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '50px', padding: '0 20px' }}>
-        <h1 style={{ fontSize: '52px', color: '#0056b3', marginBottom: '20px' }}>
+      <div style={{ textAlign: 'center', marginTop: '60px', marginBottom: '40px', padding: '0 20px' }}>
+        <h1 style={{ fontSize: '48px', color: '#0056b3', marginBottom: '20px' }}>
           Welcome to Local Vendors Bazaar
         </h1>
-        <p style={{ fontSize: '24px', color: '#333', marginBottom: '30px', maxWidth: '800px', marginInline: 'auto' }}>
-          Discover amazing local products and services.  
-          Shop and save while supporting your neighborhood businesses!
+        <p style={{ fontSize: '22px', color: '#333', maxWidth: '800px', margin: '0 auto 30px' }}>
+          Discover amazing local products and services. Shop and save while supporting your neighborhood businesses!
         </p>
         <Link to="/shop">
           <button style={{
             backgroundColor: '#007bff',
             color: 'white',
             padding: '15px 30px',
-            fontSize: '20px',
+            fontSize: '18px',
             border: 'none',
             borderRadius: '8px',
             cursor: 'pointer',
@@ -64,10 +65,10 @@ const Home = ({ cart, setCart }) => {
 
       {/* Flyer Section */}
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <img 
-          src="/assets/flyer-v2.png" 
-          alt="Shop Local Flyer" 
-          style={{ maxWidth: '90%', height: 'auto', borderRadius: '12px', boxShadow: '0px 4px 12px rgba(0,0,0,0.2)' }}
+        <img
+          src="/assets/flyer-v2.png"
+          alt="Shop Local Flyer"
+          style={{ maxWidth: '90%', height: 'auto', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}
         />
       </div>
 
@@ -87,6 +88,7 @@ const Home = ({ cart, setCart }) => {
 };
 
 export default Home;
+
 
 
 
