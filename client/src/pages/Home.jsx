@@ -1,154 +1,144 @@
-import React, { useState } from 'react';
-import logo from '../assets/logo.png';
+import React, { useState, useRef } from 'react';
 
-const Home = ({ cart, setCart }) => {
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isNewCustomer, setIsNewCustomer] = useState(false);
-  const [location, setLocation] = useState('Deliver to Elgin 60120');
-
-  const navCategories = [
-    'All', 'Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods',
-    'Coupons', 'Flyers', 'Local Events', 'Caterers', 'Wedding Planners', 'Wedding Photographers', 'Gift Shops'
+const ShopPage = ({ cart, setCart }) => {
+  const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
+  
+  const allProducts = [
+    { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
+    { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
+    { id: 3, name: 'Organic T-Shirt', category: 'Clothing', price: '$18', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
+    { id: 4, name: 'Custom Art Piece', category: 'Art', price: '$200', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Custom+Art' },
+    { id: 5, name: 'Handmade Soap', category: 'Cosmetics', price: '$8', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Soap' },
+    { id: 6, name: 'Boutique Dress', category: 'Clothing', price: '$45', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Boutique+Dress' },
+    { id: 7, name: 'Coffee Subscription', category: 'Services', price: '$20', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Coffee+Subscription' },
+    { id: 8, name: 'Gift Basket', category: 'Gift Shops', price: '$50', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Gift+Basket' },
+    { id: 9, name: 'Luxury Candle', category: 'Retail Stores', price: '$30', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Luxury+Candle' },
+    { id: 10, name: 'Sample Product', category: 'New Releases', price: '$15', rating: '⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Sample+Product' },
   ];
 
-  const handleUpdateLocation = () => {
-    const newLocation = prompt('Enter your new location (City, Zip):');
-    if (newLocation) {
-      setLocation(`Deliver to ${newLocation}`);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const scrollRef = useRef(null);
+
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter(product => product.category === selectedCategory);
+
+  const handleScroll = (direction) => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({
+        left: direction === 'left' ? -300 : 300,
+        behavior: 'smooth'
+      });
     }
   };
 
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
+
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ fontFamily: 'sans-serif', padding: '20px' }}>
       
-      {/* Top Nav */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white', gap: '10px' }}>
-        <a href="/">
-          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
-        </a>
-
-        {/* Location */}
-        <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px', cursor: 'pointer' }}>
-          <span>{location}</span>
-          <span onClick={handleUpdateLocation} style={{ textDecoration: 'underline', fontSize: '12px' }}>Update location</span>
-        </div>
-
-        {/* Search */}
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '20px', flexGrow: 1 }}>
-          <select style={{ height: '40px', width: '60px', borderRadius: '8px 0 0 8px', border: '1px solid #ccc', padding: '0 5px', backgroundColor: '#d3d3d3' }}>
-            {navCategories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          <input
-            type="text"
-            placeholder="Search products..."
-            style={{ height: '40px', flexGrow: 1, padding: '6px 10px', borderTop: '1px solid #ccc', borderBottom: '1px solid #ccc', borderLeft: 'none', fontSize: '14px' }}
-          />
-          <button style={{ height: '40px', padding: '0 15px', border: '1px solid #ccc', borderRadius: '0 8px 8px 0', backgroundColor: '#d3d3d3', cursor: 'pointer' }}>
-            🔍
-          </button>
-        </div>
-
-        {/* Sign In + Cart */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
-          <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
-          <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>
-            🛒 {cart.length > 0 && `(${cart.length})`}
-          </a>
-        </div>
-      </header>
-
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', gap: '12px', flexWrap: 'nowrap', overflowX: 'auto' }}>
-        {navCategories.map((category) => (
-          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>{category}</span>
+      <div style={{ display: 'flex', overflowX: 'auto', marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
+        {categories.map(category => (
+          <button
+            key={category}
+            onClick={() => setSelectedCategory(category)}
+            style={{
+              marginRight: '20px',
+              background: selectedCategory === category ? '#4CAF50' : 'transparent',
+              color: selectedCategory === category ? 'white' : 'black',
+              border: 'none',
+              fontSize: '16px',
+              cursor: 'pointer'
+            }}
+          >
+            {category}
+          </button>
         ))}
       </div>
 
-      {/* Shop and Save Locally Slogan */}
-      <div style={{ textAlign: 'center', margin: '1rem 0', fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>
-        Shop and Save Locally®
+      {/* Banner Ad */}
+      <div style={{
+        backgroundColor: 'skyblue',
+        padding: '40px',
+        textAlign: 'center',
+        marginBottom: '30px',
+        borderRadius: '10px'
+      }}>
+        <h2 style={{ fontSize: '32px', marginBottom: '10px' }}>Advertise Here!</h2>
+        <p style={{ fontSize: '18px' }}>Showcase your brand to thousands of local buyers.</p>
+        <img 
+          src="https://via.placeholder.com/600x200?text=Sample+Vendor+Ad" 
+          alt="Sample Ad" 
+          style={{ marginTop: '20px', borderRadius: '8px' }}
+        />
       </div>
 
-      {/* Powered by Website Name */}
-      <div style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '14px', color: '#003366' }}>
-        Powered by <strong>LocalVendorsBazaar.com</strong>
-      </div>
+      {/* Product Scroll */}
+      <div style={{ position: 'relative' }}>
+        <button 
+          onClick={() => handleScroll('left')} 
+          style={{ position: 'absolute', left: 0, top: '40%', zIndex: 1, fontSize: '40px', background: 'transparent', border: 'none', cursor: 'pointer' }}
+        >
+          &#8592;
+        </button>
 
-      {/* Vendor Banner Ad Placeholder */}
-      <div style={{ margin: '1rem', textAlign: 'center' }}>
-        <div style={{ backgroundColor: '#d3d3d3', padding: '2rem', borderRadius: '10px', color: '#003366', fontWeight: 'bold' }}>
-          Advertise Your Special Deals Here!
-        </div>
-      </div>
-
-      {/* Sections */}
-      <div style={{ padding: '1rem' }}>
-        {[
-          'New Releases', 'Best Seller Food', 'Best Seller Clothing', 'Top Rated Restaurants',
-          'Local Events', 'Coupons & Deals', 'Gift Shops Specials', 'Wedding Vendors',
-          'Health & Wellness', 'Beauty Services', 'Cleaning Services', 'Pet Services', 'Top Rated Services'
-        ].map((sectionTitle, index) => (
-          <div key={index} style={{ marginBottom: '2rem' }}>
-            <h2 style={{ color: '#003366', fontSize: '1.4rem', marginBottom: '0.5rem' }}>{sectionTitle}</h2>
-            <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '1rem' }}>
-              {[1,2,3,4,5,6].map((n) => (
-                <div key={n} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '10px', width: '140px', minWidth: '140px', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
-                  <img src={`https://via.placeholder.com/150x100?text=Product+${n}`} alt="Product" style={{ width: '100%', height: '90px', objectFit: 'cover', borderRadius: '8px' }} />
-                  <h4 style={{ color: '#003366', marginTop: '8px', fontSize: '14px' }}>Product {n}</h4>
-                  <p style={{ fontWeight: 'bold', fontSize: '13px', marginTop: '5px' }}>$20</p>
-                </div>
-              ))}
+        <div 
+          ref={scrollRef}
+          style={{
+            display: 'flex',
+            overflowX: 'auto',
+            scrollBehavior: 'smooth',
+            padding: '10px',
+            gap: '20px'
+          }}
+        >
+          {filteredProducts.map(product => (
+            <div key={product.id} style={{
+              minWidth: '300px',
+              border: '1px solid #ccc',
+              borderRadius: '10px',
+              padding: '10px',
+              background: 'white',
+              textAlign: 'center'
+            }}>
+              <img src={product.image} alt={product.name} style={{ width: '100%', borderRadius: '8px' }} />
+              <h3 style={{ margin: '10px 0' }}>{product.name}</h3>
+              <p>{product.price}</p>
+              <p>{product.rating}</p>
+              <button 
+                onClick={() => addToCart(product)} 
+                style={{
+                  background: '#4CAF50',
+                  color: 'white',
+                  border: 'none',
+                  padding: '10px 20px',
+                  marginTop: '10px',
+                  cursor: 'pointer',
+                  borderRadius: '5px'
+                }}
+              >
+                Add to Cart
+              </button>
             </div>
-          </div>
-        ))}
-      </div>
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', padding: '2rem', textAlign: 'center', fontSize: '14px', color: 'white', marginTop: 'auto' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', marginBottom: '20px' }}>
-          <div style={{ minWidth: '150px' }}>
-            <h3>Get to Know Us</h3>
-            <a href="/about" style={footerLinkStyle}>About Us</a><br/>
-            <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
-            <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
-            <a href="/careers" style={footerLinkStyle}>Careers</a><br/>
-          </div>
-          <div style={{ minWidth: '150px' }}>
-            <h3>Make Money with Us</h3>
-            <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
-            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br/>
-          </div>
-          <div style={{ minWidth: '150px' }}>
-            <h3>Buyer Resources</h3>
-            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br/>
-            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br/>
-            <a href="/returns" style={footerLinkStyle}>Returns</a><br/>
-            <a href="/help" style={footerLinkStyle}>Help Center</a><br/>
-          </div>
-          <div style={{ minWidth: '150px' }}>
-            <h3>Stay Connected</h3>
-            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br/>
-            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br/>
-            <a href="/socials" style={footerLinkStyle}>Follow Us</a><br/>
-          </div>
+          ))}
         </div>
-        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
-          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
-        </p>
-      </footer>
+
+        <button 
+          onClick={() => handleScroll('right')} 
+          style={{ position: 'absolute', right: 0, top: '40%', zIndex: 1, fontSize: '40px', background: 'transparent', border: 'none', cursor: 'pointer' }}
+        >
+          &#8594;
+        </button>
+      </div>
     </div>
   );
 };
 
-const footerLinkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '14px',
-};
+export default ShopPage;
 
-export default Home;
 
 
 
