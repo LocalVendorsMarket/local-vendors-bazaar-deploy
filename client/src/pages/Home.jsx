@@ -6,12 +6,9 @@ const Home = ({ cart, setCart }) => {
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [location, setLocation] = useState('Deliver to Elgin 60120');
 
-  const allCategories = [
-    'All', 'Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods', 'Coupons',
-    'Local Events', 'Flyers', 'Caterers', 'Wedding Planners', 'Wedding Photographers', 'DJs',
-    'Mehndi Artists', 'Wedding Decorators', 'Beauty Services', 'Gift Shops', 'Grocery Stores',
-    'Florists', 'Health & Wellness', 'Auto Services', 'Cleaning Services', 'Electronics',
-    'Pet Services', 'Real Estate'
+  const navCategories = [
+    'All', 'Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods',
+    'Coupons', 'Flyers', 'Local Events', 'Caterers', 'Wedding Planners', 'Wedding Photographers', 'Gift Shops'
   ];
 
   const handleUpdateLocation = () => {
@@ -39,7 +36,7 @@ const Home = ({ cart, setCart }) => {
         {/* Search */}
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: '20px', flexGrow: 1 }}>
           <select style={{ height: '40px', width: '60px', borderRadius: '8px 0 0 8px', border: '1px solid #ccc', padding: '0 5px', backgroundColor: '#d3d3d3' }}>
-            {allCategories.map((cat) => (
+            {navCategories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
@@ -63,32 +60,35 @@ const Home = ({ cart, setCart }) => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '12px', justifyContent: 'flex-start' }}>
-        {allCategories.map((category) => (
-          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold' }}>{category}</span>
+      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', gap: '12px', flexWrap: 'nowrap', overflowX: 'auto' }}>
+        {navCategories.map((category) => (
+          <span key={category} style={{ color: 'white', cursor: 'pointer', fontSize: '13px', fontWeight: 'bold', whiteSpace: 'nowrap' }}>{category}</span>
         ))}
       </div>
 
-      {/* Shop and Save Locally Message */}
-      <div style={{ textAlign: 'center', margin: '1rem', fontSize: '22px', fontWeight: 'bold', color: '#003366' }}>
-        Shop and Save Locally
+      {/* Shop and Save Locally Slogan */}
+      <div style={{ textAlign: 'center', margin: '1rem 0', fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>
+        Shop and Save Locally®
       </div>
 
-      {/* Shop by Category Boxes */}
-      <div style={{ padding: '1rem', display: 'flex', gap: '15px', flexWrap: 'wrap', justifyContent: 'center' }}>
-        {allCategories.map((cat, idx) => (
-          <div key={idx} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '10px', width: '120px', minWidth: '120px', height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#003366', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
-            {cat}
-          </div>
-        ))}
+      {/* Powered by Website Name */}
+      <div style={{ textAlign: 'center', marginBottom: '1rem', fontSize: '14px', color: '#003366' }}>
+        Powered by <strong>LocalVendorsBazaar.com</strong>
       </div>
 
-      {/* Category Sections */}
+      {/* Vendor Banner Ad Placeholder */}
+      <div style={{ margin: '1rem', textAlign: 'center' }}>
+        <div style={{ backgroundColor: '#d3d3d3', padding: '2rem', borderRadius: '10px', color: '#003366', fontWeight: 'bold' }}>
+          Advertise Your Special Deals Here!
+        </div>
+      </div>
+
+      {/* Sections */}
       <div style={{ padding: '1rem' }}>
         {[
-          'New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants',
-          'Local Events', 'Coupons & Deals', 'Gift Shops Specials', 'Top Rated Services',
-          'Wedding Vendors', 'Health & Wellness Deals'
+          'New Releases', 'Best Seller Food', 'Best Seller Clothing', 'Top Rated Restaurants',
+          'Local Events', 'Coupons & Deals', 'Gift Shops Specials', 'Wedding Vendors',
+          'Health & Wellness', 'Beauty Services', 'Cleaning Services', 'Pet Services', 'Top Rated Services'
         ].map((sectionTitle, index) => (
           <div key={index} style={{ marginBottom: '2rem' }}>
             <h2 style={{ color: '#003366', fontSize: '1.4rem', marginBottom: '0.5rem' }}>{sectionTitle}</h2>
@@ -149,6 +149,7 @@ const footerLinkStyle = {
 };
 
 export default Home;
+
 
 
 
