@@ -5,6 +5,7 @@ const Home = ({ cart, setCart }) => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [location, setLocation] = useState('Deliver to Elgin 60120');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   const productExamples = [
     { id: 1, name: 'Fresh Honey', price: '$12', image: 'https://via.placeholder.com/150x100?text=Fresh+Honey' },
@@ -13,15 +14,12 @@ const Home = ({ cart, setCart }) => {
     { id: 4, name: 'Wooden Art', price: '$40', image: 'https://via.placeholder.com/150x100?text=Wooden+Art' },
   ];
 
-  const sections = [
-    'New Releases',
-    'Best Seller Foods',
-    'Best Seller Clothing',
-    'Top Rated Restaurants',
-    'Trending Now',
-    'Local Favorites',
-    'New Restaurants',
-    'Best Deals Today'
+  const allCategories = [
+    'All', 'Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods', 'Coupons',
+    'Local Events', 'Flyers', 'Caterers', 'Wedding Planners', 'Wedding Photographers', 'DJs',
+    'Mehndi Artists', 'Wedding Decorators', 'Beauty Services', 'Gift Shops', 'Grocery Stores',
+    'Florists', 'Health & Wellness', 'Auto Services', 'Cleaning Services', 'Electronics',
+    'Pet Services', 'Real Estate'
   ];
 
   const handleUpdateLocation = () => {
@@ -48,19 +46,19 @@ const Home = ({ cart, setCart }) => {
 
         {/* Search */}
         <div style={{ display: 'flex', alignItems: 'center', marginLeft: '20px', flexGrow: 1 }}>
-          <select style={{ height: '40px', borderRadius: '8px 0 0 8px', border: '1px solid #ccc', padding: '0 10px', backgroundColor: '#d3d3d3' }}>
-            <option>All</option>
-            <option>Food</option>
-            <option>Jewelry</option>
-            <option>Clothing</option>
-            <option>Restaurants</option>
+          <select style={{ height: '40px', width: '60px', borderRadius: '8px 0 0 8px', border: '1px solid #ccc', padding: '0 5px', backgroundColor: '#d3d3d3' }}>
+            {allCategories.map((cat) => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
           </select>
           <input
             type="text"
             placeholder="Search products..."
             style={{ height: '40px', flexGrow: 1, padding: '6px 10px', borderTop: '1px solid #ccc', borderBottom: '1px solid #ccc', borderLeft: 'none', fontSize: '14px' }}
           />
-          <button style={{ height: '40px', padding: '0 15px', border: '1px solid #ccc', borderRadius: '0 8px 8px 0', backgroundColor: '#d3d3d3', cursor: 'pointer' }}>🔍</button>
+          <button style={{ height: '40px', padding: '0 15px', border: '1px solid #ccc', borderRadius: '0 8px 8px 0', backgroundColor: '#d3d3d3', cursor: 'pointer' }}>
+            🔍
+          </button>
         </div>
 
         {/* Sign In + Cart */}
@@ -98,9 +96,9 @@ const Home = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* 8 Highlighted Sections */}
+      {/* Product Sections */}
       <div style={{ padding: '1rem' }}>
-        {sections.map((sectionTitle, index) => (
+        {['New Releases', 'Best Seller Foods', 'Best Seller Clothing', 'Top Rated Restaurants', 'Trending Now', 'Local Favorites', 'New Restaurants', 'Best Deals Today'].map((sectionTitle, index) => (
           <div key={index} style={{ marginBottom: '3rem' }}>
             <h2 style={{ color: '#003366', fontSize: '1.5rem', marginBottom: '1rem' }}>{sectionTitle}</h2>
             <div style={{ display: 'flex', gap: '20px', overflowX: 'auto', paddingBottom: '1rem' }}>
@@ -161,6 +159,7 @@ const footerLinkStyle = {
 };
 
 export default Home;
+
 
 
 
