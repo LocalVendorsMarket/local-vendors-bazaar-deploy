@@ -5,29 +5,30 @@ const Home = () => {
   const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '100px' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '140px' }}>
       
       {/* Sub Nav Bar */}
-      <div style={{ 
-        display: 'flex', 
-        overflowX: 'auto', 
-        borderBottom: '1px solid #ccc', 
-        padding: '10px 20px', 
-        backgroundColor: '#ffffff',
-        position: 'sticky',
+      <div style={{
+        display: 'flex',
+        overflowX: 'auto',
+        padding: '10px 20px',
+        backgroundColor: 'white',
+        borderBottom: '1px solid #ddd',
+        position: 'fixed',
         top: '80px',
-        zIndex: 50 
+        width: '100%',
+        zIndex: 50
       }}>
         {categories.map(category => (
-          <button 
+          <button
             key={category}
-            style={{ 
-              marginRight: '20px', 
-              background: 'transparent', 
-              border: 'none', 
-              fontSize: '16px', 
-              color: '#333', 
-              cursor: 'pointer' 
+            style={{
+              marginRight: '20px',
+              background: 'transparent',
+              border: 'none',
+              fontSize: '16px',
+              color: '#333',
+              cursor: 'pointer'
             }}
           >
             {category}
@@ -36,12 +37,12 @@ const Home = () => {
       </div>
 
       {/* Hero Section */}
-      <div style={{ textAlign: 'center', marginTop: '50px', marginBottom: '40px', padding: '0 20px' }}>
+      <div style={{ textAlign: 'center', marginTop: '40px', marginBottom: '50px', padding: '0 20px' }}>
         <h1 style={{ fontSize: '48px', color: '#0056b3', marginBottom: '20px' }}>
           Welcome to Local Vendors Bazaar
         </h1>
         <p style={{ fontSize: '22px', color: '#333', maxWidth: '800px', margin: '0 auto 30px' }}>
-          Discover amazing local products and services — shop and save while supporting your neighborhood businesses!
+          Shop locally and save! Discover unique products, great services, and support neighborhood businesses today.
         </p>
         <Link to="/shop">
           <button style={{
@@ -61,9 +62,9 @@ const Home = () => {
 
       {/* Flyer Section */}
       <div style={{ textAlign: 'center', marginBottom: '50px' }}>
-        <img 
-          src="/assets/flyer-v2.png" 
-          alt="Shop Local Flyer" 
+        <img
+          src="/assets/flyer-v2.png"
+          alt="Shop Local Flyer"
           style={{ maxWidth: '90%', height: 'auto', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.2)' }}
         />
       </div>
@@ -74,8 +75,8 @@ const Home = () => {
           Why Shop Locally?
         </h2>
         <p style={{ fontSize: '20px', color: '#555', maxWidth: '900px', margin: '0 auto' }}>
-          LocalVendorsBazaar.com connects you with small businesses, artisans, and local service providers.
-          Every purchase strengthens your community and helps local businesses thrive!
+          LocalVendorsBazaar.com helps you find the best products and services in your neighborhood.  
+          Support small businesses, save money, and build a stronger community by shopping locally!
         </p>
       </div>
 
@@ -84,6 +85,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
