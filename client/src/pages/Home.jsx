@@ -3,62 +3,61 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh' }}>
+    <div className="min-h-screen flex flex-col" style={{ fontFamily: 'sans-serif' }}>
       
-      {/* Top Navigation Bar */}
-      <nav style={{ backgroundColor: 'green', padding: '10px 20px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        {/* Left side: Logo */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ height: '40px', marginRight: '20px' }} />
-          <div style={{ display: 'flex', gap: '15px' }}>
-            <Link to="/" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Home</Link>
-            <Link to="/faq" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>FAQ</Link>
-            <Link to="/blog" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Blog</Link>
-            <Link to="/contact" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Contact</Link>
-            <Link to="/vendor-signup" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Become a Vendor</Link>
-            <Link to="/shop" style={{ color: 'white', textDecoration: 'none', fontWeight: 'bold' }}>Shop</Link>
+      {/* Navigation Bar */}
+      <nav className="bg-green-600 p-4 flex items-center justify-between">
+        <div className="flex items-center space-x-6">
+          <img src="/assets/logo.png" alt="Logo" className="h-10" />
+          <div className="flex space-x-4">
+            <Link to="/" className="text-white font-semibold hover:underline">Home</Link>
+            <Link to="/faq" className="text-white font-semibold hover:underline">FAQ</Link>
+            <Link to="/blog" className="text-white font-semibold hover:underline">Blog</Link>
+            <Link to="/contact" className="text-white font-semibold hover:underline">Contact</Link>
+            <Link to="/vendor-signup" className="text-white font-semibold hover:underline">Become a Vendor</Link>
+            <Link to="/shop" className="text-white font-semibold hover:underline">Shop</Link>
           </div>
         </div>
 
-        {/* Right side: Search and Cart */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div className="flex items-center space-x-2">
           <input
             type="text"
             placeholder="Search"
-            style={{ padding: '5px 10px', borderRadius: '5px', border: 'none' }}
+            className="rounded px-2 py-1"
           />
           <input
             type="text"
             placeholder="Zip Code"
-            style={{ padding: '5px 10px', borderRadius: '5px', border: 'none' }}
+            className="rounded px-2 py-1"
           />
           <Link to="/cart">
-            <img src="/assets/cart-icon-white.png" alt="Cart" style={{ height: '30px' }} />
+            <img src="/assets/cart-icon-white.png" alt="Cart" className="h-8" />
           </Link>
         </div>
       </nav>
 
-      {/* Main Banner Section */}
-      <div style={{ textAlign: 'center', marginTop: '40px', padding: '20px' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '10px' }}>Welcome to Local Vendors Bazaar!</h1>
-        <p style={{ fontSize: '1.2rem', marginBottom: '30px' }}>Connecting Local Sellers and Buyers Together</p>
-        <img 
-          src="/assets/flyer-v2.png" 
-          alt="Shop Local Flyer" 
-          style={{ width: '80%', maxWidth: '700px', borderRadius: '10px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
-        />
-      </div>
+      {/* Main Content (MATCHING ShopPage layout) */}
+      <main className="flex-grow bg-gray-100 py-8 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h1 className="text-3xl font-bold mb-6">Welcome to Local Vendors Bazaar!</h1>
+          <p className="text-lg mb-4">
+            Browse, Shop, and Support your Local Businesses!
+          </p>
+          {/* You can insert any future components here (featured products, categories, etc.) */}
+        </div>
+      </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: 'green', color: 'white', textAlign: 'center', padding: '10px', marginTop: '50px' }}>
+      <footer className="bg-green-600 text-white text-center p-4">
         © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
       </footer>
-
+      
     </div>
   );
 };
 
 export default Home;
+
 
 
 
