@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 const Home = () => {
   return (
-    <div className="min-h-screen flex flex-col" style={{ fontFamily: 'sans-serif' }}>
+    <div className="min-h-screen flex flex-col bg-gray-100" style={{ fontFamily: 'sans-serif' }}>
       
-      {/* Navigation Bar */}
+      {/* Top Navigation Bar */}
       <nav className="bg-green-600 p-4 flex items-center justify-between">
         <div className="flex items-center space-x-6">
           <img src="/assets/logo.png" alt="Logo" className="h-10" />
@@ -36,14 +36,14 @@ const Home = () => {
         </div>
       </nav>
 
-      {/* Main Content (MATCHING ShopPage layout) */}
-      <main className="flex-grow bg-gray-100 py-8 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-3xl font-bold mb-6">Welcome to Local Vendors Bazaar!</h1>
-          <p className="text-lg mb-4">
-            Browse, Shop, and Support your Local Businesses!
+      {/* Main Page Body (same as Shop page) */}
+      <main className="flex-grow container mx-auto py-12 px-4">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-4">Welcome to Local Vendors Bazaar!</h1>
+          <p className="text-lg text-gray-700 mb-8">
+            Connecting Local Sellers and Buyers Together.
           </p>
-          {/* You can insert any future components here (featured products, categories, etc.) */}
+          {/* You can add more sections here if you want later, matching shop layout */}
         </div>
       </main>
 
@@ -57,6 +57,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
