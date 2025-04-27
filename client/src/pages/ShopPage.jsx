@@ -37,7 +37,6 @@ const ShopPage = ({ cart, setCart }) => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    console.log('Signing in with:', signInEmail);
     setIsSignInModalOpen(false);
     setIsNewCustomer(false);
   };
@@ -52,10 +51,10 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', backgroundColor: '#e6f0ff', display: 'flex', flexDirection: 'column' }}>
 
       {/* Top Nav */}
-      <header style={{ backgroundColor: '#2b9348', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap' }}>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: '#fff', flexWrap: 'wrap' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <a href="/">
             <img src={logo} alt="Logo" style={{ width: '50px' }} />
@@ -66,12 +65,12 @@ const ShopPage = ({ cart, setCart }) => {
           </div>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', flexGrow: 1, marginLeft: '20px', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', height: '38px', width: '80px' }}>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={{ padding: '6px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', height: '38px', width: '70px' }}>
             {categories.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
-          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+          <input type="text" placeholder="Search products..." style={{ width: '550px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <button style={{ backgroundColor: '#40916c', borderRadius: '8px', padding: '8px', border: 'none', fontSize: '18px', cursor: 'pointer', color: 'white' }}>🔍</button>
           <button onClick={() => setIsSignInModalOpen(true)} style={{ padding: '8px 12px', backgroundColor: '#40916c', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>Sign In</button>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart.length > 0 && `(${cart.length})`}</a>
@@ -79,9 +78,9 @@ const ShopPage = ({ cart, setCart }) => {
       </header>
 
       {/* Subcategory Bar */}
-      <div style={{ backgroundColor: '#d8f3dc', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start' }}>
         {categories.map((category) => (
-          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#2b9348', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
+          <button key={category} onClick={() => setSelectedCategory(category)} style={{ padding: '6px 12px', backgroundColor: selectedCategory === category ? '#40916c' : '#003366', color: '#fff', border: 'none', borderRadius: '20px', cursor: 'pointer', fontWeight: 'bold', fontSize: '14px' }}>{category}</button>
         ))}
       </div>
 
@@ -90,40 +89,63 @@ const ShopPage = ({ cart, setCart }) => {
         {filteredProducts.map((product) => (
           <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-            <h2 style={{ marginTop: '10px', color: '#1f7a3f', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
+            <h2 style={{ marginTop: '10px', color: '#003366', fontSize: '1.2rem', textAlign: 'center' }}>{product.name}</h2>
             <p style={{ color: '#666', marginBottom: '8px', textAlign: 'center' }}>{product.rating}</p>
             <p style={{ fontWeight: 'bold', color: '#333', marginBottom: '12px' }}>{product.price}</p>
             <div style={{ display: 'flex', gap: '10px' }}>
-              <button style={{ padding: '8px 12px', backgroundColor: '#2b9348', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setSelectedProduct(product)}>Learn More</button>
-              <button style={{ padding: '8px 12px', backgroundColor: '#f9c74f', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
+              <button style={{ padding: '8px 12px', backgroundColor: '#003366', color: '#fff', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => setSelectedProduct(product)}>Learn More</button>
+              <button style={{ padding: '8px 12px', backgroundColor: '#40916c', color: '#000', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }} onClick={() => handleAddToCart(product)}>Add to Cart</button>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Sign In Modal */}
-      {isSignInModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 }}>
-          <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', color: '#2b9348', marginBottom: '1rem' }}>{isNewCustomer ? 'Create Your Customer Account' : 'Sign In or Create Account'}</h2>
-            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && (<input type="text" placeholder="Full Name" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem' }} required />)}
-              <input type="email" placeholder="Enter mobile number or email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem' }} required />
-              {isNewCustomer && (<input type="password" placeholder="Create password" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', fontSize: '1rem' }} required />)}
-              <button type="submit" style={{ backgroundColor: '#2b9348', color: '#fff', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>{isNewCustomer ? 'Create your account' : 'Continue'}</button>
-            </form>
-            <p style={{ fontSize: '0.75rem', color: '#777', marginTop: '1rem' }}>By continuing, you agree to LocalVendorsBazaar's Conditions of Use and Privacy Notice.</p>
-            {!isNewCustomer && (<p onClick={() => setIsNewCustomer(true)} style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#007185', textDecoration: 'underline', cursor: 'pointer', textAlign: 'center' }}>New customer? Start here.</p>)}
-            <button onClick={() => { setIsSignInModalOpen(false); setIsNewCustomer(false); }} style={{ marginTop: '1.5rem', padding: '0.5rem 1rem', backgroundColor: '#ccc', color: '#000', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>Cancel</button>
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', padding: '2rem', color: '#fff', marginTop: 'auto' }}>
+        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '40px', marginBottom: '20px' }}>
+          <div style={{ minWidth: '150px' }}>
+            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Get to Know Us</h3>
+            <a href="/about" style={footerLinkStyle}>About Us</a><br/>
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br/>
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br/>
+            <a href="/careers" style={footerLinkStyle}>Careers</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Make Money with Us</h3>
+            <a href="/signup" style={footerLinkStyle}>Become a Vendor</a><br/>
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br/>
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br/>
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br/>
+            <a href="/help" style={footerLinkStyle}>Help Center</a><br/>
+          </div>
+          <div style={{ minWidth: '150px' }}>
+            <h3 style={{ color: '#ffffff', marginBottom: '8px' }}>Stay Connected</h3>
+            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br/>
+            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br/>
+            <a href="/socials" style={footerLinkStyle}>Follow Us</a><br/>
           </div>
         </div>
-      )}
+        <p style={{ marginTop: '1rem', fontSize: '12px', color: '#aad576', textAlign: 'center' }}>
+          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        </p>
+      </footer>
 
     </div>
   );
 };
 
+const footerLinkStyle = {
+  color: '#aad576',
+  textDecoration: 'none',
+  fontSize: '14px',
+};
+
 export default ShopPage;
+
 
 
 
