@@ -2,24 +2,53 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Home = () => {
+  const categories = ['All', 'New Releases', 'Clothing', 'Jewelry', 'Cosmetics', 'Services', 'Restaurants', 'Retail Stores', 'Gift Shops'];
+
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', padding: '40px 20px' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#E6F0FA', minHeight: '100vh', paddingTop: '100px' }}>
       
-      {/* Welcome Section */}
-      <div style={{ textAlign: 'center', marginTop: '50px', marginBottom: '50px' }}>
-        <h1 style={{ fontSize: '52px', color: '#0056b3', marginBottom: '20px' }}>
+      {/* Sub Nav Bar */}
+      <div style={{ 
+        display: 'flex', 
+        overflowX: 'auto', 
+        borderBottom: '1px solid #ccc', 
+        padding: '10px 20px', 
+        backgroundColor: '#ffffff',
+        position: 'sticky',
+        top: '80px',
+        zIndex: 50 
+      }}>
+        {categories.map(category => (
+          <button 
+            key={category}
+            style={{ 
+              marginRight: '20px', 
+              background: 'transparent', 
+              border: 'none', 
+              fontSize: '16px', 
+              color: '#333', 
+              cursor: 'pointer' 
+            }}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* Hero Section */}
+      <div style={{ textAlign: 'center', marginTop: '50px', marginBottom: '40px', padding: '0 20px' }}>
+        <h1 style={{ fontSize: '48px', color: '#0056b3', marginBottom: '20px' }}>
           Welcome to Local Vendors Bazaar
         </h1>
-        <p style={{ fontSize: '24px', color: '#333', marginBottom: '30px', maxWidth: '800px', marginInline: 'auto' }}>
-          Discover amazing local products and services.  
-          Shop and save while supporting your neighborhood businesses!
+        <p style={{ fontSize: '22px', color: '#333', maxWidth: '800px', margin: '0 auto 30px' }}>
+          Discover amazing local products and services — shop and save while supporting your neighborhood businesses!
         </p>
         <Link to="/shop">
           <button style={{
             backgroundColor: '#007bff',
             color: 'white',
             padding: '15px 30px',
-            fontSize: '20px',
+            fontSize: '18px',
             border: 'none',
             borderRadius: '8px',
             cursor: 'pointer',
@@ -31,7 +60,7 @@ const Home = () => {
       </div>
 
       {/* Flyer Section */}
-      <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+      <div style={{ textAlign: 'center', marginBottom: '50px' }}>
         <img 
           src="/assets/flyer-v2.png" 
           alt="Shop Local Flyer" 
@@ -41,13 +70,12 @@ const Home = () => {
 
       {/* About Section */}
       <div style={{ textAlign: 'center', marginBottom: '60px', padding: '0 20px' }}>
-        <h2 style={{ fontSize: '38px', color: '#0056b3', marginBottom: '20px' }}>
+        <h2 style={{ fontSize: '36px', color: '#0056b3', marginBottom: '20px' }}>
           Why Shop Locally?
         </h2>
-        <p style={{ fontSize: '22px', color: '#555', maxWidth: '900px', margin: '0 auto' }}>
-          LocalVendorsBazaar.com makes it easy to find and shop from the best local vendors near you.
-          Every purchase you make helps a small business grow, strengthens your community,
-          and brings you unique, quality products you won't find anywhere else.
+        <p style={{ fontSize: '20px', color: '#555', maxWidth: '900px', margin: '0 auto' }}>
+          LocalVendorsBazaar.com connects you with small businesses, artisans, and local service providers.
+          Every purchase strengthens your community and helps local businesses thrive!
         </p>
       </div>
 
@@ -56,6 +84,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
