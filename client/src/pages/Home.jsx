@@ -4,6 +4,7 @@ import logo from '../assets/logo.png';
 const Home = ({ cart, setCart }) => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [location, setLocation] = useState('Deliver to Elgin 60120');
 
   const productExamples = [
     { id: 1, name: 'Fresh Honey', price: '$12', image: 'https://via.placeholder.com/150x100?text=Fresh+Honey' },
@@ -23,25 +24,47 @@ const Home = ({ cart, setCart }) => {
     'Best Deals Today'
   ];
 
+  const handleUpdateLocation = () => {
+    const newLocation = prompt('Enter your new location (City, Zip):');
+    if (newLocation) {
+      setLocation(`Deliver to ${newLocation}`);
+    }
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
       {/* Top Nav */}
       <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white', gap: '10px' }}>
         <a href="/">
-          <img src={logo} alt="Logo" style={{ width: '50px' }} />
+          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
         </a>
-        <nav style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/faq" style={navLinkStyle}>FAQ</a>
-          <a href="/blog" style={navLinkStyle}>Blog</a>
-          <a href="/contact" style={navLinkStyle}>Contact</a>
-          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-        </nav>
-        <div style={{ display: 'flex', alignItems: 'center', marginLeft: 'auto', gap: '10px' }}>
-          <input type="text" placeholder="Search products..." style={{ width: '300px', padding: '6px 10px', borderRadius: '8px', border: '1px solid #ccc', height: '40px' }} />
-          <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' }}>🔍</button>
+
+        {/* Location */}
+        <div style={{ display: 'flex', flexDirection: 'column', fontSize: '12px', cursor: 'pointer' }}>
+          <span>{location}</span>
+          <span onClick={handleUpdateLocation} style={{ textDecoration: 'underline', fontSize: '12px' }}>Update location</span>
+        </div>
+
+        {/* Search */}
+        <div style={{ display: 'flex', alignItems: 'center', marginLeft: '20px', flexGrow: 1 }}>
+          <select style={{ height: '40px', borderRadius: '8px 0 0 8px', border: '1px solid #ccc', padding: '0 10px', backgroundColor: '#d3d3d3' }}>
+            <option>All</option>
+            <option>Food</option>
+            <option>Jewelry</option>
+            <option>Clothing</option>
+            <option>Restaurants</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Search products..."
+            style={{ height: '40px', flexGrow: 1, padding: '6px 10px', borderTop: '1px solid #ccc', borderBottom: '1px solid #ccc', borderLeft: 'none', fontSize: '14px' }}
+          />
+          <button style={{ height: '40px', padding: '0 15px', border: '1px solid #ccc', borderRadius: '0 8px 8px 0', backgroundColor: '#d3d3d3', cursor: 'pointer' }}>🔍</button>
+        </div>
+
+        {/* Sign In + Cart */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px', marginLeft: 'auto' }}>
           <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', fontWeight: 'bold', textDecoration: 'underline' }}>Sign In</span>
           <a href="/cart" style={{ color: '#fff', textDecoration: 'none', fontSize: '26px', fontWeight: 'bold', filter: 'drop-shadow(1px 1px 0 white)' }}>
             🛒 {cart.length > 0 && `(${cart.length})`}
@@ -59,6 +82,20 @@ const Home = ({ cart, setCart }) => {
       {/* Slogan */}
       <div style={{ textAlign: 'center', margin: '2rem 0', fontSize: '24px', fontWeight: 'bold', color: '#003366' }}>
         Shop and Save Locally
+      </div>
+
+      {/* Deals Banner */}
+      <div style={{ margin: '1rem', padding: '1rem', backgroundColor: '#cce0ff', textAlign: 'center', fontSize: '20px', fontWeight: 'bold', borderRadius: '10px' }}>
+        🌟 Spring Special: Save up to 20% on Local Foods and Goods! 🌟
+      </div>
+
+      {/* Shop by Category */}
+      <div style={{ padding: '2rem', display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center' }}>
+        {['Food', 'Jewelry', 'Clothing', 'Restaurants', 'Services', 'Home Goods'].map((cat, idx) => (
+          <div key={idx} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', width: '120px', height: '120px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontWeight: 'bold', color: '#003366', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
+            {cat}
+          </div>
+        ))}
       </div>
 
       {/* 8 Highlighted Sections */}
@@ -117,13 +154,6 @@ const Home = ({ cart, setCart }) => {
   );
 };
 
-const navLinkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '14px',
-  fontWeight: 'bold'
-};
-
 const footerLinkStyle = {
   color: 'white',
   textDecoration: 'none',
@@ -131,6 +161,7 @@ const footerLinkStyle = {
 };
 
 export default Home;
+
 
 
 
