@@ -1,36 +1,28 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Blog from './pages/Blog';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 import Faq from './pages/Faq';
-import Contact from './pages/Contact';
-import VendorSignupPage from './pages/VendorSignupPage';
-import ThankYouPage from './pages/ThankYouPage';
-import ShopPage from './pages/ShopPage';
-import Cart from './pages/Cart'; // ✅ Added Cart page import
-import BuyerSignupPage from './pages/BuyerSignupPage'; // ✅ New BuyerSignupPage import
+import Blog from './pages/Blog';
+import Testimonials from './pages/Testimonials';  // <-- Make sure this is imported
+import Contact from './pages/Contact'; // (later)
+import Shop from './pages/Shop'; // (later)
 
 function App() {
   const [cart, setCart] = useState([]);
 
   return (
-    <Router basename="/">
-      <Routes>
-        <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
-        <Route path="/blog" element={<Blog cart={cart} setCart={setCart} />} />
-        <Route path="/faq" element={<Faq cart={cart} setCart={setCart} />} />
-        <Route path="/contact" element={<Contact cart={cart} setCart={setCart} />} />
-        <Route path="/signup" element={<VendorSignupPage cart={cart} setCart={setCart} />} />
-        <Route path="/thank-you" element={<ThankYouPage cart={cart} setCart={setCart} />} />
-        <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
-        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
-        <Route path="/buyersignup" element={<BuyerSignupPage cart={cart} setCart={setCart} />} /> {/* ✅ New BuyerSignupPage route */}
-      </Routes>
-    </Router>
+    <Routes>
+      <Route path="/" element={<HomePage cart={cart} setCart={setCart} />} />
+      <Route path="/faq" element={<Faq cart={cart} />} />
+      <Route path="/blog" element={<Blog cart={cart} />} />
+      <Route path="/testimonials" element={<Testimonials cart={cart} />} />
+      <Route path="/contact" element={<Contact cart={cart} />} /> {/* (after we build) */}
+      <Route path="/shop" element={<Shop cart={cart} setCart={setCart} />} /> {/* (already built) */}
+    </Routes>
   );
 }
 
 export default App;
+
 
 
 
