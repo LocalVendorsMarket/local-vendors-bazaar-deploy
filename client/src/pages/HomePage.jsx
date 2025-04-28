@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
-
+// Home Page final version 1.0 - minor comment added to trigger redeploy
 const HomePage = ({ cart, setCart }) => {
   const categories = [
     'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
