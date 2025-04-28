@@ -9,7 +9,7 @@ const Testimonials = ({ cart }) => {
     {
       name: "Sarah M.",
       feedback: "Local Vendors Bazaar helped me discover amazing local shops I never knew existed! Highly recommended!",
-      image: "https://via.placeholder.com/80"  // Optional small profile pic
+      image: "https://via.placeholder.com/80"
     },
     {
       name: "John D.",
@@ -43,6 +43,7 @@ const Testimonials = ({ cart }) => {
           <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/testimonials" style={navLinkStyle}>Testimonials</a>
           <a href="/contact" style={navLinkStyle}>Contact</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
         </div>
@@ -50,7 +51,9 @@ const Testimonials = ({ cart }) => {
           <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
           <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
           <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>
+            🛒 {cart?.length > 0 && `(${cart.length})`}
+          </a>
         </div>
       </header>
 
