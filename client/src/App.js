@@ -5,7 +5,7 @@ import Faq from './pages/Faq';
 import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact'; // (we'll build soon)
-import Shop from './pages/Shop';
+import ShopPage from './pages/ShopPage';
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -17,7 +17,7 @@ function App() {
       <Route path="/blog" element={<Blog cart={cart} />} />
       <Route path="/testimonials" element={<Testimonials cart={cart} />} />
       <Route path="/contact" element={<Contact cart={cart} />} />
-      <Route path="/shop" element={<Shop cart={cart} setCart={setCart} />} />
+      <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
     </Routes>
   );
 }
