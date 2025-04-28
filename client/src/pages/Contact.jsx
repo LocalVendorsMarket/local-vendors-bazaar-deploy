@@ -10,8 +10,8 @@ const Contact = ({ cart }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert('Message sent!');
-    setFormData({ name: '', email: '', message: '' }); // Clear form after submit
+    alert('Message sent successfully!');
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
@@ -34,13 +34,13 @@ const Contact = ({ cart }) => {
       </header>
 
       {/* Contact Form */}
-      <main style={{ padding: '2rem', maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
-        <h1 style={{ color: '#003366', fontSize: '2.5rem', marginBottom: '2rem' }}>Contact Us</h1>
-        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+      <main style={{ padding: '2rem', maxWidth: '1200px', width: '100%', margin: '0 auto', flex: '1', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <h1 style={{ color: '#003366', fontSize: '3rem', textAlign: 'center', marginBottom: '2rem' }}>Get in Touch</h1>
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '2rem', width: '100%' }}>
           <input
             type="text"
             name="name"
-            placeholder="Your Name"
+            placeholder="Full Name"
             value={formData.name}
             onChange={handleChange}
             style={inputStyle}
@@ -49,7 +49,7 @@ const Contact = ({ cart }) => {
           <input
             type="email"
             name="email"
-            placeholder="Your Email"
+            placeholder="Email Address"
             value={formData.email}
             onChange={handleChange}
             style={inputStyle}
@@ -60,7 +60,7 @@ const Contact = ({ cart }) => {
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
-            rows="6"
+            rows="8"
             style={textareaStyle}
             required
           />
@@ -69,7 +69,7 @@ const Contact = ({ cart }) => {
       </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: 'auto', textAlign: 'center' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
         <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
@@ -78,9 +78,9 @@ const Contact = ({ cart }) => {
 
 // Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const inputStyle = { width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px' };
-const textareaStyle = { width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px', resize: 'vertical' };
-const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '14px', fontSize: '16px', border: 'none', borderRadius: '8px', cursor: 'pointer' };
+const inputStyle = { width: '100%', padding: '18px', borderRadius: '10px', border: '1px solid #ccc', fontSize: '18px', backgroundColor: 'white' };
+const textareaStyle = { width: '100%', padding: '18px', borderRadius: '10px', border: '1px solid #ccc', fontSize: '18px', resize: 'vertical', backgroundColor: 'white' };
+const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '16px', fontSize: '18px', borderRadius: '10px', fontWeight: 'bold', border: 'none', cursor: 'pointer' };
 
 export default Contact;
 
