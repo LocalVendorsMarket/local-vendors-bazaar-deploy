@@ -17,24 +17,21 @@ const HomePage = ({ cart, setCart }) => {
     { id: 3, name: 'Organic T-Shirt', category: 'Clothing', price: '$18', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
     { id: 4, name: 'Custom Artwork', category: 'Art', price: '$80', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Artwork' },
     { id: 5, name: 'Gourmet Pizza', category: 'Restaurants', price: '$15', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Pizza' },
-    { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' },
-    { id: 7, name: 'Wedding Cake Bakery', category: 'Food', price: '$300', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Wedding+Cake' },
-    { id: 8, name: 'Henna Artist', category: 'Services', price: '$100/hr', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Henna+Artist' },
-    { id: 9, name: 'Wedding DJ', category: 'Services', price: '$500', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Wedding+DJ' },
-    { id: 10, name: 'Florist Service', category: 'Home Goods', price: '$60', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Florist' }
+    { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' }
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
   const [searchCategory, setSearchCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [vendorZip, setVendorZip] = useState('');
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [signInEmail, setSignInEmail] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
 
-  const productRefs = [useRef(null), useRef(null), useRef(null)]; // Three rows
+  const productRefs = [useRef(null), useRef(null), useRef(null)];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -63,6 +60,11 @@ const HomePage = ({ cart, setCart }) => {
     }
   };
 
+  const handleVendorZipSearch = (e) => {
+    e.preventDefault();
+    alert(`Searching vendors near ${vendorZip}`);
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
@@ -86,14 +88,15 @@ const HomePage = ({ cart, setCart }) => {
             ))}
           </select>
           <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <button style={searchButtonStyle}>🔍</button>
+          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
+          <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
           <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
           <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
         </div>
       </header>
 
       {/* Subcategories */}
-      <div style={{ backgroundColor: '#003366', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
         {categories.map((cat) => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
             {cat}
@@ -101,9 +104,9 @@ const HomePage = ({ cart, setCart }) => {
         ))}
       </div>
 
-      {/* Welcome Banner */}
+      {/* Advertise Banner */}
       <div style={{ backgroundColor: '#003366', textAlign: 'center', padding: '2rem 1rem', margin: '1rem 0' }}>
-        <h1 style={{ color: 'white', fontSize: '1.75rem', margin: 0 }}>Shop and Save Locally<sup>®</sup></h1>
+        <h1 style={{ color: 'white', fontSize: '1.75rem', margin: 0 }}>Advertise Here! Promote Your Products on Local Vendors Bazaar<sup>®</sup></h1>
       </div>
 
       {/* Product Rows */}
@@ -115,7 +118,6 @@ const HomePage = ({ cart, setCart }) => {
               <div key={product.id} style={productCardStyle}>
                 <img src={product.image} alt={product.name} style={productImageStyle} />
                 <h2 style={productNameStyle}>{product.name}</h2>
-                {/* TODO: Remove this when real vendor data is loaded */}
                 <p style={productRatingStyle}>{product.rating}</p>
                 <p style={productPriceStyle}>{product.price}</p>
                 <button style={productButtonStyle}>Add to Cart</button>
@@ -125,7 +127,6 @@ const HomePage = ({ cart, setCart }) => {
           <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
         </div>
       ))}
-
       {/* Modals */}
       {isSignInModalOpen && (
         <div style={modalStyle}>
@@ -165,7 +166,7 @@ const HomePage = ({ cart, setCart }) => {
       )}
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
           <div>
             <h3>Get to Know Us</h3>
@@ -202,11 +203,12 @@ const HomePage = ({ cart, setCart }) => {
   );
 };
 
-// Helper styles
+// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-const searchInputStyle = { width: '300px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '18px', cursor: 'pointer' };
+const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
+const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
+const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
 const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
 const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' };
 const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
