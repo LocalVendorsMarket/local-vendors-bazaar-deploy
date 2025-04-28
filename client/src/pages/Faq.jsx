@@ -51,13 +51,18 @@ const Faq = ({ cart }) => {
       </header>
 
       {/* Subcategories */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start' }}>
-        {['All', 'Food', 'Jewelry', 'Clothing', 'Home Goods', 'Wedding Planners', 'Wedding Photographers'].map((cat) => (
-          <span key={cat} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
-            {cat}
-          </span>
-        ))}
-      </div>
+<div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px', justifyContent: 'flex-start' }}>
+  {[
+    'All', 'Food', 'Jewelry', 'Clothing', 'Home Goods', 'Restaurants', 'Services', 
+    'Art', 'Grocery Stores', 'Best Sellers', 'New Releases', 'Wedding Planners', 
+    'Wedding Photographers'
+  ].map((cat) => (
+    <span key={cat} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
+      {cat}
+    </span>
+  ))}
+</div>
+
 
       {/* FAQ Content */}
       <main style={{ textAlign: 'center', padding: '2rem' }}>
@@ -131,6 +136,7 @@ const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRa
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default Faq;
+
 
 
 
