@@ -78,6 +78,7 @@ const HomePage = ({ cart, setCart }) => {
         <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
+          <a href="/testimonials" style={navLinkStyle}>Testimonials</a>
           <a href="/contact" style={navLinkStyle}>Contact</a>
           <a href="/shop" style={navLinkStyle}>Shop</a>
         </div>
