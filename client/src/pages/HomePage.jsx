@@ -76,6 +76,7 @@ const HomePage = ({ cart, setCart }) => {
           <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
         </div>
         <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
           <a href="/faq" style={navLinkStyle}>FAQ</a>
           <a href="/blog" style={navLinkStyle}>Blog</a>
           <a href="/testimonials" style={navLinkStyle}>Testimonials</a>
@@ -128,6 +129,7 @@ const HomePage = ({ cart, setCart }) => {
           <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
         </div>
       ))}
+
       {/* Modals */}
       {isSignInModalOpen && (
         <div style={modalStyle}>
@@ -224,6 +226,7 @@ const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
