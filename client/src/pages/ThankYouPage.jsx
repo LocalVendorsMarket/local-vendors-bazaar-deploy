@@ -1,112 +1,49 @@
 import React from 'react';
+import logo from '../assets/logo.png';
 
-const ThankYouPage = ({ cart }) => {
-  const navLinkStyle = {
-    margin: '0 10px',
-    color: '#fff',
-    textDecoration: 'none',
-    fontSize: '14px',
-  };
-
-  const inputStyle = {
-    marginLeft: '10px',
-    padding: '6px 10px',
-    borderRadius: '8px',
-    border: '1px solid #ccc',
-    fontSize: '14px',
-  };
-
-  const searchButtonStyle = {
-    marginLeft: '10px',
-    padding: '6px 12px',
-    backgroundColor: '#40916c',
-    color: '#fff',
-    borderRadius: '8px',
-    border: 'none',
-    fontWeight: 'bold',
-    cursor: 'pointer',
-  };
-
+const ThankYouPage = () => {
   return (
-    <div className="min-h-screen flex flex-col items-center bg-gray-50" style={{ fontFamily: 'sans-serif' }}>
-      {/* Navigation Bar */}
-      <header
-        style={{
-          backgroundColor: '#2b9348',
-          padding: '1rem',
-          color: '#fff',
-          width: '100%',
-          position: 'sticky',
-          top: 0,
-          zIndex: 1000,
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          flexWrap: 'wrap',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src="/assets/logo.png" alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <div style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</div>
-        </div>
-
-        <nav style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/faq" style={navLinkStyle}>FAQ</a>
-          <a href="/blog" style={navLinkStyle}>Blog</a>
-          <a href="/contact" style={navLinkStyle}>Contact</a>
-          <a href="/signup" style={navLinkStyle}>Become a Vendor</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/cart" style={navLinkStyle}>
-            <span style={{ filter: 'brightness(0) invert(1)' }}>🛒</span> {cart?.length > 0 && `(${cart.length})`}
-          </a>
-          <input type="text" placeholder="Search products..." style={inputStyle} />
-          <input type="text" placeholder="Zip Code" style={{ ...inputStyle, width: '100px' }} />
-          <button style={searchButtonStyle}>Search</button>
-        </nav>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      
+      {/* Header */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white' }}>
+        <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+        <h1 style={{ marginLeft: '1rem', fontSize: '1.5rem' }}>Local Vendors Bazaar</h1>
       </header>
 
-      {/* Main Thank You Content */}
-      <main className="flex flex-col items-center justify-center flex-grow p-8 mt-10">
-        <h1 className="text-4xl font-bold text-green-600 mb-4">🎉 Thank You!</h1>
-        <p className="text-gray-600 text-lg mb-8 text-center">
-          Your application has been submitted successfully.<br />
-          We will review and contact you shortly!
-        </p>
-        <a
-          href="/"
-          style={{
-            marginTop: '1rem',
-            padding: '10px 20px',
-            backgroundColor: '#2b9348',
-            color: '#fff',
-            textDecoration: 'none',
-            borderRadius: '8px',
-            fontWeight: 'bold',
-            fontSize: '1.1rem',
-          }}
-        >
-          Back to Home
-        </a>
+      {/* Thank You Content */}
+      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', padding: '2rem' }}>
+        <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h2 style={{ color: '#2b9348', fontSize: '2rem', marginBottom: '1rem' }}>Thank You for Signing Up!</h2>
+          <p style={{ color: '#555', fontSize: '1.1rem', marginBottom: '2rem' }}>
+            We’ve received your vendor application and will review it shortly.  
+            You’ll get a confirmation email once your listing is active.
+          </p>
+          <a href="/" style={buttonStyle}>Back to Home</a>
+        </div>
       </main>
 
       {/* Footer */}
-      <footer
-        style={{
-          backgroundColor: '#f5f5f5',
-          padding: '1rem',
-          textAlign: 'center',
-          color: '#666',
-          marginTop: 'auto',
-        }}
-      >
-        <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1rem' }}>
+        <p style={{ fontSize: '12px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
+
     </div>
   );
 };
 
+const buttonStyle = {
+  backgroundColor: '#2b9348',
+  color: 'white',
+  padding: '0.75rem 1.5rem',
+  borderRadius: '8px',
+  textDecoration: 'none',
+  fontWeight: 'bold',
+  fontSize: '1rem',
+};
+
 export default ThankYouPage;
+
 
 
 

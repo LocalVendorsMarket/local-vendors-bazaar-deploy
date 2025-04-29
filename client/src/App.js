@@ -6,7 +6,8 @@ import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import ShopPage from './pages/ShopPage';
-import VendorSignupPage from './pages/VendorSignupPage'; // ✅ no { }
+import VendorSignupPage from './pages/VendorSignupPage';
+import ThankYouPage from './pages/ThankYouPage'; // ✅ Added this import
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -20,6 +21,7 @@ function App() {
       <Route path="/contact" element={<Contact cart={cart} />} />
       <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
       <Route path="/vendor-signup" element={<VendorSignupPage cart={cart} />} />
+      <Route path="/thank-you" element={<ThankYouPage />} /> {/* ✅ Added ThankYou route */}
     </Routes>
   );
 }
