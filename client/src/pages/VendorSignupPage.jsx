@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 
-const VendorSignupPage = ({ cart }) => {
+const VendorSignupThankYouPage = ({ cart }) => {
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       
@@ -24,30 +24,20 @@ const VendorSignupPage = ({ cart }) => {
         </div>
       </header>
 
-      {/* Banner */}
-      <div style={{ backgroundColor: '#00509e', padding: '2rem', textAlign: 'center', color: 'white' }}>
-        <h1 style={{ margin: 0, fontSize: '2rem' }}>Become a Vendor</h1>
-        <p style={{ marginTop: '0.5rem', fontSize: '1rem' }}>Join our marketplace and grow your local business!</p>
-      </div>
-
-      {/* Form Section */}
-      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>
-        <form 
-          action="https://formspree.io/f/movdqjgp"
-          method="POST"
-          style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '600px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', display: 'flex', flexDirection: 'column', gap: '1rem' }}
-        >
-          <input type="text" name="businessName" required placeholder="Business Name" style={inputBox} />
-          <input type="email" name="email" required placeholder="Email Address" style={inputBox} />
-          <input type="tel" name="phone" placeholder="Phone Number" style={inputBox} />
-          <input type="url" name="website" placeholder="Website (Optional)" style={inputBox} />
-          <textarea name="description" required placeholder="Tell us about your business..." rows="4" style={inputBox} />
-          <button type="submit" style={submitButtonStyle}>Submit Application</button>
-        </form>
+      {/* Main Thank You Content */}
+      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '3rem 1rem', textAlign: 'center' }}>
+        <div style={{ backgroundColor: 'white', padding: '3rem 2rem', borderRadius: '12px', maxWidth: '600px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h1 style={{ color: '#003366', marginBottom: '1.5rem', fontSize: '2rem' }}>Thank You for Signing Up!</h1>
+          <p style={{ color: '#555', fontSize: '1.1rem', marginBottom: '2rem' }}>
+            Your vendor application has been received.<br />
+            Our team will review it and get back to you shortly.
+          </p>
+          <a href="/" style={buttonStyle}>Return to Home</a>
+        </div>
       </main>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1rem' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1.5rem 1rem', marginTop: '2rem' }}>
         <p style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
 
@@ -56,11 +46,27 @@ const VendorSignupPage = ({ cart }) => {
 };
 
 // Styles
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
-const inputBox = { width: '100%', padding: '12px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px' };
-const submitButtonStyle = { backgroundColor: '#00509e', color: 'white', padding: '12px', border: 'none', borderRadius: '8px', fontWeight: 'bold', fontSize: '16px', cursor: 'pointer' };
+const navLinkStyle = { 
+  color: 'white', 
+  fontWeight: 'bold', 
+  textDecoration: 'none', 
+  fontSize: '14px' 
+};
 
-export default VendorSignupPage;
+const buttonStyle = { 
+  display: 'inline-block', 
+  backgroundColor: '#00509e', 
+  color: 'white', 
+  padding: '12px 24px', 
+  borderRadius: '8px', 
+  textDecoration: 'none', 
+  fontWeight: 'bold', 
+  fontSize: '16px', 
+  marginTop: '1rem' 
+};
+
+export default VendorSignupThankYouPage;
+
 
 
 
