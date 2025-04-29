@@ -17,10 +17,72 @@ const VendorSignupPage = ({ cart }) => {
           <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
         </nav>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒 {cart?.length >
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
+        </div>
+      </header>
 
+      {/* Vendor Signup Form */}
+      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '3rem 1rem' }}>
+        <div style={{ backgroundColor: 'white', padding: '3rem', borderRadius: '12px', maxWidth: '600px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h1 style={{ color: '#003366', marginBottom: '1rem', textAlign: 'center' }}>Become a Vendor</h1>
+          <p style={{ color: '#555', marginBottom: '2rem', textAlign: 'center' }}>
+            Join Local Vendors Bazaar today and start reaching new customers!
+          </p>
 
+          <form 
+            action="https://formspree.io/f/movdqjgp" 
+            method="POST" 
+            style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
+          >
+            <input type="hidden" name="_redirect" value="https://www.localvendorsbazaar.com/vendor-thankyou" />
 
+            <input type="text" name="businessName" required placeholder="Business Name" style={inputBox} />
+            <input type="email" name="email" required placeholder="you@example.com" style={inputBox} />
+            <input type="tel" name="phone" placeholder="123-456-7890" style={inputBox} />
+            <input type="url" name="website" placeholder="https://yourbusiness.com" style={inputBox} />
+            <textarea name="description" required placeholder="Tell us about your business..." rows="4" style={inputBox} />
+            
+            <button type="submit" style={submitButtonStyle}>Submit Application</button>
+          </form>
+        </div>
+      </main>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '1rem', textAlign: 'center' }}>
+        <p style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
+    </div>
+  );
+};
+
+// Styles
+const navLinkStyle = {
+  color: 'white',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  fontSize: '14px'
+};
+
+const inputBox = {
+  width: '100%',
+  padding: '0.75rem',
+  borderRadius: '8px',
+  border: '1px solid #ccc',
+  fontSize: '1rem'
+};
+
+const submitButtonStyle = {
+  backgroundColor: '#003366',
+  color: 'white',
+  padding: '0.75rem',
+  borderRadius: '8px',
+  border: 'none',
+  fontWeight: 'bold',
+  fontSize: '1rem',
+  cursor: 'pointer'
+};
+
+export default VendorSignupPage;
 
 
 
