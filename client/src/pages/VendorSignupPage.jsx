@@ -1,9 +1,10 @@
 import React from 'react';
 import logo from '../assets/logo.png';
 
-const VendorSignupThankYouPage = ({ cart }) => {
+const VendorSignupPage = ({ cart }) => {
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      
       {/* Navigation */}
       <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
@@ -16,35 +17,8 @@ const VendorSignupThankYouPage = ({ cart }) => {
           <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
         </nav>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-        </div>
-      </header>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒 {cart?.length >
 
-      {/* Main Thank You Content */}
-      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '3rem 1rem', textAlign: 'center' }}>
-        <div style={{ backgroundColor: 'white', padding: '3rem 2rem', borderRadius: '12px', maxWidth: '600px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-          <h1 style={{ color: '#003366', marginBottom: '1.5rem', fontSize: '2rem' }}>Thank You for Signing Up with Local Vendors Bazaar!</h1>
-          <p style={{ color: '#555', fontSize: '1.1rem', marginBottom: '2rem' }}>
-            We’re excited to have you onboard.<br />
-            Let’s make a difference together — one product, one neighborhood at a time. 🌟
-          </p>
-          <a href="/" style={buttonStyle}>Return to Home</a>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1rem' }}>
-        <p style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
-    </div>
-  );
-};
-
-// Styles
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
-const buttonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
-
-export default VendorSignupThankYouPage;
 
 
 
