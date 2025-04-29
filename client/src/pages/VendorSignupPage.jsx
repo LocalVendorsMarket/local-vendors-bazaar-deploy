@@ -47,6 +47,7 @@ const VendorSignupPage = ({ cart }) => {
     </div>
   );
 };
+export default VendorSignupPage;
 
 
 
