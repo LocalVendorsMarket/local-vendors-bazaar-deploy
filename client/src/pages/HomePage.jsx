@@ -180,7 +180,7 @@ const HomePage = ({ cart, setCart }) => {
     </div>
     <div>
       <h3>Make Money with Us</h3>
-      <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
+      <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a>
       <a href="/advertise" style={footerLinkStyle}>Advertise Products</a>
     </div>
     <div>
