@@ -8,7 +8,7 @@ const HomePage = ({ cart, setCart }) => {
     'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
     'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
     'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
-    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents'
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
   const allProducts = [
@@ -68,7 +68,7 @@ const HomePage = ({ cart, setCart }) => {
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
 
-      {/* Nav Bar */}
+      {/* Header */}
       <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
         <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
@@ -94,7 +94,7 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Sub Nav Bar */}
+      {/* Subcategories */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
         {categories.map((cat) => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
@@ -105,7 +105,9 @@ const HomePage = ({ cart, setCart }) => {
 
       {/* Advertise Banner */}
       <div style={{ backgroundColor: '#003366', textAlign: 'center', padding: '2rem 1rem', margin: '1rem 0' }}>
-        <h1 style={{ color: 'white', fontSize: '1.75rem', margin: 0 }}>Advertise Here! Promote Your Products on Local Vendors Bazaar<sup>®</sup></h1>
+        <h1 style={{ color: 'white', fontSize: '1.75rem', margin: 0 }}>
+          Promote your products and get visibility. Join Local Vendors Bazaar today.
+        </h1>
       </div>
 
       {/* Product Rows */}
@@ -127,44 +129,6 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       ))}
 
-      {/* Modals */}
-      {isSignInModalOpen && (
-        <div style={modalStyle}>
-          <div style={modalContentStyle}>
-            <h2 style={{ color: '#003366' }}>{isNewCustomer ? 'Create Account' : 'Sign In'}</h2>
-            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && <input type="text" placeholder="Full Name" style={inputStyle} required />}
-              <input type="email" placeholder="Email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} style={inputStyle} required />
-              {isNewCustomer && <input type="password" placeholder="Create Password" style={inputStyle} required />}
-              <button type="submit" style={buttonStyle}>{isNewCustomer ? 'Create your account' : 'Continue'}</button>
-            </form>
-            {!isNewCustomer && (
-              <p onClick={() => setIsNewCustomer(true)} style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#007185', textDecoration: 'underline', cursor: 'pointer' }}>
-                New customer? Start here.
-              </p>
-            )}
-            <button onClick={() => { setIsSignInModalOpen(false); setIsNewCustomer(false); }} style={{ marginTop: '1.5rem', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {isUpdateLocationOpen && (
-        <div style={modalStyle}>
-          <div style={modalContentStyle}>
-            <h2 style={{ color: '#003366' }}>Update Location</h2>
-            <form onSubmit={handleUpdateLocationSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter new Zip Code" style={inputStyle} required />
-              <button type="submit" style={buttonStyle}>Update</button>
-              <button type="button" onClick={() => setIsUpdateLocationOpen(false)} style={{ backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                Cancel
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
@@ -178,9 +142,16 @@ const HomePage = ({ cart, setCart }) => {
           </div>
           <div>
             <h3>Advertise With Us</h3>
-            <a href="/advertise-products" style={footerLinkStyle}>Advertise Products</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
             <a href="/advertise-services" style={footerLinkStyle}>Advertise Services</a><br />
             <a href="/advertise-events" style={footerLinkStyle}>Advertise Events</a>
+          </div>
+          <div>
+            <h3>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
+            <a href="/help" style={footerLinkStyle}>Help Center</a>
           </div>
           <div>
             <h3>Stay Connected</h3>
@@ -193,12 +164,10 @@ const HomePage = ({ cart, setCart }) => {
           © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
         </p>
       </footer>
-
     </div>
   );
 };
 
-// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
 const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
@@ -211,13 +180,10 @@ const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0
 const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
 const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
-const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' };
-const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px' };
-const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
