@@ -6,7 +6,7 @@ import Blog from './pages/Blog';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import ShopPage from './pages/ShopPage';
-import VendorSignupPage from './pages/VendorSignupPage'; // ✅ Correct new import
+import VendorSignupPage from './pages/VendorSignupPage'; // ✅ no { }
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -19,12 +19,13 @@ function App() {
       <Route path="/testimonials" element={<Testimonials cart={cart} />} />
       <Route path="/contact" element={<Contact cart={cart} />} />
       <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
-      <Route path="/vendor-signup" element={<VendorSignupPage cart={cart} />} /> {/* ✅ Added properly */}
+      <Route path="/vendor-signup" element={<VendorSignupPage cart={cart} />} />
     </Routes>
   );
 }
 
 export default App;
+
 
 
 
