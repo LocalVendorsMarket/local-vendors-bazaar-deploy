@@ -1,15 +1,19 @@
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
+import React, { useState, useRef } from 'react';
+import logo from '../assets/logo.png';
+
 const HomePage = ({ cart, setCart }) => {
   const categories = [
-    'All', 'Women's Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
+    'All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
     'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
     'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
     'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
     'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
+
 
   const allProducts = [
     { id: 1, name: 'Embroidered Kurti', category: 'Women's Apparel', price: '$30', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Kurti' },
