@@ -13,13 +13,14 @@ const HomePage = ({ cart, setCart }) => {
 
 
   const allProducts = [
-    { id: 1, name: 'Embroidered Kurti', category: 'Women's Apparel', price: '$30', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Kurti' },
-    { id: 2, name: 'Gold Plated Earrings', category: 'Jewelry', price: '$22', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Earrings' },
-    { id: 3, name: 'Organic Lip Balm', category: 'Makeup', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Lip+Balm' },
-    { id: 4, name: 'Handwoven Shawl', category: 'Women's Apparel', price: '$45', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Shawl' },
-    { id: 5, name: 'Natural Foundation', category: 'Makeup', price: '$20', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Foundation' },
-    { id: 6, name: 'Handcrafted Ring', category: 'Jewelry', price: '$28', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Ring' }
+    { id: 1, name: "Embroidered Kurti", category: "Women's Apparel", price: "$30", rating: "⭐⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Kurti" },
+    { id: 2, name: "Gold Plated Earrings", category: "Jewelry", price: "$22", rating: "⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Earrings" },
+    { id: 3, name: "Organic Lip Balm", category: "Makeup", price: "$12", rating: "⭐⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Lip+Balm" },
+    { id: 4, name: "Handwoven Shawl", category: "Women's Apparel", price: "$45", rating: "⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Shawl" },
+    { id: 5, name: "Natural Foundation", category: "Makeup", price: "$20", rating: "⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Foundation" },
+    { id: 6, name: "Handcrafted Ring", category: "Jewelry", price: "$28", rating: "⭐⭐⭐⭐⭐", image: "https://via.placeholder.com/300x200?text=Ring" }
   ];
+  
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
