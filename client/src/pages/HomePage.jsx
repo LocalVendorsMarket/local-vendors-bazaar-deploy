@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
-import React, { useState, useRef } from 'react';
-import logo from '../assets/logo.png';
-
 const HomePage = ({ cart, setCart }) => {
   const categories = [
     'All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
