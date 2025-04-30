@@ -8,7 +8,7 @@ const ShopPage = ({ cart, setCart }) => {
     'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
     'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
     'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
-    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents'
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
   const allProducts = [
@@ -27,18 +27,12 @@ const ShopPage = ({ cart, setCart }) => {
 
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
-  const filteredProducts = allProducts.filter((product) => {
-    const matchesCategory = selectedCategory === 'All' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter(product => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    if (direction === 'left') {
-      productRefs[row].current.scrollBy({ left: -300, behavior: 'smooth' });
-    } else {
-      productRefs[row].current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
+    productRefs[row].current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
   };
 
   const handleVendorZipSearch = (e) => {
@@ -72,7 +66,7 @@ const ShopPage = ({ cart, setCart }) => {
 
       {/* Subcategories */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-        {categories.map((cat) => (
+        {categories.map(cat => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
             {cat}
           </span>
@@ -80,10 +74,10 @@ const ShopPage = ({ cart, setCart }) => {
       </div>
 
       {/* Product Rows */}
-      {[0, 1, 2].map((row) => (
+      {[0, 1, 2].map(row => (
         <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
           <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
+          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem' }}>
             {filteredProducts.map(product => (
               <div key={product.id} style={productCardStyle}>
                 <img src={product.image} alt={product.name} style={productImageStyle} />
@@ -98,7 +92,7 @@ const ShopPage = ({ cart, setCart }) => {
         </div>
       ))}
 
-      {/* Footer */}
+      {/* Footer (now consistent with homepage) */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
           <div>
@@ -106,12 +100,15 @@ const ShopPage = ({ cart, setCart }) => {
             <a href="/about" style={footerLinkStyle}>About Us</a><br />
             <a href="/blog" style={footerLinkStyle}>Blog</a><br />
             <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
+            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
             <a href="/careers" style={footerLinkStyle}>Careers</a>
           </div>
           <div>
             <h3>Make Money with Us</h3>
             <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a>
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
           </div>
           <div>
             <h3>Buyer Resources</h3>
@@ -131,7 +128,6 @@ const ShopPage = ({ cart, setCart }) => {
           © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
         </p>
       </footer>
-
     </div>
   );
 };
@@ -152,6 +148,7 @@ const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ShopPage;
+
 
 
 
