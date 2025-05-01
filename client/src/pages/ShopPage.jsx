@@ -2,138 +2,107 @@ import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
-  const categories = [
-    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
-    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
-    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
-    'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
-    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
-    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
+  const [searchQuery, setSearchQuery] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedRating, setSelectedRating] = useState(null);
+
+  const categories = ['All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Groceries', 'Electronics', 'Health', 'Toys', 'Shoes'];
+
+  const allProducts = [
+    { id: 1, name: 'Embroidered Kurti', category: 'Women’s Apparel', price: 30, rating: 5, stock: 3, image: 'https://via.placeholder.com/300x200?text=Kurti' },
+    { id: 2, name: 'Gold Earrings', category: 'Jewelry', price: 22, rating: 4, stock: 8, image: 'https://via.placeholder.com/300x200?text=Earrings' },
+    { id: 3, name: 'Organic Lip Balm', category: 'Makeup', price: 12, rating: 5, stock: 15, image: 'https://via.placeholder.com/300x200?text=Lip+Balm' },
+    { id: 4, name: 'Organic T-Shirt', category: 'Women’s Apparel', price: 18, rating: 3, stock: 5, image: 'https://via.placeholder.com/300x200?text=T-Shirt' },
+    { id: 5, name: 'Makeup Kit', category: 'Makeup', price: 40, rating: 4, stock: 2, image: 'https://via.placeholder.com/300x200?text=Makeup+Kit' },
+    { id: 6, name: 'Running Shoes', category: 'Shoes', price: 50, rating: 5, stock: 10, image: 'https://via.placeholder.com/300x200?text=Shoes' }
   ];
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const filteredProducts = allProducts.filter(p => {
+    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
+    const matchesRating = selectedRating ? p.rating === selectedRating : true;
+    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
+    return matchesCategory && matchesRating && matchesSearch;
+  });
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+  };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
-      {/* Nav Bar */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white' }}>
-        <a href="/">
-          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '1rem' }} />
-        </a>
-        <a href="/" style={navLinkStyle}>Home</a>
-        <div style={{ flex: 1 }}></div>
-        <div style={{ position: 'relative', marginRight: '1rem' }}>
+    <div style={{ display: 'flex', minHeight: '100vh', fontFamily: 'sans-serif', backgroundColor: '#f8f8f8' }}>
+      {/* Sidebar Filters */}
+      <aside style={{ width: '250px', background: '#fff', padding: '1rem', borderRight: '1px solid #ccc' }}>
+        <h3 style={{ color: '#003366' }}>Filter By</h3>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ fontWeight: 'bold' }}>Category</label>
+          <select style={{ width: '100%', marginTop: '0.5rem' }} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+            {categories.map(cat => <option key={cat}>{cat}</option>)}
+          </select>
+        </div>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ fontWeight: 'bold' }}>Star Rating</label>
+          {[5, 4, 3, 2, 1].map(rating => (
+            <div key={rating}>
+              <input type="radio" id={`star-${rating}`} name="rating" value={rating} onChange={() => setSelectedRating(rating)} />
+              <label htmlFor={`star-${rating}`}>{'⭐'.repeat(rating)}</label>
+            </div>
+          ))}
+        </div>
+
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ fontWeight: 'bold' }}>Zip Code</label>
           <input
             type="text"
+            placeholder="Enter zip"
+            value={zipCode}
+            onChange={(e) => setZipCode(e.target.value)}
+            style={{ width: '100%', marginTop: '0.5rem', padding: '0.5rem' }}
+          />
+        </div>
+      </aside>
+
+      {/* Main Shop Area */}
+      <main style={{ flex: 1, padding: '2rem' }}>
+        {/* Nav Bar */}
+        <header style={{ marginBottom: '1.5rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+          <a href="/"><img src={logo} alt="Logo" style={{ height: '40px' }} /></a>
+          <input
+            type="text"
+            placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search products..."
-            style={searchInputStyle}
+            style={{ flex: 1, margin: '0 1rem', padding: '0.6rem 2rem 0.6rem 0.75rem', borderRadius: '8px', border: '1px solid #ccc' }}
           />
-          <span style={searchIconStyle}>🔍</span>
-        </div>
-        <a href="/signin" style={navLinkStyle}>Sign In</a>
-        <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', marginLeft: '1rem' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-      </header>
+          <a href="/signin" style={{ marginRight: '1rem', color: '#003366', fontWeight: 'bold' }}>Sign In</a>
+          <a href="/cart" style={{ fontSize: '24px' }}>🛒</a>
+        </header>
 
-      {/* Layout */}
-      <div style={{ display: 'flex' }}>
-        {/* Sidebar Filters */}
-        <aside style={{ width: '250px', backgroundColor: '#ffffff', padding: '1rem', borderRight: '1px solid #ddd' }}>
-          <h3>Filter By</h3>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Category:</label>
-            <select style={selectStyle} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>{cat}</option>
-              ))}
-            </select>
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Zip Code:</label>
-            <input
-              type="text"
-              value={vendorZip}
-              onChange={(e) => setVendorZip(e.target.value)}
-              placeholder="Enter Zip"
-              style={zipInputStyle}
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Price Range:</label>
-            <div>
-              <input type="checkbox" /> Under $25<br />
-              <input type="checkbox" /> $25 to $50<br />
-              <input type="checkbox" /> $50 to $100<br />
-              <input type="checkbox" /> $100 & Above
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Rating:</label>
-            <div>
-              <input type="checkbox" /> ⭐⭐⭐⭐⭐<br />
-              <input type="checkbox" /> ⭐⭐⭐⭐ & Up<br />
-              <input type="checkbox" /> ⭐⭐⭐ & Up
-            </div>
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <label>Shipping:</label>
-            <div>
-              <input type="checkbox" /> Free Shipping<br />
-              <input type="checkbox" /> Pickup Available
-            </div>
-          </div>
-        </aside>
-
-        {/* Main Content */}
-        <main style={{ flex: 1, padding: '2rem' }}>
-          <h2>Featured Products</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
-            {[...Array(12).keys()].map((id) => (
-              <div key={id} style={productCardStyle}>
-                <img src={`https://via.placeholder.com/300x200?text=Product+${id + 1}`} alt={`Product ${id + 1}`} style={productImageStyle} />
-                <h3 style={productNameStyle}>Product {id + 1}</h3>
-                <p style={productRatingStyle}>⭐⭐⭐⭐ · 200 sold this month · 5 left</p>
-                <p style={productPriceStyle}>$29.99</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <button style={productButtonStyle}>Add to Cart</button>
-                  <a href="#" style={{ textDecoration: 'underline', color: '#003366', fontSize: '0.85rem' }}>See Customer Reviews</a>
-                </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
+          {filteredProducts.map(product => (
+            <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '1rem', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' }}>
+              <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+              <h3 style={{ color: '#003366', margin: '0.5rem 0' }}>{product.name}</h3>
+              <p>{'⭐'.repeat(product.rating)}</p>
+              <p style={{ fontWeight: 'bold' }}>${product.price}</p>
+              <p style={{ fontSize: '13px', color: '#666' }}>Only {product.stock} left in stock!</p>
+              <p style={{ fontSize: '12px', color: '#00509e' }}>Sold this month: {10 + product.id}</p>
+              <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
+                <button style={{ backgroundColor: '#003366', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}>Learn More</button>
+                <button onClick={() => addToCart(product)} style={{ backgroundColor: '#003366', color: '#fff', border: 'none', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}>Add to Cart</button>
               </div>
-            ))}
-          </div>
-        </main>
-      </div>
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
-        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
+            </div>
+          ))}
+        </div>
+      </main>
     </div>
   );
 };
 
-// Styles
-const navLinkStyle = { color: 'white', fontWeight: 'bold', margin: '0 10px', textDecoration: 'none' };
-const searchInputStyle = { width: '500px', padding: '10px 40px 10px 12px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px' };
-const searchIconStyle = { position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', fontSize: '16px', color: '#666' };
-const zipInputStyle = { width: '80px', padding: '6px', borderRadius: '6px', border: '1px solid #ccc' };
-const selectStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
-const productCardStyle = { backgroundColor: '#fff', borderRadius: '10px', padding: '1rem', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', textAlign: 'center' };
-const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '6px' };
-const productNameStyle = { color: '#003366', fontSize: '1.1rem', margin: '0.5rem 0' };
-const productRatingStyle = { color: '#555', fontSize: '0.9rem', marginBottom: '0.5rem' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333', fontSize: '1rem' };
-const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.9rem' };
-
 export default ShopPage;
+
 
 
 
