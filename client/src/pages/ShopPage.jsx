@@ -11,29 +11,25 @@ const ShopPage = ({ cart, setCart }) => {
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
-  const allProducts = [
-    { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
-    { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
-    { id: 3, name: 'Organic T-Shirt', category: 'Clothing', price: '$18', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
-    { id: 4, name: 'Custom Artwork', category: 'Art', price: '$80', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Artwork' },
-    { id: 5, name: 'Gourmet Pizza', category: 'Restaurants', price: '$15', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Pizza' },
-    { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' }
-  ];
+  const allProducts = Array.from({ length: 12 }, (_, i) => ({
+    id: i + 1,
+    name: `Product ${i + 1}`,
+    category: categories[(i % categories.length)],
+    price: `$${(i + 1) * 5}`,
+    rating: '⭐⭐⭐⭐',
+    sold: 25 + i,
+    remaining: 100 - i * 2,
+    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
+  }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchCategory, setSearchCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [vendorZip, setVendorZip] = useState('');
-
-  const productRefs = [useRef(null), useRef(null), useRef(null)];
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
-    : allProducts.filter(product => product.category === selectedCategory);
-
-  const scrollProducts = (row, direction) => {
-    productRefs[row].current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
-  };
+    : allProducts.filter((product) => product.category === selectedCategory);
 
   const handleVendorZipSearch = (e) => {
     e.preventDefault();
@@ -41,59 +37,94 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff' }}>
       {/* Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
-          <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-        </div>
+        <a href="/" style={{ ...navLinkStyle, marginLeft: '2rem' }}>Home</a>
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Search products..."
+          style={{ width: '600px', padding: '8px 40px 8px 12px', marginLeft: '1rem', borderRadius: '8px', fontSize: '14px' }}
+        />
+        <span style={{ position: 'relative', right: '32px', fontSize: '18px', cursor: 'pointer' }}>🔍</span>
+        <span onClick={() => setIsSignInModalOpen(true)} style={{ ...navLinkStyle, marginLeft: 'auto' }}>Sign In</span>
+        <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', marginLeft: '1rem', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
       </header>
 
-      {/* Subcategories */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      {/* Sub Nav Bar */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', gap: '20px', flexWrap: 'nowrap', overflowX: 'auto' }}>
         {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
-            {cat}
-          </span>
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', whiteSpace: 'nowrap' }}>{cat}</span>
         ))}
       </div>
 
-      {/* Product Rows */}
-      {[0, 1, 2].map(row => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem' }}>
-            {filteredProducts.map(product => (
-              <div key={product.id} style={productCardStyle}>
-                <img src={product.image} alt={product.name} style={productImageStyle} />
-                <h2 style={productNameStyle}>{product.name}</h2>
-                <p style={productRatingStyle}>{product.rating}</p>
-                <p style={productPriceStyle}>{product.price}</p>
-                <button style={productButtonStyle}>Add to Cart</button>
-              </div>
-            ))}
+      {/* Filter & Product Grid */}
+      <div style={{ display: 'flex', padding: '2rem' }}>
+        {/* Sidebar Filters */}
+        <aside style={{ width: '250px', marginRight: '2rem' }}>
+          <h3 style={{ color: '#003366' }}>Filter By</h3>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Category</label>
+          <select style={{ width: '100%', padding: '0.5rem' }}>
+            {categories.map(cat => <option key={cat}>{cat}</option>)}
+          </select>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Price</label>
+          <div>
+            <label><input type="checkbox" /> Under $25</label><br />
+            <label><input type="checkbox" /> $25 - $50</label><br />
+            <label><input type="checkbox" /> $50 - $100</label><br />
+            <label><input type="checkbox" /> Over $100</label>
           </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Zip Code</label>
+          <input type="text" placeholder="Enter Zip" style={{ width: '100%', padding: '0.5rem' }} />
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Rating</label>
+          <div>
+            <label><input type="checkbox" /> ⭐⭐⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐</label>
+          </div>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Availability</label>
+          <div>
+            <label><input type="checkbox" /> In Stock</label><br />
+            <label><input type="checkbox" /> Out of Stock</label>
+          </div>
+          <button style={{ marginTop: '1rem', backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>Search</button>
+        </aside>
+
+        {/* Product Grid */}
+        <section style={{ flexGrow: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
+          {filteredProducts.map(product => (
+            <div key={product.id} style={{ backgroundColor: 'white', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' }}>
+              <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+              <h2 style={{ color: '#003366' }}>{product.name}</h2>
+              <p>{product.rating}</p>
+              <p>{product.price}</p>
+              <p style={{ fontSize: '13px', color: '#003366' }}>{product.sold} sold this month</p>
+              <p style={{ fontSize: '13px', color: '#003366' }}>{product.remaining} left</p>
+              <button style={{ backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Add to Cart</button>
+            </div>
+          ))}
+        </section>
+      </div>
+
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' }}>
+            <h2 style={{ color: '#003366' }}>Sign In</h2>
+            <input type="email" placeholder="Email" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%', marginBottom: '1rem' }} required />
+            <input type="password" placeholder="Password" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%', marginBottom: '1rem' }} required />
+            <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>Continue</button>
+            <button onClick={() => setIsSignInModalOpen(false)} style={{ marginTop: '1rem', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Cancel</button>
+          </div>
         </div>
-      ))}
+      )}
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
           <div>
             <h3>Get to Know Us</h3>
@@ -132,19 +163,7 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
-// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
-const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' };
-const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
-const productRatingStyle = { color: '#666', marginBottom: '8px' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
-const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ShopPage;
