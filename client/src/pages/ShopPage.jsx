@@ -1,115 +1,86 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
-const ShopPage = ({ cart, setCart }) => {
+const ShopPage = ({ cart }) => {
   const categories = [
     'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
     'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
     'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
     'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
     'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
-    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants', 'Makeup', 'Books'
   ];
 
-  const departments = ['Apparel', 'Electronics', 'Beauty', 'Home', 'Toys', 'Grocery'];
-
-  const allProducts = Array.from({ length: 12 }, (_, i) => ({
-    id: i + 1,
-    name: `Product ${i + 1}`,
-    category: categories[i % categories.length],
-    price: `$${(i + 1) * 10}`,
-    rating: '⭐⭐⭐⭐',
-    sold: 20 + i,
-    remaining: 100 - i * 3,
-    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
-  }));
-
-  const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [zipCode, setZipCode] = useState('');
-  const [selectedDept, setSelectedDept] = useState('');
-
-  const filteredProducts = selectedCategory === 'All' ? allProducts : allProducts.filter(p => p.category === selectedCategory);
+  const [selectedDepartment, setSelectedDepartment] = useState('All');
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+    <div style={{ fontFamily: 'sans-serif' }}>
       {/* Nav Bar */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: 'white' }}>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <input
-          type="text"
-          placeholder="Search Products..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ flex: '1', maxWidth: '400px', margin: '0 1rem', padding: '0.5rem', borderRadius: '8px' }}
-        />
-        <span role="img" aria-label="search">🔍</span>
-        <a href="/" style={navLinkStyle}>Home</a>
-        <a href="#" style={navLinkStyle}>Sign In</a>
-        <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+        <div style={{ flexGrow: 1, margin: '0 1rem', position: 'relative' }}>
+          <input
+            type="text"
+            placeholder="Search products..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            style={{ width: '100%', padding: '10px 40px 10px 12px', borderRadius: '8px', fontSize: '14px' }}
+          />
+          <span style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', color: '#003366', background: '#fff', padding: '4px', borderRadius: '50%', cursor: 'pointer' }}>🔍</span>
+        </div>
+        <nav style={{ display: 'flex', gap: '15px' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/signin" style={navLinkStyle}>Sign In</a>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+        </nav>
       </header>
 
-      {/* Sub Nav */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', overflowX: 'auto' }}>
-        {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', margin: '0 10px', cursor: 'pointer' }}>{cat}</span>
+      {/* Sub Nav Bar */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: '1rem' }}>
+        {categories.map((cat) => (
+          <span key={cat} style={{ color: 'white', whiteSpace: 'nowrap', cursor: 'pointer', fontSize: '14px' }}>{cat}</span>
         ))}
       </div>
 
-      {/* Main Section */}
-      <div style={{ display: 'flex' }}>
-        {/* Sidebar Filter */}
-        <aside style={{ width: '250px', backgroundColor: '#fff', padding: '1rem', borderRight: '1px solid #ccc' }}>
-          <h3>Filter By</h3>
-          <label>Category</label>
-          <select style={filterStyle} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-            {categories.map(cat => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          <label>Zip Code</label>
-          <input type="text" style={{ ...filterStyle, width: '100%' }} value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
-          <label>Price Range</label>
-          <div>
-            <input type="checkbox" /> Under $25<br />
-            <input type="checkbox" /> $25 to $50<br />
-            <input type="checkbox" /> $50 to $100<br />
-            <input type="checkbox" /> Over $100
-          </div>
-          <label>Ratings</label>
-          <div>
-            <input type="checkbox" /> ⭐<br />
-            <input type="checkbox" /> ⭐⭐<br />
-            <input type="checkbox" /> ⭐⭐⭐<br />
-            <input type="checkbox" /> ⭐⭐⭐⭐<br />
-            <input type="checkbox" /> ⭐⭐⭐⭐⭐
-          </div>
-          <label>Department</label>
-          <select style={filterStyle} value={selectedDept} onChange={(e) => setSelectedDept(e.target.value)}>
-            <option value="">Select Department</option>
-            {departments.map(dept => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
-          </select>
-          <button style={{ marginTop: '1rem', padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '8px', border: 'none' }}>Search</button>
-        </aside>
-
-        {/* Product Grid */}
-        <main style={{ flex: 1, padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
-          {filteredProducts.map(product => (
-            <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
-              <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-              <h3 style={{ color: '#003366' }}>{product.name}</h3>
-              <p>{product.price}</p>
-              <p>{product.rating} · {product.sold} sold · {product.remaining} left</p>
-              <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', border: 'none' }}>Add to Cart</button>
-            </div>
+      {/* Filter Bar */}
+      <aside style={{ padding: '1rem', backgroundColor: '#f1f1f1', display: 'flex', flexDirection: 'column', gap: '1rem', width: '250px' }}>
+        <label style={filterLabelStyle}>Category</label>
+        <select style={filterSelectStyle}>
+          {categories.map((cat) => (
+            <option key={cat} value={cat}>{cat}</option>
           ))}
-        </main>
-      </div>
+        </select>
+
+        <label style={filterLabelStyle}>Zip Code</label>
+        <input
+          type="text"
+          value={zipCode}
+          onChange={(e) => setZipCode(e.target.value)}
+          placeholder="Enter Zip Code"
+          style={{ ...filterInputStyle, width: '120px' }}
+        />
+
+        <label style={filterLabelStyle}>Department</label>
+        <select
+          value={selectedDepartment}
+          onChange={(e) => setSelectedDepartment(e.target.value)}
+          style={filterSelectStyle}
+        >
+          <option value="All">All Departments</option>
+          <option value="Women's Apparel">Women's Apparel</option>
+          <option value="Electronics">Electronics</option>
+          <option value="Services">Services</option>
+          <option value="Books">Books</option>
+          <option value="Beauty">Beauty</option>
+        </select>
+
+        <button style={{ ...searchButtonStyle, backgroundColor: '#003366', color: 'white' }}>Search</button>
+      </aside>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
           <div>
             <h3>Get to Know Us</h3>
@@ -148,11 +119,15 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', margin: '0 1rem' };
-const filterStyle = { width: '100%', padding: '0.5rem', marginBottom: '1rem', borderRadius: '8px', border: '1px solid #ccc' };
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
+const filterLabelStyle = { fontWeight: 'bold', fontSize: '14px' };
+const filterSelectStyle = { width: '100%', padding: '8px', borderRadius: '6px' };
+const filterInputStyle = { padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
+const searchButtonStyle = { padding: '10px', borderRadius: '8px', border: 'none', fontSize: '14px', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ShopPage;
+
 
 
 
