@@ -19,6 +19,7 @@ const ShopPage = ({ cart, setCart }) => {
     rating: '⭐⭐⭐⭐',
     sold: 25 + i,
     remaining: 100 - i * 2,
+    reviews: 10 + i * 3,
     image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
   }));
 
@@ -86,11 +87,12 @@ const ShopPage = ({ cart, setCart }) => {
             <label><input type="checkbox" /> ⭐⭐</label><br />
             <label><input type="checkbox" /> ⭐</label>
           </div>
-          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Availability</label>
-          <div>
-            <label><input type="checkbox" /> In Stock</label><br />
-            <label><input type="checkbox" /> Out of Stock</label>
-          </div>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Search by Departments</label>
+          <select style={{ width: '100%', padding: '0.5rem' }}>
+            {[ 'Art', 'Auto Repair', 'Bakeries', 'Clothing', 'Coffee Shops', 'Florists', 'Food', 'Furniture', 'Grocery Stores', 'Health & Beauty', 'Home Goods', 'Jewelry', 'Makeup', 'Music & Bands', 'Pet Services', 'Real Estate Agents', 'Restaurants', 'Services', 'Tutors', 'Yoga Studios'].sort().map(dep => (
+              <option key={dep}>{dep}</option>
+            ))}
+          </select>
           <button style={{ marginTop: '1rem', backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', cursor: 'pointer' }}>Search</button>
         </aside>
 
@@ -104,6 +106,7 @@ const ShopPage = ({ cart, setCart }) => {
               <p>{product.price}</p>
               <p style={{ fontSize: '13px', color: '#003366' }}>{product.sold} sold this month</p>
               <p style={{ fontSize: '13px', color: '#003366' }}>{product.remaining} left</p>
+              <p style={{ fontSize: '13px', color: '#007185', textDecoration: 'underline', cursor: 'pointer' }}>See Customer Reviews ({product.reviews})</p>
               <button style={{ backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Add to Cart</button>
             </div>
           ))}
@@ -167,6 +170,7 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'unde
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ShopPage;
+
 
 
 
