@@ -1,146 +1,137 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
-const ShopPage = ({ cart, setCart }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+const ShopPage = ({ cart }) => {
   const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
-  const [selectedPrice, setSelectedPrice] = useState('');
-  const [selectedStars, setSelectedStars] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   const categories = [
-    'All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
-    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners', 'Henna Tattoos', 'Bakeries',
-    'Coffee Shops', 'Florists', 'Furniture', 'Grocery Stores', 'Health & Beauty', 'Mobile Repair', 'Pet Services',
-    'Photobooth Rentals', 'Tutors', 'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
+    'All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Home Goods', 'Restaurants', 'Services', 'Grocery', 'Toys', 'Electronics'
   ];
 
-  const products = new Array(12).fill(null).map((_, idx) => ({
-    id: idx + 1,
-    name: `Product ${idx + 1}`,
-    category: categories[(idx + 1) % categories.length],
-    price: `$${(10 + idx * 2)}`,
+  const products = Array.from({ length: 12 }).map((_, i) => ({
+    id: i + 1,
+    name: `Product ${i + 1}`,
+    category: categories[i % categories.length],
+    price: `$${10 + i * 3}`,
     rating: '⭐⭐⭐⭐',
-    sold: `${10 + idx} sold this month`,
-    remaining: `${20 - idx} remaining`,
-    image: `https://via.placeholder.com/300x200?text=Product+${idx + 1}`,
+    sold: 50 + i * 2,
+    remaining: 100 - i * 5,
+    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
   }));
 
-  const filtered = products.filter(
-    (p) =>
-      (selectedCategory === 'All' || p.category === selectedCategory) &&
-      (!selectedPrice || p.price <= selectedPrice) &&
-      (!selectedStars || p.rating.length === parseInt(selectedStars))
+  const filteredProducts = products.filter(
+    (product) => selectedCategory === 'All' || product.category === selectedCategory
   );
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff' }}>
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', justifyContent: 'space-between', color: 'white', alignItems: 'center' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f4f6f8' }}>
+      {/* Nav Bar */}
+      <header style={{ backgroundColor: '#003366', color: 'white', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
-          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Local Vendors Bazaar</span>
+          <img src={logo} alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
         </a>
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={{ height: '35px', borderRadius: '8px', padding: '0 10px' }} />
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={{ height: '35px', width: '100px', borderRadius: '8px', padding: '0 10px' }} />
-          <a href="/vendor-signup" style={{ color: 'white', textDecoration: 'underline' }}>Become a Vendor</a>
-          <a href="/cart" style={{ fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)', textDecoration: 'none', color: 'white' }}>🛒</a>
+        <input
+          type="text"
+          placeholder="Search products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{ padding: '8px', borderRadius: '6px', border: '1px solid #ccc', width: '300px' }}
+        />
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/signin" style={navLinkStyle}>Sign In</a>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
         </nav>
       </header>
 
       <div style={{ display: 'flex' }}>
-        <aside style={{ width: '240px', background: '#f5f5f5', padding: '1rem' }}>
-          <h3>Filter By</h3>
-          <label>Category:</label><br />
-          <select style={{ width: '100%' }} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
-            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
-          </select>
-          <br /><br />
+        {/* Sidebar Filter */}
+        <aside style={{ width: '250px', backgroundColor: '#fff', padding: '1rem', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
+          <h3 style={filterHeaderStyle}>Filter By</h3>
 
-          <label>Price:</label><br />
-          <select style={{ width: '100%' }} value={selectedPrice} onChange={(e) => setSelectedPrice(e.target.value)}>
-            <option value="">Any</option>
-            <option value="20">Under $20</option>
-            <option value="40">Under $40</option>
-            <option value="60">Under $60</option>
-            <option value="80">Under $80</option>
-          </select>
-          <br /><br />
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={filterLabelStyle}>Category</label>
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              style={filterSelectStyle}
+            >
+              {categories.map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
 
-          <label>Rating:</label><br />
-          <select style={{ width: '100%' }} value={selectedStars} onChange={(e) => setSelectedStars(e.target.value)}>
-            <option value="">Any</option>
-            <option value="5">★★★★★</option>
-            <option value="4">★★★★</option>
-            <option value="3">★★★</option>
-          </select>
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={filterLabelStyle}>Zip Code</label>
+            <input
+              type="text"
+              value={zipCode}
+              onChange={(e) => setZipCode(e.target.value)}
+              placeholder="Enter Zip"
+              style={filterInputStyle}
+            />
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={filterLabelStyle}>Price Range</label>
+            <div>
+              <input type="checkbox" id="p1" /><label htmlFor="p1"> Under $25</label><br />
+              <input type="checkbox" id="p2" /><label htmlFor="p2"> $25 to $50</label><br />
+              <input type="checkbox" id="p3" /><label htmlFor="p3"> $50 to $100</label><br />
+              <input type="checkbox" id="p4" /><label htmlFor="p4"> $100 & Above</label>
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <label style={filterLabelStyle}>Star Rating</label>
+            <div>
+              <input type="checkbox" id="r4" /><label htmlFor="r4"> ⭐⭐⭐⭐ & Up</label><br />
+              <input type="checkbox" id="r3" /><label htmlFor="r3"> ⭐⭐⭐ & Up</label>
+            </div>
+          </div>
         </aside>
 
-        <main style={{ flexGrow: 1, padding: '1rem' }}>
-          <h2 style={{ color: '#003366' }}>Explore Products</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1rem' }}>
-            {filtered.map((product) => (
-              <div key={product.id} style={{ background: 'white', padding: '1rem', borderRadius: '12px', boxShadow: '0 0 8px rgba(0,0,0,0.1)' }}>
-                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-                <h3 style={{ margin: '0.5rem 0' }}>{product.name}</h3>
-                <p style={{ margin: 0 }}>{product.price}</p>
-                <p style={{ margin: '4px 0', fontSize: '13px', color: '#003366' }}>{product.rating}</p>
-                <p style={{ margin: '4px 0', fontSize: '13px', color: '#003366' }}>{product.sold}</p>
-                <p style={{ margin: '4px 0', fontSize: '13px', color: '#003366' }}>{product.remaining}</p>
-                <div style={{ marginTop: '0.5rem' }}>
-                  <a href="#" style={{ textDecoration: 'underline', fontSize: '12px', color: '#007185' }}>See customer reviews</a>
+        {/* Product Grid */}
+        <main style={{ flexGrow: 1, padding: '2rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '2rem' }}>
+            {filteredProducts.map(product => (
+              <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', padding: '1rem', textAlign: 'center' }}>
+                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '6px' }} />
+                <h3 style={{ color: '#003366', margin: '0.5rem 0' }}>{product.name}</h3>
+                <p style={{ margin: '0.3rem 0', fontSize: '14px' }}>{product.price} · {product.rating}</p>
+                <p style={{ color: '#555', fontSize: '13px' }}>Sold this month: {product.sold}</p>
+                <p style={{ color: '#555', fontSize: '13px' }}>Items left: {product.remaining}</p>
+                <div style={{ marginTop: '1rem' }}>
+                  <button style={actionButtonStyle}>Add to Cart</button>
+                  <a href="#" style={{ display: 'block', color: '#007185', fontSize: '13px', marginTop: '8px', textDecoration: 'underline' }}>See Customer Reviews</a>
                 </div>
-                <button style={{ marginTop: '0.5rem', backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>
-                  Add to Cart
-                </button>
               </div>
             ))}
           </div>
         </main>
       </div>
 
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
-          <div>
-            <h3>Get to Know Us</h3>
-            <a href="/about" style={footerLinkStyle}>About Us</a><br />
-            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
-            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
-            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
-            <a href="/careers" style={footerLinkStyle}>Careers</a>
-          </div>
-          <div>
-            <h3>Make Money with Us</h3>
-            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
-          </div>
-          <div>
-            <h3>Buyer Resources</h3>
-            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
-            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
-            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
-            <a href="/help" style={footerLinkStyle}>Help Center</a>
-          </div>
-          <div>
-            <h3>Stay Connected</h3>
-            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
-            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
-            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
-          </div>
-        </div>
-        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
-          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
-        </p>
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
+        <p style={{ fontSize: '14px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
+const navLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' };
+const filterHeaderStyle = { color: '#003366', fontSize: '16px', marginBottom: '10px' };
+const filterLabelStyle = { display: 'block', marginBottom: '4px', fontSize: '14px', fontWeight: 'bold', color: '#003366' };
+const filterSelectStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
+const filterInputStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
+const actionButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' };
 
 export default ShopPage;
+
 
 
 
