@@ -11,128 +11,105 @@ const ShopPage = ({ cart, setCart }) => {
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
-  const departments = [
-    'Women\'s Apparel', 'Jewelry', 'Makeup & Skincare', 'Home Goods', 'Art',
-    'Services', 'Food', 'Gifts', 'Seasonal Specials'
-  ];
+  const departments = ['Apparel', 'Electronics', 'Beauty', 'Home', 'Toys', 'Grocery'];
 
-  const allProducts = [
-    { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
-    { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
-    { id: 3, name: 'Organic T-Shirt', category: 'Clothing', price: '$18', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Organic+T-Shirt' },
-    { id: 4, name: 'Custom Artwork', category: 'Art', price: '$80', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Artwork' },
-    { id: 5, name: 'Gourmet Pizza', category: 'Restaurants', price: '$15', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Pizza' },
-    { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' }
-  ];
+  const allProducts = Array.from({ length: 12 }, (_, i) => ({
+    id: i + 1,
+    name: `Product ${i + 1}`,
+    category: categories[i % categories.length],
+    price: `$${(i + 1) * 10}`,
+    rating: '⭐⭐⭐⭐',
+    sold: 20 + i,
+    remaining: 100 - i * 3,
+    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
+  }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchCategory, setSearchCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
+  const [zipCode, setZipCode] = useState('');
+  const [selectedDept, setSelectedDept] = useState('');
 
-  const productRefs = [useRef(null), useRef(null), useRef(null)];
-
-  const filteredProducts = selectedCategory === 'All'
-    ? allProducts
-    : allProducts.filter(product => product.category === selectedCategory);
-
-  const scrollProducts = (row, direction) => {
-    productRefs[row].current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
-  };
-
-  const handleVendorZipSearch = (e) => {
-    e.preventDefault();
-    alert(`Searching vendors near ${vendorZip}`);
-  };
+  const filteredProducts = selectedCategory === 'All' ? allProducts : allProducts.filter(p => p.category === selectedCategory);
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-
-      {/* Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+      {/* Nav Bar */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <span style={{ fontSize: '18px', color: 'white', cursor: 'pointer' }}>🔍</span>
-          <a href="/signin" style={navLinkStyle}>Sign In</a>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-        </div>
+        <input
+          type="text"
+          placeholder="Search Products..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{ flex: '1', maxWidth: '400px', margin: '0 1rem', padding: '0.5rem', borderRadius: '8px' }}
+        />
+        <span role="img" aria-label="search">🔍</span>
+        <a href="/" style={navLinkStyle}>Home</a>
+        <a href="#" style={navLinkStyle}>Sign In</a>
+        <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
       </header>
 
-      {/* Subcategories */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+      {/* Sub Nav */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', overflowX: 'auto' }}>
         {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px' }}>
-            {cat}
-          </span>
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', margin: '0 10px', cursor: 'pointer' }}>{cat}</span>
         ))}
       </div>
 
-      {/* Filters Section */}
-      <aside style={{ padding: '1rem', backgroundColor: '#f5f5f5' }}>
-        <h3 style={{ color: '#003366' }}>Filter By</h3>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>Category:</strong>
-          <select value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)} style={{ width: '100%' }}>
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-          </select>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>Zip Code:</strong>
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={{ width: '60%' }} />
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>Price:</strong>
-          <div>
-            <label><input type="checkbox" /> Under $25</label><br />
-            <label><input type="checkbox" /> $25 to $50</label><br />
-            <label><input type="checkbox" /> $50 to $100</label><br />
-            <label><input type="checkbox" /> Over $100</label>
-          </div>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>Rating:</strong>
-          <div>
-            <label><input type="checkbox" /> ⭐⭐⭐⭐ & Up</label><br />
-            <label><input type="checkbox" /> ⭐⭐⭐ & Up</label><br />
-            <label><input type="checkbox" /> ⭐⭐ & Up</label><br />
-            <label><input type="checkbox" /> ⭐ & Up</label>
-          </div>
-        </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <strong>Department:</strong>
-          <div>
-            {departments.map(dep => <div key={dep}><label><input type="checkbox" /> {dep}</label></div>)}
-          </div>
-        </div>
-        <button style={searchButtonStyle}>Apply Filters</button>
-      </aside>
-
-      {/* Product Rows */}
-      {[0, 1, 2].map(row => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem' }}>
-            {filteredProducts.map(product => (
-              <div key={product.id} style={productCardStyle}>
-                <img src={product.image} alt={product.name} style={productImageStyle} />
-                <h2 style={productNameStyle}>{product.name}</h2>
-                <p style={productRatingStyle}>{product.rating}</p>
-                <p style={productPriceStyle}>{product.price}</p>
-                <button style={productButtonStyle}>Add to Cart</button>
-              </div>
+      {/* Main Section */}
+      <div style={{ display: 'flex' }}>
+        {/* Sidebar Filter */}
+        <aside style={{ width: '250px', backgroundColor: '#fff', padding: '1rem', borderRight: '1px solid #ccc' }}>
+          <h3>Filter By</h3>
+          <label>Category</label>
+          <select style={filterStyle} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
+            {categories.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
             ))}
+          </select>
+          <label>Zip Code</label>
+          <input type="text" style={{ ...filterStyle, width: '100%' }} value={zipCode} onChange={(e) => setZipCode(e.target.value)} />
+          <label>Price Range</label>
+          <div>
+            <input type="checkbox" /> Under $25<br />
+            <input type="checkbox" /> $25 to $50<br />
+            <input type="checkbox" /> $50 to $100<br />
+            <input type="checkbox" /> Over $100
           </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
-        </div>
-      ))}
+          <label>Ratings</label>
+          <div>
+            <input type="checkbox" /> ⭐<br />
+            <input type="checkbox" /> ⭐⭐<br />
+            <input type="checkbox" /> ⭐⭐⭐<br />
+            <input type="checkbox" /> ⭐⭐⭐⭐<br />
+            <input type="checkbox" /> ⭐⭐⭐⭐⭐
+          </div>
+          <label>Department</label>
+          <select style={filterStyle} value={selectedDept} onChange={(e) => setSelectedDept(e.target.value)}>
+            <option value="">Select Department</option>
+            {departments.map(dept => (
+              <option key={dept} value={dept}>{dept}</option>
+            ))}
+          </select>
+          <button style={{ marginTop: '1rem', padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '8px', border: 'none' }}>Search</button>
+        </aside>
+
+        {/* Product Grid */}
+        <main style={{ flex: 1, padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
+          {filteredProducts.map(product => (
+            <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+              <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+              <h3 style={{ color: '#003366' }}>{product.name}</h3>
+              <p>{product.price}</p>
+              <p>{product.rating} · {product.sold} sold · {product.remaining} left</p>
+              <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', border: 'none' }}>Add to Cart</button>
+            </div>
+          ))}
+        </main>
+      </div>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
           <div>
             <h3>Get to Know Us</h3>
@@ -171,22 +148,12 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
-// Styles
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-const searchInputStyle = { width: '300px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const zipInputStyle = { width: '60%', padding: '6px 10px', height: '32px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const searchButtonStyle = { backgroundColor: '#00509e', color: 'white', padding: '10px 20px', borderRadius: '8px', border: 'none', fontWeight: 'bold', cursor: 'pointer' };
-const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' };
-const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
-const productRatingStyle = { color: '#666', marginBottom: '8px' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
-const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', margin: '0 1rem' };
+const filterStyle = { width: '100%', padding: '0.5rem', marginBottom: '1rem', borderRadius: '8px', border: '1px solid #ccc' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ShopPage;
+
 
 
 
