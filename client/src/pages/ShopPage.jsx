@@ -1,110 +1,169 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
-const ShopPage = ({ cart }) => {
+const ShopPage = ({ cart, setCart }) => {
   const categories = [
-    'All', 'Women’s Apparel', 'Men’s Apparel', 'Kids’ Clothing', 'Jewelry', 'Makeup',
-    'Handbags', 'Electronics', 'Health & Beauty', 'Pet Supplies', 'Home Decor',
-    'Kitchen Essentials', 'Religious Items', 'Cultural Gifts', 'Toys & Games'
+    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
+    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
+    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
+    'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
+    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
   const allProducts = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
     name: `Product ${i + 1}`,
-    category: categories[(i % categories.length) || 1],
-    price: `$${(10 + i * 2).toFixed(2)}`,
+    category: categories[i % categories.length],
+    price: `$${10 + i * 5}`,
     rating: '⭐⭐⭐⭐',
-    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`
+    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
+    sold: 20 + i,
+    remaining: 10 - (i % 5)
   }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [minPrice, setMinPrice] = useState('');
-  const [maxPrice, setMaxPrice] = useState('');
+  const [vendorZip, setVendorZip] = useState('');
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
 
-  const filteredProducts = allProducts.filter(p => {
-    const matchesCategory = selectedCategory === 'All' || p.category === selectedCategory;
-    const matchesSearch = p.name.toLowerCase().includes(searchQuery.toLowerCase());
-    const price = parseFloat(p.price.replace('$', ''));
-    const matchesPrice = (!minPrice || price >= parseFloat(minPrice)) && (!maxPrice || price <= parseFloat(maxPrice));
-    return matchesCategory && matchesSearch && matchesPrice;
-  });
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter(p => p.category === selectedCategory);
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    alert(`Searching for "${searchQuery}" in ${selectedCategory}`);
+  };
+
+  const handleVendorZipSearch = (e) => {
+    e.preventDefault();
+    alert(`Searching vendors near ${vendorZip}`);
+  };
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setIsSignInModalOpen(false);
+    setIsNewCustomer(false);
+  };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f4f6f9' }}>
-      {/* Nav Bar */}
-      <header style={{ backgroundColor: '#003366', color: 'white', display: 'flex', justifyContent: 'space-between', padding: '1rem' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '1rem' }} />
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-          <span style={{ marginLeft: '1rem', fontWeight: 'bold' }}>🌟 Free Shipping over $50!</span>
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-          <a href="/signin" style={navLinkStyle}>Sign In</a>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-        </div>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+
+      {/* Header */}
+      <header style={{ backgroundColor: '#003366', color: 'white', padding: '1rem', display: 'flex', alignItems: 'center' }}>
+        <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+        <a href="/" style={navLink}>Home</a>
+        <form onSubmit={handleSearchSubmit} style={{ marginLeft: '2rem', position: 'relative' }}>
+          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInput} />
+          <button type="submit" style={magnifierButton}>🔍</button>
+        </form>
+        <span onClick={() => setIsSignInModalOpen(true)} style={{ ...navLink, marginLeft: 'auto' }}>Sign In</span>
+        <a href="/cart" style={{ ...navLink, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
       </header>
 
-      <div style={{ display: 'flex' }}>
-        {/* Sidebar Filters */}
-        <aside style={{ width: '250px', backgroundColor: '#ffffff', padding: '1rem', borderRight: '1px solid #ccc' }}>
-          <h3>Category</h3>
-          <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} style={selectStyle}>
-            {categories.map(cat => <option key={cat}>{cat}</option>)}
-          </select>
+      {/* Subnav */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', gap: '10px', overflowX: 'auto' }}>
+        {categories.map(cat => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer' }}>{cat}</span>
+        ))}
+      </div>
 
-          <h3>Search</h3>
-          <input type="text" value={searchQuery} onChange={e => setSearchQuery(e.target.value)} placeholder="Search..." style={inputStyle} />
-
-          <h3>Zip Code</h3>
-          <input type="text" value={zipCode} onChange={e => setZipCode(e.target.value)} placeholder="e.g. 60601" style={inputStyle} />
-
-          <h3>Price Range</h3>
-          <input type="number" placeholder="Min" value={minPrice} onChange={e => setMinPrice(e.target.value)} style={inputStyle} />
-          <input type="number" placeholder="Max" value={maxPrice} onChange={e => setMaxPrice(e.target.value)} style={inputStyle} />
-
-          <h3>Rating</h3>
+      {/* Filters and Products */}
+      <div style={{ display: 'flex', padding: '1rem' }}>
+        <aside style={{ width: '250px', background: 'white', padding: '1rem', borderRadius: '12px', marginRight: '1rem' }}>
+          <h3>Filter By</h3>
           <div>
-            <label><input type="checkbox" /> ⭐⭐⭐⭐ & up</label><br />
-            <label><input type="checkbox" /> ⭐⭐⭐ & up</label>
+            <label>Category</label><br />
+            <select value={selectedCategory} onChange={e => setSelectedCategory(e.target.value)} style={filterInput}>
+              {categories.map(c => <option key={c} value={c}>{c}</option>)}
+            </select>
+          </div>
+          <div>
+            <label>Zip Code</label><br />
+            <input type="text" value={vendorZip} onChange={e => setVendorZip(e.target.value)} placeholder="Enter zip" style={filterInput} />
+            <button onClick={handleVendorZipSearch} style={filterButton}>Search</button>
+          </div>
+          <div>
+            <label>Price</label><br />
+            <label><input type="checkbox" /> $0 - $25</label><br />
+            <label><input type="checkbox" /> $25 - $50</label><br />
+            <label><input type="checkbox" /> $50+</label>
+          </div>
+          <div>
+            <label>Rating</label><br />
+            <label><input type="checkbox" /> ⭐⭐⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐⭐⭐</label>
           </div>
         </aside>
 
-        {/* Main Content */}
-        <main style={{ flexGrow: 1, padding: '2rem' }}>
-          <h2 style={{ marginBottom: '1rem' }}>Explore Products</h2>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
-            {filteredProducts.map(product => (
-              <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '12px', padding: '1rem', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
-                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
-                <h3 style={{ fontSize: '1.1rem', margin: '0.5rem 0' }}>{product.name}</h3>
-                <p>{product.price} · {product.rating}</p>
-                <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '0.5rem' }}>
-                  <button style={buttonStyle}>Learn More</button>
-                  <button style={buttonStyle}>Add to Cart</button>
-                </div>
-              </div>
-            ))}
-          </div>
+        <main style={{ flex: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '1.5rem' }}>
+          {filteredProducts.map(product => (
+            <div key={product.id} style={productCard}>
+              <img src={product.image} alt={product.name} style={productImage} />
+              <h3>{product.name}</h3>
+              <p>{product.price}</p>
+              <p>{product.rating}</p>
+              <p style={{ fontSize: '13px' }}>{product.sold} bought this month · {product.remaining} left</p>
+              <button style={addToCart}>Add to Cart</button>
+            </div>
+          ))}
         </main>
       </div>
 
+      {/* Sign-In Modal */}
+      {isSignInModalOpen && (
+        <div style={modalOverlay}>
+          <div style={modalContent}>
+            <h2 style={{ color: '#003366' }}>{isNewCustomer ? 'Create Account' : 'Sign In'}</h2>
+            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {isNewCustomer && <input type="text" placeholder="Full Name" style={inputStyle} required />}
+              <input type="email" placeholder="Email" value={signInEmail} onChange={e => setSignInEmail(e.target.value)} style={inputStyle} required />
+              {isNewCustomer && <input type="password" placeholder="Create Password" style={inputStyle} required />}
+              <button type="submit" style={signInButton}>{isNewCustomer ? 'Create your account' : 'Continue'}</button>
+            </form>
+            {!isNewCustomer && (
+              <p onClick={() => setIsNewCustomer(true)} style={newCustomerText}>New customer? Start here.</p>
+            )}
+            <button onClick={() => { setIsSignInModalOpen(false); setIsNewCustomer(false); }} style={cancelButton}>Cancel</button>
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '2rem', marginTop: '2rem' }}>
-        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+        <div>
+          <a href="/about" style={footerLink}>About Us</a> | 
+          <a href="/faq" style={footerLink}> FAQ</a> | 
+          <a href="/contact" style={footerLink}> Contact</a>
+        </div>
+        <p style={{ fontSize: '12px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-const navLinkStyle = { color: 'white', marginRight: '1rem', textDecoration: 'none', fontWeight: 'bold' };
-const selectStyle = { width: '100%', padding: '0.5rem', marginBottom: '1rem' };
-const inputStyle = { width: '100%', padding: '0.5rem', marginBottom: '1rem' };
-const buttonStyle = { padding: '0.5rem 1rem', backgroundColor: '#00509e', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer' };
+// Styles
+const navLink = { color: 'white', marginLeft: '1rem', textDecoration: 'none', fontWeight: 'bold', cursor: 'pointer' };
+const searchInput = { height: '35px', borderRadius: '8px', padding: '0 10px', width: '250px', fontSize: '14px' };
+const magnifierButton = { position: 'absolute', right: '10px', top: '7px', background: 'none', border: 'none', fontSize: '16px', cursor: 'pointer' };
+const productCard = { background: 'white', borderRadius: '12px', padding: '1rem', textAlign: 'center', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' };
+const productImage = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
+const addToCart = { backgroundColor: '#003366', color: 'white', padding: '8px 16px', border: 'none', borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' };
+const filterInput = { width: '100%', padding: '0.5rem', margin: '0.25rem 0', borderRadius: '8px', border: '1px solid #ccc' };
+const filterButton = { marginTop: '0.5rem', backgroundColor: '#003366', color: 'white', border: 'none', padding: '8px', borderRadius: '8px', cursor: 'pointer' };
+const footerLink = { color: 'white', margin: '0 10px', textDecoration: 'underline', fontSize: '14px' };
+const modalOverlay = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(0,0,0,0.7)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 2000 };
+const modalContent = { background: 'white', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' };
+const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px' };
+const signInButton = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
+const newCustomerText = { marginTop: '1rem', fontSize: '0.85rem', color: '#007185', textDecoration: 'underline', cursor: 'pointer' };
+const cancelButton = { marginTop: '1rem', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 
 export default ShopPage;
+
 
 
 
