@@ -1,64 +1,52 @@
 import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
-const ShopPage = ({ cart }) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [zipCode, setZipCode] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('All');
-
+const ShopPage = ({ cart, setCart }) => {
   const categories = [
-    'All', 'Women’s Apparel', 'Jewelry', 'Makeup', 'Clothing', 'Home Goods', 'Restaurants', 'Services', 'Grocery', 'Toys', 'Electronics'
+    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
+    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
+    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
+    'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
+    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
   ];
 
-  const products = Array.from({ length: 12 }).map((_, i) => ({
-    id: i + 1,
-    name: `Product ${i + 1}`,
-    category: categories[i % categories.length],
-    price: `$${10 + i * 3}`,
-    rating: '⭐⭐⭐⭐',
-    sold: 50 + i * 2,
-    remaining: 100 - i * 5,
-    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
-  }));
-
-  const filteredProducts = products.filter(
-    (product) => selectedCategory === 'All' || product.category === selectedCategory
-  );
+  const [searchQuery, setSearchQuery] = useState('');
+  const [vendorZip, setVendorZip] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f4f6f8' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f4f4f4', minHeight: '100vh' }}>
       {/* Nav Bar */}
-      <header style={{ backgroundColor: '#003366', color: 'white', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
-          <img src={logo} alt="Logo" style={{ width: '40px', marginRight: '10px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>LocalVendorsBazaar</span>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white' }}>
+        <a href="/">
+          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '1rem' }} />
         </a>
-        <input
-          type="text"
-          placeholder="Search products..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          style={{ padding: '8px', borderRadius: '6px', border: '1px solid #ccc', width: '300px' }}
-        />
-        <nav style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/signin" style={navLinkStyle}>Sign In</a>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
-        </nav>
+        <a href="/" style={navLinkStyle}>Home</a>
+        <div style={{ flex: 1 }}></div>
+        <div style={{ position: 'relative', marginRight: '1rem' }}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search products..."
+            style={searchInputStyle}
+          />
+          <span style={searchIconStyle}>🔍</span>
+        </div>
+        <a href="/signin" style={navLinkStyle}>Sign In</a>
+        <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', marginLeft: '1rem' }}>🛒 {cart?.length > 0 && `(${cart.length})`}</a>
       </header>
 
+      {/* Layout */}
       <div style={{ display: 'flex' }}>
-        {/* Sidebar Filter */}
-        <aside style={{ width: '250px', backgroundColor: '#fff', padding: '1rem', boxShadow: '2px 0 5px rgba(0,0,0,0.1)' }}>
-          <h3 style={filterHeaderStyle}>Filter By</h3>
+        {/* Sidebar Filters */}
+        <aside style={{ width: '250px', backgroundColor: '#ffffff', padding: '1rem', borderRight: '1px solid #ddd' }}>
+          <h3>Filter By</h3>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={filterLabelStyle}>Category</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              style={filterSelectStyle}
-            >
+            <label>Category:</label>
+            <select style={selectStyle} value={selectedCategory} onChange={(e) => setSelectedCategory(e.target.value)}>
               {categories.map((cat) => (
                 <option key={cat} value={cat}>{cat}</option>
               ))}
@@ -66,48 +54,57 @@ const ShopPage = ({ cart }) => {
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={filterLabelStyle}>Zip Code</label>
+            <label>Zip Code:</label>
             <input
               type="text"
-              value={zipCode}
-              onChange={(e) => setZipCode(e.target.value)}
+              value={vendorZip}
+              onChange={(e) => setVendorZip(e.target.value)}
               placeholder="Enter Zip"
-              style={filterInputStyle}
+              style={zipInputStyle}
             />
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={filterLabelStyle}>Price Range</label>
+            <label>Price Range:</label>
             <div>
-              <input type="checkbox" id="p1" /><label htmlFor="p1"> Under $25</label><br />
-              <input type="checkbox" id="p2" /><label htmlFor="p2"> $25 to $50</label><br />
-              <input type="checkbox" id="p3" /><label htmlFor="p3"> $50 to $100</label><br />
-              <input type="checkbox" id="p4" /><label htmlFor="p4"> $100 & Above</label>
+              <input type="checkbox" /> Under $25<br />
+              <input type="checkbox" /> $25 to $50<br />
+              <input type="checkbox" /> $50 to $100<br />
+              <input type="checkbox" /> $100 & Above
             </div>
           </div>
 
           <div style={{ marginBottom: '1rem' }}>
-            <label style={filterLabelStyle}>Star Rating</label>
+            <label>Rating:</label>
             <div>
-              <input type="checkbox" id="r4" /><label htmlFor="r4"> ⭐⭐⭐⭐ & Up</label><br />
-              <input type="checkbox" id="r3" /><label htmlFor="r3"> ⭐⭐⭐ & Up</label>
+              <input type="checkbox" /> ⭐⭐⭐⭐⭐<br />
+              <input type="checkbox" /> ⭐⭐⭐⭐ & Up<br />
+              <input type="checkbox" /> ⭐⭐⭐ & Up
+            </div>
+          </div>
+
+          <div style={{ marginBottom: '1rem' }}>
+            <label>Shipping:</label>
+            <div>
+              <input type="checkbox" /> Free Shipping<br />
+              <input type="checkbox" /> Pickup Available
             </div>
           </div>
         </aside>
 
-        {/* Product Grid */}
-        <main style={{ flexGrow: 1, padding: '2rem' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(240px, 1fr))', gap: '2rem' }}>
-            {filteredProducts.map(product => (
-              <div key={product.id} style={{ backgroundColor: '#fff', borderRadius: '10px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', padding: '1rem', textAlign: 'center' }}>
-                <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '6px' }} />
-                <h3 style={{ color: '#003366', margin: '0.5rem 0' }}>{product.name}</h3>
-                <p style={{ margin: '0.3rem 0', fontSize: '14px' }}>{product.price} · {product.rating}</p>
-                <p style={{ color: '#555', fontSize: '13px' }}>Sold this month: {product.sold}</p>
-                <p style={{ color: '#555', fontSize: '13px' }}>Items left: {product.remaining}</p>
-                <div style={{ marginTop: '1rem' }}>
-                  <button style={actionButtonStyle}>Add to Cart</button>
-                  <a href="#" style={{ display: 'block', color: '#007185', fontSize: '13px', marginTop: '8px', textDecoration: 'underline' }}>See Customer Reviews</a>
+        {/* Main Content */}
+        <main style={{ flex: 1, padding: '2rem' }}>
+          <h2>Featured Products</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
+            {[...Array(12).keys()].map((id) => (
+              <div key={id} style={productCardStyle}>
+                <img src={`https://via.placeholder.com/300x200?text=Product+${id + 1}`} alt={`Product ${id + 1}`} style={productImageStyle} />
+                <h3 style={productNameStyle}>Product {id + 1}</h3>
+                <p style={productRatingStyle}>⭐⭐⭐⭐ · 200 sold this month · 5 left</p>
+                <p style={productPriceStyle}>$29.99</p>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <button style={productButtonStyle}>Add to Cart</button>
+                  <a href="#" style={{ textDecoration: 'underline', color: '#003366', fontSize: '0.85rem' }}>See Customer Reviews</a>
                 </div>
               </div>
             ))}
@@ -116,21 +113,28 @@ const ShopPage = ({ cart }) => {
       </div>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center', marginTop: '2rem' }}>
-        <p style={{ fontSize: '14px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
+        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-const navLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px', fontWeight: 'bold' };
-const filterHeaderStyle = { color: '#003366', fontSize: '16px', marginBottom: '10px' };
-const filterLabelStyle = { display: 'block', marginBottom: '4px', fontSize: '14px', fontWeight: 'bold', color: '#003366' };
-const filterSelectStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
-const filterInputStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
-const actionButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', padding: '8px 16px', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer' };
+// Styles
+const navLinkStyle = { color: 'white', fontWeight: 'bold', margin: '0 10px', textDecoration: 'none' };
+const searchInputStyle = { width: '500px', padding: '10px 40px 10px 12px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '16px' };
+const searchIconStyle = { position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none', fontSize: '16px', color: '#666' };
+const zipInputStyle = { width: '80px', padding: '6px', borderRadius: '6px', border: '1px solid #ccc' };
+const selectStyle = { width: '100%', padding: '8px', borderRadius: '6px', border: '1px solid #ccc' };
+const productCardStyle = { backgroundColor: '#fff', borderRadius: '10px', padding: '1rem', boxShadow: '0 2px 6px rgba(0,0,0,0.1)', textAlign: 'center' };
+const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '6px' };
+const productNameStyle = { color: '#003366', fontSize: '1.1rem', margin: '0.5rem 0' };
+const productRatingStyle = { color: '#555', fontSize: '0.9rem', marginBottom: '0.5rem' };
+const productPriceStyle = { fontWeight: 'bold', color: '#333', fontSize: '1rem' };
+const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', border: 'none', borderRadius: '6px', fontWeight: 'bold', cursor: 'pointer', fontSize: '0.9rem' };
 
 export default ShopPage;
+
 
 
 
