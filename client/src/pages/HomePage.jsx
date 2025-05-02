@@ -1,3 +1,4 @@
+// HomePage with Nav, Sub Nav, Footer, and Product Modal Popup
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
@@ -21,96 +22,81 @@ const HomePage = ({ cart, setCart }) => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
-  const [searchCategory, setSearchCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isNewCustomer, setIsNewCustomer] = useState(false);
-  const [signInEmail, setSignInEmail] = useState('');
-  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
-  const [newZip, setNewZip] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
-  const productRefs = [useRef(null), useRef(null), useRef(null)];
+  const [modalProduct, setModalProduct] = useState(null);
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
     : allProducts.filter((product) => product.category === selectedCategory);
 
-  const scrollProducts = (row, direction) => {
-    if (direction === 'left') {
-      productRefs[row].current.scrollBy({ left: -300, behavior: 'smooth' });
-    } else {
-      productRefs[row].current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
-  };
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedProduct(null);
-  };
-
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff' }}>
-      {/* Existing layout above */}
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
 
-      {[0].map((row) => (
-        <div key={row} style={{ display: 'flex', gap: '2rem', padding: '2rem' }}>
-          {filteredProducts.map(product => (
-            <div key={product.id} style={{ ...productCardStyle, cursor: 'pointer' }} onClick={() => handleProductClick(product)}>
-              <img src={product.image} alt={product.name} style={productImageStyle} />
-              <h2 style={productNameStyle}>{product.name}</h2>
-              <p style={productPriceStyle}>{product.price}</p>
-              <p style={productRatingStyle}>{product.rating}</p>
-            </div>
-          ))}
-        </div>
-      ))}
+      {/* Nav Bar */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white' }}>
+        <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+        <nav style={{ display: 'flex', gap: '20px' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '20px' }}>🛒</a>
+        </nav>
+      </header>
 
-      {isModalOpen && selectedProduct && (
-        <div style={modalOverlayStyle} onClick={closeModal}>
-          <div style={modalPopupStyle} onClick={(e) => e.stopPropagation()}>
-            <div style={{ display: 'flex', gap: '1rem' }}>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-                {[1, 2, 3].map(i => (
-                  <img key={i} src={selectedProduct.image} alt={`thumb-${i}`} style={{ width: '60px', height: '60px', borderRadius: '6px', objectFit: 'cover' }} />
-                ))}
-              </div>
-              <img src={selectedProduct.image} alt="Main" style={{ width: '300px', height: '300px', borderRadius: '12px', objectFit: 'cover' }} />
-              <div style={{ flex: 1 }}>
-                <h2 style={{ color: '#003366' }}>{selectedProduct.name}</h2>
-                <p>{selectedProduct.rating}</p>
-                <p>{selectedProduct.price}</p>
-                <p>This is a detailed product description for <strong>{selectedProduct.name}</strong>. Customize this area as needed.</p>
-                <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Add to Cart</button>
-              </div>
+      {/* Sub Nav Bar */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', gap: '15px', overflowX: 'auto' }}>
+        {categories.map((cat) => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', whiteSpace: 'nowrap' }}>{cat}</span>
+        ))}
+      </div>
+
+      {/* Product Grid */}
+      <section style={{ padding: '2rem', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
+        {filteredProducts.map(product => (
+          <div key={product.id} onClick={() => setModalProduct(product)} style={productCardStyle}>
+            <img src={product.image} alt={product.name} style={productImageStyle} />
+            <h3>{product.name}</h3>
+            <p>{product.rating}</p>
+            <p>{product.price}</p>
+            <button style={productButtonStyle}>Add to Cart</button>
+          </div>
+        ))}
+      </section>
+
+      {/* Product Modal */}
+      {modalProduct && (
+        <div style={modalStyle} onClick={() => setModalProduct(null)}>
+          <div style={productModalStyle} onClick={(e) => e.stopPropagation()}>
+            <div style={{ flex: 1 }}>
+              <img src={modalProduct.image} alt={modalProduct.name} style={{ width: '100%', borderRadius: '8px' }} />
             </div>
-            <button onClick={closeModal} style={{ marginTop: '1rem', backgroundColor: '#ccc', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer' }}>
-              Close
-            </button>
+            <div style={{ flex: 2, padding: '1rem' }}>
+              <h2>{modalProduct.name}</h2>
+              <p>{modalProduct.rating}</p>
+              <p>{modalProduct.price}</p>
+              <p>Description of product goes here.</p>
+              <button style={productButtonStyle}>Buy Now</button>
+            </div>
           </div>
         </div>
       )}
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
+        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
-const modalOverlayStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 };
-const modalPopupStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '900px' };
-const productCardStyle = { backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', minWidth: '250px' };
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none' };
+const productCardStyle = { backgroundColor: '#fff', padding: '1rem', borderRadius: '8px', textAlign: 'center', cursor: 'pointer', boxShadow: '0 2px 8px rgba(0,0,0,0.1)' };
 const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333' };
-const productRatingStyle = { color: '#666', marginBottom: '12px' };
+const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '6px', marginTop: '0.5rem', border: 'none' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 999 };
+const productModalStyle = { backgroundColor: 'white', borderRadius: '12px', padding: '1rem', display: 'flex', gap: '1rem', width: '90%', maxWidth: '800px' };
 
 export default HomePage;
+
 
 
 
