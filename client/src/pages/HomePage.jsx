@@ -44,10 +44,30 @@ const HomePage = ({ cart, setCart }) => {
 
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
-      {/* Header + Nav Bar + Sub Nav Bar + Search + Zip inputs are here */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white' }}>
-        <img src={logo} alt="Logo" style={{ width: '50px' }} /> Local Vendors Bazaar
-      </header>
+    {/* Header */}
+<header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
+  <a href="/"><img src="/assets/logo.png" alt="Logo" style={{ width: '50px' }} /></a>
+  <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
+    <span>Delivering to Elgin 60120</span><br />
+    <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
+  </div>
+  <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
+    <a href="/" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Home</a>
+    <a href="/shop" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Shop</a>
+    <a href="/vendor-signup" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Become a Vendor</a>
+  </div>
+  <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <select style={{ padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' }}>
+      <option>All</option>
+    </select>
+    <input type="text" placeholder="Search products..." style={{ width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+    <input type="text" placeholder="Zip Code" style={{ width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
+    <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' }}>Find Vendors</button>
+    <span style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Sign In</span>
+    <a href="/cart" style={{ color: 'white', fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+  </div>
+</header>
+
 
       <div style={{ backgroundColor: '#00509e', color: 'white', padding: '0.5rem' }}>
         {categories.map((cat) => (
