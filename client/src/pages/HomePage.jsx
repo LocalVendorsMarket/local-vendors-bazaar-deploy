@@ -1,43 +1,17 @@
-// Ensure to add this in your index.html inside the <body> tag:
-// <div id="modal-root"></div>
-
 import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import logo from '../assets/logo.png';
 
-const ProductModal = ({ product, onClose }) => {
-  if (!product) return null;
-
-  return ReactDOM.createPortal(
-    <div style={modalOverlayStyle} onClick={onClose}>
-      <div style={modalWindowStyle} onClick={(e) => e.stopPropagation()}>
-        <div style={modalGridStyle}>
-          <div style={modalThumbsStyle}>
-            {[1, 2, 3, 4].map((i) => (
-              <img key={i} src={product.image} alt={product.name} style={thumbImageStyle} />
-            ))}
-          </div>
-          <div style={modalMainImageWrapper}>
-            <img src={product.image} alt={product.name} style={mainImageStyle} />
-          </div>
-          <div style={modalDetailsStyle}>
-            <h2>{product.name}</h2>
-            <p style={{ fontSize: '1.1rem' }}>{product.rating}</p>
-            <p style={{ fontWeight: 'bold', fontSize: '1.2rem' }}>{product.price}</p>
-            <button style={buyButtonStyle}>Buy Now</button>
-            <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'gray' }}><strong>Customer Reviews:</strong> ⭐⭐⭐⭐☆</p>
-            <p style={{ fontSize: '0.9rem', color: 'gray' }}>Sold last month: 32</p>
-            <button onClick={onClose} style={closeButtonStyle}>Close</button>
-          </div>
-        </div>
-      </div>
-    </div>,
-    document.getElementById('modal-root')
-  );
-};
-
 const HomePage = ({ cart, setCart }) => {
-  const categories = ['All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants'];
+  const categories = [
+    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
+    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
+    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
+    'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
+    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
+    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants'
+  ];
+
   const allProducts = [
     { id: 1, name: 'Local Honey', category: 'Food', price: '$12', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Local+Honey' },
     { id: 2, name: 'Handmade Necklace', category: 'Jewelry', price: '$25', rating: '⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Necklace' },
@@ -47,61 +21,80 @@ const HomePage = ({ cart, setCart }) => {
     { id: 6, name: 'Home Repair Service', category: 'Services', price: '$50/hr', rating: '⭐⭐⭐⭐⭐', image: 'https://via.placeholder.com/300x200?text=Home+Repair' }
   ];
 
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
-  const filteredProducts = allProducts; // You can enhance category filtering
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter((product) => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    const ref = productRefs[row];
-    if (!ref.current) return;
-    ref.current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
+    const scrollAmount = direction === 'left' ? -300 : 300;
+    productRefs[row]?.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+  };
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setIsProductModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsProductModalOpen(false);
+    setSelectedProduct(null);
   };
 
   return (
-    <div style={{ padding: '1rem' }}>
-      <h1 style={{ color: '#003366' }}>Featured Products</h1>
+    <div style={{ padding: '2rem', backgroundColor: '#f4f4f4' }}>
+      <h2 style={{ color: '#003366' }}>Featured Products</h2>
       {[0].map((row) => (
         <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 0' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem' }}>
+          <button onClick={() => scrollProducts(row, 'left')} style={{ fontSize: '1.5rem' }}>&lt;</button>
+          <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '2rem' }}>
             {filteredProducts.map(product => (
-              <div key={product.id} style={productCardStyle} onClick={() => setSelectedProduct(product)}>
-                <img src={product.image} alt={product.name} style={productImageStyle} />
-                <h2 style={productNameStyle}>{product.name}</h2>
-                <p style={productRatingStyle}>{product.rating}</p>
-                <p style={productPriceStyle}>{product.price}</p>
+              <div key={product.id} style={{ cursor: 'pointer', background: '#fff', padding: '1rem', borderRadius: '8px', minWidth: '250px', textAlign: 'center', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }} onClick={() => handleProductClick(product)}>
+                <img src={product.image} alt={product.name} style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '8px' }} />
+                <h3>{product.name}</h3>
+                <p>{product.rating}</p>
+                <p>{product.price}</p>
               </div>
             ))}
           </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
+          <button onClick={() => scrollProducts(row, 'right')} style={{ fontSize: '1.5rem' }}>&gt;</button>
         </div>
       ))}
-      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
+
+      {/* Product Modal */}
+      {isProductModalOpen && selectedProduct && ReactDOM.createPortal(
+        <div onClick={handleCloseModal} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
+          <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: '12px', display: 'flex', padding: '2rem', maxWidth: '80vw', width: '1000px', boxShadow: '0 5px 20px rgba(0,0,0,0.3)' }}>
+            <div style={{ width: '25%', marginRight: '1rem' }}>
+              <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', borderRadius: '8px' }} />
+              {/* Add additional thumbnails vertically here if needed */}
+            </div>
+            <div style={{ width: '50%', paddingRight: '1rem' }}>
+              <h2 style={{ marginBottom: '1rem', color: '#003366' }}>{selectedProduct.name}</h2>
+              <p style={{ fontSize: '1.1rem', color: '#555' }}>{selectedProduct.rating}</p>
+              <p style={{ fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1rem' }}>{selectedProduct.price}</p>
+              <p style={{ marginTop: '1rem', fontSize: '14px' }}>Customer Reviews: ⭐⭐⭐⭐☆</p>
+              <p style={{ fontSize: '14px', color: '#777' }}>Sold last month: 40+</p>
+            </div>
+            <div style={{ width: '25%', textAlign: 'right' }}>
+              <button style={{ backgroundColor: '#003366', color: '#fff', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', marginBottom: '1rem' }}>Buy Now</button>
+              <br />
+              <button onClick={handleCloseModal} style={{ backgroundColor: '#ccc', color: '#000', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer' }}>Close</button>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 };
 
-// Styles
-const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' };
-const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { fontSize: '1.2rem', margin: '10px 0', color: '#003366' };
-const productRatingStyle = { color: '#666' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '8px' };
-const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-
-const modalOverlayStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', zIndex: 1000, display: 'flex', justifyContent: 'center', alignItems: 'center' };
-const modalWindowStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '80%', height: '80%', overflowY: 'auto' };
-const modalGridStyle = { display: 'flex', gap: '2rem', height: '100%' };
-const modalThumbsStyle = { display: 'flex', flexDirection: 'column', gap: '10px' };
-const thumbImageStyle = { width: '60px', height: '60px', objectFit: 'cover', borderRadius: '6px', border: '1px solid #ccc' };
-const modalMainImageWrapper = { flex: 1 };
-const mainImageStyle = { width: '100%', height: '100%', objectFit: 'contain' };
-const modalDetailsStyle = { flex: 1, display: 'flex', flexDirection: 'column' };
-const buyButtonStyle = { backgroundColor: '#003366', color: '#fff', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', marginTop: '1rem', cursor: 'pointer' };
-const closeButtonStyle = { marginTop: 'auto', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
-
 export default HomePage;
+
 
 
 
