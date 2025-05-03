@@ -1,5 +1,4 @@
 import React, { useState, useRef } from 'react';
-import ReactDOM from 'react-dom';
 import logo from '../assets/logo.png';
 
 const HomePage = ({ cart, setCart }) => {
@@ -22,8 +21,8 @@ const HomePage = ({ cart, setCart }) => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [isProductModalOpen, setIsProductModalOpen] = useState(false);
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
   const filteredProducts = selectedCategory === 'All'
@@ -31,69 +30,91 @@ const HomePage = ({ cart, setCart }) => {
     : allProducts.filter((product) => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    const scrollAmount = direction === 'left' ? -300 : 300;
-    productRefs[row]?.current?.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    if (direction === 'left') {
+      productRefs[row].current.scrollBy({ left: -300, behavior: 'smooth' });
+    } else {
+      productRefs[row].current.scrollBy({ left: 300, behavior: 'smooth' });
+    }
   };
 
   const handleProductClick = (product) => {
     setSelectedProduct(product);
-    setIsProductModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsProductModalOpen(false);
-    setSelectedProduct(null);
+    setShowModal(true);
   };
 
   return (
-    <div style={{ padding: '2rem', backgroundColor: '#f4f4f4' }}>
-      <h2 style={{ color: '#003366' }}>Featured Products</h2>
-      {[0].map((row) => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 0' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={{ fontSize: '1.5rem' }}>&lt;</button>
-          <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '2rem' }}>
+    <div style={{ fontFamily: 'sans-serif' }}>
+      {/* Header + Nav Bar + Sub Nav Bar + Search + Zip inputs are here */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white' }}>
+        <img src={logo} alt="Logo" style={{ width: '50px' }} /> Local Vendors Bazaar
+      </header>
+
+      <div style={{ backgroundColor: '#00509e', color: 'white', padding: '0.5rem' }}>
+        {categories.map((cat) => (
+          <span
+            key={cat}
+            onClick={() => setSelectedCategory(cat)}
+            style={{ marginRight: '1rem', cursor: 'pointer' }}>
+            {cat}
+          </span>
+        ))}
+      </div>
+
+      {/* Product Rows */}
+      <h2 style={{ textAlign: 'center', marginTop: '1rem' }}>Featured Products</h2>
+      {[0, 1, 2].map((row) => (
+        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem' }}>
+          <button onClick={() => scrollProducts(row, 'left')}>&lt;</button>
+          <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '1rem' }}>
             {filteredProducts.map(product => (
-              <div key={product.id} style={{ cursor: 'pointer', background: '#fff', padding: '1rem', borderRadius: '8px', minWidth: '250px', textAlign: 'center', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }} onClick={() => handleProductClick(product)}>
-                <img src={product.image} alt={product.name} style={{ width: '100%', height: '160px', objectFit: 'cover', borderRadius: '8px' }} />
+              <div key={product.id} onClick={() => handleProductClick(product)} style={{ cursor: 'pointer', minWidth: '220px', backgroundColor: 'white', borderRadius: '8px', padding: '1rem', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
+                <img src={product.image} alt={product.name} style={{ width: '100%' }} />
                 <h3>{product.name}</h3>
                 <p>{product.rating}</p>
                 <p>{product.price}</p>
               </div>
             ))}
           </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={{ fontSize: '1.5rem' }}>&gt;</button>
+          <button onClick={() => scrollProducts(row, 'right')}>&gt;</button>
         </div>
       ))}
 
-      {/* Product Modal */}
-      {isProductModalOpen && selectedProduct && ReactDOM.createPortal(
-        <div onClick={handleCloseModal} style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', background: 'rgba(0,0,0,0.75)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 1000 }}>
-          <div onClick={(e) => e.stopPropagation()} style={{ background: '#fff', borderRadius: '12px', display: 'flex', padding: '2rem', maxWidth: '80vw', width: '1000px', boxShadow: '0 5px 20px rgba(0,0,0,0.3)' }}>
-            <div style={{ width: '25%', marginRight: '1rem' }}>
-              <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%', borderRadius: '8px' }} />
-              {/* Add additional thumbnails vertically here if needed */}
+      {/* Product Detail Modal */}
+      {showModal && selectedProduct && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
+          <div style={{ backgroundColor: 'white', display: 'flex', width: '90%', height: '80%', borderRadius: '12px', padding: '2rem' }} onClick={(e) => e.stopPropagation()}>
+            {/* Thumbnails */}
+            <div style={{ width: '15%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <img src={selectedProduct.image} alt="thumb" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px' }} />
+              <img src={selectedProduct.image} alt="thumb" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px' }} />
+              <img src={selectedProduct.image} alt="thumb" style={{ width: '100%', border: '1px solid #ccc', borderRadius: '8px' }} />
             </div>
-            <div style={{ width: '50%', paddingRight: '1rem' }}>
-              <h2 style={{ marginBottom: '1rem', color: '#003366' }}>{selectedProduct.name}</h2>
-              <p style={{ fontSize: '1.1rem', color: '#555' }}>{selectedProduct.rating}</p>
-              <p style={{ fontSize: '1.25rem', fontWeight: 'bold', marginTop: '1rem' }}>{selectedProduct.price}</p>
-              <p style={{ marginTop: '1rem', fontSize: '14px' }}>Customer Reviews: ⭐⭐⭐⭐☆</p>
-              <p style={{ fontSize: '14px', color: '#777' }}>Sold last month: 40+</p>
+            {/* Main Image */}
+            <div style={{ width: '35%', padding: '0 2rem' }}>
+              <img src={selectedProduct.image} alt="Main" style={{ width: '100%', height: 'auto', borderRadius: '8px' }} />
             </div>
-            <div style={{ width: '25%', textAlign: 'right' }}>
-              <button style={{ backgroundColor: '#003366', color: '#fff', padding: '10px 20px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', marginBottom: '1rem' }}>Buy Now</button>
-              <br />
-              <button onClick={handleCloseModal} style={{ backgroundColor: '#ccc', color: '#000', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer' }}>Close</button>
+            {/* Product Details */}
+            <div style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.rating}</p>
+              <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{selectedProduct.price}</p>
+              <p>Sold last month: 52 units</p>
+              <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 20px', borderRadius: '8px', fontSize: '16px' }}>Add to Cart</button>
             </div>
           </div>
-        </div>,
-        document.body
+        </div>
       )}
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
+        <p>Local Vendors Bazaar © {new Date().getFullYear()}</p>
+      </footer>
     </div>
   );
 };
 
 export default HomePage;
+
 
 
 
