@@ -21,16 +21,7 @@ const HomePage = ({ cart, setCart }) => {
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
-  const [searchCategory, setSearchCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isNewCustomer, setIsNewCustomer] = useState(false);
-  const [signInEmail, setSignInEmail] = useState('');
-  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
-  const [newZip, setNewZip] = useState('');
-
+  const [filterOpen, setFilterOpen] = useState(false);
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
   const filteredProducts = selectedCategory === 'All'
@@ -45,60 +36,57 @@ const HomePage = ({ cart, setCart }) => {
     }
   };
 
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
-    setIsSignInModalOpen(false);
-    setIsNewCustomer(false);
-  };
-
-  const handleUpdateLocationSubmit = (e) => {
-    e.preventDefault();
-    if (newZip.trim()) {
-      setDeliveryLocation(newZip);
-      setNewZip('');
-      setIsUpdateLocationOpen(false);
-    }
-  };
-
-  const handleVendorZipSearch = (e) => {
-    e.preventDefault();
-    alert(`Searching vendors near ${vendorZip}`);
-  };
-
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-
-      {/* Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white', flexWrap: 'wrap' }}>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Nav Bar */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
-          <span>Delivering to {deliveryLocation}</span><br />
-          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
+        <div>
+          <span>Delivering to Elgin 60120</span><br />
+          <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
         </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px', alignItems: 'center' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
-            {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-          </select>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
-          <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
-          <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+        <div style={{ display: 'flex', gap: '1rem' }}>
+          <a href="/" style={{ color: 'white', textDecoration: 'underline' }}>Home</a>
+          <a href="/shop" style={{ color: 'white', textDecoration: 'underline' }}>Shop</a>
+          <a href="/vendor-signup" style={{ color: 'white', textDecoration: 'underline' }}>Become a Vendor</a>
+        </div>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <span onClick={() => setFilterOpen(true)} style={{ backgroundColor: '#d3d3d3', borderRadius: '8px', padding: '8px', cursor: 'pointer' }}>All ▾</span>
+          <input type="text" placeholder="Search products..." style={{ height: '40px', borderRadius: '8px', padding: '0 10px' }} />
+          <input type="text" placeholder="Zip Code" style={{ height: '40px', borderRadius: '8px', padding: '0 10px' }} />
+          <button style={{ height: '40px', borderRadius: '8px', backgroundColor: '#fff', cursor: 'pointer' }}>Find Vendors</button>
+          <span style={{ cursor: 'pointer', textDecoration: 'underline' }}>Sign In</span>
+          <a href="/cart" style={{ fontSize: '24px', color: 'white' }}>🛒</a>
         </div>
       </header>
 
+      {/* Filter Panel */}
+      {filterOpen && (
+        <div style={{ position: 'absolute', top: '70px', left: 0, width: '260px', backgroundColor: '#fff', boxShadow: '2px 2px 10px rgba(0,0,0,0.2)', padding: '1rem', zIndex: 1000 }}>
+          <div style={{ textAlign: 'right' }}>
+            <button onClick={() => setFilterOpen(false)} style={{ background: 'transparent', border: 'none', fontSize: '1.25rem', cursor: 'pointer' }}>✕</button>
+          </div>
+          <h4 style={{ marginBottom: '1rem', color: '#003366' }}>Filter by Department</h4>
+          {categories.map(cat => (
+            <div key={cat} onClick={() => { setSelectedCategory(cat); setFilterOpen(false); }} style={{ padding: '4px 0', cursor: 'pointer' }}>{cat}</div>
+          ))}
+        </div>
+      )}
+
       {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', display: 'flex', overflowX: 'auto', padding: '0.5rem 1rem', gap: '1rem' }}>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap' }}>
         {categories.map((cat) => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', whiteSpace: 'nowrap', cursor: 'pointer', fontSize: '14px' }}>{cat}</span>
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', marginRight: '1rem', fontSize: '14px' }}>
+            {cat}
+          </span>
         ))}
       </div>
 
       {/* Product Rows */}
-      {[0, 1, 2].map(row => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem' }}>
+      {[0, 1, 2].map((row) => (
+        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
           <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '1rem' }}>
+          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
             {filteredProducts.map(product => (
               <div key={product.id} style={productCardStyle}>
                 <img src={product.image} alt={product.name} style={productImageStyle} />
@@ -113,58 +101,14 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       ))}
 
-      {/* Update Location Modal */}
-      {isUpdateLocationOpen && (
-        <div style={modalStyle}>
-          <div style={modalContentStyle}>
-            <h2 style={{ color: '#003366' }}>Update Location</h2>
-            <form onSubmit={handleUpdateLocationSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter new Zip Code" style={inputStyle} required />
-              <button type="submit" style={buttonStyle}>Update</button>
-              <button type="button" onClick={() => setIsUpdateLocationOpen(false)} style={{ backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-                Cancel
-              </button>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Sign In Modal */}
-      {isSignInModalOpen && (
-        <div style={modalStyle}>
-          <div style={modalContentStyle}>
-            <h2 style={{ color: '#003366' }}>{isNewCustomer ? 'Create Account' : 'Sign In'}</h2>
-            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && <input type="text" placeholder="Full Name" style={inputStyle} required />}
-              <input type="email" placeholder="Email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} style={inputStyle} required />
-              {isNewCustomer && <input type="password" placeholder="Create Password" style={inputStyle} required />}
-              <button type="submit" style={buttonStyle}>{isNewCustomer ? 'Create your account' : 'Continue'}</button>
-            </form>
-            {!isNewCustomer && (
-              <p onClick={() => setIsNewCustomer(true)} style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#007185', textDecoration: 'underline', cursor: 'pointer' }}>
-                New customer? Start here.
-              </p>
-            )}
-            <button onClick={() => { setIsSignInModalOpen(false); setIsNewCustomer(false); }} style={{ marginTop: '1.5rem', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <p style={{ marginTop: '1rem', fontSize: '12px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+        <p>Local Vendors Bazaar © {new Date().getFullYear()}</p>
       </footer>
     </div>
   );
 };
 
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
 const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
 const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' };
 const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
@@ -172,13 +116,9 @@ const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0
 const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
 const productButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
-const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' };
-const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px' };
-const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
