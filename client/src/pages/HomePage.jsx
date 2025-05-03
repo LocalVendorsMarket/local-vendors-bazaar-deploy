@@ -44,7 +44,64 @@ const HomePage = ({ cart, setCart }) => {
 
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
-      {/* Header and product sections remain unchanged */}
+      {/* Sub Nav */}
+      <div style={{ backgroundColor: '#00509e', padding: '10px', color: 'white', fontSize: '14px', display: 'flex', flexWrap: 'wrap', gap: '15px', justifyContent: 'center' }}>
+        {categories.map(cat => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ cursor: 'pointer', textDecoration: selectedCategory === cat ? 'underline' : 'none' }}>{cat}</span>
+        ))}
+      </div>
+
+      {/* Product Rows */}
+      <h2 style={{ textAlign: 'center', marginTop: '1rem' }}>Featured Products</h2>
+      {[0].map((row) => (
+        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem' }}>
+          <button onClick={() => scrollProducts(row, 'left')}>&lt;</button>
+          <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '1rem' }}>
+            {filteredProducts.map(product => (
+              <div key={product.id} onClick={() => handleProductClick(product)} style={{ cursor: 'pointer', minWidth: '220px', backgroundColor: 'white', borderRadius: '8px', padding: '1rem', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
+                <img src={product.image} alt={product.name} style={{ width: '100%' }} />
+                <h3>{product.name}</h3>
+                <p>{product.rating}</p>
+                <p>{product.price}</p>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => scrollProducts(row, 'right')}>&gt;</button>
+        </div>
+      ))}
+
+      {/* Product Modal */}
+      {showModal && selectedProduct && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
+          <div style={{ backgroundColor: 'white', display: 'flex', width: '90%', height: '80%', borderRadius: '12px', padding: '2rem', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
+            {/* Close Button */}
+            <button onClick={() => setShowModal(false)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer' }}>❌</button>
+
+            {/* Thumbnails */}
+            <div style={{ width: '15%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              <img src={selectedProduct.image} alt="thumb1" style={{ width: '100%', borderRadius: '8px' }} />
+              <img src={selectedProduct.image} alt="thumb2" style={{ width: '100%', borderRadius: '8px' }} />
+              <img src={selectedProduct.image} alt="thumb3" style={{ width: '100%', borderRadius: '8px' }} />
+            </div>
+
+            {/* Main Image */}
+            <div style={{ width: '35%', padding: '0 2rem' }}>
+              <img src={selectedProduct.image} alt="main" style={{ width: '100%', borderRadius: '8px' }} />
+            </div>
+
+            {/* Product Info */}
+            <div style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.rating}</p>
+              <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{selectedProduct.price}</p>
+              <p>Sold last month: 52 units</p>
+              <p>Remaining: 17 in stock</p>
+              <p style={{ fontStyle: 'italic' }}>"Customers love the quality and fast delivery!"</p>
+              <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 20px', borderRadius: '8px', fontSize: '16px', fontWeight: 'bold' }}>Add to Cart</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
@@ -89,6 +146,7 @@ const HomePage = ({ cart, setCart }) => {
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
