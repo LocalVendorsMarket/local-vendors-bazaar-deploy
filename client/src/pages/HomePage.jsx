@@ -23,7 +23,14 @@ const HomePage = ({ cart, setCart }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
+  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
+  const [newZip, setNewZip] = useState('');
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
   const productRefs = [useRef(null), useRef(null), useRef(null)];
+  const [showFilters, setShowFilters] = useState(false);
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -42,14 +49,29 @@ const HomePage = ({ cart, setCart }) => {
     setShowModal(true);
   };
 
+  const handleUpdateLocationSubmit = (e) => {
+    e.preventDefault();
+    if (newZip.trim()) {
+      setDeliveryLocation(newZip);
+      setNewZip('');
+      setIsUpdateLocationOpen(false);
+    }
+  };
+
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setIsSignInModalOpen(false);
+    setIsNewCustomer(false);
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif' }}>
-      {/* Nav Bar */}
+      {/* Header */}
       <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
         <a href="/"><img src="/assets/logo.png" alt="Logo" style={{ width: '50px' }} /></a>
         <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
-          <span>Delivering to Elgin 60120</span><br />
-          <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
+          <span>Delivering to {deliveryLocation}</span><br />
+          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
         </div>
         <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
           <a href="/" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Home</a>
@@ -57,78 +79,61 @@ const HomePage = ({ cart, setCart }) => {
           <a href="/vendor-signup" style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Become a Vendor</a>
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <select style={{ padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' }}>
+            <option>All</option>
+          </select>
           <input type="text" placeholder="Search products..." style={{ width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <input type="text" placeholder="Zip Code" style={{ width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' }} />
           <button style={{ backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' }}>Find Vendors</button>
-          <span style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Sign In</span>
+          <span onClick={() => setIsSignInModalOpen(true)} style={{ color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' }}>Sign In</span>
           <a href="/cart" style={{ color: 'white', fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
         </div>
       </header>
 
       {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', padding: '10px', color: 'white', fontSize: '14px', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap' }}>
-        {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ marginRight: '15px', cursor: 'pointer', textDecoration: selectedCategory === cat ? 'underline' : 'none' }}>{cat}</span>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', flexWrap: 'nowrap', overflowX: 'auto', gap: '1rem' }}>
+        {categories.map((cat) => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', whiteSpace: 'nowrap' }}>{cat}</span>
         ))}
+        <span onClick={() => setShowFilters(true)} style={{ marginLeft: 'auto', color: '#fff', cursor: 'pointer', textDecoration: 'underline' }}>All Filters</span>
       </div>
 
-      {/* Filter Area */}
-      <div style={{ display: 'flex' }}>
-        <aside style={{ width: '200px', padding: '1rem', background: '#f5f5f5' }}>
-          <h3>Filter by Department</h3>
-          {categories.map(cat => (
-            <p key={cat} onClick={() => setSelectedCategory(cat)} style={{ cursor: 'pointer' }}>{cat}</p>
+      {/* Hidden Filter Panel */}
+      {showFilters && (
+        <div style={{ backgroundColor: '#f5f5f5', padding: '1rem', position: 'absolute', top: '100px', right: '20px', zIndex: 10, borderRadius: '8px', boxShadow: '0 2px 8px rgba(0,0,0,0.2)' }}>
+          <h4 style={{ marginBottom: '0.5rem' }}>Filter by Department</h4>
+          {categories.slice(1).map((cat) => (
+            <p key={cat} style={{ cursor: 'pointer', margin: 0 }} onClick={() => { setSelectedCategory(cat); setShowFilters(false); }}>{cat}</p>
           ))}
-        </aside>
+          <button onClick={() => setShowFilters(false)} style={{ marginTop: '0.5rem', padding: '0.5rem 1rem', borderRadius: '6px', backgroundColor: '#ccc', cursor: 'pointer' }}>Close</button>
+        </div>
+      )}
 
-        <main style={{ flex: 1 }}>
-          {[0, 1, 2].map((row) => (
-            <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem' }}>
-              <button onClick={() => scrollProducts(row, 'left')}>&lt;</button>
-              <div ref={productRefs[row]} style={{ display: 'flex', overflowX: 'auto', gap: '1rem' }}>
-                {filteredProducts.map(product => (
-                  <div key={product.id} onClick={() => handleProductClick(product)} style={{ cursor: 'pointer', minWidth: '220px', backgroundColor: 'white', borderRadius: '8px', padding: '1rem', boxShadow: '0 0 10px rgba(0,0,0,0.1)' }}>
-                    <img src={product.image} alt={product.name} style={{ width: '100%' }} />
-                    <h3>{product.name}</h3>
-                    <p>{product.rating}</p>
-                    <p>{product.price}</p>
-                    <p>Sold last month: 52</p>
-                    <p>In stock: 17</p>
-                    <p style={{ fontStyle: 'italic', fontSize: '12px' }}>Customer reviews: ⭐⭐⭐⭐☆</p>
-                  </div>
-                ))}
-              </div>
-              <button onClick={() => scrollProducts(row, 'right')}>&gt;</button>
-            </div>
-          ))}
-        </main>
-      </div>
+      {/* Update Location Modal */}
+      {isUpdateLocationOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
+          <form onSubmit={handleUpdateLocationSubmit} style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '8px' }}>
+            <h3>Update Location</h3>
+            <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter Zip Code" required style={{ padding: '10px', marginBottom: '1rem', width: '100%', borderRadius: '4px', border: '1px solid #ccc' }} />
+            <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#003366', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Update</button>
+          </form>
+        </div>
+      )}
 
-      {/* Product Modal */}
-      {showModal && selectedProduct && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
-          <div style={{ backgroundColor: 'white', display: 'flex', width: '90%', height: '80%', borderRadius: '12px', padding: '2rem', position: 'relative' }} onClick={(e) => e.stopPropagation()}>
-            <button onClick={() => setShowModal(false)} style={{ position: 'absolute', top: '15px', right: '15px', background: 'none', border: 'none', fontSize: '24px', cursor: 'pointer' }}>❌</button>
-            <div style={{ width: '15%', display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {[...Array(5)].map((_, i) => (
-                <img key={i} src={selectedProduct.image} alt={`thumb${i}`} style={{ width: '100%', borderRadius: '8px' }} />
-              ))}
-            </div>
-            <div style={{ width: '35%', padding: '0 2rem' }}>
-              <img src={selectedProduct.image} alt="main" style={{ width: '100%', borderRadius: '8px' }} />
-            </div>
-            <div style={{ width: '50%', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.rating}</p>
-              <p style={{ fontWeight: 'bold', fontSize: '1.5rem' }}>{selectedProduct.price}</p>
-              <p>Sold last month: 52 units</p>
-              <p>Remaining: 17 in stock</p>
-              <p style={{ fontStyle: 'italic' }}>
-                "Customers say it’s reliable and top quality!"
-              </p>
-              <button style={{ backgroundColor: '#003366', color: 'white', padding: '8px 16px', borderRadius: '8px', fontSize: '14px', fontWeight: 'bold' }}>Add to Cart</button>
-            </div>
-          </div>
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 1000 }}>
+          <form onSubmit={handleSignInSubmit} style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '8px' }}>
+            <h3>{isNewCustomer ? 'Create Account' : 'Sign In'}</h3>
+            {isNewCustomer && <input type="text" placeholder="Full Name" style={{ padding: '10px', marginBottom: '1rem', width: '100%', borderRadius: '4px', border: '1px solid #ccc' }} required />}
+            <input type="email" placeholder="Email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} required style={{ padding: '10px', marginBottom: '1rem', width: '100%', borderRadius: '4px', border: '1px solid #ccc' }} />
+            {isNewCustomer && <input type="password" placeholder="Create Password" style={{ padding: '10px', marginBottom: '1rem', width: '100%', borderRadius: '4px', border: '1px solid #ccc' }} required />}
+            <button type="submit" style={{ padding: '10px 20px', backgroundColor: '#003366', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>{isNewCustomer ? 'Create your account' : 'Continue'}</button>
+            {!isNewCustomer && (
+              <p onClick={() => setIsNewCustomer(true)} style={{ marginTop: '1rem', fontSize: '0.85rem', color: '#007185', textDecoration: 'underline', cursor: 'pointer' }}>New customer? Start here.</p>
+            )}
+            <button type="button" onClick={() => { setIsSignInModalOpen(false); setIsNewCustomer(false); }} style={{ marginTop: '1.5rem', backgroundColor: '#ccc', padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
+          </form>
         </div>
       )}
 
@@ -141,6 +146,7 @@ const HomePage = ({ cart, setCart }) => {
 };
 
 export default HomePage;
+
 
 
 
