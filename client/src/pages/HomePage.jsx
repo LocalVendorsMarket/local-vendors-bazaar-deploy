@@ -87,22 +87,23 @@ const HomePage = () => {
 
       {/* Product Modal */}
       {showModal && selectedProduct && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
-          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', display: 'flex', width: '90%', maxWidth: '900px' }} onClick={e => e.stopPropagation()}>
-            <div style={{ width: '40%', paddingRight: '1rem' }}>
-              <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%' }} />
-            </div>
-            <div style={{ width: '60%' }}>
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.rating}</p>
-              <p style={{ fontWeight: 'bold' }}>{selectedProduct.price}</p>
-              <p>Sold last month: 52 units</p>
-              <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 15px', borderRadius: '6px' }}>Add to Cart</button>
-              <button onClick={() => setShowModal(false)} style={{ display: 'block', marginTop: '1rem', backgroundColor: '#ccc', padding: '8px 12px', borderRadius: '6px' }}>Close</button>
-            </div>
-          </div>
-        </div>
-      ))}
+  <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
+    <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', display: 'flex', width: '90%', maxWidth: '900px' }} onClick={e => e.stopPropagation()}>
+      <div style={{ width: '40%', paddingRight: '1rem' }}>
+        <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%' }} />
+      </div>
+      <div style={{ width: '60%' }}>
+        <h2>{selectedProduct.name}</h2>
+        <p>{selectedProduct.rating}</p>
+        <p style={{ fontWeight: 'bold' }}>{selectedProduct.price}</p>
+        <p>Sold last month: 52 units</p>
+        <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 15px', borderRadius: '6px' }}>Add to Cart</button>
+        <button onClick={() => setShowModal(false)} style={{ display: 'block', marginTop: '1rem', backgroundColor: '#ccc', padding: '8px 12px', borderRadius: '6px' }}>Close</button>
+      </div>
+    </div>
+  </div>
+)}
+
 
     </div>
   );
