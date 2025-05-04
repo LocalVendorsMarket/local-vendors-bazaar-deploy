@@ -101,9 +101,25 @@ const HomePage = ({ cart, setCart }) => {
 
   return (
     <div>
-      {/* Your existing layout remains unchanged */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', padding: '2rem' }}>
+        {filteredProducts.map((product) => (
+          <div
+            key={product.id}
+            onClick={() => handleProductClick(product)}
+            style={{ cursor: 'pointer', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px', margin: '1rem', width: '300px', textAlign: 'center' }}
+          >
+            <img
+              src={product.images[0]}
+              alt={product.name}
+              style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
+            />
+            <h3>{product.name}</h3>
+            <p>{product.price}</p>
+            <p>{product.rating}</p>
+          </div>
+        ))}
+      </div>
 
-      {/* Product Detail Modal */}
       {showModal && selectedProduct && (
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
@@ -175,6 +191,7 @@ const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: 
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
 
 export default HomePage;
+
 
 
 
