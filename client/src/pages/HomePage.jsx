@@ -97,11 +97,33 @@ const HomePage = ({ cart, setCart }) => {
       </header>
 
       {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', gap: '15px', overflowX: 'auto' }}>
-        {categories.map((cat) => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', whiteSpace: 'nowrap' }}>{cat}</span>
-        ))}
-      </div>
+      {/* Sub Nav Bar */}
+<div style={{
+  backgroundColor: '#00509e',
+  padding: '0.5rem 1rem',
+  display: 'flex',
+  gap: '15px',
+  overflowX: 'auto',
+  whiteSpace: 'nowrap',
+  scrollbarWidth: 'none'
+}}>
+  {categories.map((cat) => (
+    <span
+      key={cat}
+      onClick={() => setSelectedCategory(cat)}
+      style={{
+        color: 'white',
+        cursor: 'pointer',
+        fontSize: '14px',
+        whiteSpace: 'nowrap',
+        paddingRight: '10px'
+      }}
+    >
+      {cat}
+    </span>
+  ))}
+</div>
+
 
       {/* Product Rows */}
       {[0, 1, 2].map((row) => (
