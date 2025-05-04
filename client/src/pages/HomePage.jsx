@@ -306,7 +306,7 @@ const HomePage = ({ cart, setCart }) => {
     © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
   </p>
 </footer>
-</div> //
+</div> 
   );
 };
 
