@@ -145,22 +145,91 @@ const HomePage = ({ cart, setCart }) => {
 
       {/* Product Detail Modal */}
       {showModal && selectedProduct && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 }} onClick={() => setShowModal(false)}>
-          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', display: 'flex', width: '90%', maxWidth: '900px' }} onClick={e => e.stopPropagation()}>
-            <div style={{ width: '40%', paddingRight: '1rem' }}>
-              <img src={selectedProduct.image} alt={selectedProduct.name} style={{ width: '100%' }} />
-            </div>
-            <div style={{ width: '60%' }}>
-              <h2>{selectedProduct.name}</h2>
-              <p>{selectedProduct.rating}</p>
-              <p style={{ fontWeight: 'bold' }}>{selectedProduct.price}</p>
-              <p>Sold last month: 52 units</p>
-              <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 15px', borderRadius: '6px' }}>Add to Cart</button>
-              <button onClick={() => setShowModal(false)} style={{ display: 'block', marginTop: '1rem', backgroundColor: '#ccc', padding: '8px 12px', borderRadius: '6px' }}>Close</button>
-            </div>
-          </div>
+  <div
+    style={{
+      position: 'fixed',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+      backgroundColor: 'rgba(0,0,0,0.7)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 999
+    }}
+    onClick={() => setShowModal(false)}
+  >
+    <div
+      style={{
+        backgroundColor: 'white',
+        borderRadius: '12px',
+        width: '90%',
+        maxWidth: '960px',
+        padding: '1.5rem',
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '2rem'
+      }}
+      onClick={(e) => e.stopPropagation()}
+    >
+      {/* Left thumbnails - for now just single image */}
+      <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+        <img
+          src={selectedProduct.image}
+          alt={selectedProduct.name}
+          style={{
+            width: '100%',
+            height: 'auto',
+            maxHeight: '350px',
+            objectFit: 'contain',
+            borderRadius: '8px',
+            marginBottom: '1rem'
+          }}
+        />
+        {/* You can later map thumbnails here */}
+      </div>
+
+      {/* Right content */}
+      <div style={{ flex: '2', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <div>
+          <h2 style={{ marginBottom: '0.5rem', color: '#003366' }}>{selectedProduct.name}</h2>
+          <p style={{ fontSize: '1.1rem' }}>{selectedProduct.rating}</p>
+          <p style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#222' }}>{selectedProduct.price}</p>
+          <p style={{ marginTop: '1rem', fontSize: '0.95rem', lineHeight: '1.4', color: '#555' }}>
+            Description: This locally-sourced product is one of our bestsellers. Customers love its quality and value. Buy now to support your local vendors!
+          </p>
         </div>
-      )}
+
+        <div style={{ marginTop: '2rem' }}>
+          <button style={{
+            backgroundColor: '#003366',
+            color: 'white',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+            cursor: 'pointer',
+            marginRight: '1rem'
+          }}>
+            Add to Cart
+          </button>
+          <button onClick={() => setShowModal(false)} style={{
+            backgroundColor: '#ccc',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '8px',
+            fontWeight: 'bold',
+            fontSize: '1rem',
+            cursor: 'pointer'
+          }}>
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+)}
+
 
       {/* Sign In Modal */}
       {isSignInModalOpen && (
