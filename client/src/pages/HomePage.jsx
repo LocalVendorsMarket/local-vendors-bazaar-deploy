@@ -66,6 +66,7 @@ const HomePage = ({ cart, setCart }) => {
       setIsUpdateLocationOpen(false);
     }
   };
+  const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
@@ -214,7 +215,7 @@ const HomePage = ({ cart, setCart }) => {
     © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
   </p>
 </footer>
-
+</div> //
   );
 };
 
