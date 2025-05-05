@@ -76,29 +76,29 @@ const productRefs = [productRef0, productRef1, productRef2, productRef3, product
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
       {/* Header */}
       <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
-        <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
-          <span>Delivering to {deliveryLocation}</span><br />
-          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
-        </div>
-        <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-        </div>
-        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
-          <button onClick={() => alert(`Searching vendors near ${vendorZip}`)} style={searchButtonStyle}>Find Vendors</button>
-          <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
-        </div>
-      </header>
+  <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+  <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
+    <span>Delivering to {deliveryLocation}</span><br />
+    <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
+  </div>
+  <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
+    <a href="/" style={navLinkStyle}>Home</a>
+    <a href="/shop" style={navLinkStyle}>Shop</a>
+    <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
+  </div>
+  <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
+    <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
+      {categories.map((cat) => (
+        <option key={cat} value={cat}>{cat}</option>
+      ))}
+    </select>
+    <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
+    <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
+    <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
+    <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
+    <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+  </div>
+</header>
 
       {/* Sub Nav Bar */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', gap: '15px', overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none' }}>
