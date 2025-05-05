@@ -20,7 +20,10 @@ const HomePage = ({ cart, setCart }) => {
       rating: '⭐⭐⭐⭐⭐',
       images: [
         'https://via.placeholder.com/300x200?text=Local+Honey',
-        'https://via.placeholder.com/300x200?text=Raw+Honey+Jar'
+        'https://via.placeholder.com/300x200?text=Raw+Honey+Jar',
+        'https://via.placeholder.com/300x200?text=Organic+Honey',
+        'https://via.placeholder.com/300x200?text=Honey+Comb',
+        'https://via.placeholder.com/300x200?text=Glass+Jar'
       ]
     },
     {
@@ -31,7 +34,10 @@ const HomePage = ({ cart, setCart }) => {
       rating: '⭐⭐⭐⭐',
       images: [
         'https://via.placeholder.com/300x200?text=Necklace',
-        'https://via.placeholder.com/300x200?text=Closeup+Necklace'
+        'https://via.placeholder.com/300x200?text=Closeup+Necklace',
+        'https://via.placeholder.com/300x200?text=Jewelry+Box',
+        'https://via.placeholder.com/300x200?text=Pendant',
+        'https://via.placeholder.com/300x200?text=Crafted+Details'
       ]
     },
     {
@@ -42,37 +48,31 @@ const HomePage = ({ cart, setCart }) => {
       rating: '⭐⭐⭐⭐',
       images: [
         'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
-        'https://via.placeholder.com/300x200?text=Back+of+T-Shirt'
+        'https://via.placeholder.com/300x200?text=Back+of+T-Shirt',
+        'https://via.placeholder.com/300x200?text=Label+Closeup',
+        'https://via.placeholder.com/300x200?text=Eco+Friendly',
+        'https://via.placeholder.com/300x200?text=Model+Wearing'
       ]
     }
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
-  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
-  const [searchCategory, setSearchCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [vendorZip, setVendorZip] = useState('');
-  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
-  const [isNewCustomer, setIsNewCustomer] = useState(false);
-  const [signInEmail, setSignInEmail] = useState('');
-  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
-  const [newZip, setNewZip] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
-  const [activeTab, setActiveTab] = useState('description');
 
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
-    : allProducts.filter((product) => product.category === selectedCategory);
+    : allProducts.filter(product => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    if (direction === 'left') {
-      productRefs[row].current.scrollBy({ left: -300, behavior: 'smooth' });
-    } else {
-      productRefs[row].current.scrollBy({ left: 300, behavior: 'smooth' });
+    if (productRefs[row]?.current) {
+      productRefs[row].current.scrollBy({
+        left: direction === 'left' ? -300 : 300,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -82,103 +82,79 @@ const HomePage = ({ cart, setCart }) => {
     setShowModal(true);
   };
 
-  const handleSignInSubmit = (e) => {
-    e.preventDefault();
-    setIsSignInModalOpen(false);
-    setIsNewCustomer(false);
-  };
-
-  const handleUpdateLocationSubmit = (e) => {
-    e.preventDefault();
-    if (newZip.trim()) {
-      setDeliveryLocation(newZip);
-      setNewZip('');
-      setIsUpdateLocationOpen(false);
-    }
-  };
-
-  const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
-
   return (
-    <div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', padding: '2rem' }}>
-        {filteredProducts.map((product) => (
-          <div
-            key={product.id}
-            onClick={() => handleProductClick(product)}
-            style={{ cursor: 'pointer', padding: '1rem', border: '1px solid #ddd', borderRadius: '8px', margin: '1rem', width: '300px', textAlign: 'center' }}
-          >
-            <img
-              src={product.images[0]}
-              alt={product.name}
-              style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '8px' }}
-            />
-            <h3>{product.name}</h3>
-            <p>{product.price}</p>
-            <p>{product.rating}</p>
-          </div>
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+      {/* Navbar */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', alignItems: 'center' }}>
+        <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+        <nav style={{ marginLeft: '2rem', display: 'flex', gap: '15px' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
+        </nav>
+      </header>
+
+      {/* Sub Nav */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        {categories.map(cat => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', padding: '0 10px', cursor: 'pointer' }}>{cat}</span>
         ))}
       </div>
 
+      {/* Product Rows */}
+      {[0, 1, 2].map((row) => (
+        <div key={row} style={{ display: 'flex', alignItems: 'center', padding: '1rem 2rem' }}>
+          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
+          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
+            {filteredProducts.map(product => (
+              <div key={product.id} onClick={() => handleProductClick(product)} style={productCardStyle}>
+                <img src={product.images[0]} alt={product.name} style={productImageStyle} />
+                <h2 style={productNameStyle}>{product.name}</h2>
+                <p>{product.rating}</p>
+                <p style={{ fontWeight: 'bold' }}>{product.price}</p>
+              </div>
+            ))}
+          </div>
+          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
+        </div>
+      ))}
+
+      {/* Modal */}
       {showModal && selectedProduct && (
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
               {selectedProduct.images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
+                  alt={`Thumbnail ${index}`}
                   onClick={() => setActiveImage(img)}
-                  alt="thumbnail"
                   style={{
-                    width: '100px',
-                    height: '80px',
-                    objectFit: 'cover',
+                    width: '80px',
+                    height: '60px',
                     border: activeImage === img ? '3px solid #003366' : '1px solid #ccc',
-                    borderRadius: '6px',
-                    cursor: 'pointer'
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    objectFit: 'cover'
                   }}
                 />
               ))}
             </div>
-            <div style={{ flex: '2', display: 'flex', flexDirection: 'column' }}>
+            <div style={{ flex: '2' }}>
               <img
                 src={activeImage}
                 alt={selectedProduct.name}
                 style={{
                   width: '100%',
-                  maxHeight: '300px',
+                  maxHeight: '350px',
                   objectFit: 'contain',
-                  borderRadius: '8px',
-                  transition: 'transform 0.3s',
-                  cursor: 'zoom-in'
+                  borderRadius: '10px'
                 }}
-                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
-                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1.0)')}
               />
-              <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-                <span onClick={() => setActiveTab('description')} style={{ cursor: 'pointer', fontWeight: activeTab === 'description' ? 'bold' : 'normal' }}>
-                  Description
-                </span>
-                <span onClick={() => setActiveTab('reviews')} style={{ cursor: 'pointer', fontWeight: activeTab === 'reviews' ? 'bold' : 'normal' }}>
-                  Reviews
-                </span>
-              </div>
-              <div style={{ marginTop: '1rem', fontSize: '0.95rem', color: '#333' }}>
-                {activeTab === 'description' ? (
-                  <p>This locally-sourced product is one of our bestsellers. Customers love its quality and value.</p>
-                ) : (
-                  <p>⭐️⭐️⭐️⭐️⭐️ – "Amazing product! Would definitely buy again."</p>
-                )}
-              </div>
-              <div style={{ marginTop: '2rem' }}>
-                <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer', marginRight: '1rem' }}>
-                  Add to Cart
-                </button>
-                <button onClick={() => setShowModal(false)} style={{ backgroundColor: '#ccc', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>
-                  Close
-                </button>
-              </div>
+              <p style={{ marginTop: '1rem' }}><strong>{selectedProduct.name}</strong></p>
+              <p>{selectedProduct.price} – {selectedProduct.rating}</p>
+              <button style={addToCartButtonStyle}>Add to Cart</button>
             </div>
           </div>
         </div>
@@ -187,10 +163,17 @@ const HomePage = ({ cart, setCart }) => {
   );
 };
 
-const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
+const navLinkStyle = { color: 'white', textDecoration: 'none', fontWeight: 'bold' };
+const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', padding: '0.5rem 1rem', fontSize: '1.5rem', cursor: 'pointer' };
+const productCardStyle = { minWidth: '250px', padding: '1rem', backgroundColor: 'white', borderRadius: '10px', textAlign: 'center', cursor: 'pointer', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' };
+const productImageStyle = { width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' };
+const productNameStyle = { fontSize: '1.1rem', color: '#003366' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', display: 'flex', gap: '2rem', maxWidth: '960px', width: '90%' };
+const addToCartButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', marginTop: '1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
