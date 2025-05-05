@@ -21,9 +21,9 @@ const HomePage = ({ cart, setCart }) => {
       images: [
         'https://via.placeholder.com/300x200?text=Local+Honey',
         'https://via.placeholder.com/300x200?text=Raw+Honey+Jar',
-        'https://via.placeholder.com/300x200?text=Organic+Honey',
-        'https://via.placeholder.com/300x200?text=Honey+Comb',
-        'https://via.placeholder.com/300x200?text=Glass+Jar'
+        'https://via.placeholder.com/300x200?text=Side+View+Honey',
+        'https://via.placeholder.com/300x200?text=Top+View+Honey',
+        'https://via.placeholder.com/300x200?text=Open+Jar+Honey'
       ]
     },
     {
@@ -35,9 +35,9 @@ const HomePage = ({ cart, setCart }) => {
       images: [
         'https://via.placeholder.com/300x200?text=Necklace',
         'https://via.placeholder.com/300x200?text=Closeup+Necklace',
-        'https://via.placeholder.com/300x200?text=Jewelry+Box',
-        'https://via.placeholder.com/300x200?text=Pendant',
-        'https://via.placeholder.com/300x200?text=Crafted+Details'
+        'https://via.placeholder.com/300x200?text=Necklace+Box',
+        'https://via.placeholder.com/300x200?text=On+Model',
+        'https://via.placeholder.com/300x200?text=Angle+View'
       ]
     },
     {
@@ -49,30 +49,39 @@ const HomePage = ({ cart, setCart }) => {
       images: [
         'https://via.placeholder.com/300x200?text=Organic+T-Shirt',
         'https://via.placeholder.com/300x200?text=Back+of+T-Shirt',
-        'https://via.placeholder.com/300x200?text=Label+Closeup',
-        'https://via.placeholder.com/300x200?text=Eco+Friendly',
-        'https://via.placeholder.com/300x200?text=Model+Wearing'
+        'https://via.placeholder.com/300x200?text=Side+View+T-Shirt',
+        'https://via.placeholder.com/300x200?text=Folded+T-Shirt',
+        'https://via.placeholder.com/300x200?text=Closeup+Fabric'
       ]
     }
   ];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
+  const [searchCategory, setSearchCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [vendorZip, setVendorZip] = useState('');
+  const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
+  const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
+  const [newZip, setNewZip] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
   const [activeImage, setActiveImage] = useState(null);
+  const [activeTab, setActiveTab] = useState('description');
 
   const productRefs = [useRef(null), useRef(null), useRef(null)];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
-    : allProducts.filter(product => product.category === selectedCategory);
+    : allProducts.filter((product) => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    if (productRefs[row]?.current) {
-      productRefs[row].current.scrollBy({
-        left: direction === 'left' ? -300 : 300,
-        behavior: 'smooth'
-      });
+    if (direction === 'left') {
+      productRefs[row].current.scrollBy({ left: -300, behavior: 'smooth' });
+    } else {
+      productRefs[row].current.scrollBy({ left: 300, behavior: 'smooth' });
     }
   };
 
@@ -82,97 +91,111 @@ const HomePage = ({ cart, setCart }) => {
     setShowModal(true);
   };
 
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setIsSignInModalOpen(false);
+    setIsNewCustomer(false);
+  };
+
+  const handleUpdateLocationSubmit = (e) => {
+    e.preventDefault();
+    if (newZip.trim()) {
+      setDeliveryLocation(newZip);
+      setNewZip('');
+      setIsUpdateLocationOpen(false);
+    }
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      {/* Navbar */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', alignItems: 'center' }}>
+      {/* Nav Bar */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <nav style={{ marginLeft: '2rem', display: 'flex', gap: '15px' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-        </nav>
+        <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
+          <span>Delivering to {deliveryLocation}</span><br />
+          <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
+        </div>
+        <div style={{ marginLeft: 'auto', display: 'flex', gap: '10px', alignItems: 'center' }}>
+          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search..." style={{ padding: '8px', borderRadius: '6px' }} />
+          <button onClick={() => alert(`Searching vendors near ${vendorZip}`)} style={{ padding: '8px 12px', borderRadius: '6px', backgroundColor: '#007bff', color: '#fff' }}>Search</button>
+          <a href="/cart" style={{ color: 'white', fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+        </div>
       </header>
-
-      {/* Sub Nav */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', overflowX: 'auto', whiteSpace: 'nowrap' }}>
-        {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', padding: '0 10px', cursor: 'pointer' }}>{cat}</span>
-        ))}
-      </div>
 
       {/* Product Rows */}
       {[0, 1, 2].map((row) => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', padding: '1rem 2rem' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
+        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
+          <button onClick={() => scrollProducts(row, 'left')}>&lt;</button>
           <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
             {filteredProducts.map(product => (
-              <div key={product.id} onClick={() => handleProductClick(product)} style={productCardStyle}>
-                <img src={product.images[0]} alt={product.name} style={productImageStyle} />
-                <h2 style={productNameStyle}>{product.name}</h2>
+              <div key={product.id} onClick={() => handleProductClick(product)} style={{ minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', cursor: 'pointer' }}>
+                <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+                <h2 style={{ fontSize: '1.2rem', color: '#003366' }}>{product.name}</h2>
                 <p>{product.rating}</p>
                 <p style={{ fontWeight: 'bold' }}>{product.price}</p>
               </div>
             ))}
           </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
+          <button onClick={() => scrollProducts(row, 'right')}>&gt;</button>
         </div>
       ))}
 
-      {/* Modal */}
+      {/* Product Modal */}
       {showModal && selectedProduct && (
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '1rem', alignItems: 'center' }}>
+            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {selectedProduct.images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
-                  alt={`Thumbnail ${index}`}
                   onClick={() => setActiveImage(img)}
-                  style={{
-                    width: '80px',
-                    height: '60px',
-                    border: activeImage === img ? '3px solid #003366' : '1px solid #ccc',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    objectFit: 'cover'
-                  }}
+                  alt="thumbnail"
+                  style={{ width: '80px', height: '60px', objectFit: 'cover', cursor: 'pointer', border: activeImage === img ? '2px solid #003366' : '1px solid #ccc' }}
                 />
               ))}
             </div>
-            <div style={{ flex: '2' }}>
+            <div style={{ flex: '2', padding: '0 1rem' }}>
               <img
                 src={activeImage}
                 alt={selectedProduct.name}
-                style={{
-                  width: '100%',
-                  maxHeight: '350px',
-                  objectFit: 'contain',
-                  borderRadius: '10px'
-                }}
+                style={{ width: '100%', maxHeight: '300px', objectFit: 'contain', borderRadius: '8px', marginBottom: '1rem' }}
               />
-              <p style={{ marginTop: '1rem' }}><strong>{selectedProduct.name}</strong></p>
-              <p>{selectedProduct.price} – {selectedProduct.rating}</p>
-              <button style={addToCartButtonStyle}>Add to Cart</button>
+              <h2>{selectedProduct.name}</h2>
+              <p>{selectedProduct.rating}</p>
+              <p>{selectedProduct.price}</p>
+              <div>
+                <p>{activeTab === 'description' ? 'This locally-sourced product is a bestseller loved by our community.' : '⭐️⭐️⭐️⭐️⭐️ – "Amazing product! Would definitely buy again."'}</p>
+              </div>
+              <div>
+                <button style={{ backgroundColor: '#003366', color: 'white', padding: '10px 20px', borderRadius: '6px', marginRight: '1rem' }}>Add to Cart</button>
+                <button onClick={() => setShowModal(false)} style={{ padding: '10px 20px', backgroundColor: '#ccc', borderRadius: '6px' }}>Close</button>
+              </div>
+            </div>
+            <div style={{ flex: '1', backgroundColor: '#f8f8f8', padding: '1rem', borderRadius: '8px' }}>
+              <h3>Purchase Options</h3>
+              <p>Vendor: Local Seller</p>
+              <p>Shipping: Free</p>
+              <p>Delivery: 3–5 business days</p>
+              <button style={{ marginTop: '1rem', padding: '10px', backgroundColor: '#28a745', color: 'white', border: 'none', borderRadius: '6px', fontWeight: 'bold' }}>Buy Now</button>
             </div>
           </div>
         </div>
       )}
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
+        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
-const navLinkStyle = { color: 'white', textDecoration: 'none', fontWeight: 'bold' };
-const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', padding: '0.5rem 1rem', fontSize: '1.5rem', cursor: 'pointer' };
-const productCardStyle = { minWidth: '250px', padding: '1rem', backgroundColor: 'white', borderRadius: '10px', textAlign: 'center', cursor: 'pointer', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' };
-const productImageStyle = { width: '100%', height: '150px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { fontSize: '1.1rem', color: '#003366' };
-const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', display: 'flex', gap: '2rem', maxWidth: '960px', width: '90%' };
-const addToCartButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', marginTop: '1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '95%', maxWidth: '1200px', display: 'flex', gap: '2rem' };
 
 export default HomePage;
+
 
 
 
