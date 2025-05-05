@@ -41,7 +41,15 @@ const HomePage = ({ cart, setCart }) => {
   const [activeImage, setActiveImage] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
 
-  const productRefs = Array.from({ length: 6 }, () => useRef(null));
+  const productRef0 = useRef(null);
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+  const productRef3 = useRef(null);
+  const productRef4 = useRef(null);
+  const productRef5 = useRef(null);
+
+const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
+
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
