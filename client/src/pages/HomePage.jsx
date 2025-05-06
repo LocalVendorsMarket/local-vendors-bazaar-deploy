@@ -228,6 +228,7 @@ const HomePage = ({ cart, setCart }) => {
   );
 };
 
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
 const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
