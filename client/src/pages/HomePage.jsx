@@ -232,6 +232,7 @@ const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', 
 const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
 const productRatingStyle = { color: '#666', marginBottom: '8px' };
 
+export default HomePage;
 
  
 
