@@ -36,35 +36,6 @@ const HomePage = ({ cart, setCart }) => {
   const [signInEmail, setSignInEmail] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [activeImage, setActiveImage] = useState(null);
-  const [activeTab, setActiveTab] = useState('description');
-
-  const productRef0 = useRef(null);
-  const productRef1 = useRef(null);
-  const productRef2 = useRef(null);
-  const productRef3 = useRef(null);
-  const productRef4 = useRef(null);
-  const productRef5 = useRef(null);
-  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
-
-  const filteredProducts = selectedCategory === 'All'
-    ? allProducts
-    : allProducts.filter((product) => product.category === selectedCategory);
-
-  const scrollProducts = (row, direction) => {
-    const ref = productRefs[row];
-    if (ref && ref.current) {
-      ref.current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
-    }
-  };
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    setActiveImage(product.images[0]);
-    setShowModal(true);
-  };
 
   const handleUpdateLocationSubmit = (e) => {
     e.preventDefault();
@@ -77,37 +48,68 @@ const HomePage = ({ cart, setCart }) => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    setIsSignInModalOpen(false);
-    setIsNewCustomer(false);
+    alert(`Signed in with ${signInEmail}`);
+    setSignInModalOpen(false);
+    setSignInEmail('');
   };
-
-  const handleVendorZipSearch = () => {
-    alert(`Searching vendors near ${vendorZip}`);
-  };
-
-  const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-  const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-  const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-  const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-  const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
-  const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-  const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', cursor: 'pointer' };
-  const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-  const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
-  const productRatingStyle = { color: '#666', marginBottom: '8px' };
-  const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
-  const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-  const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
-  const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      {/* Full layout sections will be placed here */}
+    <div>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
+          <div>
+            <div>Delivering to {deliveryLocation}</div>
+            <button onClick={() => setIsUpdateLocationOpen(true)} style={{ background: 'none', border: 'none', color: 'white', textDecoration: 'underline', cursor: 'pointer' }}>Update location</button>
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
+          <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
+        </div>
+      </header>
+
+      {/* Update Location Modal */}
+      {isUpdateLocationOpen && (
+        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>Update Delivery Location</h2>
+            <form onSubmit={handleUpdateLocationSubmit}>
+              <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter new ZIP code" style={searchInputStyle} />
+              <br /><br />
+              <button type="submit" style={searchButtonStyle}>Update</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>Sign In</h2>
+            <form onSubmit={handleSignInSubmit}>
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Email" style={searchInputStyle} />
+              <br /><br />
+              <button type="submit" style={searchButtonStyle}>Submit</button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
+const searchInputStyle = { padding: '0.5rem', borderRadius: '6px', width: '200px' };
+const searchButtonStyle = { padding: '0.5rem 1rem', borderRadius: '6px', cursor: 'pointer', backgroundColor: '#00509e', color: 'white' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', justifyContent: 'center', alignItems: 'center', zIndex: 9999 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px' };
+
 export default HomePage;
+
 
 
 
