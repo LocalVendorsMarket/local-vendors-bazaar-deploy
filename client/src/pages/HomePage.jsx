@@ -41,16 +41,22 @@ const HomePage = ({ cart, setCart }) => {
   const [activeImage, setActiveImage] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
 
-  const productRefs = useRef([]);
+  const productRef0 = useRef(null);
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+  const productRef3 = useRef(null);
+  const productRef4 = useRef(null);
+  const productRef5 = useRef(null);
+  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
     : allProducts.filter((product) => product.category === selectedCategory);
 
   const scrollProducts = (row, direction) => {
-    const ref = productRefs.current[row];
-    if (ref) {
-      ref.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
+    const ref = productRefs[row];
+    if (ref && ref.current) {
+      ref.current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
     }
   };
 
@@ -96,13 +102,13 @@ const HomePage = ({ cart, setCart }) => {
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      {/* Header, Sub Nav Bar, Products, Modal, Footer will be restored next */}
-      <h1 style={{ textAlign: 'center', paddingTop: '3rem', color: '#003366' }}>Welcome to Local Vendors Bazaar</h1>
+      {/* Full layout sections will be placed here */}
     </div>
   );
 };
 
 export default HomePage;
+
 
 
 
