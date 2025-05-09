@@ -11,6 +11,22 @@ const HomePage = ({ cart, setCart }) => {
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists'
   ];
 
+  const allProducts = Array.from({ length: 24 }, (_, index) => ({
+    id: index + 1,
+    name: `Product ${index + 1}`,
+    category: categories[index % categories.length],
+    price: `$${10 + index}`,
+    rating: '⭐⭐⭐⭐',
+    images: [
+      `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+View+1`,
+      `https://via.placeholder.com/300x200?text=Alt+View+2`,
+      `https://via.placeholder.com/300x200?text=Alt+View+3`,
+      `https://via.placeholder.com/300x200?text=Alt+View+4`
+    ]
+  }));
+
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
   const [searchCategory, setSearchCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
@@ -18,6 +34,8 @@ const HomePage = ({ cart, setCart }) => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [signInEmail, setSignInEmail] = useState('');
+  const [signInName, setSignInName] = useState('');
+  const [signInPhone, setSignInPhone] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
 
@@ -40,51 +58,55 @@ const HomePage = ({ cart, setCart }) => {
     alert(`Searching vendors near ${vendorZip}`);
   };
 
+  const filteredProducts = selectedCategory === 'All'
+    ? allProducts
+    : allProducts.filter((product) => product.category === selectedCategory);
+
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', flexWrap: 'wrap', color: 'white' }}>
+    <div>
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', color: 'white' }}>
         <a href="/"><img src={logo} alt="Logo" style={{ width: '50px' }} /></a>
-        <div style={{ fontSize: '12px', marginLeft: '1rem' }}>
+        <div style={{ marginLeft: '1rem' }}>
           <span>Delivering to {deliveryLocation}</span><br />
           <span onClick={() => setIsUpdateLocationOpen(true)} style={{ textDecoration: 'underline', cursor: 'pointer' }}>Update location</span>
         </div>
-        <div style={{ display: 'flex', gap: '15px', marginLeft: '2rem' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/vendor-signup" style={navLinkStyle}>Become a Vendor</a>
-        </div>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
-            {categories.map((cat) => (
-              <option key={cat} value={cat}>{cat}</option>
-            ))}
-          </select>
-          <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." style={searchInputStyle} />
-          <input type="text" value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" style={zipInputStyle} />
-          <button onClick={handleVendorZipSearch} style={searchButtonStyle}>Find Vendors</button>
-          <span onClick={() => setIsSignInModalOpen(true)} style={navLinkStyle}>Sign In</span>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px', filter: 'drop-shadow(1px 1px 0 white)' }}>🛒</a>
+          <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)}>{categories.map(cat => <option key={cat}>{cat}</option>)}</select>
+          <input value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} placeholder="Search products..." />
+          <input value={vendorZip} onChange={(e) => setVendorZip(e.target.value)} placeholder="Zip Code" />
+          <button onClick={handleVendorZipSearch}>Find Vendors</button>
+          <span onClick={() => setIsSignInModalOpen(true)} style={{ cursor: 'pointer', textDecoration: 'underline' }}>Sign In</span>
         </div>
       </header>
 
-      {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', gap: '15px', overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none' }}>
-        {categories.map((cat) => (
-          <span key={cat} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', paddingRight: '10px' }}>{cat}</span>
+      {/* Sub Nav */}
+      <div style={{ backgroundColor: '#00509e', display: 'flex', overflowX: 'auto', padding: '0.5rem' }}>
+        {categories.map(cat => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', padding: '0 10px', cursor: 'pointer' }}>{cat}</span>
         ))}
       </div>
 
+      {/* Product Grid */}
+      <main style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'center', padding: '2rem' }}>
+        {filteredProducts.map(product => (
+          <div key={product.id} style={{ backgroundColor: '#fff', padding: '1rem', borderRadius: '8px', width: '250px', textAlign: 'center', boxShadow: '0 2px 6px rgba(0,0,0,0.1)' }}>
+            <img src={product.images[0]} alt={product.name} style={{ width: '100%', borderRadius: '6px' }} />
+            <h3>{product.name}</h3>
+            <p>{product.rating}</p>
+            <p>{product.price}</p>
+          </div>
+        ))}
+      </main>
+
       {/* Update Location Modal */}
       {isUpdateLocationOpen && (
-        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>Update Delivery Location</h2>
+        <div style={modalStyle}>
+          <div style={modalContentStyle}>
+            <h2>Update Location</h2>
             <form onSubmit={handleUpdateLocationSubmit}>
-              <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter new zip code" style={inputStyle} />
-              <div>
-                <button type="submit" style={primaryButton}>Update</button>
-                <button onClick={() => setIsUpdateLocationOpen(false)} style={secondaryButton}>Cancel</button>
-              </div>
+              <input value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter zip code" />
+              <button type="submit">Update</button>
+              <button onClick={() => setIsUpdateLocationOpen(false)}>Cancel</button>
             </form>
           </div>
         </div>
@@ -92,70 +114,35 @@ const HomePage = ({ cart, setCart }) => {
 
       {/* Sign In Modal */}
       {isSignInModalOpen && (
-        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+        <div style={modalStyle}>
+          <div style={modalContentStyle}>
             <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
             <form onSubmit={handleSignInSubmit}>
-              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
-              <div>
-                <button type="submit" style={primaryButton}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButton}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
-                <button onClick={() => setIsSignInModalOpen(false)} style={secondaryButton}>Cancel</button>
-              </div>
+              {isNewCustomer && (
+                <>
+                  <input value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required />
+                  <input value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required />
+                </>
+              )}
+              <input value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Email" required />
+              <button type="submit">{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+              <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
+              <button onClick={() => setIsSignInModalOpen(false)}>Cancel</button>
             </form>
           </div>
         </div>
       )}
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
-          <div>
-            <h3>Get to Know Us</h3>
-            <a href="/about" style={footerLinkStyle}>About Us</a><br />
-            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
-            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
-            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
-            <a href="/careers" style={footerLinkStyle}>Careers</a>
-          </div>
-          <div>
-            <h3>Make Money with Us</h3>
-            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
-          </div>
-          <div>
-            <h3>Buyer Resources</h3>
-            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
-            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
-            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
-            <a href="/help" style={footerLinkStyle}>Help Center</a>
-          </div>
-          <div>
-            <h3>Stay Connected</h3>
-            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
-            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
-            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
-          </div>
-        </div>
-        <p style={{ marginTop: '1rem', fontSize: '12px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '2rem', marginTop: '2rem' }}>
+        <p>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
-const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
-const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
-const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px' };
-const inputStyle = { padding: '10px', borderRadius: '6px', width: '100%', fontSize: '16px', marginBottom: '10px', border: '1px solid #ccc' };
-const primaryButton = { padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', marginRight: '10px', cursor: 'pointer' };
-const secondaryButton = { padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', marginRight: '10px', cursor: 'pointer' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 999 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '10px', width: '400px', textAlign: 'center' };
 
 export default HomePage;
 
