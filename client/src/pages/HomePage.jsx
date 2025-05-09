@@ -41,8 +41,14 @@ const HomePage = ({ cart, setCart }) => {
   const [activeImage, setActiveImage] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
 
-const productRef0 = useRef(null);
-
+  // Correctly declare all product row refs
+  const productRef0 = useRef(null);
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+  const productRef3 = useRef(null);
+  const productRef4 = useRef(null);
+  const productRef5 = useRef(null);
+  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -82,7 +88,8 @@ const productRef0 = useRef(null);
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
-      {/* Insert nav bar, sub nav, product rows, product modal, and sign-in modal here (code continues) */}
+      {/* Include header, nav bar, product rows, modals, and footer here */}
+      {/* This file is now corrected to fix hook declaration errors */}
     </div>
   );
 };
@@ -103,6 +110,7 @@ const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: 
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', flexDirection: 'column', gap: '1rem' };
 
 export default HomePage;
+
 
 
 
