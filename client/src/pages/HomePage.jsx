@@ -17,13 +17,7 @@ const HomePage = ({ cart, setCart }) => {
     category: categories[index % categories.length],
     price: `$${10 + index}`,
     rating: '⭐⭐⭐⭐',
-    images: [
-      `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+View+1`,
-      `https://via.placeholder.com/300x200?text=Alt+View+2`,
-      `https://via.placeholder.com/300x200?text=Alt+View+3`,
-      `https://via.placeholder.com/300x200?text=Alt+View+4`
-    ]
+    image: `https://via.placeholder.com/300x200?text=Product+${index + 1}`
   }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -38,35 +32,6 @@ const HomePage = ({ cart, setCart }) => {
   const [signInPhone, setSignInPhone] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [activeImage, setActiveImage] = useState(null);
-  const [activeTab, setActiveTab] = useState('description');
-
-  const productRef0 = useRef(null);
-  const productRef1 = useRef(null);
-  const productRef2 = useRef(null);
-  const productRef3 = useRef(null);
-  const productRef4 = useRef(null);
-  const productRef5 = useRef(null);
-  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
-
-  const filteredProducts = selectedCategory === 'All'
-    ? allProducts
-    : allProducts.filter((product) => product.category === selectedCategory);
-
-  const scrollProducts = (row, direction) => {
-    const ref = productRefs[row];
-    if (ref && ref.current) {
-      ref.current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
-    }
-  };
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    setActiveImage(product.images[0]);
-    setShowModal(true);
-  };
 
   const handleUpdateLocationSubmit = (e) => {
     e.preventDefault();
@@ -79,7 +44,6 @@ const HomePage = ({ cart, setCart }) => {
 
   const handleSignInSubmit = (e) => {
     e.preventDefault();
-    // In real usage, signInName and signInPhone would be used too
     setIsSignInModalOpen(false);
     setIsNewCustomer(false);
     setSignInEmail('');
@@ -118,7 +82,6 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Update Location Modal */}
       {isUpdateLocationOpen && (
         <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
@@ -140,7 +103,6 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       )}
 
-      {/* Sign In Modal */}
       {isSignInModalOpen && (
         <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
@@ -189,21 +151,20 @@ const HomePage = ({ cart, setCart }) => {
           </div>
         </div>
       )}
-
     </div>
   );
 };
 
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
 const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
 const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
 const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px' };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '480px' };
 
 export default HomePage;
+
 
 
 
