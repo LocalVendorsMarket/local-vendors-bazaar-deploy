@@ -336,8 +336,6 @@ const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadi
 
       {/* Sub Nav Bar + Product Rows + Footer goes here */}
     </div>
-  );
-};
 
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '80px' };
