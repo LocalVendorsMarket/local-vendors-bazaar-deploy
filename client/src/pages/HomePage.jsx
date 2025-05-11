@@ -17,13 +17,7 @@ const HomePage = ({ cart, setCart }) => {
     category: categories[index % categories.length],
     price: `$${10 + index}`,
     rating: '⭐⭐⭐⭐',
-    images: [
-      `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+View+1`,
-      `https://via.placeholder.com/300x200?text=Alt+View+2`,
-      `https://via.placeholder.com/300x200?text=Alt+View+3`,
-      `https://via.placeholder.com/300x200?text=Alt+View+4`
-    ]
+    image: `https://via.placeholder.com/300x200?text=Product+${index + 1}`
   }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -38,12 +32,14 @@ const HomePage = ({ cart, setCart }) => {
   const [signInPhone, setSignInPhone] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
-  const [showModal, setShowModal] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [activeImage, setActiveImage] = useState(null);
-  const [activeTab, setActiveTab] = useState('description');
 
-  const productRefs = Array.from({ length: 6 }, () => useRef(null));
+  const productRef0 = useRef(null);
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+  const productRef3 = useRef(null);
+  const productRef4 = useRef(null);
+  const productRef5 = useRef(null);
+  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -54,12 +50,6 @@ const HomePage = ({ cart, setCart }) => {
     if (ref && ref.current) {
       ref.current.scrollBy({ left: direction === 'left' ? -300 : 300, behavior: 'smooth' });
     }
-  };
-
-  const handleProductClick = (product) => {
-    setSelectedProduct(product);
-    setActiveImage(product.images[0]);
-    setShowModal(true);
   };
 
   const handleUpdateLocationSubmit = (e) => {
@@ -111,22 +101,15 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Modals */}
       {isUpdateLocationOpen && (
         <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <h2>Update Delivery Location</h2>
             <form onSubmit={handleUpdateLocationSubmit}>
-              <input
-                type="text"
-                value={newZip}
-                onChange={(e) => setNewZip(e.target.value)}
-                placeholder="Enter new zip code"
-                style={{ padding: '10px', borderRadius: '6px', width: '200px', fontSize: '16px', marginBottom: '10px' }}
-              />
+              <input type="text" value={newZip} onChange={(e) => setNewZip(e.target.value)} placeholder="Enter new zip code" style={inputStyle} />
               <div>
-                <button type="submit" style={{ marginRight: '10px', padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>Update</button>
-                <button type="button" onClick={() => setIsUpdateLocationOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
+                <button type="submit" style={primaryButtonStyle}>Update</button>
+                <button type="button" onClick={() => setIsUpdateLocationOpen(false)} style={secondaryButtonStyle}>Cancel</button>
               </div>
             </form>
           </div>
@@ -140,71 +123,20 @@ const HomePage = ({ cart, setCart }) => {
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {isNewCustomer && (
                 <>
-                  <input
-                    type="text"
-                    value={signInName}
-                    onChange={(e) => setSignInName(e.target.value)}
-                    placeholder="Name or Company"
-                    required
-                    style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-                  />
-                  <input
-                    type="tel"
-                    value={signInPhone}
-                    onChange={(e) => setSignInPhone(e.target.value)}
-                    placeholder="Phone Number"
-                    required
-                    style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-                  />
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={inputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={inputStyle} />
                 </>
               )}
-              <input
-                type="email"
-                value={signInEmail}
-                onChange={(e) => setSignInEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-              />
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
               <div style={{ display: 'flex', gap: '10px' }}>
-                <button type="submit" style={{ padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
-                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#aaa', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
+                <button type="submit" style={primaryButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={secondaryButtonStyle}>Cancel</button>
               </div>
             </form>
           </div>
         </div>
       )}
-
-      {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', gap: '15px', overflowX: 'auto', whiteSpace: 'nowrap', scrollbarWidth: 'none' }}>
-        {categories.map((cat) => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', paddingRight: '10px' }}>{cat}</span>
-        ))}
-      </div>
-
-      {/* Product Rows */}
-      {[0, 1, 2].map((row) => (
-        <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
-          <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
-            {filteredProducts.slice(row * 4, row * 4 + 4).map(product => (
-              <div key={product.id} onClick={() => handleProductClick(product)} style={productCardStyle}>
-                <img src={product.images[0]} alt={product.name} style={productImageStyle} />
-                <h2 style={productNameStyle}>{product.name}</h2>
-                <p style={productRatingStyle}>{product.rating}</p>
-                <p style={productPriceStyle}>{product.price}</p>
-              </div>
-            ))}
-          </div>
-          <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
-        </div>
-      ))}
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <div>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</div>
-      </footer>
     </div>
   );
 };
@@ -214,16 +146,14 @@ const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px',
 const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
 const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px' };
 const searchButtonStyle = { backgroundColor: '#d3d3d3', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', cursor: 'pointer' };
-const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', cursor: 'pointer' };
-const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
-const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
-const productRatingStyle = { color: '#666', marginBottom: '8px' };
-const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
+const inputStyle = { padding: '10px', borderRadius: '6px', fontSize: '16px' };
+const primaryButtonStyle = { padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' };
+const secondaryButtonStyle = { padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '500px' };
 
 export default HomePage;
+
 
 
 
