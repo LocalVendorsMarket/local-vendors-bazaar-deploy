@@ -43,14 +43,13 @@ const HomePage = ({ cart, setCart }) => {
   const [activeImage, setActiveImage] = useState(null);
   const [activeTab, setActiveTab] = useState('description');
 
-const productRef0 = useRef(null);
-const productRef1 = useRef(null);
-const productRef2 = useRef(null);
-const productRef3 = useRef(null);
-const productRef4 = useRef(null);
-const productRef5 = useRef(null);
-const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
-
+  const productRef0 = useRef(null);
+  const productRef1 = useRef(null);
+  const productRef2 = useRef(null);
+  const productRef3 = useRef(null);
+  const productRef4 = useRef(null);
+  const productRef5 = useRef(null);
+  const productRefs = [productRef0, productRef1, productRef2, productRef3, productRef4, productRef5];
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -195,72 +194,6 @@ const productRefs = [productRef0, productRef1, productRef2, productRef3, product
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <p>&copy; {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
-
-      {/* Update Location Modal */}
-      {isUpdateLocationOpen && (
-        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>Update Delivery Location</h2>
-            <form onSubmit={handleUpdateLocationSubmit}>
-              <input
-                type="text"
-                value={newZip}
-                onChange={(e) => setNewZip(e.target.value)}
-                placeholder="Enter new zip code"
-                style={{ padding: '10px', borderRadius: '6px', width: '200px', fontSize: '16px', marginBottom: '10px' }}
-              />
-              <div>
-                <button type="submit" style={{ marginRight: '10px', padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>Update</button>
-                <button onClick={() => setIsUpdateLocationOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Sign In Modal */}
-      {isSignInModalOpen && (
-        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
-            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && (
-                <>
-                  <input
-                    type="text"
-                    value={signInName}
-                    onChange={(e) => setSignInName(e.target.value)}
-                    placeholder="Name or Company"
-                    required
-                    style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-                  />
-                  <input
-                    type="tel"
-                    value={signInPhone}
-                    onChange={(e) => setSignInPhone(e.target.value)}
-                    placeholder="Phone Number"
-                    required
-                    style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-                  />
-                </>
-              )}
-              <input
-                type="email"
-                value={signInEmail}
-                onChange={(e) => setSignInEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }}
-              />
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button type="submit" style={{ padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
-                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#aaa', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
@@ -281,6 +214,7 @@ const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: 
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
 
 export default HomePage;
+
 
 
 
