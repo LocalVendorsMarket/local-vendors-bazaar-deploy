@@ -89,6 +89,8 @@ const HomePage = ({ cart, setCart }) => {
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff', minHeight: '100vh' }}>
+      {/* Header, Subnav, Products, Modals would be here - omitted for brevity */}
+
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
@@ -143,7 +145,6 @@ const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
 
 export default HomePage;
-
 
 
 
