@@ -16,7 +16,7 @@ const HomePage = () => {
     image: `https://via.placeholder.com/300x200?text=Product+${index + 1}`
   }));
 
-  const productRefs = Array.from({ length: 6 }, () => useRef(null));
+  const productRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
 
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [deliveryLocation, setDeliveryLocation] = useState('Elgin 60120');
