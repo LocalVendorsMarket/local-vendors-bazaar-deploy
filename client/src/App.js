@@ -10,6 +10,7 @@ import VendorSignupPage from './pages/VendorSignupPage';
 import VendorSignupThankYouPage from './pages/VendorSignupThankYouPage';
 import VendorDashboard from './pages/VendorDashboard';
 import ProductManagement from './pages/ProductManagement';
+import AnalyticsReports from './pages/AnalyticsReports'; // ✅ NEW IMPORT
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -26,11 +27,13 @@ function App() {
       <Route path="/vendor-thankyou" element={<VendorSignupThankYouPage cart={cart} />} />
       <Route path="/vendor-dashboard" element={<VendorDashboard />} />
       <Route path="/vendor-products" element={<ProductManagement />} />
+      <Route path="/vendor-analytics" element={<AnalyticsReports />} /> {/* ✅ NEW ROUTE */}
     </Routes>
   );
 }
 
 export default App;
+
 
 
 
