@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import VendorSidebar from '../components/VendorSidebar';
+import VendorSidebar from '../../components/VendorSidebar';
 
 const salesData = [
   { name: 'Mon', sales: 120 },
