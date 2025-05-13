@@ -1,5 +1,5 @@
 import React from 'react';
-import VendorSidebar from '../../components/VendorSidebar';
+import VendorSidebar from '../components/VendorSidebar';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
 } from 'recharts';
