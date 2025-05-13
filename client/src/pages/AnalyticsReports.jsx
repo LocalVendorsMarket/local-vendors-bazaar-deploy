@@ -1,91 +1,62 @@
 import React from 'react';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import VendorSidebar from '../components/VendorSidebar';
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer
-} from 'recharts';
 
-const dummySalesData = [
-  { date: 'May 1', sales: 120 },
-  { date: 'May 2', sales: 90 },
-  { date: 'May 3', sales: 150 },
-  { date: 'May 4', sales: 200 },
-  { date: 'May 5', sales: 170 },
-  { date: 'May 6', sales: 240 },
-  { date: 'May 7', sales: 300 },
+const salesData = [
+  { name: 'Mon', sales: 120 },
+  { name: 'Tue', sales: 200 },
+  { name: 'Wed', sales: 150 },
+  { name: 'Thu', sales: 278 },
+  { name: 'Fri', sales: 189 },
+  { name: 'Sat', sales: 239 },
+  { name: 'Sun', sales: 349 },
 ];
 
-const topProducts = [
-  { name: 'Organic T-Shirt', sold: 120, revenue: '$2,160', rating: '⭐⭐⭐⭐' },
-  { name: 'Handmade Soap', sold: 85, revenue: '$1,275', rating: '⭐⭐⭐⭐⭐' },
-  { name: 'Beaded Jewelry Set', sold: 62, revenue: '$1,550', rating: '⭐⭐⭐⭐' },
-];
+const summary = {
+  totalSales: '$12,400',
+  totalOrders: 320,
+  topProduct: 'Handmade Necklace',
+  activeCustomers: 82,
+};
 
 const AnalyticsReports = () => {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen">
       <VendorSidebar />
-      <div className="flex-1 p-6 md:p-10">
-        <h2 className="text-2xl font-bold mb-6">Analytics & Reports</h2>
+      <div className="flex-1 p-6 bg-gray-50">
+        <h1 className="text-2xl font-bold mb-6">Analytics & Reports</h1>
 
-        {/* KPI Summary Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-2xl shadow p-4">
-            <h4 className="text-gray-500 text-sm">Total Sales</h4>
-            <p className="text-2xl font-semibold mt-1">$5,720</p>
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+          <div className="bg-white shadow rounded-2xl p-4">
+            <h2 className="text-sm text-gray-500">Total Sales</h2>
+            <p className="text-xl font-semibold">{summary.totalSales}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow p-4">
-            <h4 className="text-gray-500 text-sm">Orders This Week</h4>
-            <p className="text-2xl font-semibold mt-1">142</p>
+          <div className="bg-white shadow rounded-2xl p-4">
+            <h2 className="text-sm text-gray-500">Total Orders</h2>
+            <p className="text-xl font-semibold">{summary.totalOrders}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow p-4">
-            <h4 className="text-gray-500 text-sm">Top Product</h4>
-            <p className="text-lg font-medium mt-1">Organic T-Shirt</p>
+          <div className="bg-white shadow rounded-2xl p-4">
+            <h2 className="text-sm text-gray-500">Top Product</h2>
+            <p className="text-xl font-semibold">{summary.topProduct}</p>
           </div>
-          <div className="bg-white rounded-2xl shadow p-4">
-            <h4 className="text-gray-500 text-sm">Views This Week</h4>
-            <p className="text-2xl font-semibold mt-1">2,318</p>
+          <div className="bg-white shadow rounded-2xl p-4">
+            <h2 className="text-sm text-gray-500">Active Customers</h2>
+            <p className="text-xl font-semibold">{summary.activeCustomers}</p>
           </div>
         </div>
 
         {/* Sales Chart */}
-        <div className="bg-white rounded-2xl shadow p-6 mb-8">
-          <h3 className="text-lg font-bold mb-4">Sales - Last 7 Days</h3>
-          <ResponsiveContainer width="100%" height={250}>
-            <LineChart data={dummySalesData}>
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="date" />
+        <div className="bg-white shadow rounded-2xl p-6">
+          <h2 className="text-lg font-semibold mb-4">Weekly Sales</h2>
+          <ResponsiveContainer width="100%" height={300}>
+            <BarChart data={salesData}>
+              <XAxis dataKey="name" />
               <YAxis />
               <Tooltip />
-              <Line type="monotone" dataKey="sales" stroke="#8884d8" strokeWidth={2} />
-            </LineChart>
+              <Bar dataKey="sales" fill="#3B82F6" radius={[6, 6, 0, 0]} />
+            </BarChart>
           </ResponsiveContainer>
-        </div>
-
-        {/* Top Products Table */}
-        <div className="bg-white rounded-2xl shadow p-6">
-          <h3 className="text-lg font-bold mb-4">Top-Selling Products</h3>
-          <div className="overflow-x-auto">
-            <table className="min-w-full text-left text-sm">
-              <thead>
-                <tr className="border-b">
-                  <th className="py-2 px-4 font-semibold text-gray-600">Product</th>
-                  <th className="py-2 px-4 font-semibold text-gray-600">Units Sold</th>
-                  <th className="py-2 px-4 font-semibold text-gray-600">Revenue</th>
-                  <th className="py-2 px-4 font-semibold text-gray-600">Rating</th>
-                </tr>
-              </thead>
-              <tbody>
-                {topProducts.map((item, idx) => (
-                  <tr key={idx} className="border-t">
-                    <td className="py-2 px-4">{item.name}</td>
-                    <td className="py-2 px-4">{item.sold}</td>
-                    <td className="py-2 px-4">{item.revenue}</td>
-                    <td className="py-2 px-4">{item.rating}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
     </div>
@@ -93,6 +64,7 @@ const AnalyticsReports = () => {
 };
 
 export default AnalyticsReports;
+
 
 
 
