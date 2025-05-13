@@ -1,5 +1,5 @@
 import React from 'react';
-import VendorSidebar from '../../components/VendorSidebar';
+import VendorSidebar from 'components/VendorSidebar';
 
 const AccountSettings = () => {
   return (

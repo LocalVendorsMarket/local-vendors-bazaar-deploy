@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import VendorSidebar from '../../components/VendorSidebar';
+import VendorSidebar from 'components/VendorSidebar';
 import NewProductForm from '../components/NewProductForm';
 
 const ProductManagement = () => {
