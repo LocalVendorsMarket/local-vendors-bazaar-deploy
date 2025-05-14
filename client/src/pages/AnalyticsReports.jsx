@@ -3,14 +3,16 @@ import VendorSidebar from '../components/VendorSidebar';
 
 const AnalyticsReports = () => {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen">
       <VendorSidebar />
-      <main className="flex-1 p-6 max-w-5xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Analytics & Reports</h1>
-        <div className="bg-white rounded-2xl shadow p-6">
-          <p className="text-lg">
-            View insights, sales trends, and performance metrics to help grow your business.
-          </p>
+      <main className="flex-1 max-w-5xl mx-auto p-8 bg-white shadow rounded-xl mt-10">
+        <h1 className="text-3xl font-bold mb-6 text-center">Analytics & Reports</h1>
+        <p className="text-center text-gray-700">
+          Monitor your store’s performance, customer engagement, and sales metrics.
+        </p>
+        {/* Placeholder for future charts or metrics */}
+        <div className="mt-8 text-center text-gray-500 italic">
+          Charts and reports will be available here soon.
         </div>
       </main>
     </div>
@@ -18,6 +20,7 @@ const AnalyticsReports = () => {
 };
 
 export default AnalyticsReports;
+
 
 
 
