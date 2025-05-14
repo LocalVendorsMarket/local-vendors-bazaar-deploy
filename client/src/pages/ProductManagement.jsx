@@ -5,19 +5,18 @@ const ProductManagement = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 p-8 flex flex-col items-center justify-start bg-white">
-        <div className="max-w-4xl w-full">
-          <h1 className="text-3xl font-bold mb-4">Product Management</h1>
-          <p className="text-gray-700">
-            Manage your product listings, update pricing, and track inventory from here.
-          </p>
-        </div>
+      <main className="flex-1 p-8 max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-4">Product Management</h1>
+        <p className="text-gray-700">
+          Add, edit, or remove products listed in your store. Ensure your listings are up to date and attractive to buyers.
+        </p>
       </main>
     </div>
   );
 };
 
 export default ProductManagement;
+
 
 
 
