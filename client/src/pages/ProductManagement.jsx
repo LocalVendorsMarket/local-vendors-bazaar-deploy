@@ -5,15 +5,16 @@ const ProductManagement = () => {
   return (
     <div className="flex min-h-screen">
       <VendorSidebar />
-      <main className="flex-1 p-6">
+      <div className="flex-1 p-6">
         <h1 className="text-2xl font-bold mb-4">Product Management</h1>
-        <p>Manage your product listings here.</p>
-      </main>
+        <p>Add, edit, or remove products from your vendor catalog here.</p>
+      </div>
     </div>
   );
 };
 
 export default ProductManagement;
+
 
 
 

@@ -5,15 +5,16 @@ const VendorSupport = () => {
   return (
     <div className="flex min-h-screen">
       <VendorSidebar />
-      <main className="flex-1 p-6">
+      <div className="flex-1 p-6">
         <h1 className="text-2xl font-bold mb-4">Vendor Support</h1>
-        <p>Need help? Reach out to our vendor support team.</p>
-      </main>
+        <p>Need help? Reach out to support or view the vendor FAQ here.</p>
+      </div>
     </div>
   );
 };
 
 export default VendorSupport;
+
 
 
 
