@@ -3,16 +3,14 @@ import VendorSidebar from '../components/VendorSidebar';
 
 const AnalyticsReports = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 max-w-5xl mx-auto p-8 bg-white shadow rounded-xl mt-10">
-        <h1 className="text-3xl font-bold mb-6 text-center">Analytics & Reports</h1>
-        <p className="text-center text-gray-700">
-          Monitor your store’s performance, customer engagement, and sales metrics.
-        </p>
-        {/* Placeholder for future charts or metrics */}
-        <div className="mt-8 text-center text-gray-500 italic">
-          Charts and reports will be available here soon.
+      <main className="flex-1 p-8 flex flex-col items-center justify-start bg-white">
+        <div className="max-w-4xl w-full">
+          <h1 className="text-3xl font-bold mb-4">Analytics & Reports</h1>
+          <p className="text-gray-700">
+            View performance metrics, sales reports, and customer insights here.
+          </p>
         </div>
       </main>
     </div>

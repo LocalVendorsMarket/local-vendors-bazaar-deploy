@@ -5,10 +5,10 @@ const OrderManagement = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 p-8 flex flex-col items-center justify-center">
-        <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-3xl">
-          <h1 className="text-2xl font-bold mb-4 text-center">Order Management</h1>
-          <p className="text-gray-700 text-center">
+      <main className="flex-1 p-8 flex flex-col items-center justify-start bg-white">
+        <div className="max-w-4xl w-full">
+          <h1 className="text-3xl font-bold mb-4">Order Management</h1>
+          <p className="text-gray-700">
             Track and manage all your orders from this section.
           </p>
         </div>
