@@ -12,7 +12,8 @@ import VendorDashboard from './pages/VendorDashboard';
 import ProductManagement from './pages/ProductManagement';
 import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
-import VendorSupport from './pages/VendorSupport'; // ✅ NEW IMPORT
+import VendorSupport from './pages/VendorSupport';
+import OrderManagement from './pages/OrderManagement'; // ✅ ADD THIS
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -29,14 +30,16 @@ function App() {
       <Route path="/vendor-thankyou" element={<VendorSignupThankYouPage cart={cart} />} />
       <Route path="/vendor-dashboard" element={<VendorDashboard />} />
       <Route path="/vendor-products" element={<ProductManagement />} />
+      <Route path="/vendor-orders" element={<OrderManagement />} /> {/* ✅ ADD THIS */}
       <Route path="/vendor-analytics" element={<AnalyticsReports />} />
       <Route path="/vendor-settings" element={<AccountSettings />} />
-      <Route path="/vendor-support" element={<VendorSupport />} /> {/* ✅ NEW ROUTE */}
+      <Route path="/vendor-support" element={<VendorSupport />} />
     </Routes>
   );
 }
 
 export default App;
+
 
 
 
