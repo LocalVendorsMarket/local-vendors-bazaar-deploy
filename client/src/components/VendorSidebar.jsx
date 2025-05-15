@@ -39,10 +39,10 @@ const VendorSidebar = () => {
 
       {/* Sidebar */}
       <aside
-        className={`${
-          isOpen ? 'block' : 'hidden'
-        } md:block w-full md:w-64 bg-white border-r h-full shadow-lg`}
-      >
+  className={`${
+    isOpen ? 'block' : 'hidden'
+  } md:block w-full md:w-64 bg-white border-r shadow-lg min-h-screen flex-shrink-0`}
+>
         <div className="p-6 font-bold text-xl text-green-700">Vendor Panel</div>
         <nav className="flex flex-col gap-2 px-4">
           {navItems.map(({ label, icon, path }) => {
