@@ -13,8 +13,13 @@ import {
 import { useLocation } from 'react-router-dom';
 
 const VendorSidebar = () => {
-  const location = useLocation();
-  const [isOpen, setIsOpen] = useState(true);
+  return (
+    <aside className="w-64 bg-white shadow-md">
+      {/* Sidebar content */}
+    </aside>
+  );
+};
+
 
   const navItems = [
     { label: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" />, path: '/vendor/dashboard' },
