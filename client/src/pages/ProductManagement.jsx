@@ -3,13 +3,13 @@ import VendorSidebar from '../components/VendorSidebar';
 
 const ProductManagement = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 flex flex-col items-center justify-center p-8 bg-gray-50">
-        <div className="w-full max-w-4xl bg-white rounded-2xl shadow-md p-6">
-          <h1 className="text-2xl font-bold mb-4">Product Management</h1>
-          <p className="text-gray-700">Manage your product listings and inventory here.</p>
-        </div>
+      <main className="flex-1 p-8 max-w-5xl mx-auto">
+        <h1 className="text-3xl font-bold text-gray-800 mb-6">Product Management</h1>
+        <p className="text-gray-600 text-lg">
+          Here you can add, update, or remove products listed in your store.
+        </p>
       </main>
     </div>
   );
