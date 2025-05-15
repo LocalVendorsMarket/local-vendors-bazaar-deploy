@@ -3,11 +3,11 @@ import VendorSidebar from '../components/VendorSidebar';
 
 const OrderManagement = () => {
   return (
-    <div className="flex min-h-screen bg-gray-100">
+    <div className="min-h-screen bg-gray-100 flex">
       <VendorSidebar />
-      <main className="flex-1 p-8 flex justify-center items-start">
-        <div className="w-full max-w-4xl bg-white p-6 rounded-2xl shadow-md">
-          <h1 className="text-3xl font-bold mb-4 text-gray-800">Order Management</h1>
+      <main className="flex-1 p-8">
+        <div className="max-w-screen-lg mx-auto bg-white shadow-lg rounded-2xl p-8">
+          <h1 className="text-3xl font-bold mb-6 text-gray-800">Order Management</h1>
           <p className="text-gray-600">
             Track and manage all your orders from this section.
           </p>
@@ -18,6 +18,7 @@ const OrderManagement = () => {
 };
 
 export default OrderManagement;
+
 
 
 
