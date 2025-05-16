@@ -5,18 +5,16 @@ const ProductManagement = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 flex flex-col items-center justify-center p-8">
-        <div className="max-w-4xl w-full bg-white shadow-md rounded-xl p-6">
-          <h1 className="text-3xl font-semibold text-green-700 mb-4">Product Management</h1>
-          <p className="text-gray-600 mb-6">
-            Manage your product listings, update inventory, and add new products from this section.
-          </p>
-          <ul className="list-disc list-inside text-gray-700 space-y-2">
-            <li>View and edit existing products</li>
-            <li>Upload images and descriptions</li>
-            <li>Adjust pricing and stock levels</li>
-            <li>Add or remove product categories</li>
-          </ul>
+      <main className="flex-1 p-8 max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-green-700">Product Management</h1>
+        <p className="text-gray-700 mb-4">
+          Manage your listed products, update pricing, and upload new items to your store.
+        </p>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold text-green-600 mb-2">Your Products</h2>
+          <p className="text-gray-600">This section will display all products you've listed.</p>
+          <p className="text-sm text-gray-500 mt-2">You can also edit, delete, or add new products from here.</p>
         </div>
       </main>
     </div>
@@ -24,6 +22,7 @@ const ProductManagement = () => {
 };
 
 export default ProductManagement;
+
 
 
 

@@ -3,32 +3,19 @@ import VendorSidebar from '../components/VendorSidebar';
 
 const OrderManagement = () => {
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen bg-gray-50">
       <VendorSidebar />
-      <main className="flex-1 p-6 bg-gray-50">
-        <div className="max-w-4xl mx-auto bg-white p-6 rounded-xl shadow-md">
-          <h1 className="text-3xl font-bold mb-4 text-green-700">Order Management</h1>
-          <p className="text-gray-700 mb-4">
-            Track and manage all your orders from this section.
-          </p>
-          <div className="grid grid-cols-2 gap-4 text-sm text-gray-600">
-            <div>
-              <h2 className="font-semibold text-gray-800">Pending Orders</h2>
-              <p>Review and approve recent customer purchases.</p>
-            </div>
-            <div>
-              <h2 className="font-semibold text-gray-800">Shipped Orders</h2>
-              <p>Track packages that have been dispatched to customers.</p>
-            </div>
-            <div>
-              <h2 className="font-semibold text-gray-800">Returned Items</h2>
-              <p>Handle customer returns and restocking updates.</p>
-            </div>
-            <div>
-              <h2 className="font-semibold text-gray-800">Order History</h2>
-              <p>View past orders and transaction details.</p>
-            </div>
-          </div>
+      <main className="flex-1 p-8 max-w-4xl mx-auto">
+        <h1 className="text-3xl font-bold mb-6 text-green-700">Order Management</h1>
+        <p className="text-gray-700 mb-4">
+          Track and manage all your customer orders here. This panel helps you update order status, view order history,
+          and ensure timely deliveries.
+        </p>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <h2 className="text-xl font-semibold text-green-600 mb-2">Recent Orders</h2>
+          <p className="text-gray-600">You’ll be able to see real-time updates on new and existing orders.</p>
+          <p className="text-sm text-gray-500 mt-2">Order status, shipping, and fulfillment actions go here.</p>
         </div>
       </main>
     </div>
@@ -36,6 +23,7 @@ const OrderManagement = () => {
 };
 
 export default OrderManagement;
+
 
 
 
