@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import logo from '../assets/logo.png';
 
 const ShopPage = ({ cart, setCart }) => {
@@ -14,7 +14,7 @@ const ShopPage = ({ cart, setCart }) => {
   const allProducts = Array.from({ length: 12 }, (_, i) => ({
     id: i + 1,
     name: `Product ${i + 1}`,
-    category: categories[(i % categories.length)],
+    category: categories[i % categories.length],
     price: `$${(i + 1) * 5}`,
     rating: '⭐⭐⭐⭐',
     sold: 25 + i,
@@ -27,6 +27,11 @@ const ShopPage = ({ cart, setCart }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [vendorZip, setVendorZip] = useState('');
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
+  const [isNewCustomer, setIsNewCustomer] = useState(false);
+  const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
+  const [signInName, setSignInName] = useState('');
+  const [signInPhone, setSignInPhone] = useState('');
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -112,16 +117,28 @@ const ShopPage = ({ cart, setCart }) => {
           ))}
         </section>
       </div>
-
       {/* Sign In Modal */}
       {isSignInModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px', textAlign: 'center' }}>
-            <h2 style={{ color: '#003366' }}>Sign In</h2>
-            <input type="email" placeholder="Email" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%', marginBottom: '1rem' }} required />
-            <input type="password" placeholder="Password" style={{ padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%', marginBottom: '1rem' }} required />
-            <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', width: '100%' }}>Continue</button>
-            <button onClick={() => setIsSignInModalOpen(false)} style={{ marginTop: '1rem', backgroundColor: '#ccc', color: '#000', padding: '0.5rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Cancel</button>
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
+            <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {isNewCustomer && (
+                <>
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={inputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={inputStyle} />
+                </>
+              )}
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={inputStyle} />
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <button type="submit" style={primaryButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButtonStyle}>
+                  {isNewCustomer ? 'Back to Sign In' : 'New Customer?'}
+                </button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={cancelButtonStyle}>Cancel</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
@@ -166,10 +183,18 @@ const ShopPage = ({ cart, setCart }) => {
   );
 };
 
+// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
+const modalContentStyle = { backgroundColor: 'white', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px' };
+const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%' };
+const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
+const secondaryButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
+const cancelButtonStyle = { backgroundColor: '#aaa', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
 
 export default ShopPage;
+
 
 
 
