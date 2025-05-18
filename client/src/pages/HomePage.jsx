@@ -18,9 +18,11 @@ const HomePage = () => {
     price: `$${10 + index}`,
     rating: '⭐⭐⭐⭐',
     images: [
-      `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+1`,
-      `https://via.placeholder.com/300x200?text=Alt+2`
+      `https://via.placeholder.com/300x200?text=Main+Image+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+1+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+2+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+3+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+4+${index + 1}`
     ]
   }));
 
@@ -136,7 +138,7 @@ const HomePage = () => {
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-              {[...selectedProduct.images, ...Array(2).fill(selectedProduct.images[0])].slice(0, 5).map((img, index) => (
+              {selectedProduct.images.filter(Boolean).map((img, index) => (
                 <img
                   key={index}
                   src={img}
@@ -228,39 +230,7 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
-          <div>
-            <h3>Get to Know Us</h3>
-            <a href="/about" style={footerLinkStyle}>About Us</a><br />
-            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
-            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
-            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
-            <a href="/careers" style={footerLinkStyle}>Careers</a>
-          </div>
-          <div>
-            <h3>Make Money with Us</h3>
-            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
-            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
-          </div>
-          <div>
-            <h3>Buyer Resources</h3>
-            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
-            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
-            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
-            <a href="/help" style={footerLinkStyle}>Help Center</a>
-          </div>
-          <div>
-            <h3>Stay Connected</h3>
-            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
-            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
-            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
-          </div>
-        </div>
-        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
-          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
-        </p>
+        <p style={{ fontSize: '14px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
       </footer>
     </div>
   );
@@ -280,9 +250,9 @@ const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
