@@ -58,6 +58,12 @@ const ShopPage = ({ cart, setCart }) => {
     setShowModal(true);
   };
 
+  const handleSignInSubmit = (e) => {
+    e.preventDefault();
+    setIsSignInModalOpen(false);
+    setIsNewCustomer(false);
+  };
+
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#e6f0ff' }}>
       {/* Header */}
@@ -77,9 +83,9 @@ const ShopPage = ({ cart, setCart }) => {
       </header>
 
       {/* Sub Nav Bar */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem', display: 'flex', gap: '20px', flexWrap: 'nowrap', overflowX: 'auto' }}>
-        {categories.map(cat => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', fontSize: '14px', whiteSpace: 'nowrap' }}>{cat}</span>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '50px' }}>
+        {categories.map((cat) => (
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
         ))}
       </div>
 
@@ -137,6 +143,32 @@ const ShopPage = ({ cart, setCart }) => {
           ))}
         </section>
       </div>
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
+            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {isNewCustomer && (
+                <>
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={inputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={inputStyle} />
+                </>
+              )}
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={inputStyle} />
+              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+                <button type="submit" style={primaryButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButtonStyle}>
+                  {isNewCustomer ? 'Back to Sign In' : 'New Customer?'}
+                </button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={cancelButtonStyle}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Product Modal */}
       {showModal && selectedProduct && (
         <div style={modalStyle} onClick={() => setShowModal(false)}>
@@ -232,10 +264,13 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'unde
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
+const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%' };
 const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer', marginRight: '1rem' };
-const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
+const secondaryButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
+const cancelButtonStyle = { backgroundColor: '#aaa', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
 
 export default ShopPage;
+
 
 
 
