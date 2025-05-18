@@ -34,6 +34,7 @@ const HomePage = () => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [signInEmail, setSignInEmail] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
   const [signInName, setSignInName] = useState('');
   const [signInPhone, setSignInPhone] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
@@ -110,14 +111,7 @@ const HomePage = () => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{
-        backgroundColor: '#00509e',
-        padding: '0.5rem 1rem',
-        display: 'flex',
-        overflowX: 'auto',
-        whiteSpace: 'nowrap',
-        paddingRight: '50px' // ⬅ ensures "Bakeries" fully visible
-      }}>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '50px' }}>
         {categories.map((cat) => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
         ))}
@@ -212,7 +206,7 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Sign In Modal */}
+      {/* Sign In Modal (with Password) */}
       {isSignInModalOpen && (
         <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
@@ -225,6 +219,7 @@ const HomePage = () => {
                 </>
               )}
               <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={searchInputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={searchInputStyle} />
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button type="submit" style={searchButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
                 <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={searchButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
@@ -292,6 +287,7 @@ const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadi
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
