@@ -108,7 +108,7 @@ const HomePage = () => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap' }}>
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '30px' }}>
         {categories.map((cat) => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
         ))}
@@ -136,7 +136,7 @@ const HomePage = () => {
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-              {selectedProduct.images.map((img, index) => (
+              {[...selectedProduct.images, ...Array(2).fill(selectedProduct.images[0])].slice(0, 5).map((img, index) => (
                 <img
                   key={index}
                   src={img}
@@ -192,11 +192,11 @@ const HomePage = () => {
                 value={newZip}
                 onChange={(e) => setNewZip(e.target.value)}
                 placeholder="Enter new zip code"
-                style={{ padding: '10px', borderRadius: '6px', width: '200px', fontSize: '16px', marginBottom: '10px' }}
+                style={searchInputStyle}
               />
-              <div>
-                <button type="submit" style={{ marginRight: '10px', padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>Update</button>
-                <button onClick={() => setIsUpdateLocationOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
+              <div style={{ marginTop: '10px' }}>
+                <button type="submit" style={searchButtonStyle}>Update</button>
+                <button onClick={() => setIsUpdateLocationOpen(false)} style={searchButtonStyle}>Cancel</button>
               </div>
             </form>
           </div>
@@ -211,15 +211,15 @@ const HomePage = () => {
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {isNewCustomer && (
                 <>
-                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }} />
-                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }} />
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={searchInputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={searchInputStyle} />
                 </>
               )}
-              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={{ padding: '10px', borderRadius: '6px', fontSize: '16px' }} />
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={searchInputStyle} />
               <div style={{ display: 'flex', gap: '10px' }}>
-                <button type="submit" style={{ padding: '0.5rem 1rem', backgroundColor: '#003366', color: 'white', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={{ padding: '0.5rem 1rem', backgroundColor: '#ccc', borderRadius: '6px', cursor: 'pointer' }}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
-                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={{ padding: '0.5rem 1rem', backgroundColor: '#aaa', borderRadius: '6px', cursor: 'pointer' }}>Cancel</button>
+                <button type="submit" style={searchButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={searchButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={searchButtonStyle}>Cancel</button>
               </div>
             </form>
           </div>
@@ -266,9 +266,9 @@ const HomePage = () => {
   );
 };
 
-// 🔧 Styles
+// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
-const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '100px' };
+const searchSelectStyle = { padding: '6px', height: '40px', borderRadius: '8px', fontSize: '14px', width: '100px', backgroundColor: '#fff', color: '#000', border: '1px solid #ccc' };
 const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', backgroundColor: '#fff', color: '#000' };
 const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', backgroundColor: '#fff', color: '#000' };
 const searchButtonStyle = { backgroundColor: '#007acc', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', color: '#fff', fontWeight: 'bold', cursor: 'pointer' };
@@ -283,6 +283,7 @@ const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadi
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
