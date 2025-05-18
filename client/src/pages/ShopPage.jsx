@@ -20,7 +20,13 @@ const ShopPage = ({ cart, setCart }) => {
     sold: 25 + i,
     remaining: 100 - i * 2,
     reviews: 10 + i * 3,
-    image: `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
+    images: [
+      `https://via.placeholder.com/300x200?text=Product+${i + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+1+${i + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+2+${i + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+3+${i + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+4+${i + 1}`
+    ]
   }));
 
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -32,6 +38,10 @@ const ShopPage = ({ cart, setCart }) => {
   const [signInPassword, setSignInPassword] = useState('');
   const [signInName, setSignInName] = useState('');
   const [signInPhone, setSignInPhone] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [activeImage, setActiveImage] = useState(null);
+  const [activeTab, setActiveTab] = useState('description');
 
   const filteredProducts = selectedCategory === 'All'
     ? allProducts
@@ -40,6 +50,12 @@ const ShopPage = ({ cart, setCart }) => {
   const handleVendorZipSearch = (e) => {
     e.preventDefault();
     alert(`Searching vendors near ${vendorZip}`);
+  };
+
+  const handleProductClick = (product) => {
+    setSelectedProduct(product);
+    setActiveImage(product.images[0]);
+    setShowModal(true);
   };
 
   return (
@@ -104,41 +120,69 @@ const ShopPage = ({ cart, setCart }) => {
         {/* Product Grid */}
         <section style={{ flexGrow: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
           {filteredProducts.map(product => (
-            <div key={product.id} style={{ backgroundColor: 'white', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center' }}>
-              <img src={product.image} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
+            <div
+              key={product.id}
+              onClick={() => handleProductClick(product)}
+              style={{ backgroundColor: 'white', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', cursor: 'pointer' }}
+            >
+              <img src={product.images[0]} alt={product.name} style={{ width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' }} />
               <h2 style={{ color: '#003366' }}>{product.name}</h2>
               <p>{product.rating}</p>
               <p>{product.price}</p>
               <p style={{ fontSize: '13px', color: '#003366' }}>{product.sold} sold this month</p>
               <p style={{ fontSize: '13px', color: '#003366' }}>{product.remaining} left</p>
-              <p style={{ fontSize: '13px', color: '#007185', textDecoration: 'underline', cursor: 'pointer' }}>See Customer Reviews ({product.reviews})</p>
+              <p style={{ fontSize: '13px', color: '#007185', textDecoration: 'underline' }}>See Customer Reviews ({product.reviews})</p>
               <button style={{ backgroundColor: '#003366', color: 'white', padding: '8px 12px', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' }}>Add to Cart</button>
             </div>
           ))}
         </section>
       </div>
-      {/* Sign In Modal */}
-      {isSignInModalOpen && (
-        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+      {/* Product Modal */}
+      {showModal && selectedProduct && (
+        <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
-            <form style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && (
-                <>
-                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={inputStyle} />
-                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={inputStyle} />
-                </>
-              )}
-              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
-              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={inputStyle} />
-              <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
-                <button type="submit" style={primaryButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButtonStyle}>
-                  {isNewCustomer ? 'Back to Sign In' : 'New Customer?'}
-                </button>
-                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={cancelButtonStyle}>Cancel</button>
+            <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
+              {selectedProduct.images.map((img, i) => (
+                <img
+                  key={i}
+                  src={img}
+                  onClick={() => setActiveImage(img)}
+                  alt={`thumbnail-${i}`}
+                  style={{
+                    width: '100px',
+                    height: '80px',
+                    objectFit: 'cover',
+                    border: activeImage === img ? '3px solid #003366' : '1px solid #ccc',
+                    borderRadius: '6px',
+                    cursor: 'pointer'
+                  }}
+                />
+              ))}
+            </div>
+            <div style={{ flex: '2', display: 'flex', flexDirection: 'column' }}>
+              <img
+                src={activeImage}
+                alt={selectedProduct.name}
+                style={{ width: '100%', maxHeight: '300px', objectFit: 'contain', borderRadius: '8px', transition: 'transform 0.3s', cursor: 'zoom-in' }}
+                onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1.0)')}
+              />
+              <div style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
+                <span onClick={() => setActiveTab('description')} style={{ cursor: 'pointer', fontWeight: activeTab === 'description' ? 'bold' : 'normal' }}>Description</span>
+                <span onClick={() => setActiveTab('reviews')} style={{ cursor: 'pointer', fontWeight: activeTab === 'reviews' ? 'bold' : 'normal' }}>Reviews</span>
               </div>
-            </form>
+              <div style={{ marginTop: '1rem', fontSize: '0.95rem', color: '#333' }}>
+                {activeTab === 'description' ? (
+                  <p>This locally-sourced product is one of our bestsellers. Customers love its quality and value.</p>
+                ) : (
+                  <p>⭐️⭐️⭐️⭐️⭐️ – "Amazing product! Would definitely buy again."</p>
+                )}
+              </div>
+              <div style={{ marginTop: '2rem' }}>
+                <button style={primaryButtonStyle}>Add to Cart</button>
+                <button onClick={() => setShowModal(false)} style={cancelButtonStyle}>Close</button>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -187,13 +231,12 @@ const ShopPage = ({ cart, setCart }) => {
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
-const modalContentStyle = { backgroundColor: 'white', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '400px' };
-const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%' };
-const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
-const secondaryButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
-const cancelButtonStyle = { backgroundColor: '#aaa', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer', border: 'none' };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
+const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer', marginRight: '1rem' };
+const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default ShopPage;
+
 
 
 
