@@ -110,7 +110,14 @@ const HomePage = () => {
       </header>
 
       {/* Sub Nav */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '30px' }}>
+      <div style={{
+        backgroundColor: '#00509e',
+        padding: '0.5rem 1rem',
+        display: 'flex',
+        overflowX: 'auto',
+        whiteSpace: 'nowrap',
+        paddingRight: '50px' // ⬅ ensures "Bakeries" fully visible
+      }}>
         {categories.map((cat) => (
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
         ))}
@@ -230,7 +237,39 @@ const HomePage = () => {
 
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
-        <p style={{ fontSize: '14px' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
+          <div>
+            <h3>Get to Know Us</h3>
+            <a href="/about" style={footerLinkStyle}>About Us</a><br />
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
+            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
+            <a href="/careers" style={footerLinkStyle}>Careers</a>
+          </div>
+          <div>
+            <h3>Make Money with Us</h3>
+            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
+          </div>
+          <div>
+            <h3>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
+            <a href="/help" style={footerLinkStyle}>Help Center</a>
+          </div>
+          <div>
+            <h3>Stay Connected</h3>
+            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
+            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
+            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
+          </div>
+        </div>
+        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
+          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        </p>
       </footer>
     </div>
   );
@@ -250,8 +289,10 @@ const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
+
 
 
 
