@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
-const HomePage = () => {
+const HomePage = ({ cart, setCart }) => {
   const categories = [
     'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
     'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
@@ -11,18 +11,18 @@ const HomePage = () => {
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists'
   ];
 
-  const allProducts = Array.from({ length: 30 }, (_, index) => ({
+  const allProducts = Array.from({ length: 24 }, (_, index) => ({
     id: index + 1,
     name: `Product ${index + 1}`,
     category: categories[index % categories.length],
     price: `$${10 + index}`,
     rating: '⭐⭐⭐⭐',
     images: [
-      `https://via.placeholder.com/300x200?text=Main+Image+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+1+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+2+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+3+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+4+${index + 1}`
+      `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
+      `https://via.placeholder.com/300x200?text=Alt+View+1`,
+      `https://via.placeholder.com/300x200?text=Alt+View+2`,
+      `https://via.placeholder.com/300x200?text=Alt+View+3`,
+      `https://via.placeholder.com/300x200?text=Alt+View+4`
     ]
   }));
 
@@ -34,9 +34,9 @@ const HomePage = () => {
   const [isSignInModalOpen, setIsSignInModalOpen] = useState(false);
   const [isNewCustomer, setIsNewCustomer] = useState(false);
   const [signInEmail, setSignInEmail] = useState('');
-  const [signInPassword, setSignInPassword] = useState('');
   const [signInName, setSignInName] = useState('');
   const [signInPhone, setSignInPhone] = useState('');
+  const [signInPassword, setSignInPassword] = useState('');
   const [isUpdateLocationOpen, setIsUpdateLocationOpen] = useState(false);
   const [newZip, setNewZip] = useState('');
   const [showModal, setShowModal] = useState(false);
@@ -116,13 +116,12 @@ const HomePage = () => {
           <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
         ))}
       </div>
-
       {/* Product Rows */}
       {[0, 1, 2, 3, 4, 5].map((row) => (
         <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
           <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
           <div ref={productRefs.current[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
-            {filteredProducts.slice(row * 5, row * 5 + 5).map(product => (
+            {filteredProducts.slice(row * 4, row * 4 + 4).map(product => (
               <div key={product.id} onClick={() => handleProductClick(product)} style={productCardStyle}>
                 <img src={product.images[0]} alt={product.name} style={productImageStyle} />
                 <h2 style={productNameStyle}>{product.name}</h2>
@@ -134,17 +133,18 @@ const HomePage = () => {
           <button onClick={() => scrollProducts(row, 'right')} style={arrowButtonStyle}>&gt;</button>
         </div>
       ))}
-      {/* Product Detail Modal */}
+
+      {/* Product Modal */}
       {showModal && selectedProduct && (
         <div style={modalStyle} onClick={() => setShowModal(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
-              {selectedProduct.images.filter(Boolean).map((img, index) => (
+              {selectedProduct.images.map((img, i) => (
                 <img
-                  key={index}
+                  key={i}
                   src={img}
                   onClick={() => setActiveImage(img)}
-                  alt="thumbnail"
+                  alt={`thumb-${i}`}
                   style={{
                     width: '100px',
                     height: '80px',
@@ -176,8 +176,8 @@ const HomePage = () => {
                 )}
               </div>
               <div style={{ marginTop: '2rem' }}>
-                <button style={{ backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer', marginRight: '1rem' }}>Add to Cart</button>
-                <button onClick={() => setShowModal(false)} style={{ backgroundColor: '#ccc', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>Close</button>
+                <button style={primaryButtonStyle}>Add to Cart</button>
+                <button onClick={() => setShowModal(false)} style={cancelButtonStyle}>Close</button>
               </div>
             </div>
           </div>
@@ -206,7 +206,7 @@ const HomePage = () => {
         </div>
       )}
 
-      {/* Sign In Modal (with Password) */}
+      {/* Sign In Modal */}
       {isSignInModalOpen && (
         <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
           <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
@@ -285,8 +285,11 @@ const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12
 const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
 const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', gap: '2rem' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
+const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer', marginRight: '1rem' };
+const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
