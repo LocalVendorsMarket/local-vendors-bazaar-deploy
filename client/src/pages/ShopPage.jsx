@@ -56,7 +56,6 @@ const ShopPage = ({ cart, setCart }) => {
   };
 
   const handleAddToCart = () => {
-    // Optionally add cart logic
     setShowModal(false);
   };
 
@@ -112,8 +111,32 @@ const ShopPage = ({ cart, setCart }) => {
           </button>
         </div>
       )}
-      {/* Product Grid */}
+
+      {/* Filter Sidebar + Product Grid */}
       <div style={{ display: 'flex', padding: '2rem' }}>
+        <aside style={{ width: '250px', marginRight: '2rem' }}>
+          <h3 style={{ color: '#003366' }}>Filter By</h3>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Category</label>
+          <select style={{ width: '100%', padding: '0.5rem' }}>
+            {subNavCategories.map(cat => <option key={cat}>{cat}</option>)}
+          </select>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Price</label>
+          <div>
+            <label><input type="checkbox" /> Under $25</label><br />
+            <label><input type="checkbox" /> $25 - $50</label><br />
+            <label><input type="checkbox" /> $50 - $100</label><br />
+            <label><input type="checkbox" /> Over $100</label>
+          </div>
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Zip Code</label>
+          <input type="text" placeholder="Enter Zip" style={{ width: '100%', padding: '0.5rem' }} />
+          <label style={{ fontWeight: 'bold', display: 'block', margin: '1rem 0 0.5rem' }}>Rating</label>
+          <div>
+            <label><input type="checkbox" /> ⭐⭐⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐⭐</label><br />
+            <label><input type="checkbox" /> ⭐</label>
+          </div>
+        </aside>
         <section style={{ flexGrow: 1, display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '2rem' }}>
           {filteredProducts.map(product => (
             <div
@@ -136,8 +159,8 @@ const ShopPage = ({ cart, setCart }) => {
 
       {/* Product Modal */}
       {showModal && selectedProduct && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
-          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '900px', width: '90%', display: 'flex', gap: '2rem' }}>
+        <div style={modalStyle} onClick={() => setShowModal(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <div style={{ flex: '1', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
               {selectedProduct.images.map((img, i) => (
                 <img
@@ -172,22 +195,22 @@ const ShopPage = ({ cart, setCart }) => {
                 {activeTab === 'description' ? (
                   <p>This locally-sourced product is one of our bestsellers. Customers love its quality and value.</p>
                 ) : (
-                  <p>⭐️⭐️⭐️⭐️⭐️ – "Amazing product! Would definitely buy again."</p>
+                  <p>⭐️⭐️⭐️⭐️⭐️ – \"Amazing product! Would definitely buy again.\"</p>
                 )}
               </div>
               <div style={{ marginTop: '2rem', display: 'flex', gap: '1rem' }}>
-                <button onClick={handleAddToCart} style={{ backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>Add to Cart</button>
-                <button onClick={() => setShowModal(false)} style={{ backgroundColor: '#aaa', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' }}>Back to Products</button>
+                <button onClick={handleAddToCart} style={primaryButtonStyle}>Add to Cart</button>
+                <button onClick={() => setShowModal(false)} style={cancelButtonStyle}>Back to Products</button>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      {/* Sign In Modal */}
+      {/* Sign In Modal (Matches HomePage) */}
       {isSignInModalOpen && (
-        <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 }}>
-          <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '400px', width: '90%' }}>
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
             <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
             <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               {isNewCustomer && (
@@ -196,8 +219,8 @@ const ShopPage = ({ cart, setCart }) => {
                   <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={inputStyle} />
                 </>
               )}
-              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Email" required style={inputStyle} />
-              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Password" required style={inputStyle} />
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={inputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={inputStyle} />
               <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
                 <button type="submit" style={primaryButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
                 <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={secondaryButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
@@ -251,11 +274,14 @@ const ShopPage = ({ cart, setCart }) => {
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'underline', cursor: 'pointer' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 const inputStyle = { padding: '0.75rem', border: '1px solid #ccc', borderRadius: '8px', width: '100%' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px', display: 'flex', flexDirection: 'row', gap: '2rem' };
 const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 const secondaryButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 const cancelButtonStyle = { backgroundColor: '#aaa', color: '#000', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: 'bold', cursor: 'pointer' };
 
 export default ShopPage;
+
 
 
 
