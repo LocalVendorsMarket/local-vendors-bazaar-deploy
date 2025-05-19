@@ -3,12 +3,23 @@ import logo from '../assets/logo.png';
 
 const HomePage = ({ cart, setCart }) => {
   const categories = [
-    'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
-    'Best Sellers', 'New Releases', 'Wedding Planners', 'Wedding Photographers', 'Henna Tattoos',
-    'Bakeries', 'Coffee Shops', 'Florists', 'Furniture', 'Grocery Stores', 'Health & Beauty',
-    'Local Events', 'Mobile Repair', 'Music & Bands', 'Party Supplies', 'Pet Services',
-    'Photobooth Rentals', 'Real Estate Agents', 'Tutors', 'Yoga Studios', 'Landscaping',
-    'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists', "Today's Deals"
+    'Groceries', 'Jewelry', 'Clothing', 'Restaurants', 'Services',
+    'Best Sellers', 'New Releases', 'Wedding Planners', 'Wedding Photographers',
+    'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
+    'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
+    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents',
+    'Tutors', 'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents',
+    'Accountants', 'Make-Up Artists', "Today's Deals"
+  ];
+
+  const allDropdownOptions = [
+    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants',
+    'Services', 'Best Sellers', 'New Releases', 'Gift Ideas', 'Wedding Planners',
+    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists',
+    'Furniture', 'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair',
+    'Music & Bands', 'Party Supplies', 'Pet Services', 'Photobooth Rentals',
+    'Real Estate Agents', 'Tutors', 'Yoga Studios', 'Landscaping', 'Auto Repair',
+    'Travel Agents', 'Accountants', 'Make-Up Artists'
   ];
 
   const allProducts = Array.from({ length: 30 }, (_, index) => ({
@@ -98,7 +109,7 @@ const HomePage = ({ cart, setCart }) => {
         </div>
         <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '10px' }}>
           <select value={searchCategory} onChange={(e) => setSearchCategory(e.target.value)} style={searchSelectStyle}>
-            {categories.map((cat) => (
+            {allDropdownOptions.map((cat) => (
               <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
@@ -110,7 +121,7 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Sub Nav - Updated for relevant scroll items */}
+      {/* Sub Nav - updated categories */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', overflowX: 'auto', whiteSpace: 'nowrap', display: 'block', scrollPaddingRight: '40px' }}>
         <div style={{ display: 'inline-flex', gap: '20px' }}>
           {categories.map((cat) => (
@@ -293,6 +304,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
