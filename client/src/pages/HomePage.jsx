@@ -2,14 +2,10 @@ import React, { useState, useRef } from 'react';
 import logo from '../assets/logo.png';
 
 const HomePage = ({ cart, setCart }) => {
-  const categories = [
+  const subNavCategories = [
     'Groceries', 'Jewelry', 'Clothing', 'Restaurants', 'Services',
     'Best Sellers', 'New Releases', 'Wedding Planners', 'Wedding Photographers',
-    'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
-    'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
-    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents',
-    'Tutors', 'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents',
-    'Accountants', 'Make-Up Artists', "Today's Deals"
+    'Henna Tattoos', 'Coffee Shops', 'Make-Up Artists', "Today's Deals"
   ];
 
   const allDropdownOptions = [
@@ -25,7 +21,7 @@ const HomePage = ({ cart, setCart }) => {
   const allProducts = Array.from({ length: 30 }, (_, index) => ({
     id: index + 1,
     name: `Product ${index + 1}`,
-    category: categories[index % categories.length],
+    category: subNavCategories[index % subNavCategories.length],
     price: `$${10 + index}`,
     rating: '⭐⭐⭐⭐',
     images: [
@@ -121,10 +117,10 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Sub Nav - updated categories */}
+      {/* Sub Nav - Clean visible list */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', overflowX: 'auto', whiteSpace: 'nowrap', display: 'block', scrollPaddingRight: '40px' }}>
         <div style={{ display: 'inline-flex', gap: '20px' }}>
-          {categories.map((cat) => (
+          {subNavCategories.map((cat) => (
             <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', cursor: 'pointer', whiteSpace: 'nowrap' }}>
               {cat}
             </span>
@@ -304,6 +300,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
