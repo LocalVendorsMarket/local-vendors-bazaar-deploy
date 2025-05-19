@@ -148,7 +148,88 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       ))}
 
-      {/* ... (rest of your modals, footer, and styles stay unchanged) */}
+      {/* Update Location Modal */}
+      {isUpdateLocationOpen && (
+        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>Update Delivery Location</h2>
+            <form onSubmit={handleUpdateLocationSubmit}>
+              <input
+                type="text"
+                value={newZip}
+                onChange={(e) => setNewZip(e.target.value)}
+                placeholder="Enter new zip code"
+                style={searchInputStyle}
+              />
+              <div style={{ marginTop: '10px' }}>
+                <button type="submit" style={searchButtonStyle}>Update</button>
+                <button onClick={() => setIsUpdateLocationOpen(false)} style={searchButtonStyle}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
+            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {isNewCustomer && (
+                <>
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={searchInputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={searchInputStyle} />
+                </>
+              )}
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={searchInputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={searchInputStyle} />
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button type="submit" style={searchButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={searchButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={searchButtonStyle}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
+          <div>
+            <h3>Get to Know Us</h3>
+            <a href="/about" style={footerLinkStyle}>About Us</a><br />
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
+            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
+            <a href="/careers" style={footerLinkStyle}>Careers</a>
+          </div>
+          <div>
+            <h3>Make Money with Us</h3>
+            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a>
+          </div>
+          <div>
+            <h3>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
+            <a href="/help" style={footerLinkStyle}>Help Center</a>
+          </div>
+          <div>
+            <h3>Stay Connected</h3>
+            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
+            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
+            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
+          </div>
+        </div>
+        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
+          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 };
@@ -165,6 +246,9 @@ const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', 
 const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
 const productRatingStyle = { color: '#666', marginBottom: '8px' };
 const productPriceStyle = { fontWeight: 'bold', color: '#333', marginBottom: '12px' };
+const modalStyle = { position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', backgroundColor: 'rgba(0,0,0,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 2000 };
+const modalContentStyle = { backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', width: '90%', maxWidth: '960px' };
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default HomePage;
 
