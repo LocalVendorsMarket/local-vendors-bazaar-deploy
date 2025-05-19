@@ -3,12 +3,12 @@ import logo from '../assets/logo.png';
 
 const HomePage = ({ cart, setCart }) => {
   const categories = [
-    'All', 'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
-    'Best Sellers', "Today's Deals", 'New Releases', 'Gift Ideas', 'Wedding Planners',
-    'Wedding Photographers', 'Henna Tattoos', 'Bakeries', 'Coffee Shops', 'Florists', 'Furniture',
-    'Grocery Stores', 'Health & Beauty', 'Local Events', 'Mobile Repair', 'Music & Bands',
-    'Party Supplies', 'Pet Services', 'Photobooth Rentals', 'Real Estate Agents', 'Tutors',
-    'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists'
+    'Food', 'Jewelry', 'Clothing', 'Art', 'Home Goods', 'Restaurants', 'Services',
+    'Best Sellers', 'New Releases', 'Wedding Planners', 'Wedding Photographers', 'Henna Tattoos',
+    'Bakeries', 'Coffee Shops', 'Florists', 'Furniture', 'Grocery Stores', 'Health & Beauty',
+    'Local Events', 'Mobile Repair', 'Music & Bands', 'Party Supplies', 'Pet Services',
+    'Photobooth Rentals', 'Real Estate Agents', 'Tutors', 'Yoga Studios', 'Landscaping',
+    'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists', "Today's Deals"
   ];
 
   const allProducts = Array.from({ length: 30 }, (_, index) => ({
@@ -110,7 +110,7 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Sub Nav (Final fix with scrollPadding) */}
+      {/* Sub Nav - Updated for relevant scroll items */}
       <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', overflowX: 'auto', whiteSpace: 'nowrap', display: 'block', scrollPaddingRight: '40px' }}>
         <div style={{ display: 'inline-flex', gap: '20px' }}>
           {categories.map((cat) => (
@@ -293,6 +293,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
