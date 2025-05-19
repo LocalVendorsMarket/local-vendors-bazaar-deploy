@@ -110,10 +110,10 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       </header>
 
-      {/* Sub Nav */}
-      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '50px' }}>
+      {/* Sub Nav (FIXED) */}
+      <div style={{ backgroundColor: '#00509e', padding: '0.5rem 1rem', display: 'flex', overflowX: 'auto', whiteSpace: 'nowrap', paddingRight: '80px' }}>
         {categories.map((cat) => (
-          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer' }}>{cat}</span>
+          <span key={cat} onClick={() => setSelectedCategory(cat)} style={{ color: 'white', marginRight: '20px', cursor: 'pointer', minWidth: '80px' }}>{cat}</span>
         ))}
       </div>
       {/* Product Rows */}
@@ -289,6 +289,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
