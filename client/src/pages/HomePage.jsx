@@ -11,7 +11,7 @@ const HomePage = ({ cart, setCart }) => {
     'Yoga Studios', 'Landscaping', 'Auto Repair', 'Travel Agents', 'Accountants', 'Make-Up Artists'
   ];
 
-  const allProducts = Array.from({ length: 24 }, (_, index) => ({
+  const allProducts = Array.from({ length: 30 }, (_, index) => ({
     id: index + 1,
     name: `Product ${index + 1}`,
     category: categories[index % categories.length],
@@ -19,10 +19,10 @@ const HomePage = ({ cart, setCart }) => {
     rating: '⭐⭐⭐⭐',
     images: [
       `https://via.placeholder.com/300x200?text=Product+${index + 1}`,
-      `https://via.placeholder.com/300x200?text=Alt+View+1`,
-      `https://via.placeholder.com/300x200?text=Alt+View+2`,
-      `https://via.placeholder.com/300x200?text=Alt+View+3`,
-      `https://via.placeholder.com/300x200?text=Alt+View+4`
+      `https://via.placeholder.com/300x200?text=Alt+1`,
+      `https://via.placeholder.com/300x200?text=Alt+2`,
+      `https://via.placeholder.com/300x200?text=Alt+3`,
+      `https://via.placeholder.com/300x200?text=Alt+4`
     ]
   }));
 
@@ -120,8 +120,8 @@ const HomePage = ({ cart, setCart }) => {
       {[0, 1, 2, 3, 4, 5].map((row) => (
         <div key={row} style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '1rem 2rem' }}>
           <button onClick={() => scrollProducts(row, 'left')} style={arrowButtonStyle}>&lt;</button>
-          <div ref={productRefs.current[row]} style={{ overflowX: 'auto', display: 'flex', gap: '2rem', scrollBehavior: 'smooth' }}>
-            {filteredProducts.slice(row * 4, row * 4 + 4).map(product => (
+          <div ref={productRefs.current[row]} style={{ overflowX: 'auto', display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '2rem', scrollBehavior: 'smooth', width: '100%' }}>
+            {filteredProducts.slice(row * 5, row * 5 + 5).map(product => (
               <div key={product.id} onClick={() => handleProductClick(product)} style={productCardStyle}>
                 <img src={product.images[0]} alt={product.name} style={productImageStyle} />
                 <h2 style={productNameStyle}>{product.name}</h2>
@@ -184,52 +184,6 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       )}
 
-      {/* Update Location Modal */}
-      {isUpdateLocationOpen && (
-        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>Update Delivery Location</h2>
-            <form onSubmit={handleUpdateLocationSubmit}>
-              <input
-                type="text"
-                value={newZip}
-                onChange={(e) => setNewZip(e.target.value)}
-                placeholder="Enter new zip code"
-                style={searchInputStyle}
-              />
-              <div style={{ marginTop: '10px' }}>
-                <button type="submit" style={searchButtonStyle}>Update</button>
-                <button onClick={() => setIsUpdateLocationOpen(false)} style={searchButtonStyle}>Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
-      {/* Sign In Modal */}
-      {isSignInModalOpen && (
-        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
-          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
-            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
-            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {isNewCustomer && (
-                <>
-                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={searchInputStyle} />
-                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={searchInputStyle} />
-                </>
-              )}
-              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={searchInputStyle} />
-              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={searchInputStyle} />
-              <div style={{ display: 'flex', gap: '10px' }}>
-                <button type="submit" style={searchButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
-                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={searchButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
-                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={searchButtonStyle}>Cancel</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
-
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
@@ -277,7 +231,7 @@ const searchInputStyle = { width: '250px', padding: '6px 10px', height: '40px', 
 const zipInputStyle = { width: '120px', padding: '6px 10px', height: '40px', borderRadius: '8px', border: '1px solid #ccc', fontSize: '14px', backgroundColor: '#fff', color: '#000' };
 const searchButtonStyle = { backgroundColor: '#007acc', height: '40px', borderRadius: '8px', padding: '0 15px', border: 'none', fontSize: '14px', color: '#fff', fontWeight: 'bold', cursor: 'pointer' };
 const arrowButtonStyle = { backgroundColor: '#003366', color: 'white', border: 'none', fontSize: '2rem', padding: '0.5rem 1rem', borderRadius: '50%', cursor: 'pointer' };
-const productCardStyle = { minWidth: '250px', backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', cursor: 'pointer' };
+const productCardStyle = { backgroundColor: '#fff', padding: '1rem', borderRadius: '12px', boxShadow: '0 2px 8px rgba(0,0,0,0.1)', textAlign: 'center', cursor: 'pointer' };
 const productImageStyle = { width: '100%', height: '180px', objectFit: 'cover', borderRadius: '8px' };
 const productNameStyle = { color: '#003366', fontSize: '1.2rem', margin: '10px 0' };
 const productRatingStyle = { color: '#666', marginBottom: '8px' };
@@ -289,6 +243,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
