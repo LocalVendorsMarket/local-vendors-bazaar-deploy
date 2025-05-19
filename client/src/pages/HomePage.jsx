@@ -184,6 +184,52 @@ const HomePage = ({ cart, setCart }) => {
         </div>
       )}
 
+      {/* Update Location Modal */}
+      {isUpdateLocationOpen && (
+        <div style={modalStyle} onClick={() => setIsUpdateLocationOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>Update Delivery Location</h2>
+            <form onSubmit={handleUpdateLocationSubmit}>
+              <input
+                type="text"
+                value={newZip}
+                onChange={(e) => setNewZip(e.target.value)}
+                placeholder="Enter new zip code"
+                style={searchInputStyle}
+              />
+              <div style={{ marginTop: '10px' }}>
+                <button type="submit" style={searchButtonStyle}>Update</button>
+                <button onClick={() => setIsUpdateLocationOpen(false)} style={searchButtonStyle}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sign In Modal */}
+      {isSignInModalOpen && (
+        <div style={modalStyle} onClick={() => setIsSignInModalOpen(false)}>
+          <div style={modalContentStyle} onClick={(e) => e.stopPropagation()}>
+            <h2>{isNewCustomer ? 'Sign Up' : 'Sign In'}</h2>
+            <form onSubmit={handleSignInSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {isNewCustomer && (
+                <>
+                  <input type="text" value={signInName} onChange={(e) => setSignInName(e.target.value)} placeholder="Name or Company" required style={searchInputStyle} />
+                  <input type="tel" value={signInPhone} onChange={(e) => setSignInPhone(e.target.value)} placeholder="Phone Number" required style={searchInputStyle} />
+                </>
+              )}
+              <input type="email" value={signInEmail} onChange={(e) => setSignInEmail(e.target.value)} placeholder="Enter your email" required style={searchInputStyle} />
+              <input type="password" value={signInPassword} onChange={(e) => setSignInPassword(e.target.value)} placeholder="Enter your password" required style={searchInputStyle} />
+              <div style={{ display: 'flex', gap: '10px' }}>
+                <button type="submit" style={searchButtonStyle}>{isNewCustomer ? 'Sign Up' : 'Sign In'}</button>
+                <button type="button" onClick={() => setIsNewCustomer(!isNewCustomer)} style={searchButtonStyle}>{isNewCustomer ? 'Back to Sign In' : 'New Customer?'}</button>
+                <button type="button" onClick={() => setIsSignInModalOpen(false)} style={searchButtonStyle}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', marginTop: '2rem', textAlign: 'center' }}>
         <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
@@ -243,6 +289,7 @@ const primaryButtonStyle = { backgroundColor: '#003366', color: 'white', padding
 const cancelButtonStyle = { backgroundColor: '#ccc', color: '#000', padding: '0.75rem 1.5rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default HomePage;
+
 
 
 
