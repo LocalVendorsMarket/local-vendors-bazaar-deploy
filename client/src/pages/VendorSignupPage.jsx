@@ -44,11 +44,12 @@ const VendorSignupPage = ({ cart }) => {
                 <ul style={{ lineHeight: '1.7', fontSize: '1rem', paddingLeft: '1rem' }}>
                   <li><strong>✔️ No signup fees</strong> — it’s free to list and start selling.</li>
                   <li><strong>💰 5% fee</strong> per completed transaction.</li>
-                  <li><strong>📣 Optional Ads:</strong> You may boost your listings for homepage placement.</li>
+                  <li><strong>📢 Optional Advertising:</strong> Promote your listings on our homepage or ShopPage. Starting at $10 per week.</li>
                   <li><strong>🚫 Prohibited items:</strong> We don’t allow offensive, harmful, or illegal goods.</li>
                   <li><strong>⚖️ Content guidelines:</strong> Use clear images and honest descriptions. We review your listings periodically.</li>
                 </ul>
               </div>
+
               {/* Signup Form */}
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <input type="text" name="businessName" required placeholder="Business Name" style={inputStyle} />
@@ -86,6 +87,7 @@ const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75
 const homeButtonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
 
 export default VendorSignupPage;
+
 
 
 
