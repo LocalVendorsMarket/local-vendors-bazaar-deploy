@@ -1,8 +1,20 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
 const VendorSignupPage = ({ cart }) => {
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+
+    // Simulate delay then redirect
+    setTimeout(() => {
+      navigate('/vendor-welcome');
+    }, 1500);
+  };
 
   return (
     <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
@@ -27,13 +39,7 @@ const VendorSignupPage = ({ cart }) => {
             <>
               <h1 style={{ color: '#003366', marginBottom: '1rem' }}>Become a Vendor</h1>
               <p style={{ marginBottom: '2rem', color: '#555' }}>Join our marketplace and grow your local business. It’s fast, easy, and free!</p>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setFormSubmitted(true);
-                }}
-                style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}
-              >
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <input type="text" name="businessName" required placeholder="Business Name" style={inputStyle} />
                 <input type="email" name="email" required placeholder="you@example.com" style={inputStyle} />
                 <input type="tel" name="phone" placeholder="123-456-7890" style={inputStyle} />
@@ -69,6 +75,7 @@ const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75
 const homeButtonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
 
 export default VendorSignupPage;
+
 
 
 
