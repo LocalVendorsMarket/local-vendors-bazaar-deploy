@@ -9,8 +9,6 @@ const VendorSignupPage = ({ cart }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setFormSubmitted(true);
-
-    // Simulate delay then redirect
     setTimeout(() => {
       navigate('/vendor-welcome');
     }, 1500);
@@ -34,11 +32,24 @@ const VendorSignupPage = ({ cart }) => {
 
       {/* Main */}
       <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', padding: '3rem 1rem' }}>
-        <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', maxWidth: '600px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', textAlign: 'center' }}>
+        <div style={{ backgroundColor: '#fff', padding: '2rem', borderRadius: '12px', maxWidth: '720px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', textAlign: 'center' }}>
           {!formSubmitted ? (
             <>
               <h1 style={{ color: '#003366', marginBottom: '1rem' }}>Become a Vendor</h1>
-              <p style={{ marginBottom: '2rem', color: '#555' }}>Join our marketplace and grow your local business. It’s fast, easy, and free!</p>
+              <p style={{ marginBottom: '1.5rem', color: '#555' }}>Join our marketplace and grow your local business. It’s fast, easy, and free!</p>
+
+              {/* Info Section */}
+              <div style={{ textAlign: 'left', backgroundColor: '#f0f8ff', padding: '1.5rem', borderRadius: '10px', marginBottom: '2rem' }}>
+                <h3 style={{ color: '#003366' }}>📌 Before You Apply</h3>
+                <ul style={{ lineHeight: '1.7', fontSize: '1rem', paddingLeft: '1rem' }}>
+                  <li><strong>✔️ No signup fees</strong> — it’s free to list and start selling.</li>
+                  <li><strong>💰 5% fee</strong> per completed transaction.</li>
+                  <li><strong>📣 Optional Ads:</strong> You may boost your listings for homepage placement.</li>
+                  <li><strong>🚫 Prohibited items:</strong> We don’t allow offensive, harmful, or illegal goods.</li>
+                  <li><strong>⚖️ Content guidelines:</strong> Use clear images and honest descriptions. We review your listings periodically.</li>
+                </ul>
+              </div>
+              {/* Signup Form */}
               <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                 <input type="text" name="businessName" required placeholder="Business Name" style={inputStyle} />
                 <input type="email" name="email" required placeholder="you@example.com" style={inputStyle} />
@@ -75,6 +86,7 @@ const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75
 const homeButtonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
 
 export default VendorSignupPage;
+
 
 
 
