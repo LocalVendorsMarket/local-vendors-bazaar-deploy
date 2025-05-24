@@ -14,7 +14,8 @@ import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
 import VendorSupport from './pages/VendorSupport';
 import OrderManagement from './pages/OrderManagement';
-import VendorWelcome from './components/VendorWelcome'; // ✅ Import added
+import VendorWelcome from './components/VendorWelcome';
+import VendorLoginPage from './pages/VendorLoginPage'; // ✅ NEW: Login page import
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -29,7 +30,8 @@ function App() {
       <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
       <Route path="/vendor-signup" element={<VendorSignupPage cart={cart} />} />
       <Route path="/vendor-thankyou" element={<VendorSignupThankYouPage cart={cart} />} />
-      <Route path="/vendor-welcome" element={<VendorWelcome />} /> {/* ✅ Route added */}
+      <Route path="/vendor-welcome" element={<VendorWelcome />} />
+      <Route path="/vendor-login" element={<VendorLoginPage />} /> {/* ✅ NEW: Login page route */}
       <Route path="/vendor-dashboard" element={<VendorDashboard />} />
       <Route path="/vendor-products" element={<ProductManagement />} />
       <Route path="/vendor-orders" element={<OrderManagement />} />
