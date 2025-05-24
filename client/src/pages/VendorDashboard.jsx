@@ -68,6 +68,7 @@ const VendorDashboard = () => {
     </div>
   );
 };
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorDashboard;
 

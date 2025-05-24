@@ -80,5 +80,6 @@ const VendorSignupThankYouPage = ({ cart }) => {
 // Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
 const buttonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorSignupThankYouPage;

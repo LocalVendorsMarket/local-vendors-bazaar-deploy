@@ -117,6 +117,7 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none
 const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem' };
 const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 const homeButtonStyle = { display: 'inline-block', backgroundColor: '#00509e', color: 'white', padding: '12px 24px', borderRadius: '8px', textDecoration: 'none', fontWeight: 'bold', fontSize: '16px' };
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorSignupPage;
 

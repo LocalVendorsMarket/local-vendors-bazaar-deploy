@@ -99,7 +99,7 @@ const VendorWelcome = () => {
 };
 
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
-
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 export default VendorWelcome;
 
 
