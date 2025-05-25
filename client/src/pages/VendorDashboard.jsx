@@ -13,7 +13,7 @@ const VendorDashboard = () => {
         </a>
         <nav className="flex gap-6 text-sm">
           <a href="/" className="hover:underline">🏠 Home</a>
-          <a href="/vendor-signup" className="hover:underline">🚪 Log Out</a>
+          <a href="/vendor-login" className="hover:underline">🚪 Log Out</a>
         </nav>
       </header>
 
@@ -29,48 +29,55 @@ const VendorDashboard = () => {
         </main>
       </div>
 
+      {/* Footer */}
       <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
-  <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
-    <div>
-      <h3>Get to Know Us</h3>
-      <a href="/about" style={footerLinkStyle}>About Us</a><br />
-      <a href="/blog" style={footerLinkStyle}>Blog</a><br />
-      <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
-      <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
-      <a href="/careers" style={footerLinkStyle}>Careers</a>
-    </div>
-    <div>
-      <h3>Make Money with Us</h3>
-      <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
-      <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
-      <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
-      <a href="/advertise" style={footerLinkStyle}>Advertise Events</a><br />
-      <a href="/vendor-login" style={{ ...footerLinkStyle, textDecoration: 'underline' }}>Vendor Login</a>
-    </div>
-    <div>
-      <h3>Buyer Resources</h3>
-      <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
-      <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
-      <a href="/returns" style={footerLinkStyle}>Returns</a><br />
-      <a href="/help" style={footerLinkStyle}>Help Center</a>
-    </div>
-    <div>
-      <h3>Stay Connected</h3>
-      <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
-      <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
-      <a href="/socials" style={footerLinkStyle}>Follow Us</a>
-    </div>
-  </div>
-  <p style={{ marginTop: '1rem', fontSize: '12px' }}>
-    © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
-  </p>
-</footer>
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
+          <div>
+            <h3>Get to Know Us</h3>
+            <a href="/about" style={footerLinkStyle}>About Us</a><br />
+            <a href="/blog" style={footerLinkStyle}>Blog</a><br />
+            <a href="/faq" style={footerLinkStyle}>FAQ</a><br />
+            <a href="/testimonials" style={footerLinkStyle}>Testimonials</a><br />
+            <a href="/careers" style={footerLinkStyle}>Careers</a>
+          </div>
+          <div>
+            <h3>Make Money with Us</h3>
+            <a href="/vendor-signup" style={footerLinkStyle}>Become a Vendor</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Products</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Services</a><br />
+            <a href="/advertise" style={footerLinkStyle}>Advertise Events</a><br />
+            <a href="/vendor-login" style={{ ...footerLinkStyle, textDecoration: 'underline' }}>Vendor Login</a>
+          </div>
+          <div>
+            <h3>Buyer Resources</h3>
+            <a href="/orders" style={footerLinkStyle}>Your Orders</a><br />
+            <a href="/shipping" style={footerLinkStyle}>Shipping Info</a><br />
+            <a href="/returns" style={footerLinkStyle}>Returns</a><br />
+            <a href="/help" style={footerLinkStyle}>Help Center</a>
+          </div>
+          <div>
+            <h3>Stay Connected</h3>
+            <a href="/contact" style={footerLinkStyle}>Contact Us</a><br />
+            <a href="/newsletter" style={footerLinkStyle}>Newsletter Signup</a><br />
+            <a href="/socials" style={footerLinkStyle}>Follow Us</a>
+          </div>
+        </div>
+        <p style={{ marginTop: '1rem', fontSize: '12px' }}>
+          © {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 };
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
+
+const footerLinkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '14px'
+};
 
 export default VendorDashboard;
+
 
 
 
