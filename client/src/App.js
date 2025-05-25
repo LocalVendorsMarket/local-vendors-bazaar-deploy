@@ -16,7 +16,7 @@ import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
 import VendorSupport from './pages/VendorSupport';
 import OrderManagement from './pages/OrderManagement';
-import ProtectedRoute from './components/ProtectedRoute'; // ✅ NEW
+// import ProtectedRoute from './components/ProtectedRoute'; // ⛔️ Temporarily disabled
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -34,42 +34,19 @@ function App() {
       <Route path="/vendor-welcome" element={<VendorWelcome />} />
       <Route path="/vendor-login" element={<VendorLoginPage />} />
 
-      {/* ✅ Protected Vendor Routes */}
-      <Route path="/vendor-dashboard" element={
-        <ProtectedRoute>
-          <VendorDashboard />
-        </ProtectedRoute>
-      } />
-      <Route path="/vendor-products" element={
-        <ProtectedRoute>
-          <ProductManagement />
-        </ProtectedRoute>
-      } />
-      <Route path="/vendor-orders" element={
-        <ProtectedRoute>
-          <OrderManagement />
-        </ProtectedRoute>
-      } />
-      <Route path="/vendor-analytics" element={
-        <ProtectedRoute>
-          <AnalyticsReports />
-        </ProtectedRoute>
-      } />
-      <Route path="/vendor-settings" element={
-        <ProtectedRoute>
-          <AccountSettings />
-        </ProtectedRoute>
-      } />
-      <Route path="/vendor-support" element={
-        <ProtectedRoute>
-          <VendorSupport />
-        </ProtectedRoute>
-      } />
+      {/* ✅ Temporarily bypassed ProtectedRoute for testing */}
+      <Route path="/vendor-dashboard" element={<VendorDashboard />} />
+      <Route path="/vendor-products" element={<ProductManagement />} />
+      <Route path="/vendor-orders" element={<OrderManagement />} />
+      <Route path="/vendor-analytics" element={<AnalyticsReports />} />
+      <Route path="/vendor-settings" element={<AccountSettings />} />
+      <Route path="/vendor-support" element={<VendorSupport />} />
     </Routes>
   );
 }
 
 export default App;
+
 
 
 
