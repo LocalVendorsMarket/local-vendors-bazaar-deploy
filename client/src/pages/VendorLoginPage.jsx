@@ -11,14 +11,14 @@ const VendorLoginPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    console.log("Vendor ID:", vendorId);
-    console.log("Password:", password);
+    console.log('Vendor ID:', vendorId);
+    console.log('Password:', password);
 
     if (vendorId === 'test123' && password === 'password123') {
-      console.log("Login successful, redirecting...");
+      console.log('Login successful, redirecting...');
       navigate('/vendor-dashboard');
     } else {
-      console.log("Invalid credentials");
+      console.log('Invalid credentials');
       setError('Invalid Vendor ID or Password. Please try again.');
     }
   };
@@ -44,22 +44,8 @@ const VendorLoginPage = () => {
         <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '500px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
           <h1 style={{ color: '#003366', marginBottom: '1.5rem' }}>Vendor Login</h1>
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input
-              type="text"
-              value={vendorId}
-              onChange={(e) => setVendorId(e.target.value)}
-              placeholder="Vendor ID"
-              required
-              style={inputStyle}
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-              style={inputStyle}
-            />
+            <input type="text" value={vendorId} onChange={(e) => setVendorId(e.target.value)} placeholder="Vendor ID" required style={inputStyle} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required style={inputStyle} />
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <button type="submit" style={buttonStyle}>Login</button>
           </form>
@@ -79,6 +65,7 @@ const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid
 const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default VendorLoginPage;
+
 
 
 
