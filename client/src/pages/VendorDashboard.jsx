@@ -8,7 +8,7 @@ const VendorDashboard = () => {
       {/* Header */}
       <header className="bg-blue-900 text-white flex items-center justify-between px-6 py-4">
         <a href="/" className="flex items-center text-white text-xl font-bold">
-          <img src={logo} alt="Logo" className="w-10 mr-3" />
+          <img src={logo} alt="Logo" className="w-10 mr-3 rounded-md" />
           Local Vendors Bazaar
         </a>
         <nav className="flex gap-6 text-sm">
@@ -17,17 +17,15 @@ const VendorDashboard = () => {
         </nav>
       </header>
 
-      {/* Main Layout */}
+      {/* Main Dashboard */}
       <div className="flex flex-grow">
         <VendorSidebar />
-        <main className="flex-1 px-10 py-10">
-          <div className="bg-white rounded-xl shadow p-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">Vendor Dashboard Overview</h1>
-            <p className="text-gray-700 leading-relaxed">
-              Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance
-              analytics, upload products, track orders, and adjust account settings.
-            </p>
-          </div>
+        <main className="flex-1 max-w-5xl mx-auto px-6 py-10">
+          <h1 className="text-3xl font-bold text-gray-800 mb-6">Vendor Dashboard Overview</h1>
+          <p className="text-gray-700">
+            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance
+            analytics, and update your account settings.
+          </p>
         </main>
       </div>
 
@@ -75,6 +73,7 @@ const VendorDashboard = () => {
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorDashboard;
+
 
 
 
