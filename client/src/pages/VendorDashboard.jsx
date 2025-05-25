@@ -4,31 +4,27 @@ import logo from '../assets/logo.png';
 
 const VendorDashboard = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f9f9f9', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       {/* Header */}
-      <header className="bg-blue-900 text-white flex items-center justify-between px-6 py-4">
-        <a href="/" className="flex items-center text-white text-xl font-bold">
-          <img src={logo} alt="Logo" className="w-10 mr-3" />
-          Local Vendors Bazaar
+      <header style={{ backgroundColor: '#003366', padding: '1rem 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', color: 'white' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
+          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '12px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Local Vendors Bazaar</span>
         </a>
-        <nav className="flex gap-6 text-sm">
-          <a href="/" className="hover:underline">🏠 Home</a>
-          <a href="/vendor-login" className="hover:underline">🚪 Log Out</a>
+        <nav style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
+          <a href="/" style={navLinkStyle}>🏠 Home</a>
+          <a href="/vendor-login" style={navLinkStyle}>🚪 Log Out</a>
         </nav>
       </header>
 
-      {/* Layout: Sidebar + Main Content */}
-      <div className="flex flex-grow">
-        {/* Sidebar */}
-        <div className="w-64 bg-white shadow-md border-r">
-          <VendorSidebar />
-        </div>
-
-        {/* Main Content */}
-        <main className="flex-1 p-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-4">Vendor Dashboard Overview</h1>
-          <p className="text-gray-700">
-            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance analytics, and update your account settings.
+      {/* Main Layout */}
+      <div style={{ display: 'flex', flex: 1 }}>
+        <VendorSidebar />
+        <main style={{ flexGrow: 1, padding: '3rem 2rem', maxWidth: '1000px', margin: '0 auto' }}>
+          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Vendor Dashboard Overview</h1>
+          <p style={{ color: '#555', fontSize: '1rem' }}>
+            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance analytics,
+            and update your account settings. We're here to help you grow your business.
           </p>
         </main>
       </div>
@@ -74,9 +70,11 @@ const VendorDashboard = () => {
   );
 };
 
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorDashboard;
+
 
 
 
