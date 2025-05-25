@@ -15,11 +15,11 @@ const VendorLoginPage = () => {
     const hardcodedVendorId = 'VEND-2025-0012';
     const hardcodedPassword = 'test1234';
 
-    if (vendorId === hardcodedVendorId && password === hardcodedPassword) {
-      navigate('/vendor-dashboard');
-    } else {
-      setError('Invalid Vendor ID or Password. Please try again.');
-    }
+    if (vendorId === 'test123' && password === 'password123') {
+        navigate('/vendor-dashboard');
+      } else {
+        setError('Invalid Vendor ID or Password. Please try again.');
+      }      
   };
 
   return (
