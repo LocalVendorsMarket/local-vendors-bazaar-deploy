@@ -10,7 +10,12 @@ const VendorLoginPage = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    if (vendorId === 'test123' && password === 'password123') {
+
+    // ✅ Hardcoded credentials
+    const hardcodedVendorId = 'VEND-2025-0012';
+    const hardcodedPassword = 'test1234';
+
+    if (vendorId === hardcodedVendorId && password === hardcodedPassword) {
       navigate('/vendor-dashboard');
     } else {
       setError('Invalid Vendor ID or Password. Please try again.');
@@ -59,6 +64,7 @@ const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid
 const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default VendorLoginPage;
+
 
 
 
