@@ -5,26 +5,25 @@ import logo from '../assets/logo.png';
 const VendorDashboard = () => {
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
-      {/* Header with Nav Links */}
+      {/* Header */}
       <header className="bg-blue-900 text-white flex items-center justify-between px-6 py-4">
-        <a href="/" className="flex items-center text-white text-xl font-bold">
-          <img src={logo} alt="Logo" className="w-10 mr-3" />
-          Local Vendors Bazaar
+        <a href="/" className="flex items-center">
+          <img src={logo} alt="Logo" className="w-12 h-auto mr-3 rounded" />
+          <span className="text-xl font-bold">Local Vendors Bazaar</span>
         </a>
-        <nav className="flex gap-6 text-sm">
+        <nav className="flex gap-4 text-sm">
           <a href="/" className="hover:underline">🏠 Home</a>
           <a href="/vendor-login" className="hover:underline">🚪 Log Out</a>
         </nav>
       </header>
 
-      {/* Main Dashboard Layout */}
+      {/* Main */}
       <div className="flex flex-grow">
         <VendorSidebar />
         <main className="flex-1 max-w-5xl mx-auto px-6 py-10">
           <h1 className="text-3xl font-bold text-gray-800 mb-6">Vendor Dashboard Overview</h1>
           <p className="text-gray-700">
-            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance
-            analytics, and update your account settings.
+            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance analytics, and update your account settings.
           </p>
         </main>
       </div>
@@ -70,13 +69,10 @@ const VendorDashboard = () => {
   );
 };
 
-const footerLinkStyle = {
-  color: 'white',
-  textDecoration: 'none',
-  fontSize: '14px'
-};
+const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorDashboard;
+
 
 
 
