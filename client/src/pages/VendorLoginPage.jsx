@@ -5,78 +5,61 @@ import logo from '../assets/logo.png';
 const VendorLoginPage = () => {
   const [vendorId, setVendorId] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-
-    // Static test credentials (for now)
-    if (vendorId === 'VEND-2025-0012' && password === 'test1234') {
+    if (vendorId === 'test123' && password === 'password123') {
       navigate('/vendor-dashboard');
     } else {
-      alert('Invalid Vendor ID or Password. Please try again.');
+      setError('Invalid Vendor ID or Password. Please try again.');
     }
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f0f4f8', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Logo Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        <img src={logo} alt="Logo" style={{ width: '60px' }} />
+    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f0f0f0', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Header */}
+      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white' }}>
+        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
+          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
+          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Local Vendors Bazaar</span>
+        </a>
+        <nav style={{ display: 'flex', gap: '15px' }}>
+          <a href="/" style={navLinkStyle}>Home</a>
+          <a href="/shop" style={navLinkStyle}>Shop</a>
+          <a href="/vendor-login" style={navLinkStyle}>Vendor Login</a>
+          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒</a>
+        </nav>
       </header>
 
       {/* Login Form */}
-      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <form
-          onSubmit={handleLogin}
-          style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', width: '100%', maxWidth: '400px' }}
-        >
-          <h2 style={{ textAlign: 'center', marginBottom: '1.5rem', color: '#003366' }}>Vendor Login</h2>
-          <input
-            type="text"
-            placeholder="Vendor ID"
-            value={vendorId}
-            onChange={(e) => setVendorId(e.target.value)}
-            required
-            style={inputStyle}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            style={inputStyle}
-          />
-          <button type="submit" style={buttonStyle}>Login</button>
-        </form>
+      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>
+        <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '500px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
+          <h1 style={{ color: '#003366', marginBottom: '1.5rem' }}>Vendor Login</h1>
+          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <input type="text" value={vendorId} onChange={(e) => setVendorId(e.target.value)} placeholder="Vendor ID" required style={inputStyle} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required style={inputStyle} />
+            {error && <div style={{ color: 'red' }}>{error}</div>}
+            <button type="submit" style={buttonStyle}>Login</button>
+          </form>
+        </div>
       </main>
+
+      {/* Footer */}
+      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1rem' }}>
+        <p style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
+      </footer>
     </div>
   );
 };
 
-const inputStyle = {
-  width: '100%',
-  padding: '0.75rem',
-  marginBottom: '1rem',
-  borderRadius: '8px',
-  border: '1px solid #ccc',
-  fontSize: '1rem'
-};
-
-const buttonStyle = {
-  width: '100%',
-  padding: '0.75rem',
-  backgroundColor: '#003366',
-  color: 'white',
-  fontSize: '1rem',
-  fontWeight: 'bold',
-  borderRadius: '8px',
-  border: 'none',
-  cursor: 'pointer'
-};
+const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
+const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem' };
+const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default VendorLoginPage;
+
 
 
 
