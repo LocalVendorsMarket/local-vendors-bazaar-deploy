@@ -1,53 +1,38 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import {
-  LayoutDashboard,
-  Package,
-  ShoppingCart,
-  BarChart,
-  Settings,
-  HelpCircle,
-} from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
 
 const VendorSidebar = () => {
   const location = useLocation();
 
-  const navItems = [
-    { label: 'Dashboard', icon: <LayoutDashboard className="w-5 h-5" />, path: '/vendor-dashboard' },
-    { label: 'Products', icon: <Package className="w-5 h-5" />, path: '/vendor-products' },
-    { label: 'Orders', icon: <ShoppingCart className="w-5 h-5" />, path: '/vendor-orders' },
-    { label: 'Analytics', icon: <BarChart className="w-5 h-5" />, path: '/vendor-analytics' },
-    { label: 'Account', icon: <Settings className="w-5 h-5" />, path: '/vendor-settings' },
-    { label: 'Support', icon: <HelpCircle className="w-5 h-5" />, path: '/vendor-support' },
-  ];
+  const navItemStyle = (path) => ({
+    display: 'block',
+    padding: '0.75rem 1rem',
+    marginBottom: '0.5rem',
+    backgroundColor: location.pathname === path ? '#00509e' : '#ffffff',
+    color: location.pathname === path ? '#ffffff' : '#003366',
+    borderRadius: '8px',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    boxShadow: '0 1px 4px rgba(0, 0, 0, 0.05)'
+  });
 
   return (
-    <aside className="h-full p-6">
-      <div className="text-xl font-bold text-green-700 mb-6">Vendor Panel</div>
-      <nav className="flex flex-col gap-4">
-        {navItems.map(({ label, icon, path }) => {
-          const isActive = location.pathname === path;
-          return (
-            <NavLink
-              key={label}
-              to={path}
-              className={`flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium ${
-                isActive
-                  ? 'bg-green-100 text-green-700'
-                  : 'text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              {icon}
-              {label}
-            </NavLink>
-          );
-        })}
+    <aside style={{ width: '240px', padding: '2rem 1rem', backgroundColor: '#f0f8ff' }}>
+      <h2 style={{ color: '#003366', marginBottom: '1rem', fontSize: '1.2rem' }}>Vendor Panel</h2>
+      <nav>
+        <Link to="/vendor-dashboard" style={navItemStyle('/vendor-dashboard')}>Dashboard</Link>
+        <Link to="/vendor-products" style={navItemStyle('/vendor-products')}>Products</Link>
+        <Link to="/vendor-orders" style={navItemStyle('/vendor-orders')}>Orders</Link>
+        <Link to="/vendor-analytics" style={navItemStyle('/vendor-analytics')}>Analytics</Link>
+        <Link to="/vendor-settings" style={navItemStyle('/vendor-settings')}>Account</Link>
+        <Link to="/vendor-support" style={navItemStyle('/vendor-support')}>Support</Link>
       </nav>
     </aside>
   );
 };
 
 export default VendorSidebar;
+
 
 
 
