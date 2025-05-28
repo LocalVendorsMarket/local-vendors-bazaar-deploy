@@ -23,7 +23,7 @@ const AccountSettings = () => {
         <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
           <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Account Settings</h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
-            Here you can update your vendor account details, contact info, and preferences.
+            Manage your profile, password, and notification preferences.
           </p>
         </main>
       </div>
@@ -73,6 +73,7 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default AccountSettings;
+
 
 
 
