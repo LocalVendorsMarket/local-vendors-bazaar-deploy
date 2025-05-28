@@ -2,7 +2,7 @@ import React from 'react';
 import VendorSidebar from '../components/VendorSidebar';
 import logo from '../assets/logo.png';
 
-const AccountSettings = () => {
+const VendorSupport = () => {
   return (
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f9f9f9' }}>
       {/* Header */}
@@ -21,9 +21,9 @@ const AccountSettings = () => {
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <VendorSidebar />
         <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
-          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Account Settings</h1>
+          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Vendor Support</h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
-            Manage your profile, password, and notification preferences.
+            Need help? Reach out to our support team for assistance with your account, products, or orders.
           </p>
         </main>
       </div>
@@ -69,10 +69,12 @@ const AccountSettings = () => {
   );
 };
 
+// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
-export default AccountSettings;
+export default VendorSupport;
+
 
 
 

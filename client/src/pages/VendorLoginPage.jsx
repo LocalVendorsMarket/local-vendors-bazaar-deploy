@@ -2,7 +2,7 @@ import React from 'react';
 import VendorSidebar from '../components/VendorSidebar';
 import logo from '../assets/logo.png';
 
-const AnalyticsReports = () => {
+const AccountSettings = () => {
   return (
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f9f9f9' }}>
       {/* Header */}
@@ -21,9 +21,9 @@ const AnalyticsReports = () => {
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <VendorSidebar />
         <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
-          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Analytics & Reports</h1>
+          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Account Settings</h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
-            View your sales performance, customer engagement metrics, and revenue trends here.
+            Manage your profile, password, and notification preferences.
           </p>
         </main>
       </div>
@@ -69,10 +69,12 @@ const AnalyticsReports = () => {
   );
 };
 
+// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
-export default AnalyticsReports;
+export default AccountSettings;
+
 
 
 
