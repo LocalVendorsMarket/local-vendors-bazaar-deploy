@@ -13,23 +13,23 @@ const VendorLoginPage = () => {
     e.preventDefault();
     setError('');
 
-    console.log("Login attempt with:", vendorId, password); // ✅ Debug
+    console.log('Login attempt with:', vendorId, password);
 
     const { data, error: queryError } = await supabase
       .from('vendors')
       .select('*')
       .eq('vendor_id', vendorId)
-      .eq('password', password)
       .single();
 
-    console.log("Supabase response:", data, queryError); // ✅ Debug
+    console.log('Supabase response:', data, queryError);
 
-    if (queryError || !data) {
+    if (queryError || !data || data.password !== password) {
       setError('Invalid Vendor ID or Password. Please try again.');
-    } else {
-      console.log('✅ Login successful:', data);
-      navigate('/vendor-dashboard');
+      return;
     }
+
+    console.log('✅ Login successful');
+    navigate('/vendor-dashboard');
   };
 
   return (
@@ -53,22 +53,8 @@ const VendorLoginPage = () => {
         <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '500px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
           <h1 style={{ color: '#003366', marginBottom: '1.5rem' }}>Vendor Login</h1>
           <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input
-              type="text"
-              value={vendorId}
-              onChange={(e) => setVendorId(e.target.value)}
-              placeholder="Vendor ID"
-              required
-              style={inputStyle}
-            />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
-              required
-              style={inputStyle}
-            />
+            <input type="text" value={vendorId} onChange={(e) => setVendorId(e.target.value)} placeholder="Vendor ID" required style={inputStyle} />
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required style={inputStyle} />
             {error && <div style={{ color: 'red' }}>{error}</div>}
             <button type="submit" style={buttonStyle}>Login</button>
           </form>
@@ -88,6 +74,7 @@ const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid
 const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default VendorLoginPage;
+
 
 
 
