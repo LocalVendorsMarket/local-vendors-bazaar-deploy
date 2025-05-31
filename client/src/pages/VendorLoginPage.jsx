@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import logo from '../assets/logo.png';
-import sha256 from 'crypto-js/sha256'; // ✅ Hashing utility
+import sha256 from 'crypto-js/sha256';
 
 const VendorLoginPage = () => {
   const [vendorId, setVendorId] = useState('');
@@ -15,7 +15,6 @@ const VendorLoginPage = () => {
     setError('');
 
     const hashedPassword = sha256(password).toString();
-
     console.log('Login attempt with:', vendorId);
     console.log('Hashed password:', hashedPassword);
 
@@ -31,6 +30,8 @@ const VendorLoginPage = () => {
     if (queryError || !data) {
       setError('Invalid Vendor ID or Password. Please try again.');
     } else {
+      // Save vendorId in session storage for session check
+      sessionStorage.setItem('vendorId', vendorId);
       navigate('/vendor-dashboard');
     }
   };
@@ -77,6 +78,7 @@ const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid
 const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
 
 export default VendorLoginPage;
+
 
 
 
