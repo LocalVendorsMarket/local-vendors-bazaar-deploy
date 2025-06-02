@@ -1,51 +1,80 @@
-import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import Faq from './pages/Faq';
-import Blog from './pages/Blog';
-import Testimonials from './pages/Testimonials';
-import Contact from './pages/Contact';
 import ShopPage from './pages/ShopPage';
-import VendorSignupPage from './pages/VendorSignupPage';
-import VendorSignupThankYouPage from './pages/VendorSignupThankYouPage';
-import VendorWelcome from './components/VendorWelcome';
 import VendorLoginPage from './pages/VendorLoginPage';
 import VendorDashboard from './pages/VendorDashboard';
 import ProductManagement from './pages/ProductManagement';
+import OrderManagement from './pages/OrderManagement';
 import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
 import VendorSupport from './pages/VendorSupport';
-import OrderManagement from './pages/OrderManagement';
-// import ProtectedRoute from './components/ProtectedRoute'; // ⛔️ Temporarily disabled
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
-  const [cart, setCart] = useState([]);
-
   return (
-    <Routes>
-      <Route path="/" element={<HomePage cart={cart} setCart={setCart} />} />
-      <Route path="/faq" element={<Faq cart={cart} />} />
-      <Route path="/blog" element={<Blog cart={cart} />} />
-      <Route path="/testimonials" element={<Testimonials cart={cart} />} />
-      <Route path="/contact" element={<Contact cart={cart} />} />
-      <Route path="/shop" element={<ShopPage cart={cart} setCart={setCart} />} />
-      <Route path="/vendor-signup" element={<VendorSignupPage cart={cart} />} />
-      <Route path="/vendor-thankyou" element={<VendorSignupThankYouPage cart={cart} />} />
-      <Route path="/vendor-welcome" element={<VendorWelcome />} />
-      <Route path="/vendor-login" element={<VendorLoginPage />} />
+    <Router>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+        <Route path="/vendor-login" element={<VendorLoginPage />} />
 
-      {/* ✅ Temporarily bypassed ProtectedRoute for testing */}
-      <Route path="/vendor-dashboard" element={<VendorDashboard />} />
-      <Route path="/vendor-products" element={<ProductManagement />} />
-      <Route path="/vendor-orders" element={<OrderManagement />} />
-      <Route path="/vendor-analytics" element={<AnalyticsReports />} />
-      <Route path="/vendor-settings" element={<AccountSettings />} />
-      <Route path="/vendor-support" element={<VendorSupport />} />
-    </Routes>
+        {/* ✅ Protected Vendor Routes */}
+        <Route
+          path="/vendor-dashboard"
+          element={
+            <ProtectedRoute>
+              <VendorDashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor-products"
+          element={
+            <ProtectedRoute>
+              <ProductManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor-orders"
+          element={
+            <ProtectedRoute>
+              <OrderManagement />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor-analytics"
+          element={
+            <ProtectedRoute>
+              <AnalyticsReports />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor-account"
+          element={
+            <ProtectedRoute>
+              <AccountSettings />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/vendor-support"
+          element={
+            <ProtectedRoute>
+              <VendorSupport />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
 
 
 
