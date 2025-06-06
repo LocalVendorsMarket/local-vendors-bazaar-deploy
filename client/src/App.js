@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import VendorLoginPage from './pages/VendorLoginPage';
@@ -9,17 +10,19 @@ import OrderManagement from './pages/OrderManagement';
 import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
 import VendorSupport from './pages/VendorSupport';
+
 import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <Router>
       <Routes>
+        {/* Public Routes */}
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/vendor-login" element={<VendorLoginPage />} />
 
-        {/* ✅ Protected Vendor Routes */}
+        {/* Protected Vendor Routes */}
         <Route
           path="/vendor-dashboard"
           element={
@@ -74,6 +77,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
