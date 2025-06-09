@@ -1,7 +1,6 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import HomePage from './pages/HomePage';
 import ShopPage from './pages/ShopPage';
 import VendorLoginPage from './pages/VendorLoginPage';
@@ -20,8 +19,6 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/vendor-login" element={<VendorLoginPage />} />
-        
-        {/* ✅ Protected Vendor Routes */}
         <Route
           path="/vendor-dashboard"
           element={
@@ -76,6 +73,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
