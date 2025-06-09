@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import ShopPage from '../pages/ShopPage';
+import ShopPage from './pages/ShopPage'; // ✅ Corrected path
 import VendorLoginPage from './pages/VendorLoginPage';
 import VendorDashboard from './pages/VendorDashboard';
 import ProductManagement from './pages/ProductManagement';
@@ -72,6 +72,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
