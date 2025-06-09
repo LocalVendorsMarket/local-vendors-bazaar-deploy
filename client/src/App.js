@@ -20,6 +20,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
         <Route path="/vendor-login" element={<VendorLoginPage />} />
+        
+        {/* ✅ Protected Vendor Routes */}
         <Route
           path="/vendor-dashboard"
           element={
@@ -74,6 +76,7 @@ function App() {
 }
 
 export default App;
+
 
 
 
