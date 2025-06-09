@@ -5,7 +5,7 @@ import HomePage from '../pages/HomePage';
 import ShopPage from '../pages/ShopPage';
 import VendorLoginPage from '../pages/VendorLoginPage';
 import VendorDashboard from '../pages/VendorDashboard';
-import ProductManagement from './pages/ProductManagement';
+import ProductManagement from '../pages/ProductManagement';
 import OrderManagement from './pages/OrderManagement';
 import AnalyticsReports from './pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
