@@ -7,7 +7,7 @@ import VendorLoginPage from '../pages/VendorLoginPage';
 import VendorDashboard from '../pages/VendorDashboard';
 import ProductManagement from '../pages/ProductManagement';
 import OrderManagement from '../pages/OrderManagement';
-import AnalyticsReports from './pages/AnalyticsReports';
+import AnalyticsReports from '../pages/AnalyticsReports';
 import AccountSettings from './pages/AccountSettings';
 import VendorSupport from './pages/VendorSupport';
 import ProtectedRoute from './components/ProtectedRoute';
