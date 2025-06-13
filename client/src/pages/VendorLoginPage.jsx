@@ -1,83 +1,69 @@
+// src/pages/VendorLoginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../supabaseClient';
-import logo from '../assets/logo.png';
-import sha256 from 'crypto-js/sha256';
 
 const VendorLoginPage = () => {
+  const navigate = useNavigate();
   const [vendorId, setVendorId] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
 
-    const hashedPassword = sha256(password).toString();
-    console.log('Login attempt with:', vendorId);
-    console.log('Hashed password:', hashedPassword);
-
-    const { data, error: queryError } = await supabase
-      .from('vendors')
-      .select('*')
-      .eq('vendor_id', vendorId)
-      .eq('password', hashedPassword)
-      .single();
-
-    console.log('Supabase response:', data, queryError);
-
-    if (queryError || !data) {
-      setError('Invalid Vendor ID or Password. Please try again.');
-    } else {
-      // Save vendorId in session storage for session check
-      sessionStorage.setItem('vendorId', vendorId);
+    // Simple check for demonstration (replace with Supabase or real auth)
+    if (vendorId === 'demo' && password === 'demo123') {
+      localStorage.setItem('vendorSession', vendorId);
       navigate('/vendor-dashboard');
+    } else {
+      setError('Invalid credentials. Please try again.');
     }
   };
 
   return (
-    <div style={{ fontFamily: 'sans-serif', backgroundColor: '#f0f0f0', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: 'white' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none', color: 'white' }}>
-          <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
-          <span style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Local Vendors Bazaar</span>
-        </a>
-        <nav style={{ display: 'flex', gap: '15px' }}>
-          <a href="/" style={navLinkStyle}>Home</a>
-          <a href="/shop" style={navLinkStyle}>Shop</a>
-          <a href="/vendor-login" style={navLinkStyle}>Vendor Login</a>
-          <a href="/cart" style={{ ...navLinkStyle, fontSize: '24px' }}>🛒</a>
-        </nav>
-      </header>
-
-      {/* Login Form */}
-      <main style={{ flexGrow: 1, display: 'flex', justifyContent: 'center', alignItems: 'center', padding: '2rem' }}>
-        <div style={{ backgroundColor: 'white', padding: '2rem', borderRadius: '12px', maxWidth: '500px', width: '100%', boxShadow: '0 4px 12px rgba(0,0,0,0.1)' }}>
-          <h1 style={{ color: '#003366', marginBottom: '1.5rem' }}>Vendor Login</h1>
-          <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <input type="text" value={vendorId} onChange={(e) => setVendorId(e.target.value)} placeholder="Vendor ID" required style={inputStyle} />
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" required style={inputStyle} />
-            {error && <div style={{ color: 'red' }}>{error}</div>}
-            <button type="submit" style={buttonStyle}>Login</button>
-          </form>
-        </div>
-      </main>
-
-      {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', textAlign: 'center', padding: '1rem' }}>
-        <p style={{ fontSize: '0.9rem' }}>© {new Date().getFullYear()} Local Vendors Bazaar. All rights reserved.</p>
-      </footer>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <div className="max-w-md w-full bg-white shadow-lg rounded-2xl p-6">
+        <h2 className="text-2xl font-bold mb-4 text-center">Vendor Login</h2>
+        <form onSubmit={handleLogin}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Vendor ID</label>
+            <input
+              type="text"
+              value={vendorId}
+              onChange={(e) => setVendorId(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium text-gray-700">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="mt-1 p-2 w-full border border-gray-300 rounded-md"
+              required
+            />
+          </div>
+          {error && (
+            <div className="mb-4 text-red-500 text-sm text-center">
+              {error}
+            </div>
+          )}
+          <button
+            type="submit"
+            className="w-full bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
+          >
+            Log In
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
 
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
-const inputStyle = { padding: '0.75rem', borderRadius: '8px', border: '1px solid #ccc', fontSize: '1rem' };
-const buttonStyle = { backgroundColor: '#003366', color: 'white', padding: '0.75rem', borderRadius: '8px', fontWeight: 'bold', fontSize: '1rem', cursor: 'pointer' };
-
 export default VendorLoginPage;
+
 
 
 
