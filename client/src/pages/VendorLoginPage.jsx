@@ -1,11 +1,8 @@
 // src/pages/VendorLoginPage.jsx
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function VendorLoginPage() {
-  console.log("✅ VendorLoginPage loaded");
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -14,7 +11,6 @@ function VendorLoginPage() {
   const handleLogin = async (e) => {
     e.preventDefault();
 
-    // For now: simulate a successful login
     if (email === 'vendor@example.com' && password === 'password') {
       localStorage.setItem('vendorLoggedIn', 'true');
       navigate('/vendor-dashboard');
@@ -24,47 +20,67 @@ function VendorLoginPage() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+    <div style={{
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      height: '100vh',
+      background: '#f9f9f9',
+    }}>
       <form
         onSubmit={handleLogin}
         style={{
-          background: '#f4f4f4',
-          padding: 30,
-          borderRadius: 8,
-          boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+          background: '#fff',
+          padding: '2rem',
+          borderRadius: '8px',
+          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
           width: '100%',
-          maxWidth: 400
+          maxWidth: '400px',
         }}
       >
-        <h2 style={{ textAlign: 'center' }}>Vendor Login</h2>
+        <h2 style={{ marginBottom: '1rem' }}>Vendor Login</h2>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginBottom: 15 }}>
-          <label>Email:</label><br />
+        <div style={{ marginBottom: '1rem' }}>
+          <label>Email:</label>
           <input
             type="email"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
             required
-            style={{ width: '100%', padding: 8 }}
+            onChange={(e) => setEmail(e.target.value)}
+            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
           />
         </div>
-        <div style={{ marginBottom: 15 }}>
-          <label>Password:</label><br />
+        <div style={{ marginBottom: '1rem' }}>
+          <label>Password:</label>
           <input
             type="password"
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
             required
-            style={{ width: '100%', padding: 8 }}
+            onChange={(e) => setPassword(e.target.value)}
+            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
           />
         </div>
-        <button type="submit" style={{ width: '100%', padding: 10 }}>Login</button>
+        <button
+          type="submit"
+          style={{
+            width: '100%',
+            padding: '0.75rem',
+            background: '#4CAF50',
+            color: 'white',
+            border: 'none',
+            borderRadius: '4px',
+            cursor: 'pointer',
+          }}
+        >
+          Login
+        </button>
       </form>
     </div>
   );
 }
 
 export default VendorLoginPage;
+
 
 
 
