@@ -1,6 +1,8 @@
 // src/pages/VendorLoginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import MainNavbar from '../components/MainNavbar';
+import Footer from '../components/Footer';
 
 function VendorLoginPage() {
   const [email, setEmail] = useState('');
@@ -8,9 +10,10 @@ function VendorLoginPage() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
+    // Temporary login logic
     if (email === 'vendor@example.com' && password === 'password') {
       localStorage.setItem('vendorLoggedIn', 'true');
       navigate('/vendor-dashboard');
@@ -20,66 +23,64 @@ function VendorLoginPage() {
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-      background: '#f9f9f9',
-    }}>
-      <form
-        onSubmit={handleLogin}
-        style={{
-          background: '#fff',
-          padding: '2rem',
-          borderRadius: '8px',
-          boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
-          width: '100%',
+    <>
+      <MainNavbar />
+      <div style={{ padding: '60px 20px', minHeight: '80vh', background: '#f9f9f9' }}>
+        <div style={{
           maxWidth: '400px',
-        }}
-      >
-        <h2 style={{ marginBottom: '1rem' }}>Vendor Login</h2>
-        {error && <p style={{ color: 'red' }}>{error}</p>}
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            required
-            onChange={(e) => setEmail(e.target.value)}
-            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
+          margin: '0 auto',
+          background: '#fff',
+          padding: '30px',
+          borderRadius: '8px',
+          boxShadow: '0 0 10px rgba(0,0,0,0.1)'
+        }}>
+          <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Vendor Login</h2>
+          {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
+          <form onSubmit={handleLogin}>
+            <div style={{ marginBottom: '15px' }}>
+              <label>Email:</label><br />
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+              />
+            </div>
+            <div style={{ marginBottom: '15px' }}>
+              <label>Password:</label><br />
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
+              />
+            </div>
+            <button
+              type="submit"
+              style={{
+                width: '100%',
+                padding: '12px',
+                backgroundColor: '#4CAF50',
+                color: '#fff',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Login
+            </button>
+          </form>
         </div>
-        <div style={{ marginBottom: '1rem' }}>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            required
-            onChange={(e) => setPassword(e.target.value)}
-            style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-          />
-        </div>
-        <button
-          type="submit"
-          style={{
-            width: '100%',
-            padding: '0.75rem',
-            background: '#4CAF50',
-            color: 'white',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer',
-          }}
-        >
-          Login
-        </button>
-      </form>
-    </div>
+      </div>
+      <Footer />
+    </>
   );
 }
 
 export default VendorLoginPage;
+
 
 
 
