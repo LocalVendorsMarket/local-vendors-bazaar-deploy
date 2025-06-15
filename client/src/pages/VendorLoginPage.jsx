@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../components/NavigationBar';
-import Footer from '../components/Footer';
+import Footer from '../components/Footer.jsx';
 
 function VendorLoginPage() {
   const [email, setEmail] = useState('');
