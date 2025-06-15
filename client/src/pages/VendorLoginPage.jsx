@@ -1,4 +1,3 @@
-// src/pages/VendorLoginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../components/NavigationBar';
@@ -13,7 +12,6 @@ function VendorLoginPage() {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // Temporary login logic
     if (email === 'vendor@example.com' && password === 'password') {
       localStorage.setItem('vendorLoggedIn', 'true');
       navigate('/vendor-dashboard');
@@ -24,55 +22,57 @@ function VendorLoginPage() {
 
   return (
     <>
-      <MainNavbar />
-      <div style={{ padding: '60px 20px', minHeight: '80vh', background: '#f9f9f9' }}>
-        <div style={{
-          maxWidth: '400px',
-          margin: '0 auto',
-          background: '#fff',
-          padding: '30px',
-          borderRadius: '8px',
-          boxShadow: '0 0 10px rgba(0,0,0,0.1)'
-        }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Vendor Login</h2>
+      <NavigationBar />
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '80vh' }}>
+        <form
+          onSubmit={handleLogin}
+          style={{
+            background: '#f4f4f4',
+            padding: 30,
+            borderRadius: 8,
+            boxShadow: '0 0 10px rgba(0,0,0,0.1)',
+            width: '100%',
+            maxWidth: 400,
+            marginTop: 50
+          }}
+        >
+          <h2 style={{ textAlign: 'center' }}>Vendor Login</h2>
           {error && <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>}
-          <form onSubmit={handleLogin}>
-            <div style={{ marginBottom: '15px' }}>
-              <label>Email:</label><br />
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-            </div>
-            <div style={{ marginBottom: '15px' }}>
-              <label>Password:</label><br />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                style={{ width: '100%', padding: '10px', borderRadius: '4px', border: '1px solid #ccc' }}
-              />
-            </div>
-            <button
-              type="submit"
-              style={{
-                width: '100%',
-                padding: '12px',
-                backgroundColor: '#4CAF50',
-                color: '#fff',
-                border: 'none',
-                borderRadius: '4px',
-                cursor: 'pointer'
-              }}
-            >
-              Login
-            </button>
-          </form>
-        </div>
+          <div style={{ marginBottom: 15 }}>
+            <label>Email:</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              style={{ width: '100%', padding: 10, borderRadius: 4 }}
+            />
+          </div>
+          <div style={{ marginBottom: 15 }}>
+            <label>Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              style={{ width: '100%', padding: 10, borderRadius: 4 }}
+            />
+          </div>
+          <button
+            type="submit"
+            style={{
+              width: '100%',
+              padding: '10px 20px',
+              backgroundColor: '#198754',
+              color: 'white',
+              border: 'none',
+              borderRadius: 4,
+              fontWeight: 'bold'
+            }}
+          >
+            Login
+          </button>
+        </form>
       </div>
       <Footer />
     </>
@@ -80,6 +80,7 @@ function VendorLoginPage() {
 }
 
 export default VendorLoginPage;
+
 
 
 
