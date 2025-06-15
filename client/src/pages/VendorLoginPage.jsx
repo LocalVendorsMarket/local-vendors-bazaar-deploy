@@ -1,7 +1,7 @@
 // src/pages/VendorLoginPage.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import MainNavbar from '../components/MainNavbar';
+import NavigationBar from '../components/NavigationBar';
 import Footer from '../components/Footer';
 
 function VendorLoginPage() {
