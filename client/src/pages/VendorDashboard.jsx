@@ -1,3 +1,4 @@
+// src/pages/VendorDashboard.jsx
 import React from 'react';
 import VendorSidebar from '../components/VendorSidebar';
 import logo from '../assets/logo.png';
@@ -17,15 +18,13 @@ const VendorDashboard = () => {
         </nav>
       </header>
 
-      {/* Main Content */}
-      <div style={{ display: 'flex', flexGrow: 1, padding: '2rem' }}>
-        <div style={{ width: '220px', marginRight: '2rem' }}>
-          <VendorSidebar />
-        </div>
-        <main style={{ flexGrow: 1, backgroundColor: 'white', padding: '2rem', borderRadius: '12px', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
-          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Vendor Dashboard Overview</h1>
+      {/* Content */}
+      <div style={{ display: 'flex', flexGrow: 1 }}>
+        <VendorSidebar />
+        <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
+          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Welcome to Your Dashboard</h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
-            Welcome to your vendor dashboard! Use the sidebar to manage your store, view performance analytics, and update your account settings.
+            From here, you can manage your products, view orders, track performance, and update your vendor profile.
           </p>
         </main>
       </div>
@@ -76,6 +75,7 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default VendorDashboard;
+
 
 
 
