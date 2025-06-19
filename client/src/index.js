@@ -1,20 +1,25 @@
+// src/index.js
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import { AuthProvider } from './context/AuthContext'; // ✅ NEW
-import reportWebVitals from './reportWebVitals'; // ✅ Add this import
+import { AuthProvider } from './context/AuthContext';
+import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <BrowserRouter>
-    <AuthProvider> {/* ✅ Wrap app */}
-      <App />
-    </AuthProvider>
-  </BrowserRouter>
+  <React.StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </BrowserRouter>
+  </React.StrictMode>
 );
 
-// ✅ Optional: performance monitoring
+// Optional: performance monitoring
 reportWebVitals();
+
 
 

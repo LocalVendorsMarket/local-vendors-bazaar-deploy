@@ -5,10 +5,28 @@ import logo from '../assets/logo.png';
 
 const VendorDashboard = () => {
   return (
-    <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f9f9f9' }}>
+    <div style={{
+      fontFamily: 'sans-serif',
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column',
+      backgroundColor: '#f9f9f9'
+    }}>
       {/* Header */}
-      <header style={{ backgroundColor: '#003366', padding: '1rem', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <a href="/" style={{ display: 'flex', alignItems: 'center', color: 'white', textDecoration: 'none' }}>
+      <header style={{
+        backgroundColor: '#003366',
+        padding: '1rem',
+        color: 'white',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+      }}>
+        <a href="/" style={{
+          display: 'flex',
+          alignItems: 'center',
+          color: 'white',
+          textDecoration: 'none'
+        }}>
           <img src={logo} alt="Logo" style={{ width: '50px', marginRight: '10px' }} />
           <span style={{ fontSize: '1.3rem', fontWeight: 'bold' }}>Local Vendors Bazaar</span>
         </a>
@@ -18,11 +36,20 @@ const VendorDashboard = () => {
         </nav>
       </header>
 
-      {/* Content */}
+      {/* Main Content Area */}
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <VendorSidebar />
-        <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
-          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Welcome to Your Dashboard</h1>
+        <main style={{
+          flexGrow: 1,
+          padding: '2rem',
+          backgroundColor: 'white',
+          borderRadius: '12px',
+          margin: '2rem',
+          boxShadow: '0 2px 12px rgba(0,0,0,0.05)'
+        }}>
+          <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>
+            Welcome to Your Dashboard
+          </h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
             From here, you can manage your products, view orders, track performance, and update your vendor profile.
           </p>
@@ -30,8 +57,18 @@ const VendorDashboard = () => {
       </div>
 
       {/* Footer */}
-      <footer style={{ backgroundColor: '#003366', color: 'white', padding: '2rem', textAlign: 'center' }}>
-        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '50px' }}>
+      <footer style={{
+        backgroundColor: '#003366',
+        color: 'white',
+        padding: '2rem',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+          gap: '50px'
+        }}>
           <div>
             <h3>Get to Know Us</h3>
             <a href="/about" style={footerLinkStyle}>About Us</a><br />
@@ -70,11 +107,22 @@ const VendorDashboard = () => {
   );
 };
 
-// Styles
-const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
-const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
+// Reusable Styles
+const navLinkStyle = {
+  color: 'white',
+  fontWeight: 'bold',
+  textDecoration: 'none',
+  fontSize: '14px'
+};
+
+const footerLinkStyle = {
+  color: 'white',
+  textDecoration: 'none',
+  fontSize: '14px'
+};
 
 export default VendorDashboard;
+
 
 
 
