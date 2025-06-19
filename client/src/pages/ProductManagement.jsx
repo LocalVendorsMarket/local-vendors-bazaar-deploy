@@ -24,7 +24,7 @@ const ProductManagement = () => {
         <main style={{ flexGrow: 1, padding: '2rem', backgroundColor: 'white', borderRadius: '12px', margin: '2rem', boxShadow: '0 2px 12px rgba(0,0,0,0.05)' }}>
           <h1 style={{ fontSize: '2rem', color: '#003366', marginBottom: '1rem' }}>Product Management</h1>
           <p style={{ fontSize: '1rem', color: '#444' }}>
-            Upload, update, or remove your listed products.
+            View, edit, or delete your listed products here.
           </p>
         </main>
       </div>
@@ -74,6 +74,7 @@ const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
 export default ProductManagement;
+
 
 
 
