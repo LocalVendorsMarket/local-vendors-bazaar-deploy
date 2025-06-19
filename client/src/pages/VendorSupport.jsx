@@ -1,8 +1,19 @@
-import React from 'react';
+// src/pages/VendorSupport.jsx
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import VendorSidebar from '../components/VendorSidebar';
 import logo from '../assets/logo.png';
 
 const VendorSupport = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const vendorId = localStorage.getItem('vendor_id');
+    if (!vendorId) {
+      navigate('/vendor-login');
+    }
+  }, [navigate]);
+
   return (
     <div style={{ fontFamily: 'sans-serif', minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: '#f9f9f9' }}>
       {/* Header */}
@@ -13,7 +24,16 @@ const VendorSupport = () => {
         </a>
         <nav style={{ display: 'flex', gap: '20px' }}>
           <a href="/" style={navLinkStyle}>🏠 Home</a>
-          <a href="/vendor-login" style={navLinkStyle}>🚪 Log Out</a>
+          <a
+            href="#"
+            onClick={() => {
+              localStorage.removeItem('vendor_id');
+              window.location.href = '/vendor-login';
+            }}
+            style={navLinkStyle}
+          >
+            🚪 Log Out
+          </a>
         </nav>
       </header>
 
@@ -69,7 +89,6 @@ const VendorSupport = () => {
   );
 };
 
-// Styles
 const navLinkStyle = { color: 'white', fontWeight: 'bold', textDecoration: 'none', fontSize: '14px' };
 const footerLinkStyle = { color: 'white', textDecoration: 'none', fontSize: '14px' };
 
